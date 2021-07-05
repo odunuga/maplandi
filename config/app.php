@@ -167,6 +167,7 @@ return [
          */
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
+        \SocialiteProviders\Manager\ServiceProvider::class,
         /*
          * Application Service Providers...
          */

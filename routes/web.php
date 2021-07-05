@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SocialiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/google/login', [SocialiteController::class, 'login'])->name('google.login');
+
+Route::get('/google/signup', [SocialiteController::class, 'signup'])->name('google.signup');
+
+
+Route::get('oauth/google/callback', [SocialiteController::class, 'webhook']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

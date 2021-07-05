@@ -81,7 +81,7 @@
                         </div>
                         <div class="socila-login">
                             <ul>
-                                <li><a href="javascript:void(0)" class="google"><i class="lni lni-google"></i>Sign
+                                <li><a href="{{ route('google.signup')  }}" class="google"><i class="lni lni-google"></i>Sign
                                         Up
                                         With Google</a>
                                 </li>
