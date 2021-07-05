@@ -78,8 +78,8 @@ Mastercard</span>
                     <div class="col-12">
                         <div class="content">
                             <ul class="footer-bottom-links">
-                                <li><a href="javascript:void(0)">Terms of use</a></li>
-                                <li><a href="javascript:void(0)"> Privacy Policy</a></li>
+                                <li><a href="{{ route('terms.show') }}">Terms of use</a></li>
+                                <li><a href="{{ route('policy.show') }}"> Privacy Policy</a></li>
 
                             </ul>
                             </p>
