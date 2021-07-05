@@ -63,7 +63,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <p class="outer-link mt-5">Don't have an account? <a href="{{ route('register') }}">Register
+                        <p class="outer-link mt-5">Don't have an account? <a class="text-red-500 hover:text-red-900" href="{{ route('register') }}">Register
                                 here</a>
                         </p>
                     </div>
