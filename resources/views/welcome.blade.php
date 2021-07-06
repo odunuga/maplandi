@@ -2,7 +2,7 @@
     <livewire:cart/>
     <livewire:category/>
     <livewire:deals/>
-{{--    <livewire:latest/>--}}
+    {{--    <livewire:latest/>--}}
 
     {{--    <section class="how-works section">--}}
     {{--        <div class="container">--}}
@@ -49,138 +49,9 @@
 
     <x-testimonialcomponent/>
 
-    {{--    <section class="how-works section bg-light">--}}
-    {{--        <div class="container">--}}
-    {{--            <div class="row">--}}
-    {{--                <div class="col-12">--}}
-    {{--                    <div class="section-title">--}}
-    {{--                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Features </h2>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--            <div class="row">--}}
-    {{--                <div class="col-lg-4 col-md-4 col-12">--}}
+    <x-featurescomponent/>
 
-    {{--                    <div class="single-work wow fadeInUp" data-wow-delay=".2s">--}}
-    {{--<span class="serial" style="border: 6px solid #dc3545;">--}}
-    {{--<i class="lni lni-support"></i>--}}
-    {{--</span>--}}
-    {{--                        <h3>24/7 Customer Support</h3>--}}
-    {{--                    </div>--}}
-
-    {{--                </div>--}}
-    {{--                <div class="col-lg-4 col-md-4 col-12">--}}
-
-    {{--                    <div class="single-work wow fadeInUp" data-wow-delay=".4s">--}}
-    {{--<span class="serial" style="border: 6px solid #dc3545;">--}}
-    {{--<i class="lni lni-checkmark-circle"></i>--}}
-    {{--</span>--}}
-    {{--                        <h3>Best Quality</h3>--}}
-    {{--                    </div>--}}
-
-    {{--                </div>--}}
-    {{--                <div class="col-lg-4 col-md-4 col-12">--}}
-
-    {{--                    <div class="single-work wow fadeInUp" data-wow-delay=".6s">--}}
-    {{--<span class="serial" style="	border: 6px solid #dc3545;">--}}
-    {{--&#x20A6;--}}
-    {{--</span>--}}
-    {{--                        <h3>Affordable Prices</h3>--}}
-    {{--                    </div>--}}
-
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </section>--}}
-
-    {{--    <section id="contact-us" class="contact-us section">--}}
-    {{--        <div class="container">--}}
-    {{--            <div class="contact-head wow fadeInUp" data-wow-delay=".4s">--}}
-    {{--                <div class="row">--}}
-    {{--                    <div class="col-lg-5 col-12">--}}
-    {{--                        <div class="single-head">--}}
-    {{--                            <div class="contant-inner-title">--}}
-    {{--                                <h2>Our Contacts & Location</h2>--}}
-    {{--                            </div>--}}
-    {{--                            <div class="single-info">--}}
-    {{--                                <h3>Opening hours</h3>--}}
-    {{--                                <ul>--}}
-    {{--                                    <li>Daily: 9.30 AM–6.00 PM</li>--}}
-    {{--                                    <li>Sunday & Holidays: Closed</li>--}}
-    {{--                                </ul>--}}
-    {{--                            </div>--}}
-    {{--                            <div class="single-info">--}}
-    {{--                                <h3>Contact info</h3>--}}
-    {{--                                <ul>--}}
-    {{--                                    <li>17, Freedom way, Ikate Lekki phase 1, Lagos, Nigeria.</li>--}}
-    {{--                                    <li>--}}
-    {{--                                        <a href="https://demo.graygrids.com/cdn-cgi/l/email-protection#660f080009261f091314110304150f12034805090b"><span--}}
-    {{--                                                class="__cf_email__" data-cfemail="5a3f223b372a363f1a33343c3574393537">support@maplandi.com</span></a>--}}
-    {{--                                    </li>--}}
-    {{--                                    <li><a href="tel:(617) 495-9400-326">(617) 495-9400-326</a></li>--}}
-    {{--                                </ul>--}}
-    {{--                            </div>--}}
-    {{--                            <div class="single-info contact-social">--}}
-    {{--                                <h3>Social contact</h3>--}}
-    {{--                                <ul>--}}
-    {{--                                    <li><a href="javascript:void(0)"><i class="lni lni-facebook-original"></i></a></li>--}}
-    {{--                                    <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>--}}
-    {{--                                    <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>--}}
-    {{--                                    <li><a href="javascript:void(0)"><i class="lni lni-pinterest"></i></a></li>--}}
-    {{--                                </ul>--}}
-    {{--                            </div>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                    <div class="col-lg-7 col-12">--}}
-    {{--                        <div class="form-main">--}}
-    {{--                            <div class="form-title">--}}
-    {{--                                <h2>Get in Touch</h2>--}}
-    {{--                                <p>Want to make a custom order, partnerships or other enquiries leave us a message</p>--}}
-    {{--                            </div>--}}
-    {{--                            <form class="form" method="post"--}}
-    {{--                                  action="https://demo.graygrids.com/themes/classigrids-demo/assets/mail/mail.php">--}}
-    {{--                                <div class="row">--}}
-    {{--                                    <div class="col-lg-6 col-12">--}}
-    {{--                                        <div class="form-group">--}}
-    {{--                                            <input name="name" type="text" placeholder="Your Name" required="required">--}}
-    {{--                                        </div>--}}
-    {{--                                    </div>--}}
-    {{--                                    <div class="col-lg-6 col-12">--}}
-    {{--                                        <div class="form-group">--}}
-    {{--                                            <input name="subject" type="text" placeholder="Your Subject"--}}
-    {{--                                                   required="required">--}}
-    {{--                                        </div>--}}
-    {{--                                    </div>--}}
-    {{--                                    <div class="col-lg-6 col-12">--}}
-    {{--                                        <div class="form-group">--}}
-    {{--                                            <input name="email" type="email" placeholder="Your Email"--}}
-    {{--                                                   required="required">--}}
-    {{--                                        </div>--}}
-    {{--                                    </div>--}}
-    {{--                                    <div class="col-lg-6 col-12">--}}
-    {{--                                        <div class="form-group">--}}
-    {{--                                            <input name="phone" type="text" placeholder="Your Phone"--}}
-    {{--                                                   required="required">--}}
-    {{--                                        </div>--}}
-    {{--                                    </div>--}}
-    {{--                                    <div class="col-12">--}}
-    {{--                                        <div class="form-group message">--}}
-    {{--                                            <textarea name="message" placeholder="Your Message"></textarea>--}}
-    {{--                                        </div>--}}
-    {{--                                    </div>--}}
-    {{--                                    <div class="col-12">--}}
-    {{--                                        <div class="form-group button">--}}
-    {{--                                            <button type="submit" class="btn ">Submit Message</button>--}}
-    {{--                                        </div>--}}
-    {{--                                    </div>--}}
-    {{--                                </div>--}}
-    {{--                            </form>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </section>--}}
+   <x-contactuscomponent/>
 
     {{--    <div class="map-section">--}}
     {{--        <div class="map-container">--}}

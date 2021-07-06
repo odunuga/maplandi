@@ -20,3 +20,12 @@ function format_number($raw_num)
 
     return $num;
 }
+
+function filter_phone($value)
+{
+    $new_value = trim($value);
+    $new_value = str_replace("(", "", $new_value);
+    $new_value = str_replace(")", "", $new_value);
+    $new_value = str_replace(" ", "", $new_value);
+    return str_replace("-", "", $new_value);
+}
