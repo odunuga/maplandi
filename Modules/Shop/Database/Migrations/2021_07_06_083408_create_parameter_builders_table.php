@@ -16,9 +16,9 @@ class CreateParameterBuildersTable extends Migration
         Schema::create('parameter_builders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('parameter_id');
-            $table->string('name');
-            $table->string('id')->nullable();
-            $table->enum('type', ['input', 'textarea', 'select', 'radio','check'])->nullable()->default('input');
+            $table->string('type_name');
+            $table->string('type_id')->nullable();
+            $table->enum('type', ['input', 'textarea', 'select', 'radio', 'check'])->nullable()->default('input');
             $table->longText('attributes')->nullable();
             $table->softDeletes();
             $table->timestamps();

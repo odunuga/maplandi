@@ -15,7 +15,18 @@ class CreateGeneralSettingsTable extends Migration
     {
         Schema::create('general_settings', function (Blueprint $table) {
             $table->id();
-
+            $table->string('site_name')->nullable()->default('Maplandi');
+            $table->text('site_motto')->nullable()->default('At Maplandi we pride ourselves in having everything you could possibly need for life and living at the best prices than anywhere else.');
+            $table->string('site_cac')->nullable()->default('1023230');
+            $table->longText('site_description')->nullable();
+            $table->string('site_email')->nullable()->default('support@maplandi.com')->comment('only to be used for backend operations');
+            $table->string('contact_number')->nullable()->default('+(123) 1800-567-8990');
+            $table->longText('site_address')->nullable()->default('17, Freedom way, Ikate Lekki phase 1, Lagos, Nigeria.');
+            $table->longText('opening_hours')->nullable();
+            $table->string('facebook_handler')->nullable()->default('https://facebook.com/maplandi');
+            $table->string('twitter_handler')->nullable()->default('https://twitter.com/maplandi');
+            $table->string('linkedin_handler')->nullable()->default('https://linkedin.com/maplandi');
+            $table->string('instagram_handler')->nullable()->default('https://instagram.com/maplandi');
             $table->timestamps();
         });
     }
