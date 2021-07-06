@@ -62,44 +62,8 @@
                             <h2>Get in Touch</h2>
                             <p>Want to make a custom order, partnerships or other enquiries leave us a message</p>
                         </div>
-                        <form class="form" method="post"
-                              action="">
-                            <div class="row">
-                                <div class="col-lg-6 col-12">
-                                    <div class="form-group">
-                                        <input name="name" type="text" placeholder="Your Name" required="required">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-12">
-                                    <div class="form-group">
-                                        <input name="subject" type="text" placeholder="Your Subject"
-                                               required="required">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-12">
-                                    <div class="form-group">
-                                        <input name="email" type="email" placeholder="Your Email"
-                                               required="required">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-12">
-                                    <div class="form-group">
-                                        <input name="phone" type="text" placeholder="Your Phone"
-                                               required="required">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group message">
-                                        <textarea name="message" placeholder="Your Message"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group button">
-                                        <button type="submit" class="btn ">Submit Message</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                            <livewire:contact-us />
+
                     </div>
                 </div>
             </div>

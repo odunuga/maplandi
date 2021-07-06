@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Styles -->
-@include('partials.links')
-
-<!-- Scripts -->
+    @include('partials.links')
+    @livewireStyles
+    <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
@@ -29,6 +29,7 @@
 {{ $slot }}
 @include('partials.footer')
 @include('partials.scripts')
+@livewireScripts
 @stack('scripts')
 
 </body>
