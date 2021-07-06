@@ -11,6 +11,9 @@
 |
 */
 
-Route::prefix('shop')->group(function() {
-    Route::get('/', 'ShopController@index');
+
+use Illuminate\Support\Facades\Route;
+
+Route::prefix('shop')->group(function () {
+    Route::get('/', 'ShopController@index')->name('shop');
 });
