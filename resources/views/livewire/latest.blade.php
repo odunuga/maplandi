@@ -1,12 +1,11 @@
-<!--LATEST PRODUCTS-->
+
 <section class="items-tab section">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="section-title">
                     <h2 class="wow fadeInUp" data-wow-delay=".4s">Latest Products</h2>
-                    <p class="wow fadeInUp" data-wow-delay=".6s">Shop from varieties of our newly stocked
-                        products</p>
+                    <p class="wow fadeInUp" data-wow-delay=".6s">Shop from varieties of our newly stocked products</p>
                 </div>
             </div>
         </div>

@@ -1,8 +1,10 @@
 <x-guest-layout>
-    <livewire:cart/>
+    <!--PRODUCT CATEGORIES -->
     <livewire:category/>
+    <!--BEST DEAILS-->
     <livewire:deals/>
-    {{--    <livewire:latest/>--}}
+    <!--LATEST PRODUCTS-->
+    <livewire:latest/>
 
     {{--    <section class="how-works section">--}}
     {{--        <div class="container">--}}
@@ -51,7 +53,7 @@
 
     <x-featurescomponent/>
 
-   <x-contactuscomponent/>
+    <x-contactuscomponent/>
 
     {{--    <div class="map-section">--}}
     {{--        <div class="map-container">--}}

@@ -26,6 +26,7 @@
     </div>
 </div>
 <livewire:navbar/>
+<livewire:cart/>
 {{ $slot }}
 @include('partials.footer')
 @include('partials.scripts')
