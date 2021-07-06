@@ -25,12 +25,11 @@
         </div>
     </div>
 </div>
-@include('partials.header')
-<div class="font-sans text-gray-900 antialiased">
-    {{ $slot }}
-</div>
+<livewire:navbar/>
+{{ $slot }}
 @include('partials.footer')
 @include('partials.scripts')
+@stack('scripts')
 
 </body>
 </html>
