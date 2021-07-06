@@ -27,7 +27,6 @@
                             <a href="../shop" class="btn">Shop Now</a>
                         </div>
 
-
                         <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">

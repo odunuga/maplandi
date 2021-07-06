@@ -1,4 +1,11 @@
 <?php return array (
+  'cyrildewit/eloquent-viewable' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'CyrildeWit\\EloquentViewable\\EloquentViewableServiceProvider',
+    ),
+  ),
   'darryldecode/cart' => 
   array (
     'providers' => 
@@ -101,6 +108,17 @@
     'aliases' => 
     array (
       'Livewire' => 'Livewire\\Livewire',
+    ),
+  ),
+  'nagy/laravel-rating' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Nagy\\LaravelRating\\LaravelRatingServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'LaravelRatingFacade' => 'Nagy\\LaravelRating\\LaravelRatingFacade',
     ),
   ),
   'nesbot/carbon' => 

@@ -167,13 +167,15 @@ return [
          */
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
-        \SocialiteProviders\Manager\ServiceProvider::class,
+        SocialiteProviders\Manager\ServiceProvider::class,
+        CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
+        Nagy\LaravelRating\LaravelRatingServiceProvider::class,
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
@@ -233,6 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+        "LaravelRating" => \Nagy\LaravelRating\LaravelRatingFacade::class,
     ],
 
 ];

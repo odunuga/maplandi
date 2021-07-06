@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Nagy\LaravelRating\Traits\Like\CanLike;
+use Nagy\LaravelRating\Traits\Rate\CanRate;
 
 class User extends Authenticatable
 {
@@ -16,6 +18,8 @@ class User extends Authenticatable
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
+    use CanRate;
+    use CanLike;
     use TwoFactorAuthenticatable;
 
     /**
