@@ -14,28 +14,30 @@ class SocialiteController extends Controller
     //
     public function login()
     {
-        return Socialite::driver('google')->with(['type' => 'login'])->redirect();
+        return Socialite::driver('google')->with(['type' => 'login'])->redirect(); // redirect to google login
     }
 
     public function signup()
     {
-        return Socialite::driver('google')->with(['type' => 'register'])->redirect();
+        return Socialite::driver('google')->with(['type' => 'register'])->redirect(); // redirect to google signup
     }
 
 
     public function webhook()
     {
 
-        $userSocial = Socialite::driver('google')->user();
+        $userSocial = Socialite::driver('google')->user(); // fetch user details from google
 
-        $check_user = User::where(['email' => $userSocial->getEmail()])->first();
+        $check_user = User::where(['email' => $userSocial->getEmail()])->first();  // check if we have user details in our db
         if ($check_user) {
-            Auth::login($check_user);
-            if (Hash::check($userSocial->getId(), $check_user->password)) {
+            Auth::login($check_user); // login the user
+            // check if user has not changed default password
+            if (Hash::check($userSocial->getId(), $check_user->password)) {  // take user to page to change default password
                 return view('first_password_set')->with(['user' => $check_user]);
             }
-            return $this->redirectUser();
+            return $this->redirectUser(); // redirect user back to page before user login
         } else {
+            // create new user
             $user = User::create([
                 'name' => $userSocial->getName(),
                 'email' => $userSocial->getEmail(),
@@ -44,18 +46,18 @@ class SocialiteController extends Controller
                 'socialite_id' => $userSocial->getId()
             ]);
 
-            Auth::login($user);
-            return view('first_password_set')->with(['user' => $user]);
+            Auth::login($user); // login new user
+            return view('first_password_set')->with(['user' => $user]); // take user to first password changing page
         }
     }
 
     private function redirectUser()
     {
-        $check_session = Session::has('redirect_to');
+        $check_session = Session::has('redirect_to'); // check if redirect page is set
         if ($check_session) {
-            $to = Session::get('redirect_to');
+            $to = Session::get('redirect_to'); // take user to redirect page
         } else {
-            $to = route('dashboard');
+            $to = route('dashboard'); // else take user to dashboard
         }
         return redirect($to);
     }
