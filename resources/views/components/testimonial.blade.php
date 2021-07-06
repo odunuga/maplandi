@@ -17,7 +17,7 @@
                         <i class="lni lni-quotation"></i>
                     </div>
                     <div class="product">
-                        <img src="{{ asset('vendor/images/testimonial/testi1.jpg') }}" alt="#">
+                        <img src="{{ asset('vendor/images/testimonialComponent/testi1.jpg') }}" alt="#">
                         <h4 class="name">
                             Jane Anderson
                             <span class="deg">Founder & CEO</span>
@@ -38,7 +38,7 @@
                         <i class="lni lni-quotation"></i>
                     </div>
                     <div class="product">
-                        <img src="{{ asset('vendor/images/testimonial/testi2.jpg') }}" alt="#">
+                        <img src="{{ asset('vendor/images/testimonialComponent/testi2.jpg') }}" alt="#">
                         <h4 class="name">
                             Devid Samuyel
                             <span class="deg">Web Developer</span>
@@ -59,7 +59,7 @@
                         <i class="lni lni-quotation"></i>
                     </div>
                     <div class="product">
-                        <img src="{{ asset('vendor/images/testimonial/testi3.jpg') }}" alt="#">
+                        <img src="{{ asset('vendor/images/testimonialComponent/testi3.jpg') }}" alt="#">
                         <h4 class="name">
                             Jully Sulli
                             <span class="deg">Ui/Ux Designer</span>

@@ -4,8 +4,10 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class features extends Component
+class whyChooseUsComponent extends Component
 {
+    public $why_choose_us;
+
     /**
      * Create a new component instance.
      *
@@ -13,7 +15,8 @@ class features extends Component
      */
     public function __construct()
     {
-        //
+        $this->why_choose_us = \Modules\Admin\Entities\WhyChooseUs::all()->sortBy('id')->take(4);
+
     }
 
     /**
@@ -23,6 +26,6 @@ class features extends Component
      */
     public function render()
     {
-        return view('components.features');
+        return view('components.whychooseus');
     }
 }

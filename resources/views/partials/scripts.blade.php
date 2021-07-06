@@ -39,9 +39,9 @@
         }
     });
 
-    //========= testimonial
+    //========= testimonialComponent
     tns({
-        container: '.testimonial-slider',
+        container: '.testimonialComponent-slider',
         items: 3,
         slideBy: 'page',
         autoplay: false,
