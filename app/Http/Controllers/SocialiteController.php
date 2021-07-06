@@ -43,7 +43,8 @@ class SocialiteController extends Controller
                 'email' => $userSocial->getEmail(),
                 'profile_photo_path' => $userSocial->getAvatar(),
                 'password' => Hash::make($userSocial->getId()),
-                'socialite_id' => $userSocial->getId()
+                'socialite_id' => $userSocial->getId(),
+                'email_verified_at' => now()
             ]);
 
             Auth::login($user); // login new user
