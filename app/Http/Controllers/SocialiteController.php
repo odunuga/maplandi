@@ -28,21 +28,12 @@ class SocialiteController extends Controller
 
         $userSocial = Socialite::driver('google')->user();
 
-        // OAuth 2.0 providers...
-//        $token = $user->token;
-//        $refreshToken = $user->refreshToken;
-//        $expiresIn = $user->expiresIn;
-
-
-        // All providers...
-//        $user->getId();
-//        $user->getNickname();
-//        $user->getName();
-//        $user->getEmail();
-//        $user->getAvatar();
         $check_user = User::where(['email' => $userSocial->getEmail()])->first();
         if ($check_user) {
             Auth::login($check_user);
+            if (Hash::check($userSocial->getId(), $check_user->password)) {
+                return view('first_password_set')->with(['user' => $check_user]);
+            }
             return $this->redirectUser();
         } else {
             $user = User::create([
@@ -54,7 +45,7 @@ class SocialiteController extends Controller
             ]);
 
             Auth::login($user);
-            return $this->redirectUser();
+            return view('first_password_set')->with(['user' => $user]);
         }
     }
 
