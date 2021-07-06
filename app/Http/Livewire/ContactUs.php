@@ -27,7 +27,22 @@ class ContactUs extends Component
     {
         $validatedData = $this->validate();
 
+        $this->sendMail();
+        $this->clear();
         session()->flash('contact_success', 'Message sent successfully');
-        dd($validatedData);
+    }
+
+    private function sendMail()
+    {
+        // Send Mail Here
+
+    }
+
+    private function clear()
+    {
+        $this->name = '';
+        $this->subject = '';
+        $this->phone = '';
+        $this->message = '';
     }
 }
