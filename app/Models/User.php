@@ -63,5 +63,22 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'image'
     ];
+
+    public function getImageAttribute($value)
+    {
+        $default = 'vendor/images/dashboard/noimg.png';
+        if ($value) {
+
+            if (substr($value->profile_photo_path, 0, 4) === "http") {
+                return $value->profile_photo_path;
+            }
+            if ($value->profile_photo_url) {
+                return $value->profile_photo_url;
+            }
+            return asset($default);
+        }
+        return asset($default);
+    }
 }

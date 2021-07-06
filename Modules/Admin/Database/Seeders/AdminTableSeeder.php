@@ -17,8 +17,8 @@ class AdminTableSeeder extends Seeder
      */
     public function run()
     {
-        if (Testimony::count() < 0) {
-            Testimony::factory()->count(10)->for(User::factory()->count(5))->create();
+        if (Testimony::count() < 1) {
+            Testimony::factory()->count(10)->for(User::factory())->create();
         }
         if (WhyChooseUs::count() < 1) {
             $lists = [

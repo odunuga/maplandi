@@ -7,6 +7,8 @@ use Illuminate\View\Component;
 class whyChooseUsComponent extends Component
 {
     public $why_choose_us;
+    public $why_choose_us_title;
+    public $why_choose_us_details;
 
     /**
      * Create a new component instance.
@@ -15,7 +17,9 @@ class whyChooseUsComponent extends Component
      */
     public function __construct()
     {
-        $this->why_choose_us = \Modules\Admin\Entities\WhyChooseUs::all()->sortBy('id')->take(4);
+        $this->why_choose_us_title = 'Why Choose Us';
+        $this->why_choose_us_details = 'At Maplandi we are commited to delivering everything you could possibly need for life and living at the best prices than anywhere else.';
+        $this->why_choose_us = \Modules\Admin\Entities\WhyChooseUs::all()->sortBy('id')->take(6);
 
     }
 
