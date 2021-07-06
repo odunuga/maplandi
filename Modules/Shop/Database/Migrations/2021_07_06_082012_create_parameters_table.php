@@ -15,7 +15,8 @@ class CreateParametersTable extends Migration
     {
         Schema::create('parameters', function (Blueprint $table) {
             $table->id();
-
+            $table->unsignedBigInteger('category_id');
+            $table->string('title')->comment('This will be used for the parameter label');
             $table->timestamps();
         });
     }

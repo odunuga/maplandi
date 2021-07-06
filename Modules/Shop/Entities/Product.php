@@ -15,6 +15,15 @@ class Product extends Model
 
     protected $fillable = [];
 
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
+
     protected static function newFactory()
     {
         return \Modules\Shop\Database\factories\ProductFactory::new();

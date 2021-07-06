@@ -10,7 +10,12 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = [];
-    
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     protected static function newFactory()
     {
         return \Modules\Shop\Database\factories\CategoryFactory::new();

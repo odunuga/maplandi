@@ -10,7 +10,12 @@ class Tag extends Model
     use HasFactory;
 
     protected $fillable = [];
-    
+
+    public function product()
+    {
+        return $this->morphedByMany(Product::class, 'taggable');
+    }
+
     protected static function newFactory()
     {
         return \Modules\Shop\Database\factories\TagFactory::new();
