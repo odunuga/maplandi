@@ -10,11 +10,11 @@ class Comment extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $guarded = [];
 
     public function comment_by()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'comment_by_id', 'id');
     }
 
     public function product()

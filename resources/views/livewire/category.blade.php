@@ -5,9 +5,8 @@
                 <div class="hero-text text-center">
 
                     <div class="section-heading">
-                        <h2 class="wow fadeInUp" data-wow-delay=".3s">Welcome to Maplandi</h2>
-                        <p class="wow fadeInUp" data-wow-delay=".5s">At Maplandi we pride ourselves in having everything
-                            you could possibly need for life and living at the best prices than anywhere else.</p>
+                        <h2 class="wow fadeInUp" data-wow-delay=".3s">Welcome to {{ $site_settings->site_name }}</h2>
+                        <p class="wow fadeInUp" data-wow-delay=".5s">{{ $site_settings->site_motto }}</p>
                     </div>
 
 

@@ -1,4 +1,11 @@
 <?php return array (
+  'binary-cats/laravel-sku' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'BinaryCats\\Sku\\SkuServiceProvider',
+    ),
+  ),
   'cyrildewit/eloquent-viewable' => 
   array (
     'providers' => 

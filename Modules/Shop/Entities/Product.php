@@ -2,6 +2,7 @@
 
 namespace Modules\Shop\Entities;
 
+use BinaryCats\Sku\HasSku;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,6 +12,7 @@ class Product extends Model
 {
     use HasFactory;
     use Rateable;
+    use HasSku;
     use InteractsWithViews;
 
     protected $fillable = [];

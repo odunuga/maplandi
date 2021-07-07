@@ -9,7 +9,22 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $guarded = [];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function image()
+    {
+        return $this->morphTo(Image::class, 'imageable');
+    }
+
+    public function sub_categories()
+    {
+        return $this->hasMany(Category::class, 'category_id', 'id');
+    }
 
     public function products()
     {

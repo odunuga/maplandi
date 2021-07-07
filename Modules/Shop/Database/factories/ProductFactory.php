@@ -1,7 +1,9 @@
 <?php
+
 namespace Modules\Shop\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ProductFactory extends Factory
 {
@@ -19,8 +21,15 @@ class ProductFactory extends Factory
      */
     public function definition()
     {
+        $title = $this->faker->sentence(6);
         return [
-            //
+            'sku' => $this->faker->uuid,
+            'title' => $title,
+            'slug' => Str::slug($title),
+            'description' => $this->faker->sentence(30),
+            'featured' => $this->faker->boolean(20),
+            'published' => $this->faker->boolean(20),
+            'available' => $this->faker->boolean(90)
         ];
     }
 }

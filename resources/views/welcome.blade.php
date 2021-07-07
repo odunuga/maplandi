@@ -1,6 +1,6 @@
 <x-guest-layout>
     <!--PRODUCT CATEGORIES -->
-    <livewire:category/>
+    <x-search-component/>
     <!--BEST DEAILS-->
     <livewire:deals/>
     <!--LATEST PRODUCTS-->
