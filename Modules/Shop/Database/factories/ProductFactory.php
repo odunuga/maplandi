@@ -28,6 +28,7 @@ class ProductFactory extends Factory
             'slug' => Str::slug($title),
             'description' => $this->faker->sentence(30),
             'featured' => $this->faker->boolean(20),
+            'hot' => $this->faker->boolean(20),
             'published' => $this->faker->boolean(20),
             'available' => $this->faker->boolean(90)
         ];

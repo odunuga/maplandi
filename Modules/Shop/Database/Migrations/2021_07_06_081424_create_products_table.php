@@ -20,7 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->longText('description')->nullable();
-            $table->boolean('featured')->nullable();
+            $table->boolean('featured')->nullable()->default(false);
+            $table->boolean('hot')->nullable()->default(false);
             $table->boolean('published')->nullable()->default(false);
             $table->boolean('available')->nullable()->default(true);
             $table->integer('report_count')->nullable()->default(0);
