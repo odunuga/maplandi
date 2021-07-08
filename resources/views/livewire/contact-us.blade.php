@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-6 col-12">
             <div class="form-group">
-                <input wire:model="name" type="text" value="{{ auth() ->check()?auth()->user()->name:''}}"
+                <input wire:model="name" type="text" value="{{ auth()->check()?auth()->user()->name:''}}" {{ auth()->check()?"readonly":"" }}
                        placeholder="Your Name" required="required">
                 @error('name') <span class="error">{{ $message }}</span> @enderror
             </div>
@@ -17,7 +17,8 @@
         <div class="col-lg-6 col-12">
             <div class="form-group">
                 <input wire:model="phone" type="tel" placeholder="Your Phone"
-                       value="{{ auth()->check()?auth()->user->phone:'' }}" required="required">
+                       value="{{ auth()->check()?auth()->user()->phone:'' }}"
+                       required="required" {{ auth()->check()?"readonly":"" }}>
                 @error('phone') <span class="error">{{ $message }}</span> @enderror
             </div>
         </div>

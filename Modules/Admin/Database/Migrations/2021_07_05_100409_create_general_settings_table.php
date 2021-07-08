@@ -16,6 +16,7 @@ class CreateGeneralSettingsTable extends Migration
         Schema::create('general_settings', function (Blueprint $table) {
             $table->id();
             $table->string('site_name')->nullable()->default('Maplandi');
+            $table->longText('site_logo')->nullable()->default('vendor/images/logo/logo2.png');
             $table->text('site_motto')->nullable()->default('At Maplandi we pride ourselves in having everything you could possibly need for life and living at the best prices than anywhere else.');
             $table->string('site_cac')->nullable()->default('1023230');
             $table->longText('site_description')->nullable();

@@ -1,40 +1,41 @@
-@auth()
-    <header class="header navbar-area">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12">
-                    <div class="nav-inner">
-                        <nav class="navbar navbar-expand-lg">
-                            <a class="navbar-brand" href="{{ url('/') }}">
-                                <img src="{{ $user->image }}" style="width:45px; height:47px;" alt="Logo">
+<header class="header navbar-area">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="nav-inner">
+                    <nav class="navbar navbar-expand-lg">
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            <img src="{{ asset($site_settings->site_logo) }}" style="width:45px; height:47px;"
+                                 alt="Logo">
 
-                            </a>
+                        </a>
 
-                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
-                                <ul id="nav" class="navbar-nav ms-auto">
+                        <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                            <ul id="nav" class="navbar-nav ms-auto">
 
-                                    <li class="nav-item active "><a href="../">Home</a></li>
-                                    </li>
+                                <li class="nav-item active "><a href="../">Home</a></li>
+                                </li>
 
-                                    <li class="nav-item">
-                                        <a href="." aria-label="Toggle navigation">Shop</a>
-                                    </li>
-
-
-                                    <li class="nav-item d-lg-none">
-                                        <a class="active dd-menu collapsed" href="login" data-bs-toggle="collapse"
-                                           data-bs-target="#submenu-1-1" aria-controls="navbarSupportedContent"
-                                           aria-expanded="false" aria-label="Toggle navigation">Login to Buy</a>
-                                        <ul class="sub-menu collapse" id="submenu-1-1">
-                                            <li class="nav-item active"><a href="../login">Login</a></li>
-                                            <li class="nav-item active"><a href="../register">Or Register</a></li>
-
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+                                <li class="nav-item">
+                                    <a href="." aria-label="Toggle navigation">Shop</a>
+                                </li>
 
 
+                                <li class="nav-item d-lg-none">
+                                    <a class="active dd-menu collapsed" href="login" data-bs-toggle="collapse"
+                                       data-bs-target="#submenu-1-1" aria-controls="navbarSupportedContent"
+                                       aria-expanded="false" aria-label="Toggle navigation">Login to Buy</a>
+                                    <ul class="sub-menu collapse" id="submenu-1-1">
+                                        <li class="nav-item active"><a href="../login">Login</a></li>
+                                        <li class="nav-item active"><a href="../register">Or Register</a></li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        @guest
                             <div class="login-button">
                                 <ul>
                                     <li>
@@ -46,7 +47,7 @@
                                     </li>
                                 </ul>
                             </div>
-
+                        @else
                             <div class="flex-shrink-0 dropdown">
                                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle"
                                    id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -79,78 +80,39 @@
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="#">LOGOUT</a></li>
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="POST">@csrf
+                                            <button class="dropdown-item pl-2" type="submit"><i
+                                                    class="lni lni-unlink"></i> LOGOUT
+                                            </button>
+                                        </form>
+                                    </li>
                                 </ul>
                             </div>
+                        @endguest
+                        <button type="button" class="btn btn-transparent position-relative"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <B style="font-weight:100;"> Cart
+                                <i class="lni lni-cart-full" style="color:red;"></i>
 
-                            <button type="button" class="btn btn-transparent position-relative btn btn-primary"
-                                    data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <B style="font-weight:100;"> Cart
-                                    <i class="lni lni-cart-full" style="color:red;"></i>
-
-                                </B>
-                                <span class="position-absolute top-0 start-100 translate-middle badge bg-danger">
+                            </B>
+                            <span class="position-absolute top-0 start-100 translate-middle badge bg-danger">
          2
   </span>
-                            </button>
-                            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                    aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="toggler-icon"></span>
-                                <span class="toggler-icon"></span>
-                                <span class="toggler-icon"></span>
-                            </button>
+                        </button>
+                        <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                        </button>
 
-
-                            </a>
-                        </nav>
-                    </div>
+                    </nav>
                 </div>
             </div>
         </div>
-    </header>
-@else
-    <header class="header navbar-area">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12">
-                    <div class="nav-inner">
-                        <nav class="navbar navbar-expand-lg">
-                            <a class="navbar-brand" href="../">
-                                <img src="{{ asset('vendor/images/logo/logo2.png') }}" style="width:45px; height:47px;"
-                                     alt="Logo">
-                            </a>
+    </div>
 
-                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
-                                <ul id="nav" class="navbar-nav ms-auto">
+</header>
 
-                                    <li class="nav-item active "><a href="../">Home</a></li>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="../shop" aria-label="Toggle navigation">Shop</a>
-                                    </li>
-
-
-                                </ul>
-                            </div>
-
-                            <div class="button header-button">
-                                <a href="{{ route('login') }}" class="btn">Sign In</a>
-                            </div>
-
-                            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                    aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="toggler-icon"></span>
-                                <span class="toggler-icon"></span>
-                                <span class="toggler-icon"></span>
-                            </button>
-
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-@endauth

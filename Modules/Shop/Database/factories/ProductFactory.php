@@ -23,7 +23,7 @@ class ProductFactory extends Factory
     {
         $title = $this->faker->sentence(6);
         return [
-            'sku' => $this->faker->uuid,
+            'sku' => abs((double)$this->faker->uuid),
             'title' => $title,
             'slug' => Str::slug($title),
             'description' => $this->faker->sentence(30),

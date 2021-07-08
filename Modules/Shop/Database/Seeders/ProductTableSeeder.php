@@ -47,7 +47,6 @@ class ProductTableSeeder extends Seeder
                 $img = new Image();
                 $img->url = $item['image'];
                 $cat->image()->save($img);
-                $cat->save();
             }
         }
         if (Category::count() > 1 && Product::count() < 1) {

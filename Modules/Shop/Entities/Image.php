@@ -5,6 +5,11 @@ namespace Modules\Shop\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * Class Image
+ * @package Modules\Shop\Entities
+ * @property mixed url
+ */
 class Image extends Model
 {
     use HasFactory;

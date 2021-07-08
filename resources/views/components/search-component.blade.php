@@ -56,9 +56,9 @@
                     <div class="category-slider">
 
                         @foreach($categories as $cat)
-                            <a href="{{ route('shop',['category'=>$cat->slug]) }}" class="single-cat">
+                            <a href="{{ url('shop').'?category='.$cat->slug }}" class="single-cat">
                                 <div class="icon">
-                                    <img src="{{ asset($cat->image) }}" alt="#">
+                                    <img src="{{ asset($cat->image->url) }}" alt="#">
                                 </div>
                                 <h3>{{ $cat->title }}</h3>
                                 <h5 class="total">{{ $cat->products->count() }}</h5>
