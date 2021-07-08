@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Modules\Shop\Entities\Category;
 use Modules\Shop\Entities\Comment;
+use Modules\Shop\Entities\Currency;
 use Modules\Shop\Entities\Image;
 use Modules\Shop\Entities\Product;
 use Modules\Shop\Entities\Tag;
@@ -21,6 +22,36 @@ class ProductTableSeeder extends Seeder
      */
     public function run()
     {
+
+        if (Currency::count() < 1) {
+            $currencies = [
+                [
+                    'name' => 'Naira',
+                    'code' => 'NGN',
+                    'symbol' => '₦',
+                ], [
+                    'name' => 'United States Dollar',
+                    'code' => 'USD',
+                    'symbol' => '$',
+                ], [
+                    'name' => 'United Kingdom Pound',
+                    'code' => 'GBP',
+                    'symbol' => '£',
+                ], [
+                    'name' => 'Ghana Cedi',
+                    'code' => 'GHS',
+                    'symbol' => '¢',
+                ],
+            ];
+
+            foreach ($currencies as $item) {
+                Currency::create([
+                    'name' => $item['name'],
+                    'code' => $item['code'],
+                    'symbol' => $item['symbol'],
+                ]);
+            }
+        }
         if (Category::count() < 1) {
             $categories = [
                 ['title' => 'Automobile', 'image' => 'vendor/images/categories/car.svg'],
@@ -62,5 +93,6 @@ class ProductTableSeeder extends Seeder
                 });
 
         }
+
     }
 }

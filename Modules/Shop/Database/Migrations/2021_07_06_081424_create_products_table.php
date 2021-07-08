@@ -20,6 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->longText('description')->nullable();
+            $table->double('price')->nullable()->default(0);
+            $table->unsignedBigInteger('currency_id')->nullable()->default(1);
             $table->boolean('featured')->nullable()->default(false);
             $table->boolean('hot')->nullable()->default(false);
             $table->boolean('published')->nullable()->default(false);

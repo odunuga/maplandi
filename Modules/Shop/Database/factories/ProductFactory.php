@@ -4,6 +4,7 @@ namespace Modules\Shop\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Modules\Shop\Entities\Currency;
 
 class ProductFactory extends Factory
 {
@@ -26,6 +27,7 @@ class ProductFactory extends Factory
             'sku' => abs((double)$this->faker->uuid),
             'title' => $title,
             'slug' => Str::slug($title),
+            'currency_id' => $this->faker->randomElement(Currency::all()->pluck('id')->toArray()),
             'description' => $this->faker->sentence(30),
             'featured' => $this->faker->boolean(20),
             'hot' => $this->faker->boolean(20),
