@@ -16,16 +16,16 @@
 
                             <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                                 <div class="image">
-                                    <a href="{{ route('shop',['id'=>$deal->id]) }}" class="thumbnail"><img
+                                    <a href="{{url('shop/'.$deal->sku) }}" class="thumbnail"><img
                                             src="{{ asset($deal->image?$deal->image->url:"") }}" alt="#"></a>
                                     <div class="product">
                                     </div>
                                 </div>
                                 <div class="content">
                                     <div class="top-content">
-                                        <a href="javascript:void(0)" class="tag">Mobile Phones</a>
+                                        <a href="javascript:void(0)" class="tag">{{ $deal->category->title }}</a>
                                         <h3 class="title">
-                                            <a href="{{ route('shop',['product'=>$deal->sku]) }}">{{ $deal->title }}</a>
+                                            <a href="{{ url('shop/'.$deal->sku) }}">{{ $deal->title }}</a>
                                         </h3>
                                         <livewire:rating :deal="$deal" :key="$deal->id"/>
                                     </div>
