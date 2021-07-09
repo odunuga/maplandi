@@ -11,19 +11,16 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Styles -->
-
     @include('partials.links')
     @livewireStyles
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
 </head>
 <body class="font-sans antialiased">
+
 <x-jet-banner/>
 <livewire:navbar/>
-
 <livewire:cart-modal/>
 <div class="min-h-screen bg-gray-100">
 {{--    @livewire('navigation-menu')--}}
@@ -45,9 +42,10 @@
 
 @stack('modals')
 
+@livewireScripts
 @include('partials.footer')
 @include('partials.scripts')
-@livewireScripts
+{{--<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>--}}
 @isset($scripts) {{ $scripts }} @endisset
 </body>
 </html>

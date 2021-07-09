@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{{ asset('vendor/css/glightbox.min.css') }}"/>
 <link rel="stylesheet" href="{{ asset('vendor/css/main.css') }}"/>
 <link rel="stylesheet" href="{{ asset('vendor/css/rateit.css') }}"/>
+<link rel="stylesheet" href="{{ asset('vendor/css/toastr.css') }}"/>
 
 
 <!--FAVICONS-->

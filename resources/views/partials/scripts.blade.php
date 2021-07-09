@@ -8,6 +8,7 @@
 <script src="{{ asset('vendor/js/glightbox.min.js') }}"></script>
 <script src="{{ asset('vendor/js/jquery.rateit.min.js') }}"></script>
 <script src="{{ asset('vendor/js/main.js') }}"></script>
+<script src="{{ asset('vendor/js/toastr.min.js') }}"></script>
 <script type="text/javascript">
     //========= Category Slider
     let cat = document.getElementsByClassName('category-slider');
@@ -72,4 +73,28 @@
                 }
             }
         });
+
+    window.livewire.on('alert', data => {
+        const type = data[0];
+        const message = data[1];
+
+        toastr[type](message);
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "500",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    });
 </script>

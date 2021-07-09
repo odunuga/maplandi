@@ -29,7 +29,8 @@ class ContactUs extends Component
 
         $this->sendMail();
         $this->clear();
-        session()->flash('contact_success', 'Message sent successfully');
+        $this->emit('alert', ['success', 'Message sent successfully']);
+
     }
 
     private function sendMail()

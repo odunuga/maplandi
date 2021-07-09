@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class whyChooseUsComponent extends Component
+class WhyChooseUsComponent extends Component
 {
     public $why_choose_us;
     public $why_choose_us_title;
