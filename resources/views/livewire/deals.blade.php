@@ -1,4 +1,4 @@
-@if(count($hot_deals)>0)
+@if(count($hot_deals) > 0)
     <section class="items-grid section custom-padding">
         <div class="container">
             <div class="row">
@@ -17,7 +17,7 @@
                             <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                                 <div class="image">
                                     <a href="{{ route('shop',['id'=>$deal->id]) }}" class="thumbnail"><img
-                                            src="{{ asset($deal->image) }}" alt="#"></a>
+                                            src="{{ asset($deal->image?$deal->image->url:"") }}" alt="#"></a>
                                     <div class="product">
                                     </div>
                                 </div>
@@ -25,20 +25,14 @@
                                     <div class="top-content">
                                         <a href="javascript:void(0)" class="tag">Mobile Phones</a>
                                         <h3 class="title">
-                                            <a href="shop/product-details.html">Apple Iphone X</a>
+                                            <a href="{{ route('shop',['product'=>$deal->sku]) }}">{{ $deal->title }}</a>
                                         </h3>
-                                        <ul class="rating">
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><i class="lni lni-star-filled"></i></li>
-                                            <li><a href="javascript:void(0)">(35)</a></li>
-                                        </ul>
-
+                                        <livewire:rating :deal="$deal" :key="$deal->id"/>
                                     </div>
                                     <div class="bottom-content">
-                                        <p class="price">Price: <span>{{ number_format($deal->price) }}</span></p>
+                                        <p class="price">Price:
+                                            <span>{{ currency_with_price($deal->price,$deal->currency->symbol) }}</span>
+                                        </p>
                                         <a href="javascript:void(0)" class="like"><i class="lni lni-cart"></i></a>
                                     </div>
                                 </div>
@@ -50,4 +44,15 @@
             </div>
         </div>
     </section>
+
+    @push('scripts')
+        <script>
+            $(document).ready(function () {
+                $('.rateit').rateit();
+                $('.rateit').on('rated', function (event, value) {
+                    Livewire.emit('rated', {id: event.target.id, value: value})
+                })
+            });
+        </script>
+    @endpush
 @endif

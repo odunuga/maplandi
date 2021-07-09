@@ -82,8 +82,38 @@ class ProductTableSeeder extends Seeder
         }
         if (Category::count() > 1 && Product::count() < 1) {
             $tags = ['Bike', 'Services', 'Brand', 'Popular'];
+            $images = [
+                '/vendor/images/items-tab/item-1.jpg',
+                '/vendor/images/items-tab/item-2.jpg',
+                '/vendor/images/items-tab/item-3.jpg',
+                '/vendor/images/items-tab/item-4.jpg',
+                '/vendor/images/items-tab/item-5.jpg',
+                '/vendor/images/items-tab/item-6.jpg',
+                '/vendor/images/items-tab/item-7.jpg',
+                '/vendor/images/items-tab/item-8.jpg',
+                '/vendor/images/items-grid/author-1.jpg',
+                '/vendor/images/items-grid/author-2.jpg',
+                '/vendor/images/items-grid/author-3.jpg',
+                '/vendor/images/items-grid/author-4.jpg',
+                '/vendor/images/items-grid/author-5.jpg',
+                '/vendor/images/items-grid/author-6.jpg',
+                '/vendor/images/items-grid/img1.jpg',
+                '/vendor/images/items-grid/img2.jpg',
+                '/vendor/images/items-grid/img3.jpg',
+                '/vendor/images/items-grid/img4.jpg',
+                '/vendor/images/items-grid/img5.jpg',
+                '/vendor/images/items-grid/img6.jpg',
+                '/vendor/images/item-details/image1.jpg',
+                '/vendor/images/item-details/image2.jpg',
+                '/vendor/images/item-details/image3.jpg',
+                '/vendor/images/item-details/image4.jpg',
+                '/vendor/images/item-details/image5.jpg',
+            ];
             foreach ($x = Category::all() as $cat)
-                Product::factory()->count(3)->create(['category_id' => $cat->id])->each(function ($product) use ($tags) {
+                Product::factory()->count(3)->create(['category_id' => $cat->id])->each(function ($product) use ($tags, $images) {
+                    $ni = new Image();
+                    $ni->url = $images[random_int(0, count($images) - 1)];
+                    $product->image()->save($ni);
                     Comment::factory()->for(User::factory(), 'comment_by')->count(3)->create(['product_id' => $product]);
                     foreach ($tags as $tag) {
                         $set = new Tag();

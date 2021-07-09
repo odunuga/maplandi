@@ -9,9 +9,28 @@ class Deals extends Component
 {
     public $hot_deals;
 
+    protected $listeners = ['rated' => 'implement_rating'];
+
+    public function implement_rating(array $value)
+    {
+
+        $filter_product_id = (int)trim(substr($value['id'], -1, 1));
+
+        $filter_rating_value = (float)trim($value['value']);
+        if (auth()->check()) {
+            $deal = Product::where('id', $filter_product_id)->firstOrFail();
+            auth()->user()->rate($deal, $filter_rating_value);
+
+        } else {
+            session()->flash('error', 'You Are Not logged In');
+
+        }
+
+    }
+
     public function mount()
     {
-        return $this->hot_deals = Product::with(['category', 'image', 'tags'])->inRandomOrder()->where('hot', 1)->where('published', 1)->where('available', 1)->get()->take(12);
+        return $this->hot_deals = Product::with(['category', 'image', 'tags', 'currency'])->inRandomOrder()->where('hot', 1)->where('published', 1)->where('available', 1)->get()->take(12);
     }
 
     public function render()

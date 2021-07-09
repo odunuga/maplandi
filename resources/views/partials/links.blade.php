@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="{{ asset('vendor/css/bootstrap.min.css') }}"/>
 {{--<link rel="stylesheet" href="{{ asset('css/app.css') }}">--}}
 
@@ -7,6 +6,7 @@
 <link rel="stylesheet" href="{{ asset('vendor/css/tiny-slider.css') }}"/>
 <link rel="stylesheet" href="{{ asset('vendor/css/glightbox.min.css') }}"/>
 <link rel="stylesheet" href="{{ asset('vendor/css/main.css') }}"/>
+<link rel="stylesheet" href="{{ asset('vendor/css/rateit.css') }}"/>
 
 
 <!--FAVICONS-->

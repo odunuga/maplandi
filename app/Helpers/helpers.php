@@ -29,3 +29,13 @@ function filter_phone($value)
     $new_value = str_replace(" ", "", $new_value);
     return str_replace("-", "", $new_value);
 }
+
+function currency_with_price($value, $currency_symbol)
+{
+    $new_value = trim($value);
+    $new_value = str_replace("(", "", $new_value);
+    $new_value = str_replace(")", "", $new_value);
+    $new_value = str_replace(" ", "", $new_value);
+    $new_value = str_replace("-", "", $new_value);
+    return $currency_symbol . ' ' . number_format($new_value);
+}

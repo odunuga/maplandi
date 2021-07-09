@@ -6,6 +6,7 @@
 <script src="{{ asset('vendor/js/wow.min.js') }}"></script>
 <script src="{{ asset('vendor/js/tiny-slider.js') }}"></script>
 <script src="{{ asset('vendor/js/glightbox.min.js') }}"></script>
+<script src="{{ asset('vendor/js/jquery.rateit.min.js') }}"></script>
 <script src="{{ asset('vendor/js/main.js') }}"></script>
 <script type="text/javascript">
     //========= Category Slider

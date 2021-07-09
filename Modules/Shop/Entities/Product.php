@@ -22,6 +22,11 @@ class Product extends Model
         return $this->morphOne(Image::class, 'imageable');
     }
 
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
+    }
+
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
