@@ -6,6 +6,7 @@ use BinaryCats\Sku\HasSku;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Nagy\LaravelRating\Traits\Like\Likeable;
 use Nagy\LaravelRating\Traits\Rate\Rateable;
 
 class Product extends Model
@@ -13,6 +14,7 @@ class Product extends Model
     use HasFactory;
     use Rateable;
     use HasSku;
+    use Likeable;
     use InteractsWithViews;
 
     protected $fillable = [];

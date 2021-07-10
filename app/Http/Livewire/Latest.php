@@ -10,7 +10,7 @@ class Latest extends Component
     public $latest_products = [];
     public $random_products = [];
     public $popular_products = [];
-    public $take = 8;
+    public $take =9;
 
     public function mount()
     {

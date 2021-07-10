@@ -1,6 +1,8 @@
 <?php
 
 
+use Modules\Shop\Entities\Product;
+
 function format_number($raw_num)
 {
 
@@ -38,4 +40,8 @@ function currency_with_price($value, $currency_symbol)
     $new_value = str_replace(" ", "", $new_value);
     $new_value = str_replace("-", "", $new_value);
     return $currency_symbol . ' ' . number_format($new_value);
+}
+
+function filtered_products($filters,$paginate){
+  return  Product::with(['image', 'tags', 'category', 'currency'])->latest()->where('published', 1)->where('available', 1)->paginate($paginate);
 }

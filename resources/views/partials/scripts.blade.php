@@ -12,7 +12,8 @@
 <script type="text/javascript">
     //========= Category Slider
     let cat = document.getElementsByClassName('category-slider');
-    if (cat)
+
+    if (cat.length > 0)
         tns({
             container: '.category-slider',
             items: 3,
@@ -44,7 +45,7 @@
 
     //========= testimonialComponent
     let test = document.getElementsByClassName('testimonial-slider');
-    if (test)
+    if (test.length > 0)
         tns({
             container: '.testimonial-slider',
             items: 3,
