@@ -30,7 +30,7 @@
             <div class="row">
                 @isset($products)
                     @foreach($products as $item)
-                        <livewire:grid-products :item="$item" :key="$item->id"/>
+                        <livewire:grid-products :item="$item" :key="'grid'.$item->id"/>
                     @endforeach
                 @endisset
             </div>
@@ -63,7 +63,7 @@
             <div class="row">
                 @isset($products)
                     @foreach($products as $item)
-                        <livewire:list-products :item="$item" :key="$item->id"/>
+                        <livewire:list-products :item="$item" :key="'list'.$item->id"/>
                     @endforeach
                 @endisset
 
@@ -75,14 +75,14 @@
                     @isset($products)
                         <div class="pagination left">
                             {{ $products->links() }}
-{{--                            <ul class="pagination-list">--}}
-{{--                                <li><a href="javascript:void(0)">1</a></li>--}}
-{{--                                <li class="active"><a href="javascript:void(0)">2</a></li>--}}
-{{--                                <li><a href="javascript:void(0)">3</a></li>--}}
-{{--                                <li><a href="javascript:void(0)">4</a></li>--}}
-{{--                                <li><a href="javascript:void(0)"><i--}}
-{{--                                            class="lni lni-chevron-right"></i></a></li>--}}
-{{--                            </ul>--}}
+                            {{--                            <ul class="pagination-list">--}}
+                            {{--                                <li><a href="javascript:void(0)">1</a></li>--}}
+                            {{--                                <li class="active"><a href="javascript:void(0)">2</a></li>--}}
+                            {{--                                <li><a href="javascript:void(0)">3</a></li>--}}
+                            {{--                                <li><a href="javascript:void(0)">4</a></li>--}}
+                            {{--                                <li><a href="javascript:void(0)"><i--}}
+                            {{--                                            class="lni lni-chevron-right"></i></a></li>--}}
+                            {{--                            </ul>--}}
                         </div>
                     @endisset
                 </div>

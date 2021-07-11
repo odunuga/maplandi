@@ -12,43 +12,28 @@
                         </form>
                     </div>
 
-
                     <div class="single-widget">
                         <h3>All Categories</h3>
                         <ul class="list">
-                            <li>
-                                <a href="category.html"><i class="lni lni-dinner"></i> Hotel &
-                                    Travels<span>15</span></a>
-                            </li>
-                            <li>
-                                <a href="category.html"><i class="lni lni-control-panel"></i> Services
-                                    <span>20</span></a>
-                            </li>
-                            <li>
-                                <a href="category.html"><i class="lni lni-bullhorn"></i> Marketing
-                                    <span>55</span></a>
-                            </li>
-                            <li>
-                                <a href="category.html"><i class="lni lni-home"></i> Real Estate<span>35</span></a>
-                            </li>
-                            <li>
-                                <a href="category.html"><i class="lni lni-bolt"></i> Electronics <span>60</span></a>
-                            </li>
-                            <li>
-                                <a href="category.html"><i class="lni lni-tshirt"></i> Dress & Clothing
-                                    <span>55</span></a>
-                            </li>
-                            <li>
-                                <a href="category.html"><i class="lni lni-diamond-alt"></i> Jewelry & Accessories
-                                    <span>45</span></a>
-                            </li>
+                            @isset($categories)
+                                @foreach($categories as $cat)
+                                    <li>
+                                        <a href="#" wire:click="filterCategory('{{$cat->slug}}')">
+                                            <img src="{{ asset($cat->image->url) }}"
+                                                 alt="{{ $cat->title }} thumbnail"
+                                                 style="height:1.5em"> {{ $cat->title }}
+                                            <span>{{ format_number($cat->products->count()) }}</span></a>
+                                    </li>
+
+                                @endforeach
+                            @endisset
                         </ul>
                     </div>
 
                     <div class="single-widget range">
                         <h3>Price Range</h3>
-                        <input type="range" class="form-range" name="range" step="1" min="100" max="10000"
-                               value="10" onchange="rangePrimary.value=value">
+                        <input type="range" class="form-range" name="range" step="1" min="100" max="1000000" value="10"
+                               onchange="rangePrimary.value=value;Livewire.emit('newRange',value)">
                         <div class="range-inner">
                             <label>$</label>
                             <input type="text" id="rangePrimary" placeholder="100"/>
@@ -59,7 +44,7 @@
                     <div class="single-widget banner">
                         <h3>Advertisement</h3>
                         <a href="javascript:void(0)">
-                            <img src="../assets/images/banner/banne" alt="#">
+                            <img src="{{ asset('vendor/images/banner/banner.jpg') }}" alt="#">
                         </a>
                     </div>
 
@@ -68,7 +53,6 @@
             <div class="col-lg-9 col-md-8 col-12">
                 <div class="category-grid-list">
                     <div class="row">
-
                         <livewire:filter-products :title="$title" :filters="$filters"/>
                     </div>
                 </div>
