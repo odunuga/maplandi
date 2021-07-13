@@ -9,6 +9,7 @@
 <script src="{{ asset('vendor/js/jquery.rateit.min.js') }}"></script>
 <script src="{{ asset('vendor/js/main.js') }}"></script>
 <script src="{{ asset('vendor/js/toastr.min.js') }}"></script>
+<script src="{{ asset('vendor/pace-master/pace.js') }}"></script>
 <script type="text/javascript">
     //========= Category Slider
     let cat = document.getElementsByClassName('category-slider');
@@ -74,6 +75,34 @@
                 }
             }
         });
+
+    paceOptions = {
+        catchupTime: 100,
+        initialRate: .03,
+        minTime: 250,
+        ghostTime: 100,
+        maxProgressPerFrame: 20,
+        easeFactor: 1.25,
+        startOnPageLoad:true,
+        restartOnPushState:true,
+        restartOnRequestAfter: 500,
+        target:'body',
+        elements: {
+            checkInterval: 100,
+            selectors: ['body']
+        },
+        eventLag: {
+            minSamples: 10,
+            sampleCount: 3,
+            lagThreshold: 3
+        },
+        ajax: {
+            trackMethods: ['GET'],
+            trackWebSockets:true,
+            ignoreURLs: []
+        }
+
+    }
 
     window.livewire.on('alert', data => {
         const type = data[0];

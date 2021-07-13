@@ -8,60 +8,72 @@ use Livewire\WithPagination;
 
 class ShopProducts extends Component
 {
-    use WithPagination;
+//    use WithPagination;
 
 
     public $title;
-    public $filters;
     public $categories;
-    protected $listeners = ['newRange' => 'SetNewRange'];
+    public $search;
+    public $category;
+    public $cat_id;
+    public $range;
+    public $order_by;
+    public $dir;
+    protected $queryString = ['search', 'category', 'range', 'order_by', 'dir'];
+    protected $listeners = ['newRange' => 'filterRange'];
+
 
     public function mount()
     {
-        $this->categories = get_categories();
-        Cache::forget('filters');
+        $this->filterCategory($this->category);
     }
 
-    public function filterCategory($slug)
+    // Called directly from click event
+    public function filterCategory($slug = null)
     {
-        $this->build_link('category', $slug);
-        $cat = get_category_from_slug($slug);
-        $data = ['filters' => $this->filters, 'title' => $cat->title];
-        $this->emitData($data);
-    }
+        if ($slug === '*') {
+            $this->category = '';
+        } else {
+            $cat = get_category_from_slug($slug);
 
-    public function SetNewRange($value)
-    {
-        $this->build_link('range', $value);
-        $data = ['filters' => $this->filters];
-        $this->emitData($data);
-    }
+            if ($cat) {
+                $this->category = $cat->slug;
+                $this->cat_id = $cat->id;
+            }
+        }
+        $this->search = null;
 
-    private function emitData($data)
-    {
-        $this->emit('newSearch', $data);
     }
 
     public function render()
     {
-        $this->title = 'Accessories | Computing | Gadgets | Phones and a whole lot more.';
+        $this->search = custom_filter_var($this->search);
+        $this->setTitle();
+        $this->categories = get_categories(); // fetch all categories for sidebar
+        $params = ['category' => $this->category, 'search' => $this->search, 'range' => $this->range, 'order_by' => $this->order_by, 'dir' => $this->dir, 'category_id' => $this->cat_id];
 
-        return view('livewire.shop-products');
+        return view('livewire.shop-products', ['title' => $this->title, 'params' => $params]);
     }
 
-    public function build_link($name, $slug)
+
+    public function submitSearch()
     {
-        if (Cache('filters')) {
-            $fetches = collect(Cache('filters'));
+        $input = custom_filter_var($this->search);
+        $this->search = $input;
+        $this->emit('newSearch', $input);
+    }
 
+    protected function setTitle()
+    {
+        if ($this->search) {
+            $this->title = $this->search;
+        } else if ($this->category) {
+            $this->title = $this->category;
         } else {
-            // fetch current filters and add new filter option for categories
-            $fetches = collect($this->filters);
+            $this->title = 'Accessories | Computing | Gadgets | Phones and a whole lot more.';
         }
-        $fetches = $fetches->put($name, $slug);
-        Cache(['filters' => $fetches]);
-        $this->filters = $fetches;
 
     }
+
 
 }

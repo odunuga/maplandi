@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{{ asset('vendor/css/main.css') }}"/>
 <link rel="stylesheet" href="{{ asset('vendor/css/rateit.css') }}"/>
 <link rel="stylesheet" href="{{ asset('vendor/css/toastr.css') }}"/>
+<link href="{{ asset('vendor/pace-master/themes/silver/pace-theme-mac-osx.css') }}" rel="stylesheet" />
 
 
 <!--FAVICONS-->
