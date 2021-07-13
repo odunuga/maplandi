@@ -22,6 +22,7 @@
                                     <label for="category"><i class="lni lni-grid-alt theme-color"></i></label>
                                     <select name="category" id="category">
                                         <option value="" selected disabled>Categories</option>
+                                        <option value="*">All</option>
                                         @foreach($categories as $cat)
                                             <option value="{{ $cat->slug }}">{{ $cat->title }}</option>
                                         @endforeach
@@ -47,7 +48,7 @@
                             } else if (k.value === "") {
                                 alert("What are we searching for?")
                             } else {
-                                let newUrl = '{{ route('shop') }}' + '?query=' + k.value.trim() + '&category=' + c.value.trim();
+                                let newUrl = '{{ route('shop') }}' + '?search=' + k.value.trim() + '&category=' + c.value.trim();
                                 window.location.replace(newUrl);
                                 // console.log(newUrl)
                             }

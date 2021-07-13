@@ -56,15 +56,22 @@ function filtered_products(int $paginate, $category_id = null, int $range = null
     }
     // Search options
     if ($search) {
-        $filtered_products = $filtered_products->where('title', 'LIKE', '%' . $search . '%')->orWhere('description', 'LIKE', '%' . $search . '%');
+        $reservedSymbols = ['-', '+', '<', '>', '@', '(', ')', '~'];
+        $searchTerm = str_replace($reservedSymbols, ' ', $search);
+        $searchValues = preg_split('/\s+/', $searchTerm, -1, PREG_SPLIT_NO_EMPTY);
+        foreach ($searchValues as $value) {
+            $filtered_products = $filtered_products->orWhere('title', 'like', "%{$value}%")->orWhere('description', 'like', "%{$value}%");
+        }
+        $filtered_products = $filtered_products->orderBy('title');
+//        $filtered_products = $filtered_products->orWhere('title', 'LIKE', '%' . $search . '%')->orWhere('description', 'LIKE', '%' . $search . '%');
     }
-
     if ($dir === 'asc') {
         $filtered_products = $filtered_products->orderBy($order);
-    } else {
+    } elseif ($dir === 'desc') {
         $filtered_products = $filtered_products->orderByDesc($order);
     }
 
+//    dd($filtered_products->get());
     return $filtered_products->paginate($paginate);
 }
 

@@ -35,13 +35,11 @@ class ShopProducts extends Component
             $this->category = '';
         } else {
             $cat = get_category_from_slug($slug);
-
             if ($cat) {
                 $this->category = $cat->slug;
                 $this->cat_id = $cat->id;
             }
         }
-        $this->search = null;
 
     }
 
@@ -66,9 +64,9 @@ class ShopProducts extends Component
     protected function setTitle()
     {
         if ($this->search) {
-            $this->title = $this->search;
+            $this->title = ucfirst($this->search);
         } else if ($this->category) {
-            $this->title = $this->category;
+            $this->title = ucfirst($this->category);
         } else {
             $this->title = 'Accessories | Computing | Gadgets | Phones and a whole lot more.';
         }

@@ -15,8 +15,8 @@ class FilterProducts extends Component
     public $category;
     public $cat_id;
     public $range;
-    public $order = 'created_at';
-    public $dir = 'desc';
+    public $order;
+    public $dir;
 
     protected $listeners = ['newSearch' => 'prepSearch'];
 
