@@ -21,7 +21,18 @@
                                     <div class="product">
                                         <div class="product-image">
                                         </div>
+                                        @if($deal->product_type=='sell')
+                                            <p class="sale">For Sale</p>
+
+                                        @endif
+                                        @if($deal->product_type=='new')
+                                            <span class="rent"> Rent </span>
+                                        @endif
                                     </div>
+                                    @if($deal->featured)
+                                        <p class="item-position"><i class="lni lni-bolt"></i> Featured</p>
+                                    @endif
+
                                 </div>
                                 <div class="content">
                                     <div class="top-content">
@@ -35,7 +46,8 @@
                                         <p class="price">Price:
                                             <span>{{ currency_with_price($deal->price,$deal->currency->symbol) }}</span>
                                         </p>
-                                        <livewire:add-to-cart :product="$deal" :key="'dealCart'.$deal->sku" :class="'like'"/>
+                                        <livewire:add-to-cart :product="$deal" :key="'dealCart'.$deal->sku"
+                                                              :class="'like'"/>
                                     </div>
                                 </div>
                             </div>

@@ -128,6 +128,17 @@
       'Livewire' => 'Livewire\\Livewire',
     ),
   ),
+  'mcamara/laravel-localization' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Mcamara\\LaravelLocalization\\LaravelLocalizationServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'LaravelLocalization' => 'Mcamara\\LaravelLocalization\\Facades\\LaravelLocalization',
+    ),
+  ),
   'nagy/laravel-rating' => 
   array (
     'providers' => 
