@@ -15,7 +15,10 @@ class CreateProductParametersTable extends Migration
     {
         Schema::create('product_parameters', function (Blueprint $table) {
             $table->id();
-
+            $table->unsignedBigInteger('parameter_id');
+            $table->unsignedBigInteger('product_id');
+            $table->longText('value')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

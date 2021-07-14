@@ -17,7 +17,7 @@
             <a href="javascript:void(0)"
                class="tag">{{ $item->category->title }}</a>
             <h3 class="title">
-                <a href="{{ url('show/'.$item->sku) }}">{{ $item->title }}</a>
+                <a href="{{ url('shop/'.$item->sku) }}">{{ $item->title }}</a>
             </h3>
 
             <ul class="info">

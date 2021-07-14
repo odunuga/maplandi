@@ -1,4 +1,4 @@
-<footer class="footer" >
+<footer class="footer">
 
     <div class="footer-top">
         <div class="container">
@@ -13,7 +13,7 @@
                                 <span class="text">
 Visa</span>
                             </a>
-                            <a href="javascript:void(0)" class="btn" >
+                            <a href="javascript:void(0)" class="btn">
                                 <i class="lni lni-mastercard"></i>
                                 <span class="text">
 Mastercard</span>
@@ -61,7 +61,10 @@ Mastercard</span>
                         <h3>Contact</h3>
                         <ul>
                             <li>23 New Design Str, Lorem Upsum 10<br> Hudson Yards, USA</li>
-                            <li>Tel. +(123) 1800-567-8990 <br> Mail. <a href="https://demo.graygrids.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81f2f4f1f1eef3f5c1e2ede0f2f2e8e6f3e8e5f2afe2eeec">[email&#160;protected]</a></li>
+                            <li>Tel. +(123) 1800-567-8990 <br> Mail. <a
+                                    href="https://demo.graygrids.com/cdn-cgi/l/email-protection" class="__cf_email__"
+                                    data-cfemail="81f2f4f1f1eef3f5c1e2ede0f2f2e8e6f3e8e5f2afe2eeec">[email&#160;protected]</a>
+                            </li>
                         </ul>
                     </div>
 
@@ -82,12 +85,28 @@ Mastercard</span>
                                 <li><a href="{{ route('policy.show') }}"> Privacy Policy</a></li>
 
                             </ul>
-                            </p>
+                            <ul>
+                                <li class="flex-row">
+
+                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                        <a rel="alternate" hreflang="{{ $localeCode }}"
+                                           href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                            {{ $properties['native'] }}
+                                        </a> |
+                                    @endforeach
+
+
+                                </li>
+
+                            </ul>
                             <ul class="footer-social">
-                                <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                                <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
+                                </li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a>
+                                </li>
                                 <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
-                                <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a>
+                                </li>
                             </ul>
                         </div>
                     </div>

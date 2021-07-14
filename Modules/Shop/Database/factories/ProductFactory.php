@@ -33,6 +33,7 @@ class ProductFactory extends Factory
             'featured' => $this->faker->boolean(40),
             'hot' => $this->faker->boolean(40),
             'published' => $this->faker->boolean(90),
+            'product_type'=>$this->faker->randomElement(['sell', 'rent', null]),
             'available' => $this->faker->boolean(90)
         ];
     }

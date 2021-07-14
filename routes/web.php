@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SocialiteController;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,21 +14,23 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    })->name('welcome');
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+    Route::get('/google/login', [SocialiteController::class, 'login'])->name('google.login');
 
-Route::get('/google/login', [SocialiteController::class, 'login'])->name('google.login');
+    Route::get('/google/signup', [SocialiteController::class, 'signup'])->name('google.signup');
 
-Route::get('/google/signup', [SocialiteController::class, 'signup'])->name('google.signup');
+    Route::get('test', function () {
+        $user = auth()->user();
+        return view('first_password_set')->with(['user' => $user]);
+    });
+    Route::get('oauth/google/callback', [SocialiteController::class, 'webhook']);
 
-Route::get('test', function () {
-    $user = auth()->user();
-    return view('first_password_set')->with(['user' => $user]);
-});
-Route::get('oauth/google/callback', [SocialiteController::class, 'webhook']);
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+    Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+}
+);

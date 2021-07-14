@@ -11,6 +11,7 @@
 <link href="{{ asset('vendor/pace-master/themes/silver/pace-theme-mac-osx.css') }}" rel="stylesheet" />
 
 
+
 <!--FAVICONS-->
 <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('vendor/favicon/apple-icon-57x57.png') }}">
 <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('vendor/favicon/apple-icon-60x60.png') }}">

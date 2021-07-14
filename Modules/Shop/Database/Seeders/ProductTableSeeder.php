@@ -10,7 +10,10 @@ use Modules\Shop\Entities\Category;
 use Modules\Shop\Entities\Comment;
 use Modules\Shop\Entities\Currency;
 use Modules\Shop\Entities\Image;
+use Modules\Shop\Entities\Parameter;
+use Modules\Shop\Entities\ParameterBuilder;
 use Modules\Shop\Entities\Product;
+use Modules\Shop\Entities\ProductParameter;
 use Modules\Shop\Entities\Tag;
 
 class ProductTableSeeder extends Seeder
@@ -19,6 +22,7 @@ class ProductTableSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     * @throws \Exception
      */
     public function run()
     {
@@ -78,6 +82,26 @@ class ProductTableSeeder extends Seeder
                 $img = new Image();
                 $img->url = $item['image'];
                 $cat->image()->save($img);
+                if ($item['title'] == 'Electronics') {
+                    $prop = new ParameterBuilder();
+                    $prop->type_name = 'Type';
+                    $prop->type_id = 'productType';
+                    $prop->type = 'select';
+                    $prop->attributes = ['audio & Music Accessories', 'Games Consoles Accessories', 'Headphones Accessories', 'Networking Product Accessories', 'Photo & Video Accessories'];
+
+
+                    $prop1 = new ParameterBuilder();
+                    $prop1->type_name = 'Condition';
+                    $prop1->type_id = 'productCondition';
+                    $prop1->type = 'select';
+                    $prop1->attributes = ['Brand New', 'Used'];
+                    $para = Parameter::create([
+                        'category_id' => $cat->id,
+                        'title' => 'Type'
+                    ]);
+                    $para->properties()->save($prop);
+                    $para->properties()->save($prop1);
+                }
             }
         }
         if (Category::count() > 1 && Product::count() < 1) {
@@ -109,16 +133,40 @@ class ProductTableSeeder extends Seeder
                 '/vendor/images/item-details/image4.jpg',
                 '/vendor/images/item-details/image5.jpg',
             ];
-            foreach ($x = Category::all() as $cat)
-                Product::factory()->count(3)->create(['category_id' => $cat->id])->each(function ($product) use ($tags, $images) {
+            foreach ($x = Category::with(['parameters', 'parameters.properties'])->get() as $cat)
+                Product::factory()->count(5)->create(['category_id' => $cat->id])->each(function ($product) use ($tags, $images, $cat) {
+                    // Set single image for product
                     $ni = new Image();
                     $ni->url = $images[random_int(0, count($images) - 1)];
                     $product->image()->save($ni);
+                    // set other images for product
+                    $set_images = array_rand($images, 3);
+                    foreach ($set_images as $img) {
+                        $nim = new Image();
+                        $nim->url = $img;
+                        $product->images()->save($nim);
+                    }
+
+                    // add demo comments for product
                     Comment::factory()->for(User::factory(), 'comment_by')->count(3)->create(['product_id' => $product]);
+                    // set tags for products
                     foreach ($tags as $tag) {
                         $set = new Tag();
                         $set->title = $tag;
                         $product->tags()->save($set);
+                    }
+                    $pv1 = ["audio & Music Accessories", "Games Consoles Accessories", "Headphones Accessories", "Networking Product Accessories", "Photo & Video Accessories"];
+                    $pv2 = ["Brand New", "Used"];
+                    // Set Parameters for product
+                    if ($cat->parameters) {
+                        foreach ($cat->parameters as $pa) {
+                            $pp = new ProductParameter();
+                            $pp->product_id = $product->id;
+                            $pp->parameter_id = $pa->id;
+                            $pp->value = $pa->id === 1 ? $pv1[random_int(0, count($pv1) - 1)] : $pv2[random_int(0, count($pv2) - 1)];
+                            $pp->save();
+                        }
+
                     }
                 });
 

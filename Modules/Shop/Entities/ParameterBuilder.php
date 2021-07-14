@@ -5,14 +5,24 @@ namespace Modules\Shop\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * Class ParameterBuilder
+ * @package Modules\Shop\Entities
+ * @property mixed|string type_name
+ * @property mixed|string type_id
+ * @property mixed|string type
+ * @property array attributes
+ *
+ */
 class ParameterBuilder extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $guarded = [];
     protected $casts = [
-        'attribute' => 'array'
+        'attributes' => 'array'
     ];
+
 
     public function parameter()
     {

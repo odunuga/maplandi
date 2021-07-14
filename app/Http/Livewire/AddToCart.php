@@ -11,12 +11,15 @@ class AddToCart extends Component
 
     public $product;
     public $class;
+    public $style = null;
+    public $text;
     public $in_cart = false;
 
-    public function mount($product, $class = '')
+    public function mount($product, $class = '',  $text = false)
     {
         $this->product = $product;
         $this->class = $class;
+        $this->text = $text;
     }
 
     public function render()
@@ -30,7 +33,7 @@ class AddToCart extends Component
         if ($this->check_cart_item($this->product->sku)) {
             $item = $this->get_single_item($this->product->sku);
             $this->delete_cart($item->id);
-            $this->emit('alert', ['error', __('shop.cart.remove_item')]);
+            $this->emit('alert', ['error', __('cart.remove_item')]);
 
         } else {
             $symbol = isset($this->product->currency) ? $this->product->currency->symbol : 'N';
@@ -47,7 +50,7 @@ class AddToCart extends Component
                     'attributes' => ['symbol' => $symbol, 'category' => $category, 'image' => $image, 'description' => $description]
                 ];
             $this->add_cart($item);
-            $this->emit('alert', ['success', __("shop.cart.add_item")]);
+            $this->emit('alert', ['success', __("cart.add_item")]);
         }
         $this->emit('updateItem');
 
