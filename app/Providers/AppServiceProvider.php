@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
             return $view->with(['site_settings' => $this->get_site_settings()]);
         });
         $repos = [
-            ['key' => ShopRepository::class, 'value' => ShopInterface::class],
+            ['key' => ShopInterface::class, 'value' => ShopRepository::class],
         ];
         foreach ($repos as $repo) {
             $this->app->bind($repo['key'], $repo['value']);

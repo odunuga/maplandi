@@ -5,9 +5,17 @@ namespace Modules\Shop\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Shop\Repository\ShopInterface as Repo;
 
 class ShopController extends Controller
 {
+    private $repo;
+
+    public function __construct(Repo $repo)
+    {
+        $this->repo = $repo;
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -38,12 +46,13 @@ class ShopController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     * @param mixed $sku
      * @return Renderable
      */
-    public function show($id)
+    public function show($sku)
     {
-        return view('shop::show');
+        $product = $this->repo->findBySku($sku, ['image', 'category', 'tags', 'currency', 'parameters'])->first();
+        return view('shop::show')->with(compact('product'));
     }
 
     /**

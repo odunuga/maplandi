@@ -4,6 +4,8 @@ namespace Modules\Shop\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Category extends Model
 {
@@ -16,9 +18,14 @@ class Category extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-    public function image()
+    public function image(): MorphOne
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function images(): MorphMany
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     public function sub_categories()
@@ -29,6 +36,11 @@ class Category extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function parameters()
+    {
+        return $this->hasMany(Parameter::class);
     }
 
     protected static function newFactory()

@@ -4,7 +4,10 @@
 namespace Modules\Shop\Repository;
 
 
-interface ShopInterface extends \App\Repository\CoreInterface
+use App\Repository\CoreInterface;
+
+interface ShopInterface extends CoreInterface
 {
+
 
 }
