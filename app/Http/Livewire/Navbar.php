@@ -6,6 +6,12 @@ use Livewire\Component;
 
 class Navbar extends Component
 {
+    public $counter;
+
+    public function mount(){
+
+    }
+
     public function render()
     {
         return view('livewire.navbar');

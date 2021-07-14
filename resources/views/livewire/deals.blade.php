@@ -19,6 +19,8 @@
                                     <a href="{{url('shop/'.$deal->sku) }}" class="thumbnail"><img
                                             src="{{ asset($deal->image?$deal->image->url:"") }}" alt="#"></a>
                                     <div class="product">
+                                        <div class="product-image">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="content">
@@ -33,7 +35,7 @@
                                         <p class="price">Price:
                                             <span>{{ currency_with_price($deal->price,$deal->currency->symbol) }}</span>
                                         </p>
-                                        <a href="javascript:void(0)" class="like"><i class="lni lni-cart"></i></a>
+                                        <livewire:add-to-cart :product="$deal" :key="'dealCart'.$deal->sku" :class="'like'"/>
                                     </div>
                                 </div>
                             </div>

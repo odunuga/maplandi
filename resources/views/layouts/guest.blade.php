@@ -27,8 +27,8 @@
         </div>
     </div>
 </div>
-<livewire:navbar/>
-<livewire:cart/>
+<livewire:navbar key="{{ now() }}"/>
+<livewire:cart-modal key="{{ now() }}"/>
 {{ $slot }}
 @include('partials.footer')
 @livewireScripts

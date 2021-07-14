@@ -13,9 +13,10 @@
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                             <ul id="nav" class="navbar-nav ms-auto">
 
-                                <li class="nav-item active "><a href="{{ url('/') }}">Home</a></li>
+                                <li class="nav-item @if(Route::is('welcome')) active @endif"><a href="{{ url('/') }}">Home</a>
+                                </li>
 
-                                <li class="nav-item">
+                                <li class="nav-item @if(Route::is('shop')) active @endif">
                                     <a href="{{ route("shop") }}" aria-label="Toggle navigation">Shop</a>
                                 </li>
 
@@ -110,9 +111,7 @@
                                 <i class="lni lni-cart-full" style="color:red;"></i>
 
                             </B>
-                            <span class="position-absolute top-0 start-100 translate-middle badge bg-danger">
-         2
-  </span>
+                            <livewire:cart-counter key="{{now()}}"/>
                         </button>
                         <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -127,6 +126,5 @@
             </div>
         </div>
     </div>
-
 </header>
 

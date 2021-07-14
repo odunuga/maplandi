@@ -11,6 +11,8 @@
 |
 */
 
-Route::prefix('cart')->group(function() {
-    Route::get('/', 'CartController@index');
+use Illuminate\Support\Facades\Route;
+
+Route::prefix('cart')->group(function () {
+    Route::get('/', 'CartController@index')->name('cart');
 });

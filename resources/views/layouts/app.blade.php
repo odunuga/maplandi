@@ -18,8 +18,8 @@
 <body class="font-sans antialiased">
 
 <x-jet-banner/>
-<livewire:navbar/>
-<livewire:cart-modal/>
+<livewire:navbar key="{{ now() }}"/>
+<livewire:cart-modal key="{{ now() }}"/>
 <div class="min-h-screen bg-gray-100">
 {{--    @livewire('navigation-menu')--}}
 

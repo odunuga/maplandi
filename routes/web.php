@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
 Route::get('/google/login', [SocialiteController::class, 'login'])->name('google.login');
 
 Route::get('/google/signup', [SocialiteController::class, 'signup'])->name('google.signup');

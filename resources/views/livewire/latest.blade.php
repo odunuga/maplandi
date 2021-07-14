@@ -67,13 +67,12 @@
                                                 </h3>
                                                 <ul class="info">
                                                     <li class="price">{{ currency_with_price($product->price,$product->currency->symbol) }}</li>
-                                                    <li class="like"><a href="javascript:void(0)"><i
-                                                                class="lni lni-cart"></i></a>
+                                                    <li class="like">
+                                                        <livewire:add-to-cart :product="$product" :key="$product->sku" :class="'like'" />
                                                     </li>
                                                 </ul>
                                             </div>
                                         </div>
-
                                     </div>
                                 @endforeach
                             </div>
@@ -111,8 +110,8 @@
                                                 </h3>
                                                 <ul class="info">
                                                     <li class="price">{{ currency_with_price($product->price,$product->currency->symbol) }}</li>
-                                                    <li class="like"><a href="javascript:void(0)"><i
-                                                                class="lni lni-cart"></i></a>
+                                                    <li class="like">
+                                                        <livewire:add-to-cart :product="$product" :key="$product->sku" :class="'like'" />
                                                     </li>
                                                 </ul>
                                             </div>
@@ -154,8 +153,8 @@
                                                 </h3>
                                                 <ul class="info">
                                                     <li class="price">{{ currency_with_price($product->price,$product->currency->symbol) }}</li>
-                                                    <li class="like"><a href="javascript:void(0)"><i
-                                                                class="lni lni-cart"></i></a>
+                                                    <li class="like">
+                                                        <livewire:add-to-cart :product="$product" :key="$product->sku" :class="'like'" />
                                                     </li>
                                                 </ul>
                                             </div>

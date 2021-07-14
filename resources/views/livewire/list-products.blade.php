@@ -28,8 +28,8 @@
                         <li class="like">
                             <livewire:like :product="$item"/>
                         </li>
-                        <li class="like"><a href="javascript:void(0)"><i
-                                    class="lni lni-cart"></i></a>
+                        <li class="like">
+                            <livewire:add-to-cart :product="$item" :key="$item->sku" />
 
                         </li>
                     </ul>

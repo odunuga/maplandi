@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\Admin\Traits\SiteSettingsTraits;
+use Modules\Shop\Repository\ShopInterface;
+use Modules\Shop\Repository\ShopRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,13 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             return $view->with(['site_settings' => $this->get_site_settings()]);
         });
+        $repos = [
+            ['key' => ShopRepository::class, 'value' => ShopInterface::class],
+        ];
+        foreach ($repos as $repo) {
+            $this->app->bind($repo['key'], $repo['value']);
+        }
+
     }
 
     /**
