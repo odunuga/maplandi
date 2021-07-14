@@ -35,13 +35,16 @@ class AddToCart extends Component
         } else {
             $symbol = isset($this->product->currency) ? $this->product->currency->symbol : 'N';
             $category = isset($this->product->category) ? $this->product->category->title : '';
+            $image = isset($this->product->image->url) ? $this->product->image->url : '';
+            $description = isset($this->product->description) ? substr($this->product->description, 0, 100) : '';
 
             $item =
-                ['id' => $this->product->sku,
+                [
+                    'id' => $this->product->sku,
                     'name' => $this->product->title,
                     'price' => $this->product->price,
                     'quantity' => 1,
-                    'attributes' => ['symbol' => $symbol, 'category' => $category]
+                    'attributes' => ['symbol' => $symbol, 'category' => $category, 'image' => $image, 'description' => $description]
                 ];
             $this->add_cart($item);
             $this->emit('alert', ['success', __("shop.cart.add_item")]);

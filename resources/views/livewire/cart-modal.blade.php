@@ -15,7 +15,8 @@
                         @foreach($items as $item)
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
-                                    <div class="text-dark"><b>{{ $item->name }} </b></div>
+                                    <div><a
+                                            href="{{url('shop/'.$item->id)}}" class="text-dark"><b>{{ $item->name }} </b></a></div>
                                     Category
                                     : {{ $item->attributes->has('category')?$item->attributes->get('category'):'' }}
                                 </div>
@@ -32,7 +33,7 @@
             </div>
             <div class="modal-footer">
                 @if($items && $items->count() > 0)
-                    <a href="{{ route('cart') }}" class="btn btn-dark btn-sm ">
+                    <a href="{{ route('cart') }}" class="btn btn-sm ">
                         View Cart</a>
                 @endif
             </div>
