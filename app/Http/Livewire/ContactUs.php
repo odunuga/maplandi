@@ -28,7 +28,7 @@ class ContactUs extends Component
         $validatedData = $this->validate();
 
         $this->sendMail();
-        $this->clear();
+        $this->reset();
         $this->emit('alert', ['success', 'Message sent successfully']);
 
     }
@@ -39,11 +39,5 @@ class ContactUs extends Component
 
     }
 
-    private function clear()
-    {
-        $this->name = '';
-        $this->subject = '';
-        $this->phone = '';
-        $this->message = '';
-    }
+
 }

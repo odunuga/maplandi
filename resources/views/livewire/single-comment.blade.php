@@ -1,12 +1,12 @@
 <div class="single-comment">
-    <img src="../assets/images/testimonial/testi2.jpg" alt="#">
+    <img
+        src="{{ asset(isset($comment->comment_by->image)?$comment->comment_by->image->url:'vendor/images/dashboard/noimg.png') }}"
+        alt="#">
     <div class="content">
-        <h4>Dannyson</h4>
-        <span>25 Feb, 2023</span>
+        <h4>{{ $comment->name??$comment->comment_by->name??'anonymous' }}</h4>
+        <span>{{ $comment->created_at->diffForHumans() }}</span>
         <p>
-            There are many variations of passages of Lorem Ipsum available, but the majority
-            have suffered alteration in some form, by injected humour, or randomised words
-            which don't look even slightly believable.
+            {!! $comment->body !!}
         </p>
     </div>
 </div>

@@ -26,19 +26,22 @@
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-info ">
                             <h2 class="title">{{ $product->title }}</h2>
-                            @isset($product->parameters)
-                                <div class="list-info mb-3">
+                            <div class="list-info mb-3">
 
-                                    <h4>{{__('shop.information')}}</h4>
-                                    <ul>
+                                <h4>{{__('shop.information')}}</h4>
+                                <ul>
+                                    <li><span>Category:</span>{{ $product->category? $product->category->title:'' }}
+                                    </li>
+                                    @isset($product->parameters)
                                         @foreach($product->parameters as $para)
                                             <li><span>{{ $para->title }}:</span> {{ $para->pivot->value }}</li>
                                         @endforeach
-                                    </ul>
-                                </div>
-                        @endisset
-
-                        <!--ADD TO CART BUTTON-->
+                                    @endisset
+                                </ul>
+                            </div>
+                            <livewire:rating :deal="$product" :key="$product->id"/>
+                            <br/>
+                            <!--ADD TO CART BUTTON-->
                             <livewire:add-to-cart :product="$product" :key="$product->sku" :text="true"/>
                             <div class="social-share">
 
@@ -63,7 +66,7 @@
                         <div class="item-details-sidebar">
                             <div class="single-block tags">
                                 @isset($product->tags)
-                                    <h3>{{ __('shop.tag') }}</h3>
+                                    <h3>{{ __('shop.tags') }}</h3>
                                     <ul>
                                         @foreach($product->tags as $tag)
                                             <li><a href="javascript:void(0)">{{ $tag->title }}</a></li>
