@@ -15,7 +15,6 @@ class CreateCartRecordsTable extends Migration
     {
         Schema::create('cart_records', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_Id')->nullable();
             $table->string('session_id');
             $table->longText('cart')->nullable();
             $table->string('sub_total');

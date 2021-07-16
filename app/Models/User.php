@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Cart\Entities\ShippingAddress;
 use Nagy\LaravelRating\Traits\Like\CanLike;
 use Nagy\LaravelRating\Traits\Rate\CanRate;
 
@@ -65,6 +66,11 @@ class User extends Authenticatable
         'profile_photo_url',
         'image'
     ];
+
+    public function shipping_address()
+    {
+        return $this->hasOne(ShippingAddress::class);
+    }
 
     public function getImageAttribute($value)
     {

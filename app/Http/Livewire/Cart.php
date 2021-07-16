@@ -55,8 +55,7 @@ class Cart extends Component
         }
 
         // redirect user to checkout page
-        $cart = CartRecord::create([
-            'user_id' => auth()->check() ? auth()->id() : null,
+        $cart = CartRecord::firstOrCreate([
             'session_id' => $this->session_id,
             'cart' => $this->get_all_items(),
             'sub_total' => $this->sub_total,

@@ -23,10 +23,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     Route::get('/google/signup', [SocialiteController::class, 'signup'])->name('google.signup');
 
-    Route::get('test', function () {
-        $user = auth()->user();
-        return view('first_password_set')->with(['user' => $user]);
-    });
     Route::get('oauth/google/callback', [SocialiteController::class, 'webhook']);
 
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

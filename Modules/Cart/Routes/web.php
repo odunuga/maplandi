@@ -16,3 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('cart')->group(function () {
     Route::get('/', 'CartController@index')->name('cart');
 });
+
+Route::prefix('checkout')->group(function () {
+    Route::get('/', 'CartController@checkout')->name('checkout');
+});
+
+
+Route::prefix('order')->group(function () {
+    Route::get('/', 'CartController@order')->name('order');
+});
+
+Route::prefix('payment')->group(function () {
+    Route::get('/', 'CartController@payment')->name('payment');
+});

@@ -58,8 +58,8 @@ class SocialiteController extends Controller
         if ($check_session) {
             $to = Session::get('redirect_to'); // take user to redirect page
         } else {
-            $to = route('dashboard'); // else take user to dashboard
+            $to = 'dashboard'; // else take user to dashboard
         }
-        return redirect($to);
+        return redirect()->route($to);
     }
 }

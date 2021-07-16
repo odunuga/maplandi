@@ -6,6 +6,7 @@ namespace Modules\Shop\Traits;
 
 use AmrShawky\LaravelCurrency\Facade\Currency;
 use Modules\Admin\Traits\SiteSettingsTraits;
+use Modules\Cart\Entities\CartRecord;
 
 trait CartTraits
 {
@@ -87,6 +88,6 @@ trait CartTraits
 
     private function check_session_cart()
     {
-        return \Modules\Shop\Entities\Cart::where('session_id', $this->session_id)->where('cleared', false);
+        return CartRecord::where('session_id', $this->session_id)->where('cleared', false);
     }
 }
