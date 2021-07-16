@@ -1,23 +1,18 @@
 <?php
 
-namespace Modules\Shop\Entities;
+namespace Modules\Cart\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-/**
- * Class Cart
- * @package Modules\Shop\Entities
- *
- */
-class Cart extends Model
+class CartRecord extends Model
 {
     use HasFactory;
 
     protected $fillable = [];
-
+    
     protected static function newFactory()
     {
-        return \Modules\Shop\Database\factories\CartFactory::new();
+        return \Modules\Cart\Database\factories\CartRecordFactory::new();
     }
 }

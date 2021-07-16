@@ -29,7 +29,7 @@ function filter_phone($value)
     return str_replace(array("(", ")", " ", "-"), "", $new_value);
 }
 
-function currency_with_price($value = null, $currency_symbol)
+function currency_with_price($value = null, $currency_symbol = 'NGN')
 {
     if ($value === null) {
         return $currency_symbol . '0';
@@ -92,7 +92,17 @@ function get_category_from_slug($slug)
     return \Modules\Shop\Entities\Category::where('slug', $slug)->first();
 }
 
-function search_query_products($query, $paginate)
+function get_user_currency()
 {
+    return \Illuminate\Support\Facades\Cache::get('user_currency');
+}
 
+function check_user_currency()
+{
+    return \Illuminate\Support\Facades\Cache::has('user_currency');
+}
+
+function set_user_currency($currency_id, $code)
+{
+    return \Illuminate\Support\Facades\Cache::add('user_currency', ['id' => $currency_id, 'code' => $code]);
 }

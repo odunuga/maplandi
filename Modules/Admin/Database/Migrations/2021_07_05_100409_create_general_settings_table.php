@@ -29,6 +29,7 @@ class CreateGeneralSettingsTable extends Migration
             $table->string('linkedin_handler')->nullable()->default('https://linkedin.com/maplandi');
             $table->string('instagram_handler')->nullable()->default('https://instagram.com/maplandi');
             $table->string('default_currency')->nullable()->default(1);
+            $table->string('tax')->comment('Tax in Percentage')->nullable()->default(0);
             $table->timestamps();
         });
     }

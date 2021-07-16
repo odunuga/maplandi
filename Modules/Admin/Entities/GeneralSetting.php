@@ -4,6 +4,7 @@ namespace Modules\Admin\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Shop\Entities\Currency;
 
 /**
  * Class GeneralSetting
@@ -30,6 +31,11 @@ class GeneralSetting extends Model
     protected $casts = [
         'opening_hours' => 'array'
     ];
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class, 'default_currency', 'id');
+    }
 
     protected static function newFactory()
     {

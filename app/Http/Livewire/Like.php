@@ -16,9 +16,9 @@ class Like extends Component
         $this->like_count = $product->likesCount();
     }
 
-    public function setLike($value)
+    public function setLike()
     {
-        dd($value);
+        dd($this->product);
     }
 
     public function render()

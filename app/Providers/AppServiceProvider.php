@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             return $view->with(['site_settings' => $this->get_site_settings()]);
         });
+
         $repos = [
             ['key' => ShopInterface::class, 'value' => ShopRepository::class],
         ];

@@ -10,7 +10,7 @@
 </div>
 <div class="single-block comment-form">
     <h3>{{__('shop.post-a-comment')}}</h3>
-    <form wire:submit.prevent="sendNewComment" method="POST">
+    <form wire:submit.prevent="sendNewComment">
         <div class="row">
             <div class="col-lg-6 col-12">
                 <div class="form-box form-group">

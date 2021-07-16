@@ -4,10 +4,13 @@
 namespace Modules\Shop\Traits;
 
 
-use Darryldecode\Cart\Cart;
+use AmrShawky\LaravelCurrency\Facade\Currency;
+use Modules\Admin\Traits\SiteSettingsTraits;
 
 trait CartTraits
 {
+    use SiteSettingsTraits;
+
     private $session_id;
 
     public function __construct()
@@ -66,4 +69,24 @@ trait CartTraits
         return $cartCollection->count();
     }
 
+    private function set_amount($code, $amount)
+    {
+        return Currency::convert()->from($code)->to(get_user_currency()['code'] ?? 'NGN')->amount($amount)->get();
+    }
+
+    private function get_admin_base_currency_code()
+    {
+        return $this->get_admin_base_currency()->code;
+    }
+
+    private function get_admin_base_currency()
+    {
+        return $this->get_site_settings()->currency;
+    }
+
+
+    private function check_session_cart()
+    {
+        return \Modules\Shop\Entities\Cart::where('session_id', $this->session_id)->where('cleared', false);
+    }
 }
