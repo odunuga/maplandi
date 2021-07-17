@@ -54,8 +54,9 @@ class Cart extends Component
             }
         }
 
+        set_redirect_with_prev_session('checkout',$this->session_id);
         // redirect user to checkout page
-        $cart = CartRecord::firstOrCreate([
+        $cart = CartRecord::create([
             'session_id' => $this->session_id,
             'cart' => $this->get_all_items(),
             'sub_total' => $this->sub_total,

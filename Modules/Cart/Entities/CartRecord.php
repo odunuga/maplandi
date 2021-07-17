@@ -9,8 +9,8 @@ class CartRecord extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
-    
+    protected $guarded = [];
+
     protected static function newFactory()
     {
         return \Modules\Cart\Database\factories\CartRecordFactory::new();

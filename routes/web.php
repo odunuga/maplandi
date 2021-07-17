@@ -25,6 +25,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     Route::get('oauth/google/callback', [SocialiteController::class, 'webhook']);
 
+    Route::get('/password/first',[SocialiteController::class,'password_set'])->name('password.first');
+
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');

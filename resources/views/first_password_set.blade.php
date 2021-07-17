@@ -1,21 +1,21 @@
 <x-app-layout>
-    {{--    @dd($user)--}}
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Welcome ').$user->name }}
-        </h2>
-    </x-slot>
+    <section class="login section" style="margin-top:30px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12">
+                    <div class="form-head">
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                            {{ __('Welcome ').$user->name }}
+                        </h2>
+                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                            {{__('welcome.first_password.message')}}
+                        </div>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                {{__('welcome.first_password.message')}}
+                        <livewire:set-first-password/>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-8">
-            <livewire:set-first-password/>
-        </div>
-    </div>
+    </section>
+
 </x-app-layout>

@@ -1,6 +1,7 @@
 <?php
 
 
+use Illuminate\Support\Facades\Cache;
 use Modules\Shop\Entities\Product;
 
 function format_number($raw_num)
@@ -105,4 +106,10 @@ function check_user_currency()
 function set_user_currency($currency_id, $code)
 {
     return \Illuminate\Support\Facades\Cache::add('user_currency', ['id' => $currency_id, 'code' => $code]);
+}
+
+function set_redirect_with_prev_session($to, $session_id, $name = 'redirect_to')
+{
+    Cache::put($name, $to);
+    Cache::put('prev_session', $session_id);
 }

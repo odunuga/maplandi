@@ -63,6 +63,7 @@ trait CartTraits
         return \Cart::session($this->session_id)->getContent();
     }
 
+
     public function cart_count()
     {
         // count carts contents

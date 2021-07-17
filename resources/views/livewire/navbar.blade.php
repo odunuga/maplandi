@@ -35,7 +35,7 @@
                                     </li>
                                 @else
                                     <li class="nav-item d-lg-none">
-                                        <a href="{{route('profile')}}"><i class="lni lni-user"></i> Profile</a>
+                                        <a href="{{route('profile.show')}}"><i class="lni lni-user"></i> Profile</a>
 
                                     </li>
                                     <li class="nav-item d-lg-none">
