@@ -1,5 +1,6 @@
+
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 <link rel="stylesheet" href="{{ asset('vendor/css/bootstrap.min.css') }}"/>
-{{--<link rel="stylesheet" href="{{ asset('css/app.css') }}">--}}
 
 <link rel="stylesheet" href="{{ asset('vendor/css/LineIcons.2.0.css') }}"/>
 <link rel="stylesheet" href="{{ asset('vendor/css/animate.css') }}"/>

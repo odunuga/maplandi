@@ -5,8 +5,7 @@
                 <div class="nav-inner">
                     <nav class="navbar navbar-expand-lg">
                         <a class="navbar-brand" href="{{ url('/') }}">
-                            <img src="{{ asset($site_settings->site_logo) }}" style="width:45px; height:47px;"
-                                 alt="Logo">
+                            <img src="{{ asset($site_settings->site_logo) }}" style="width:45px; height:47px;" alt="Logo">
 
                         </a>
 

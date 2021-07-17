@@ -36,7 +36,8 @@
 
                         <div class="col-12">
                             <div class="form-group mb-3 message">
-                                <textarea class="form-control" wire:model="address" name="message" placeholder="Shipping Address"></textarea>
+                                <textarea class="form-control" wire:model="address" name="message"
+                                          placeholder="Shipping Address"></textarea>
                             </div>
                         </div>
                         <div class="col-12">
@@ -83,13 +84,13 @@
                         Total
                     </span>
                 <h2 class="font-bold">
-                    {{ currency_with_price((double) $cart_details->total,$cart_details->payment_symbol) }}
+                    {{ currency_with_price((double) $cart_details['total'],$cart_details['payment_symbol']) }}
                 </h2>
                 <hr>
                 @if($cart_details)
-                    @foreach($cart_details->cart as $item)
+                    @foreach($cart_details['cart'] as $item)
                         <span class="text-muted  mb-3">
-                                    {{ $item->name }}
+                                    {{ $item['name'] }}
                                 </span>
                     @endforeach
                 @endif
