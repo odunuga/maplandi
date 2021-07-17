@@ -23,6 +23,9 @@ class CheckoutDetails extends Component
         $this->address = auth()->user()->shipping_address ? auth()->user()->shipping_address->address : '';
     }
 
+    public function payment_gateway(){
+
+    }
     public function render()
     {
         return view('livewire.checkout-details',['cart_details'=>$this->cart_details]);

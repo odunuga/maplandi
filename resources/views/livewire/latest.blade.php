@@ -66,7 +66,7 @@
                                                     <a href="{{ url('shop/'.$product->sku) }}">{{ $product->title }}</a>
                                                 </h3>
                                                 <ul class="info">
-                                                    <li class="price">{{ currency_with_price($product->price,$product->currency->symbol) }}</li>
+                                                    <li class="price">{{ convert_to_user_currency($product->price,$product->currency->symbol) }}</li>
                                                     <li class="like">
                                                         <livewire:add-to-cart :product="$product" :key="$product->sku" :class="'like'" />
                                                     </li>
@@ -109,7 +109,7 @@
                                                     <a href="{{ url('shop/'.$product->sku) }}">{{ $product->title }}</a>
                                                 </h3>
                                                 <ul class="info">
-                                                    <li class="price">{{ currency_with_price($product->price,$product->currency->symbol) }}</li>
+                                                    <li class="price">{{ convert_to_user_currency($product->price,$product->currency->symbol) }}</li>
                                                     <li class="like">
                                                         <livewire:add-to-cart :product="$product" :key="$product->sku" :class="'like'" />
                                                     </li>
@@ -152,7 +152,7 @@
                                                     <a href="{{ url('shop/'.$product->sku) }}">{{ $product->title }}</a>
                                                 </h3>
                                                 <ul class="info">
-                                                    <li class="price">{{ currency_with_price($product->price,$product->currency->symbol) }}</li>
+                                                    <li class="price">{{ convert_to_user_currency($product->price,$product->currency->symbol) }}</li>
                                                     <li class="like">
                                                         <livewire:add-to-cart :product="$product" :key="$product->sku" :class="'like'" />
                                                     </li>

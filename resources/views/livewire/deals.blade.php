@@ -44,7 +44,7 @@
                                     </div>
                                     <div class="bottom-content">
                                         <p class="price">Price:
-                                            <span>{{ currency_with_price($deal->price,$deal->currency->symbol) }}</span>
+                                            <span>{{ convert_to_user_currency($deal->price,$deal->currency->symbol) }}</span>
                                         </p>
                                         <livewire:add-to-cart :product="$deal" :key="'dealCart'.$deal->sku"
                                                               :class="'like'"/>

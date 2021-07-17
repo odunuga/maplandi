@@ -24,7 +24,7 @@
                     </h3>
 
                     <ul class="info">
-                        <li class="price"> {{ currency_with_price($item->price,$item->currency->symbol) }}</li>
+                        <li class="price"> {{ convert_to_user_currency($item->price,$item->currency->symbol) }}</li>
                         <li class="like">
                             <livewire:like :product="$item"/>
                         </li>

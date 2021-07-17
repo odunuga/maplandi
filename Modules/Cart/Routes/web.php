@@ -29,3 +29,8 @@ Route::prefix('order')->group(function () {
 Route::prefix('payment')->group(function () {
     Route::get('/', 'CartController@payment')->name('payment');
 });
+
+Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
+
+
+Route::post('/pay/callback', 'PaymentController@handleGatewayCallback')->name('handleGatewayCallback');

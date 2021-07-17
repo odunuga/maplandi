@@ -39,7 +39,7 @@
                     <div class="single-widget range">
                         <h3>Price Range</h3>
                         <input type="range" class="form-range" name="range" step="100" min="1000" max="900000" value="900000"
-                               wire:model="range" ondragover="rangePrimary.value={{$range}}"
+                               wire:model="range" ondragover="rangePrimary.value='{{$range}}'"
                             {{--
                             Livewire.emit('newRange',value)--}}
                         >

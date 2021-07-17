@@ -5,7 +5,7 @@
                 <h5>Payment Information</h5>
             </div>
             <div class="ibox-content">
-                <form method="post" wire:submit.prevent="paymentgateway">
+                <form method="post" wire:submit.prevent="payment_gateway">
                     <div class="row">
                         <div class="col-lg-6 col-12">
                             <div class="form-group mb-3">
@@ -115,7 +115,7 @@
                 <span class="small">
                         Please contact with us if you have any questions. We are avalible 24h.
 
-
+                </span>
             </div>
         </div>
     </div>

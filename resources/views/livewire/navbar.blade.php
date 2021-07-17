@@ -5,7 +5,8 @@
                 <div class="nav-inner">
                     <nav class="navbar navbar-expand-lg">
                         <a class="navbar-brand" href="{{ url('/') }}">
-                            <img src="{{ asset($site_settings->site_logo) }}" style="width:45px; height:47px;" alt="Logo">
+                            <img src="{{ asset($site_settings->site_logo) }}" style="width:45px; height:47px;"
+                                 alt="Logo">
 
                         </a>
 
@@ -106,12 +107,26 @@
                         @endguest
                         <button type="button" class="btn btn-transparent position-relative"
                                 data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <B style="font-weight:100;"> Cart
+                            <strong style="font-weight:100;"> Cart
                                 <i class="lni lni-cart-full" style="color:red;"></i>
 
-                            </B>
+                            </strong>
                             <livewire:cart-counter key="{{now()}}"/>
                         </button>
+                        <select class="form-select-sm text-dark" wire:model="currency_id"
+                                onchange="Livewire.emit('set_new_currency')">
+                            <option value="" disabled>{{ get_user_currency()['code'] }}</option>
+                            @foreach($currencies as $currency)
+                                <option value="{{ $currency['id'] }}">
+                                    {{ $currency['symbol'] }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <span class="mx-2 my-1">
+                            <i wire:offline.class.remove="bg-success" wire:offline.class="bg-danger"
+                               class="lni lni-bg-circle bg-success"> </i>
+                        </span>
+
                         <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">

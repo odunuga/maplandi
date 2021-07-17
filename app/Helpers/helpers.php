@@ -1,6 +1,7 @@
 <?php
 
 
+use AmrShawky\LaravelCurrency\Facade\Currency;
 use Illuminate\Support\Facades\Cache;
 use Modules\Shop\Entities\Product;
 
@@ -112,4 +113,15 @@ function set_redirect_with_prev_session($to, $session_id, $name = 'redirect_to')
 {
     Cache::put($name, $to);
     Cache::put('prev_session', $session_id);
+}
+
+function set_amount($code, $amount)
+{
+    return Currency::convert()->from($code)->to(get_user_currency()['code'] ?? 'NGN')->amount($amount)->get();
+}
+
+function convert_to_user_currency($amount, $code)
+{
+    $converted = set_amount($code, $amount);
+   return currency_with_price($converted, get_user_currency()['code']);
 }
