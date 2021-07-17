@@ -20,7 +20,8 @@ class CreateCartRecordsTable extends Migration
             $table->string('sub_total');
             $table->string('tax_added');
             $table->string('total');
-            $table->boolean('cleared')->nullable()->default(false);
+            $table->string('payment_currency');
+            $table->string('payment_symbol');
             $table->timestamps();
         });
     }

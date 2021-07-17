@@ -15,6 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('reference')->unique();
             $table->unsignedBigInteger('user_id');
             $table->string('session_id')->nullable();
             $table->longText('cart')->nullable();
@@ -23,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->string('total');
             $table->boolean('cleared');
             $table->unsignedBigInteger('address_id')->nullable();
+            $table->dateTime('payed_at')->nullable();
             $table->timestamps();
         });
     }

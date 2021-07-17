@@ -11,6 +11,10 @@ class CartRecord extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'cart' => 'array'
+    ];
+
     protected static function newFactory()
     {
         return \Modules\Cart\Database\factories\CartRecordFactory::new();

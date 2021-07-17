@@ -14,7 +14,12 @@ class Cart extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $guarded = [];
+
+    protected $casts = [
+        'cart' => 'array'
+    ];
+
 
     protected static function newFactory()
     {

@@ -54,12 +54,14 @@ class Cart extends Component
             }
         }
 
-        set_redirect_with_prev_session('checkout',$this->session_id);
+        set_redirect_with_prev_session('checkout', $this->session_id());
         // redirect user to checkout page
         $cart = CartRecord::create([
-            'session_id' => $this->session_id,
+            'session_id' => $this->session_id(),
             'cart' => $this->get_all_items(),
             'sub_total' => $this->sub_total,
+            'payment_currency' => get_user_currency()['id'],
+            'payment_symbol' => get_user_currency()['code'],
             'tax_added' => $this->tax_added,
             'total' => $this->total,
         ]);
