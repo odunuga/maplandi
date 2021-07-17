@@ -8,6 +8,7 @@ class Rating extends Component
 {
     public $deal;
     public $key;
+    public $class;
 
     public function render()
     {

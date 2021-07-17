@@ -122,6 +122,10 @@ function set_amount($code, $amount)
 
 function convert_to_user_currency($amount, $code)
 {
+    $user_currency = get_user_currency();
     $converted = set_amount($code, $amount);
-   return currency_with_price($converted, get_user_currency()['code']);
+    if ($code !== $user_currency['code']) {
+        return currency_with_price($converted,);
+    }
+    return currency_with_price($amount, $code);
 }

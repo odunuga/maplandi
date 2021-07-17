@@ -1,4 +1,4 @@
-<ul class="rating">
+<ul class="rating {{ isset($class)?$class:'' }}">
     <li>
         <div id="deal{{ $deal->id }}" class="rateit"
              data-rateit-resetable="false"

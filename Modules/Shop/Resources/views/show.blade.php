@@ -39,8 +39,16 @@
                                     @endisset
                                 </ul>
                             </div>
-                            <livewire:rating :deal="$product" :key="$product->id"/>
+                            <livewire:rating :deal="$product" :key="$product->id" class="flex flex-inline"/>
                             <br/>
+                            <div class="price my-2 text-semibold">
+                                @if(isset($product->currency) && $product->currency->code!=get_user_currency()['code'])
+                                    {{ currency_with_price($product->price,$product->currency->code) }}
+                                    ~ {{ convert_to_user_currency($product->price,$product->currency->code) }}
+                                @else
+                                    {{ currency_with_price($product->price,$product->currency->code) }}
+                                @endif
+                            </div>
                             <!--ADD TO CART BUTTON-->
                             <livewire:add-to-cart :product="$product" :key="$product->sku" :text="true"/>
                             <div class="social-share">
