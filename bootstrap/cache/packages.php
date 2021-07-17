@@ -175,6 +175,13 @@
       'Module' => 'Nwidart\\Modules\\Facades\\Module',
     ),
   ),
+  'overtrue/laravel-like' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Overtrue\\LaravelLike\\LikeServiceProvider',
+    ),
+  ),
   'socialiteproviders/manager' => 
   array (
     'providers' => 

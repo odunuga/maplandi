@@ -13,6 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Modules\Cart\Entities\ShippingAddress;
 use Nagy\LaravelRating\Traits\Like\CanLike;
 use Nagy\LaravelRating\Traits\Rate\CanRate;
+use Overtrue\LaravelLike\Traits\Liker;
 
 class User extends Authenticatable
 {
@@ -21,8 +22,8 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use SoftDeletes;
+    use Liker;
     use CanRate;
-    use CanLike;
     use TwoFactorAuthenticatable;
 
     /**

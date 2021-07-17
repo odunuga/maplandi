@@ -18,7 +18,18 @@ class Like extends Component
 
     public function setLike()
     {
-        dd($this->product);
+        if (auth()->check()) {
+            $user = auth()->user();
+            $product = $this->product;
+            if ($user->hasLiked($product) == false) {
+                $user->like($product);
+                $this->emit('alert', ['success', 'You Like this']);
+            } else {
+                $user->unlike($product);
+            }
+        } else {
+            $this->emit('alert', ['error', 'Login Required']);
+        }
     }
 
     public function render()

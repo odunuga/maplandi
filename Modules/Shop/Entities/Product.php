@@ -12,8 +12,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Nagy\LaravelRating\Traits\Like\Likeable;
 use Nagy\LaravelRating\Traits\Rate\Rateable;
+use Overtrue\LaravelLike\Traits\Likeable;
 
 class Product extends Model
 {
