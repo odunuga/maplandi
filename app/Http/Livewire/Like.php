@@ -13,7 +13,7 @@ class Like extends Component
     public function mount($product)
     {
         $this->product = $product;
-        $this->like_count = $product->likesCount();
+        $this->like_count = $product->likers()->count();
     }
 
     public function setLike()
@@ -23,7 +23,7 @@ class Like extends Component
             $product = $this->product;
             if ($user->hasLiked($product) == false) {
                 $user->like($product);
-                $this->emit('alert', ['success', 'You Like this']);
+                $this->emit('alert', ['success', '👍 You Like this ']);
             } else {
                 $user->unlike($product);
             }
