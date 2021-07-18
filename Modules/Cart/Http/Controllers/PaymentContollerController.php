@@ -16,6 +16,7 @@ class PaymentContollerController extends Controller
      */
     public function redirectToGateway()
     {
+        dd(request()->all());
         try {
             return Paystack::getAuthorizationUrl()->redirectNow();
         } catch (\Exception $e) {

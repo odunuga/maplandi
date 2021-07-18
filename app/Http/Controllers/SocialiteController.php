@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -54,7 +55,7 @@ class SocialiteController extends Controller
         }
     }
 
-    private function redirectUser($to = 'dashboard')
+    private function redirectUser($to = RouteServiceProvider::HOME)
     {
         $check_session = Cache::has('redirect_to'); // check if redirect page is set
         if ($check_session) {

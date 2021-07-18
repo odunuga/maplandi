@@ -94,18 +94,34 @@
                                 </span>
                     @endforeach
                 @endif
+                <form method="post" action="{{ route('pay') }}"accept-charset="UTF-8" class="form-horizontal" role="form">
+                @csrf
+                    <input type="hidden" name="email" value="otemuyiwa@gmail.com"> {{-- required --}}
+                    <input type="hidden" name="orderID" value="345">
+                    <input type="hidden" name="amount" value="800"> {{-- required in kobo --}}
+                    <input type="hidden" name="quantity" value="3">
+                    <input type="hidden" name="currency" value="NGN">
+                    <input type="hidden" name="metadata" value="{{ json_encode($array = ['key_name' => 'value',]) }}" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
+                    <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
+
+                    <input type="hidden" name="split_code" value="SPL_EgunGUnBeCareful"> {{-- to support transaction split. more details https://paystack.com/docs/payments/multi-split-payments/#using-transaction-splits-with-payments --}}
+                    <input type="hidden" name="split" value="{{ json_encode($split) }}"> {{-- to support dynamic transaction split. More details https://paystack.com/docs/payments/multi-split-payments/#dynamic-splits --}}
+                    {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
+
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}"> {{-- employ this in place of csrf_field only in laravel 5.0 --}}
+
+                </form>
                 <div class="m-t-sm">
                     <div class="btn-group">
-
                         <!--PAY WITH CARD BTN-->
-                        <a href="#" id="cardpay-btn" class="btn btn-primary btn-lg"><i
+                        <button id="cardpay-btn" class="btn btn-primary btn-lg"><i
                                 class="lni lni-credit-cards"></i>
-                            Pay Now</a>
+                            Pay Now</button>
                         <!--PAY ON DELIVERY BTN-->
-                        <a href="order-confirmation.html" id="pod-btn"
+                        <button href="order-confirmation.html" id="pod-btn"
                            class="btn btn-primary btn-lg">
                             <i class="lni lni-delivery"></i>
-                            Pay on Delivery</a>
+                            Pay on Delivery</button>
                     </div>
                 </div>
             </div>

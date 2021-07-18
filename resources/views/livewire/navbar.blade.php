@@ -68,7 +68,7 @@
                                    id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
                                          class="d-none d-lg- rounded-circle">
-                                    <span> <b>Hi, Daniel </b> </span>
+                                    <span> <b>Hi, {{ auth() ->user()->name }} </b> </span>
                                 </a>
                                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="">
                                     <li><a class="dropdown-item" href="{{ route('profile.show') }}">
