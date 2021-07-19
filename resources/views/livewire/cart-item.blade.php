@@ -39,7 +39,7 @@
     </td>
     <td>
         <h5>
-            {{ currency_with_price($item['price']*$item['quantity'], $item['attributes'] ?$item['attributes']['symbol']:'N') }}
+            {{ currency_with_price($item['price']*$item['quantity'], $item['attributes'] ?$item['attributes']['symbol']:'') }}
 
         </h5>
     </td>

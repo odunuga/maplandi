@@ -59,7 +59,7 @@ class Cart extends Component
         // redirect user to checkout page
         $cart = CartRecord::create([
             'session_id' => $this->session_id(),
-            'cart' => $this->get_all_items(),
+            'cart' => $this->add_converted_currency($this->get_all_items()),
             'sub_total' => $this->sub_total,
             'payment_currency' => get_user_currency()['id'],
             'payment_symbol' => get_user_currency()['code'],
@@ -84,7 +84,7 @@ class Cart extends Component
 
         if ($cart) {
             $cart->update([
-                'cart' => $this->get_all_items(),
+                'cart' => $this->add_converted_currency($this->get_all_items()),
                 'sub_total' => $this->sub_total,
                 'payment_currency' => get_user_currency()['id'],
                 'payment_symbol' => get_user_currency()['code'],
@@ -92,6 +92,27 @@ class Cart extends Component
                 'total' => $this->total,
             ]);
         }
+    }
+
+    private function add_converted_currency($items, $code = null)
+    {
+        $new_record = [];
+        foreach ($items as $item) {
+            $new_record[] = ['id' => $item['id'],
+                'name' => $item['name'],
+                'price' => $item['price'],
+                'quantity' => $item['quantity'],
+                'attributes' => [
+                    'symbol' => $item['attributes']['symbol'],
+                    'code' => $item['attributes']['code'],
+                    'category' => $item['attributes']['category'],
+                    'image' => $item['attributes']['image'],
+                    'description' => $item['attributes']['description'],
+                    'amount' => $this->set_amount($item['attributes']['code'], $item['price'] * $item['quantity'], $code)
+                ]
+            ];
+        }
+        return $new_record;
     }
 
 

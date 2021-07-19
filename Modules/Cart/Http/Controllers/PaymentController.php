@@ -34,17 +34,15 @@ class PaymentController extends Controller
                 'address' => ['required', 'min:10']
             ]);
 
-            dd(request()->all());
             if ($validate->fails()) {
                 dd($validate->errors());
                 return back()->with($validate->errors());
             } else {
                 $this->update_shipping_address(request()->all());
-                dd(auth()->user()->shipping_address);
                 return Paystack::getAuthorizationUrl()->redirectNow();
             }
         } catch (\Exception $e) {
-            return redirect()->back()->with(['alert' => ['error', 'The paystack token has expired. Please refresh the page and try again.', 'type' => 'error']]);
+            return redirect()->back()->with(['alert' => ['error', $e->getMessage()]]);
         }
     }
 

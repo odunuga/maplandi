@@ -72,9 +72,10 @@ trait CartTraits
         return $cartCollection->count();
     }
 
-    private function set_amount($code, $amount)
+    private function set_amount($code, $amount, $currency = null)
     {
-        return Currency::convert()->from($code)->to(get_user_currency()['code'] ?? 'NGN')->amount($amount)->get();
+        if ($currency === null) $currency = get_user_currency()['code'];
+        return Currency::convert()->from($code)->to($currency)->amount($amount)->get();
     }
 
     private function get_admin_base_currency_code()

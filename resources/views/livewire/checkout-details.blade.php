@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="form-group mb-3">
-                                <input class="form-control" wire:dirty.class="border-red-500" name="email" type="email"
+                                <input class="form-control" wire:dirty.class="border-red-500" name="email" type="email" wire:model.lazy="email"
                                        placeholder="example@email.com" required>
                                 @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
@@ -98,7 +98,7 @@
                 @if($cart_details)
                     @foreach($cart_details['cart'] as $item)
                         <span class="text-muted  mb-3">
-                                    {{ $item['name'] }}
+                                    {{ $item['name'] }} - {{ currency_with_price($item['attributes']['amount'],$cart_details['payment_symbol']) }}
                                 </span>
                     @endforeach
                 @endif
