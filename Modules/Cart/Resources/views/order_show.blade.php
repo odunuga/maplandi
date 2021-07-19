@@ -125,7 +125,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h4 class="text-center mb-5">{{ $order->reference }}
+                    <h4 class="text-center mb-5">{{ __('orders.single_order.title') }}{{ $order->reference }}
                     </h4>
                     <div class="container">
                         <div class="wrapper wrapper-content animated fadeInRight">
@@ -158,7 +158,7 @@
                                                 Transaction status: {{ $order->transaction_confirmed===true||$order->transaction_confirmed==='true'?'Yes':'No' }}
                                             </div>
                                             <div class="card-group">
-                                                <a href="{{ route('orders') }}" class="btn btn-outline-info"> Back</a>
+                                                <a href="{{ route('orders') }}" class="btn btn-outline-info"> {{__('buttons.back')}}</a>
                                             </div>
                                             <div class="card-group"></div>
                                         </div>

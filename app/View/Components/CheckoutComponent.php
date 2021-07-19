@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Providers\RouteServiceProvider;
 use Illuminate\View\Component;
 use Modules\Shop\Traits\CartTraits;
 
@@ -37,6 +38,7 @@ class CheckoutComponent extends Component
         } else {
             $cart_details = $this->get_cart($this->session_id());
         }
-        return view('components.checkout-component', ['cart_details' => $cart_details]);
+
+            return view('components.checkout-component', ['cart_details' => $cart_details]);
     }
 }

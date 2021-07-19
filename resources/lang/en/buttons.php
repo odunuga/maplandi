@@ -1,6 +1,8 @@
 <?php
 
 return
-[
-  'update'=>'Update'
-];
+    [
+        'update' => 'Update',
+        'back' => 'Back',
+        'go-back' => 'Go Back'
+    ];

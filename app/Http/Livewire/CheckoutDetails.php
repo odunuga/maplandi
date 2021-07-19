@@ -35,7 +35,7 @@ class CheckoutDetails extends Component
 
     public function cal_total_in_kobo()
     {
-        $total = (double)$this->cart_details['total'];
+        $total = (double)isset($this->cart_details['total']) ? $this->cart_details['total'] : 0;
         // if naira, convert to kobo
         $this->total_in_kobo = $total * 100;
 

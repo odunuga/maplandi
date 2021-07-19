@@ -82,7 +82,7 @@ class Cart extends Component
             }
         }
 
-        if ($cart) {
+        if (isset($cart) && $cart != null && count($cart) > 0) {
             $cart->update([
                 'cart' => $this->add_converted_currency($this->get_all_items()),
                 'sub_total' => $this->sub_total,
