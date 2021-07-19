@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Shop\Entities\Cart;
 
 /**
- * @property mixed status
+ * @property boolean status
  * @property mixed message
  * @property mixed transaction_id
  * @property mixed reference
