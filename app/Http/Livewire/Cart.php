@@ -24,6 +24,7 @@ class Cart extends Component
     public function render()
     {
         $this->calculateTotals();
+        $this->update_database();
         return view('livewire.cart', ['items' => $this->get_all_items(),]);
     }
 
@@ -48,7 +49,7 @@ class Cart extends Component
         $checker = $this->check_session_cart();
         if ($checker->count() > 0) {
             $check2 = $checker->first();
-            if ($check2->cleared === false) {
+            if (isset($check2->cleared) && $check2->cleared === false) {
                 $cart = $check2;
                 return redirect()->route('checkout', ['cart' => $cart]);
             }
@@ -67,6 +68,30 @@ class Cart extends Component
         ]);
 
         return redirect()->route('checkout', ['cart' => $cart]);
+    }
+
+    private function update_database()
+    {
+        $check_cart = \Modules\Shop\Entities\Cart::where('session_id', $this->session_id());
+        if ($check_cart->count() > 0) {
+            $cart = $check_cart->first();
+        } else {
+            $check_cart_record = CartRecord::where('session_id', $this->session_id());
+            if ($check_cart_record->count() > 0) {
+                $cart = $check_cart_record->first();
+            }
+        }
+
+        if ($cart) {
+            $cart->update([
+                'cart' => $this->get_all_items(),
+                'sub_total' => $this->sub_total,
+                'payment_currency' => get_user_currency()['id'],
+                'payment_symbol' => get_user_currency()['code'],
+                'tax_added' => $this->tax_added,
+                'total' => $this->total,
+            ]);
+        }
     }
 
 

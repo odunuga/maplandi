@@ -6,10 +6,18 @@ namespace Modules\Cart\Http\Controllers;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 use Modules\Cart\Entities\Order;
+use Modules\Shop\Traits\PaymentTraits;
 use Unicodeveloper\Paystack\Facades\Paystack;
 
 class PaymentController extends Controller
 {
+
+    use PaymentTraits;
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Redirect the User to Paystack Payment Page
@@ -17,6 +25,7 @@ class PaymentController extends Controller
      */
     public function redirectToGateway()
     {
+
         try {
             $validate = Validator::make(request()->all(), [
                 'first_name' => 'required',
@@ -25,10 +34,14 @@ class PaymentController extends Controller
                 'address' => ['required', 'min:10']
             ]);
 
+            dd(request()->all());
             if ($validate->fails()) {
-                return Paystack::getAuthorizationUrl()->redirectNow();
+                dd($validate->errors());
+                return back()->with($validate->errors());
             } else {
-                return back()->with($validate->errors())->withInput();
+                $this->update_shipping_address(request()->all());
+                dd(auth()->user()->shipping_address);
+                return Paystack::getAuthorizationUrl()->redirectNow();
             }
         } catch (\Exception $e) {
             return redirect()->back()->with(['alert' => ['error', 'The paystack token has expired. Please refresh the page and try again.', 'type' => 'error']]);

@@ -90,8 +90,8 @@ trait CartTraits
 
     private function check_session_cart()
     {
-        if(auth()->check()){
-            return \Modules\Shop\Entities\Cart::where('user_id',auth()->id())->latest();
+        if (auth()->check()) {
+            return \Modules\Shop\Entities\Cart::where('user_id', auth()->id())->latest();
         }
         return CartRecord::where('session_id', $this->session_id());
     }
@@ -101,6 +101,11 @@ trait CartTraits
         return CartRecord::where('session_id', $session);
     }
 
+    private function clear_session_cart($session)
+    {
+        return CartRecord::where('session_id', $session)->delete();
+    }
+
     private function fetch_cart()
     {
         // check previous session cart
@@ -108,6 +113,7 @@ trait CartTraits
             $session = Cache::get('prev_session');
             $cart_check = $this->get_session_cart($session);
             if ($cart_check->count() > 0) {
+                $this->clear_session_cart($session);
                 return $cart_check->first();
             }
         }

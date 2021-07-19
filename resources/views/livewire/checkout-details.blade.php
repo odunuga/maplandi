@@ -111,6 +111,10 @@
                             @csrf
                             <input type="hidden" name="email" value="{{ $email }}"> {{-- required --}}
                             <input type="hidden" name="order_id" value="{{ $cart_details['id'] }}">
+                            <input hidden name="first_name" value="{{ $first_name }}"/>
+                            <input hidden name="last_name" value="{{ $last_name }}"/>
+                            <input hidden name="phone" value="{{ $phone }}"/>
+                            <input hidden name="address" value="{{ $address }}"/>
                             <input type="hidden" name="amount" value="{{ $total_in_kobo }}">
                             <input type="hidden" name="currency" value="{{ get_user_currency()['code'] }}">
                             <input type="hidden" name="metadata"
