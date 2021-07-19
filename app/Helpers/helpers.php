@@ -106,7 +106,7 @@ function check_user_currency()
 
 function set_user_currency($currency_id, $code)
 {
-    return \Illuminate\Support\Facades\Cache::add('user_currency', ['id' => $currency_id, 'code' => $code]);
+    return \Illuminate\Support\Facades\Cache::put('user_currency', ['id' => $currency_id, 'code' => $code]);
 }
 
 function set_redirect_with_prev_session($to, $session_id, $name = 'redirect_to')
@@ -123,9 +123,9 @@ function set_amount($code, $amount)
 function convert_to_user_currency($amount, $code)
 {
     $user_currency = get_user_currency();
-    $converted = set_amount($code, $amount);
     if ($code !== $user_currency['code']) {
-        return currency_with_price($converted,);
+        $converted = set_amount($code, $amount);
+        return currency_with_price($converted, $user_currency['code']);
     }
     return currency_with_price($amount, $code);
 }

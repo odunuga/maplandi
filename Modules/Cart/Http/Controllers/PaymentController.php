@@ -70,6 +70,9 @@ class PaymentController extends Controller
             $order->transaction_confirmed = $paymentDetails['data']['status'] === "success";
             $order->save();
 
+            //TODO Emit Payment Event Information
+
+
         } else {
             $order = Order::where('reference', $paymentDetails['data']['reference'])->first();
         }

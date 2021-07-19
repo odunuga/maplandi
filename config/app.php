@@ -170,6 +170,7 @@ return [
         SocialiteProviders\Manager\ServiceProvider::class,
         CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
         Nagy\LaravelRating\LaravelRatingServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -236,6 +237,7 @@ return [
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
         "LaravelRating" => \Nagy\LaravelRating\LaravelRatingFacade::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ],
 
 ];

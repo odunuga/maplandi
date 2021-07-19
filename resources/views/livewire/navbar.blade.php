@@ -111,7 +111,8 @@
                         </button>
                         <select class="form-select-sm text-dark" wire:model="currency_id"
                                 onchange="Livewire.emit('set_new_currency')">
-                            <option value="" disabled>{{ get_user_currency()['code'] }}</option>
+                            <option value=""
+                                    selected>{{ collect($currencies)->where('code',get_user_currency()['code'])->first()?->symbol }}</option>
                             @foreach($currencies as $currency)
                                 <option value="{{ $currency['id'] }}">
                                     {{ $currency['symbol'] }}

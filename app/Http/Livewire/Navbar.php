@@ -12,10 +12,6 @@ class Navbar extends Component
     public $currency_id;
     protected $listeners = ['set_new_currency'];
 
-    public function mount()
-    {
-
-    }
 
     public function render()
     {
@@ -27,6 +23,7 @@ class Navbar extends Component
     {
         $currency = $this->get_currency_using_id($this->currency_id);
         set_user_currency($currency['id'], $currency['code']);
+        $this->emit('reload');
     }
 
     private function get_currency_using_id($id)

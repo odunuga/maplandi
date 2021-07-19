@@ -5,6 +5,7 @@ namespace Modules\Cart\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Cart\Entities\Order;
 use Modules\Shop\Traits\CartTraits;
 
 class CartController extends Controller
@@ -40,7 +41,10 @@ class CartController extends Controller
     public function order_show($ref)
     {
         if (auth()->check()) {
-            return view('cart::order_show');
+
+            $order = Order::with(['buyer', 'cart'])->where('reference', $ref)->first();
+
+            return view('cart::order_show')->with(['order' => $order]);
         }
         session()->put('redirect_to', 'order');
         return redirect()->route('login');
