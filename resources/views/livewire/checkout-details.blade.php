@@ -34,7 +34,8 @@
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="form-group mb-3">
-                                <input class="form-control" wire:dirty.class="border-red-500" name="email" type="email" wire:model.lazy="email"
+                                <input class="form-control" wire:dirty.class="border-red-500" name="email" type="email"
+                                       wire:model.lazy="email"
                                        placeholder="example@email.com" required>
                                 @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
@@ -118,7 +119,7 @@
                             <input type="hidden" name="amount" value="{{ $total_in_kobo }}">
                             <input type="hidden" name="currency" value="{{ get_user_currency()['code'] }}">
                             <input type="hidden" name="metadata"
-                                   value="{{ json_encode(['cart'=>$cart_details['cart'],'address'=>['first_name'=>$first_name,'last_name'=>$last_name,'email'=>$email,'phone'=>$phone,'address'=>['address'=>$address]]]) }}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
+                                   value="{{ json_encode(['cart'=>$cart_details['cart'],'sub_total'=>['sub_total'],'tax_added'=>$cart_details['tax_added'],'address'=>['first_name'=>$first_name,'last_name'=>$last_name,'email'=>$email,'phone'=>$phone,'address'=>$address]]) }}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
                             <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
                             <button id="cardpay-btn" wire:dirty type="submit" class="btn btn-primary btn-lg"><i
                                     class="lni lni-credit-cards"></i>
@@ -130,7 +131,7 @@
                         <button wire:click="pay_on_delivery_order_confirmation" id="pod-btn"
                                 class="btn btn-primary btn-lg">
                             <i class="lni lni-delivery"></i>
-                            Pay on Delivery
+                            Pay on Delivery <i class="lni lni-spinner lni-is-spinning" wire:loading></i>
                         </button>
                     </div>
                 </div>

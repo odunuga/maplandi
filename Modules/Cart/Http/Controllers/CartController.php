@@ -29,7 +29,7 @@ class CartController extends Controller
         return redirect()->route('login');
     }
 
-    public function order()
+    public function orders()
     {
         if (auth()->check()) {
             return view('cart::order');
@@ -49,5 +49,10 @@ class CartController extends Controller
         session()->put('redirect_to', 'order');
         return redirect()->route('login');
 
+    }
+
+    public function on_delivery()
+    {
+        return view('cart::order_confirmation');
     }
 }

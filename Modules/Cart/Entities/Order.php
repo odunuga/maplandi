@@ -2,8 +2,10 @@
 
 namespace Modules\Cart\Entities;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Shop\Entities\Cart;
 
 /**
  * @property mixed status
@@ -27,6 +29,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property mixed phone
  * @property int|string|null user_id
  * @property int|string|null cart_id
+ * @property string payment_type
+ * @property int|string|null sub_total
+ * @property int|string|null tax_added
  */
 class Order extends Model
 {
@@ -37,6 +42,16 @@ class Order extends Model
         'paid_at' => 'datetime',
         'cart' => 'array'
     ];
+
+    public function buyer()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
+    }
 
     protected static function newFactory()
     {

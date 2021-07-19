@@ -6,6 +6,7 @@ namespace Modules\Cart\Http\Controllers;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 use Modules\Cart\Entities\Order;
+use Modules\Shop\Traits\CartTraits;
 use Modules\Shop\Traits\PaymentTraits;
 use Unicodeveloper\Paystack\Facades\Paystack;
 
@@ -13,6 +14,7 @@ class PaymentController extends Controller
 {
 
     use PaymentTraits;
+    use CartTraits;
 
     public function __construct()
     {
@@ -35,7 +37,6 @@ class PaymentController extends Controller
             ]);
 
             if ($validate->fails()) {
-                dd($validate->errors());
                 return back()->with($validate->errors());
             } else {
                 $this->update_shipping_address(request()->all());
@@ -57,7 +58,7 @@ class PaymentController extends Controller
 
             $address = $paymentDetails['data']['metadata']['address'];
             $order = new Order();
-
+            $order->payment_type = 'pay_now'; //'pay_now', 'pay_on_delivery'
             $order->user_id = auth()->id();
             $order->status = $paymentDetails['status'];
             $order->message = $paymentDetails['message'];
@@ -71,6 +72,8 @@ class PaymentController extends Controller
             $order->channel = $paymentDetails['data']['channel'];
             $order->currency = $paymentDetails['data']['currency'];
             $order->cart = $paymentDetails['data']['metadata']['cart'];
+            $order->sub_total = $paymentDetails['data']['metadata']['sub_total'];
+            $order->tax_added = $paymentDetails['data']['metadata']['tax_added'];
             $order->first_name = $address['first_name'];
             $order->last_name = $address['last_name'];
             $order->email = $address['email'];
@@ -79,15 +82,20 @@ class PaymentController extends Controller
             $order->fees = $paymentDetails['data']['fees'];
             $order->customer_code = $paymentDetails['data']['customer']['customer_code'];
             $order->transaction_confirmed = $paymentDetails['data']['status'] === "success";
+
             $order->save();
 
             //TODO Emit Payment Event Information
 
+            $this->clear_session_cart($this->session_id());
 
         } else {
             $order = Order::where('reference', $paymentDetails['data']['reference'])->first();
         }
+        $this->clear_all_cart($this->session_id());
 
-        return view('cart::payment')->with(compact('order'));
+        return view('cart::payment_confirmation')->with(compact('order'));
     }
+
+
 }

@@ -107,6 +107,9 @@ trait CartTraits
         return CartRecord::where('session_id', $session)->delete();
     }
 
+    private function clear_all_cart($session){
+        \Cart::session($this->session_id())->clear();
+    }
     private function fetch_cart()
     {
         // check previous session cart

@@ -237,7 +237,6 @@ return [
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
         "LaravelRating" => \Nagy\LaravelRating\LaravelRatingFacade::class,
-        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ],
 
 ];

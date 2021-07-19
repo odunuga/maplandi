@@ -22,14 +22,14 @@ Route::prefix('checkout')->group(function () {
 });
 
 
-Route::prefix('order')->group(function () {
-    Route::get('/', 'CartController@order')->name('order');
-
+Route::prefix('orders')->group(function () {
+    Route::get('/', 'CartController@orders')->name('orders');
     Route::get('/{ref}', 'CartController@order_show')->name('order.show');
 });
 
 Route::prefix('payment')->group(function () {
     Route::get('/', 'CartController@payment')->name('payment');
+    Route::get('/on-delivery', 'CartController@on_delivery')->name('payment.on_delivery');
 });
 
 Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');

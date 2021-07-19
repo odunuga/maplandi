@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Modules\Cart\Entities\Order;
 use Unicodeveloper\Paystack\Facades\Paystack;
 
 class CheckoutDetails extends Component
@@ -57,13 +58,55 @@ class CheckoutDetails extends Component
     public function pay_on_delivery_order_confirmation()
     {
         // prepare order with details and send to order table
-
-
+        $store_transaction = $this->save_on_delivery_order();
+        if ($store_transaction) {
+            return redirect()->route('payment.on_delivery');
+        }
     }
 
     public function render()
     {
         $this->cal_total_in_kobo();
         return view('livewire.checkout-details', ['cart_details' => $this->cart_details]);
+    }
+
+    private function generate_on_delivery_id()
+    {
+        return time() . $this->cart_details['id'];
+    }
+
+    private function save_on_delivery_order()
+    {
+
+        $transaction_id = $this->generate_on_delivery_id();
+        $order = new Order();
+        $order->payment_type = 'pay_on_delivery';
+        $order->user_id = auth()->id();
+        $order->status = 'pending';
+        $order->message = 'on_delivery';
+        $order->cart_id = $this->cart_details['id'];
+        $order->transaction_id = $transaction_id;
+        $order->reference = encrypt($transaction_id);
+        $order->amount = $this->cart_details['total'];
+        $order->payment_message = null;
+        $order->gateway_response = null;
+        $order->paid_at = null;
+        $order->channel = 'on_delivery';
+        $order->currency = $this->cart_details['payment_currency'];
+        $order->cart = $this->cart_details['cart'];
+        $order->sub_total = $this->cart_details['sub_total'];
+        $order->tax_added = $this->cart_details['tax_added'];
+        $order->first_name = $this->first_name;
+        $order->last_name = $this->last_name;
+        $order->email = $this->email;
+        $order->phone = $this->phone;
+        $order->address = $this->address;
+        $order->fees = null;
+        $order->customer_code = null;
+        $order->transaction_confirmed = false;
+
+        return $order->save();
+
+
     }
 }

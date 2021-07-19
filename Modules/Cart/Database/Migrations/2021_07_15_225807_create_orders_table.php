@@ -15,6 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->enum('payment_type ', ['pay_now', 'pay_on_delivery']);
             $table->string('user_id');
             $table->unsignedBigInteger('cart_id')->nullable();
             $table->string('status')->nullable()->default(false);
@@ -28,6 +29,8 @@ class CreateOrdersTable extends Migration
             $table->string('channel')->nullable();
             $table->string('currency')->nullable();
             $table->longText('cart')->nullable();
+            $table->string('sub_total')->nullable();
+            $table->string('tax_added')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('phone')->nullable();

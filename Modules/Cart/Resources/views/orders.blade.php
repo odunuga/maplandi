@@ -120,58 +120,17 @@
         }
 
     </style>
-
     <section class=" section mb-5" style="margin-top:40px">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h4 class="text-center mb-5">{{ $order->reference }}
-                    </h4>
                     <div class="container">
                         <div class="wrapper wrapper-content animated fadeInRight">
                             <div class="row">
-                                <div class="col-md-9">
-                                    <div class="ibox">
-                                        <div class="ibox-title">
-                                            <h5>Payment Information</h5>
-                                        </div>
-                                        <div class="ibox-content">
-                                            <div class="card-group">
-                                                Reference: {{ $order->payment_type }}
-                                            </div>
-                                            <div class="card-group">
-                                                Transaction ID: {{ $order->transaction_id }}
-                                            </div>
-                                            <div class="card-group">
-                                                Payment Type: {{ ucfirst($order->payment_type) }}
-                                            </div>
-                                            <div class="card-group">
-                                                Channel: {{ $order->channel }}
-                                            </div>
-                                            <div class="card-group">
-                                                Amount: {{ currency_with_price($order->amount,$order->currency) }}
-                                            </div>
-                                            <div class="card-group">
-                                                Payment Message: {{ $order->payment_message }}
-                                            </div>
-                                            <div class="card-group">
-                                                Transaction status: {{ $order->transaction_confirmed===true||$order->transaction_confirmed==='true'?'Yes':'No' }}
-                                            </div>
-                                            <div class="card-group">
-                                                <a href="{{ route('orders') }}" class="btn btn-outline-info"> Back</a>
-                                            </div>
-                                            <div class="card-group"></div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
 
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
