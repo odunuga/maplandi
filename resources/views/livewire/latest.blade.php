@@ -74,7 +74,7 @@
                                                         @endif
                                                     </li>
                                                     <li class="like">
-                                                        <livewire:add-to-cart :product="$product" :key="$product->sku"
+                                                        <livewire:add-to-cart :product="$product->id" :key="$product->sku"
                                                                               :class="'like'"/>
                                                     </li>
                                                 </ul>
@@ -124,7 +124,7 @@
                                                         @endif
                                                     </li>
                                                     <li class="like">
-                                                        <livewire:add-to-cart :product="$product" :key="$product->sku"
+                                                        <livewire:add-to-cart :product="$product->id" :key="$product->sku"
                                                                               :class="'like'"/>
                                                     </li>
                                                 </ul>
@@ -174,7 +174,7 @@
                                                         @endif
                                                     </li>
                                                     <li class="like">
-                                                        <livewire:add-to-cart :product="$product" :key="$product->sku"
+                                                        <livewire:add-to-cart :product="$product->id" :key="$product->sku"
                                                                               :class="'like'"/>
                                                     </li>
                                                 </ul>

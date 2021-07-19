@@ -13,11 +13,13 @@
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                             <ul id="nav" class="navbar-nav ms-auto">
 
-                                <li class="nav-item @if(Route::is('welcome')) active @endif"><a href="{{ url('/') }}">Home</a>
+                                <li class="nav-item @if(Route::is('welcome')) active @endif"><a
+                                        href="{{ url('/') }}">{{__('navbar.home')}}</a>
                                 </li>
 
                                 <li class="nav-item @if(Route::is('shop')) active @endif">
-                                    <a href="{{ route("shop") }}" aria-label="Toggle navigation">Shop</a>
+                                    <a href="{{ route("shop") }}"
+                                       aria-label="Toggle navigation">{{__('navbar.shop')}}</a>
                                 </li>
 
 
@@ -26,21 +28,33 @@
                                         <a class="active dd-menu collapsed" href="{{ route('login') }}"
                                            data-bs-toggle="collapse"
                                            data-bs-target="#submenu-1-1" aria-controls="navbarSupportedContent"
-                                           aria-expanded="false" aria-label="Toggle navigation">Login to Buy</a>
+                                           aria-expanded="false"
+                                           aria-label="Toggle navigation">{{__('navbar.login_to_buy')}}</a>
                                         <ul class="sub-menu collapse" id="submenu-1-1">
-                                            <li class="nav-item active"><a href="{{route('login')}}">Login</a></li>
-                                            <li class="nav-item active"><a href="{{ route('register') }}">Register</a>
+                                            <li class="nav-item active"><a
+                                                    href="{{route('login')}}">{{__('navbar.login')}}</a></li>
+                                            <li class="nav-item active"><a
+                                                    href="{{ route('register') }}">{{__('navbar.register') }}</a>
                                             </li>
                                         </ul>
                                     </li>
                                 @else
                                     <li class="nav-item d-lg-none">
-                                        <a href="{{route('profile.show')}}"><i class="lni lni-user"></i> Profile</a>
+                                        <a href="{{route('profile.show')}}"><i
+                                                class="lni lni-user"></i> {{__('navbar.profile')}}</a>
+                                    </li>
+
+                                    <li class="nav-item d-lg-none">
+
+                                        <a class="dropdown-item" href="{{ route('orders') }}">
+                                            <span class> <b><i class="lni lni-cart" style="margin-right:10px"></i> </b> </span>
+                                            {{__('navbar.orders')}}
+                                        </a>
                                     </li>
                                     <li class="nav-item d-lg-none">
                                         <form action="{{ route('logout') }}" method="POST">@csrf
                                             <button class="dropdown-item pl-2" type="submit"><i
-                                                    class="lni lni-unlink"></i> LOGOUT
+                                                    class="lni lni-unlink"></i>{{__('navbar.logout')}}
                                             </button>
                                         </form>
                                     </li>
@@ -53,10 +67,12 @@
                             <div class="login-button">
                                 <ul>
                                     <li>
-                                        <a href="{{ route('login') }}"><i class="lni lni-enter"></i> Login</a>
+                                        <a href="{{ route('login') }}"><i
+                                                class="lni lni-enter"></i> {{__('navbar.login')}}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('register') }}"><i class="lni lni-user"></i> Register</a>
+                                        <a href="{{ route('register') }}"><i
+                                                class="lni lni-user"></i>{{__('navbar.register')}}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -72,20 +88,20 @@
                                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="">
                                     <li><a class="dropdown-item" href="{{ route('profile.show') }}">
                                             <span class> <b><i class="lni lni-user" style="margin-right:10px"></i> </b> </span>
-                                            Account
+                                            {{__('navbar.account')}}
                                         </a>
                                     </li>
 
 
-                                    <li><a class="dropdown-item" href="../myaccount/orders.html">
+                                    <li><a class="dropdown-item" href="{{ route('orders') }}">
                                             <span class> <b><i class="lni lni-cart" style="margin-right:10px"></i> </b> </span>
-                                            Orders
+                                            {{__('navbar.orders')}}
                                         </a>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="../myaccount/saved-items.html">
+                                    <li><a class="dropdown-item" href="#">
                                             <span class> <b><i class="lni lni-heart" style="margin-right:10px"></i> </b> </span>
-                                            Saved Items
+                                            {{ __('navbar.saved_items') }}
                                         </a>
                                     </li>
                                     <li>
@@ -94,7 +110,7 @@
                                     <li>
                                         <form action="{{ route('logout') }}" method="POST">@csrf
                                             <button class="dropdown-item pl-2" type="submit"><i
-                                                    class="lni lni-unlink"></i> LOGOUT
+                                                    class="lni lni-unlink"></i> {{__('navbar.logout')}}
                                             </button>
                                         </form>
                                     </li>
@@ -103,7 +119,7 @@
                         @endguest
                         <button type="button" class="btn btn-transparent position-relative"
                                 data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <strong style="font-weight:100;"> Cart
+                            <strong style="font-weight:100;"> {{__('navbar.cart')}}
                                 <i class="lni lni-cart-full" style="color:red;"></i>
 
                             </strong>

@@ -3,16 +3,19 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Modules\Shop\Entities\Product;
 
 class Like extends Component
 {
     public $product;
     public $like_count = 0;
+    public $liked;
     public $like_icon = 'lni lni-heart';
 
-    public function mount($product)
+    public function mount(Product $product)
     {
         $this->product = $product;
+        $this->liked = auth()->check() && auth()->user()->hasLiked($product) == true ? 'bg-danger text-white' : '';
         $this->like_count = $product->likers()->count();
     }
 

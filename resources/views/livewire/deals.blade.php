@@ -52,7 +52,7 @@
                                                 @endif
                                              </span>
                                         </p>
-                                        <livewire:add-to-cart :product="$deal" :key="'dealCart'.$deal->sku"
+                                        <livewire:add-to-cart :product="$deal->id" :key="'dealCart'.$deal->sku"
                                                               :class="'like'"/>
                                     </div>
                                 </div>

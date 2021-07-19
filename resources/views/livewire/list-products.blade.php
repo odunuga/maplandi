@@ -31,7 +31,7 @@
                             @endif
                         </li>
                         <li class="like">
-                            <livewire:like :product="$item"/>
+                            <livewire:like :product="$item->id"/>
                         </li>
                         <li class="like">
                             <livewire:add-to-cart :product="$item" :key="$item->sku" />
