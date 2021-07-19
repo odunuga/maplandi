@@ -38,9 +38,9 @@ class ProductTableSeeder extends Seeder
                     'code' => 'USD',
                     'symbol' => '$',
                 ], [
-                    'name' => 'United Kingdom Pound',
-                    'code' => 'GBP',
-                    'symbol' => '£',
+                    'name' => 'South African Rand',
+                    'code' => 'ZAR',
+                    'symbol' => 'R',
                 ], [
                     'name' => 'Ghana Cedi',
                     'code' => 'GHS',

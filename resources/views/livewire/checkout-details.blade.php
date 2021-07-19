@@ -9,35 +9,43 @@
                     <div class="row">
                         <div class="col-lg-6 col-12">
                             <div class="form-group mb-3">
-                                <input class="form-control" wire:model="first_name" name="first_name" type="text"
-                                       placeholder="first-name">
+                                <input class="form-control " wire:dirty.class="border-red-500"
+                                       wire:model.lazy="first_name" name="first_name" type="text"
+                                       placeholder="first Name" required>
+                                @error('first_name') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
                         <div class="col-lg-6 col-12">
                             <div class="form-group mb-3">
-                                <input class="form-control" wire:model="last_name" name="last_name" type="text"
+                                <input class="form-control" wire:dirty.class="border-red-500"
+                                       wire:model.lazy="last_name" name="last_name" type="text"
                                        placeholder="Last name">
                             </div>
                         </div>
 
                         <div class="col-lg-6 col-12">
                             <div class="form-group mb-3">
-                                <input name="phone" type="text" wire:model="phone" class="form-control"
-                                       placeholder="Mobile Number">
+                                <input name="phone" type="text" wire:dirty.class="border-red-500"
+                                       wire:model.lazy="phone" class="form-control"
+                                       placeholder="Mobile Number" required>
+                                @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">
                             <div class="form-group mb-3">
-                                <input class="form-control" wire:model="email" name="email" type="email"
-                                       placeholder="username@gmail.com">
+                                <input class="form-control" wire:dirty.class="border-red-500" name="email" type="email"
+                                       placeholder="example@email.com" required>
+                                @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
                         <div class="col-12">
                             <div class="form-group mb-3 message">
-                                <textarea class="form-control" wire:model="address" name="message"
-                                          placeholder="Shipping Address"></textarea>
+                                <textarea class="form-control" wire:dirty.class="border-red-500"
+                                          wire:model.lazy="address" name="address"
+                                          placeholder="Shipping Address" required></textarea>
+                                @error('address') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="col-12">
@@ -69,7 +77,7 @@
             </div>
 
             <div class="ibox-content">
-                <a href="{{ route('cart') }}" class="btn btn-white"><i class="fa fa-arrow-left"></i> Go
+                <a href="{{ route('cart') }}" class="btn btn-white btn-outline-dark"><i class="fa fa-arrow-left"></i> Go
                     Back</A>
             </div>
         </div>
@@ -94,34 +102,32 @@
                                 </span>
                     @endforeach
                 @endif
-                <form method="post" action="{{ route('pay') }}"accept-charset="UTF-8" class="form-horizontal" role="form">
-                @csrf
-                    <input type="hidden" name="email" value="otemuyiwa@gmail.com"> {{-- required --}}
-                    <input type="hidden" name="orderID" value="345">
-                    <input type="hidden" name="amount" value="800"> {{-- required in kobo --}}
-                    <input type="hidden" name="quantity" value="3">
-                    <input type="hidden" name="currency" value="NGN">
-                    <input type="hidden" name="metadata" value="{{ json_encode($array = ['key_name' => 'value',]) }}" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
-                    <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
-
-                    <input type="hidden" name="split_code" value="SPL_EgunGUnBeCareful"> {{-- to support transaction split. more details https://paystack.com/docs/payments/multi-split-payments/#using-transaction-splits-with-payments --}}
-                    <input type="hidden" name="split" value="{{ json_encode($split) }}"> {{-- to support dynamic transaction split. More details https://paystack.com/docs/payments/multi-split-payments/#dynamic-splits --}}
-                    {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
-
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}"> {{-- employ this in place of csrf_field only in laravel 5.0 --}}
-
-                </form>
                 <div class="m-t-sm">
                     <div class="btn-group">
                         <!--PAY WITH CARD BTN-->
-                        <button id="cardpay-btn" class="btn btn-primary btn-lg"><i
-                                class="lni lni-credit-cards"></i>
-                            Pay Now</button>
+
+                        <form method="post" action="{{ route('pay') }}" accept-charset="UTF-8" class="form-horizontal"
+                              role="form">
+                            @csrf
+                            <input type="hidden" name="email" value="{{ $email }}"> {{-- required --}}
+                            <input type="hidden" name="order_id" value="{{ $cart_details['id'] }}">
+                            <input type="hidden" name="amount" value="{{ $total_in_kobo }}">
+                            <input type="hidden" name="currency" value="{{ get_user_currency()['code'] }}">
+                            <input type="hidden" name="metadata"
+                                   value="{{ json_encode(['cart'=>$cart_details['cart'],'address'=>['first_name'=>$first_name,'last_name'=>$last_name,'email'=>$email,'phone'=>$phone,'address'=>['address'=>$address]]]) }}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
+                            <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
+                            <button id="cardpay-btn" wire:dirty type="submit" class="btn btn-primary btn-lg"><i
+                                    class="lni lni-credit-cards"></i>
+                                Pay Now
+                            </button>
+                        </form>
+
                         <!--PAY ON DELIVERY BTN-->
-                        <button href="order-confirmation.html" id="pod-btn"
-                           class="btn btn-primary btn-lg">
+                        <button wire:click="pay_on_delivery_order_confirmation" id="pod-btn"
+                                class="btn btn-primary btn-lg">
                             <i class="lni lni-delivery"></i>
-                            Pay on Delivery</button>
+                            Pay on Delivery
+                        </button>
                     </div>
                 </div>
             </div>

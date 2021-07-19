@@ -15,16 +15,27 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id');
+            $table->unsignedBigInteger('cart_id')->nullable();
+            $table->string('status')->nullable()->default(false);
+            $table->longText('message')->nullable();
+            $table->string('transaction_id')->nullable();
             $table->string('reference')->unique();
-            $table->unsignedBigInteger('user_id');
-            $table->string('session_id')->nullable();
+            $table->string('amount');
+            $table->string('payment_message')->nullable();
+            $table->string('gateway_response')->nullable();
+            $table->dateTime('paid_at')->nullable();
+            $table->string('channel')->nullable();
+            $table->string('currency')->nullable();
             $table->longText('cart')->nullable();
-            $table->string('sub_total');
-            $table->string('tax_added');
-            $table->string('total');
-            $table->boolean('cleared');
-            $table->unsignedBigInteger('address_id')->nullable();
-            $table->dateTime('payed_at')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->longText('address')->nullable();
+            $table->string('fees')->nullable();
+            $table->string('customer_code')->nullable();
+            $table->boolean('transaction_confirmed')->nullable()->default(false);
             $table->timestamps();
         });
     }

@@ -28,13 +28,22 @@ class CartController extends Controller
         return redirect()->route('login');
     }
 
-    public function payment()
-    {
-        return view('cart::payment');
-    }
-
     public function order()
     {
-        return view('cart::order');
+        if (auth()->check()) {
+            return view('cart::order');
+        }
+        session()->put('redirect_to', 'order');
+        return redirect()->route('login');
+    }
+
+    public function order_show($ref)
+    {
+        if (auth()->check()) {
+            return view('cart::order_show');
+        }
+        session()->put('redirect_to', 'order');
+        return redirect()->route('login');
+
     }
 }

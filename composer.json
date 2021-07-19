@@ -24,7 +24,8 @@
         "overtrue/laravel-like": "^4.0",
         "socialiteproviders/google": "^4.1",
         "socialiteproviders/zoho": "^4.1",
-        "unicodeveloper/laravel-paystack": "^1.0"
+        "unicodeveloper/laravel-paystack": "^1.0",
+        "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

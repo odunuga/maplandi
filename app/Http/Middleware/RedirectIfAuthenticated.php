@@ -29,7 +29,7 @@ class RedirectIfAuthenticated
                 if ($check_session) {
                     $to = Cache::get('redirect_to'); // take user to redirect page
                 }
-                return redirect($to);
+                return redirect()->route($to);
             }
         }
 

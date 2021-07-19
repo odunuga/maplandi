@@ -24,6 +24,8 @@ Route::prefix('checkout')->group(function () {
 
 Route::prefix('order')->group(function () {
     Route::get('/', 'CartController@order')->name('order');
+
+    Route::get('/{ref}', 'CartController@order_show')->name('order.show');
 });
 
 Route::prefix('payment')->group(function () {
@@ -33,4 +35,4 @@ Route::prefix('payment')->group(function () {
 Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 
 
-Route::post('/pay/callback', 'PaymentController@handleGatewayCallback')->name('handleGatewayCallback');
+Route::get('/payment/callback', 'PaymentController@handleGatewayCallback')->name('handleGatewayCallback');

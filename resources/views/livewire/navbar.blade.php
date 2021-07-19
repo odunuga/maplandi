@@ -36,7 +36,6 @@
                                 @else
                                     <li class="nav-item d-lg-none">
                                         <a href="{{route('profile.show')}}"><i class="lni lni-user"></i> Profile</a>
-
                                     </li>
                                     <li class="nav-item d-lg-none">
                                         <form action="{{ route('logout') }}" method="POST">@csrf
@@ -84,13 +83,10 @@
                                         </a>
                                     </li>
 
-
                                     <li><a class="dropdown-item" href="../myaccount/saved-items.html">
                                             <span class> <b><i class="lni lni-heart" style="margin-right:10px"></i> </b> </span>
                                             Saved Items
-
                                         </a>
-
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider">
