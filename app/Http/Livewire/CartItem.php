@@ -21,6 +21,7 @@ class CartItem extends Component
     {
         $this->delete_cart($this->item['id']);
         $this->emit('reloadItems', []);
+        $this->emit('updateItem');
     }
 
     public function confirmDelete()

@@ -36,7 +36,7 @@ class Cart extends Component
             $sub_total += $this->set_amount($item['attributes']['code'], $item['price'] * $item['quantity']);
         }
         $this->sub_total = $sub_total;
-        $tax = $this->get_site_settings()->tax ?? 0;
+        $tax = $this->get_site_settings() && $this->get_site_settings()->tax ? $this->get_site_settings()->tax : 0;
         $this->tax = $tax;
         $tax_per = $sub_total != 0 ? ($sub_total * ($tax / 100)) : 0;
         $this->tax_added = $tax_per;
@@ -54,10 +54,15 @@ class Cart extends Component
                 return redirect()->route('checkout', ['cart' => $cart]);
             }
         }
+        // check if cart is not empty
+        $current_cart = $this->get_all_items();
+        if ($current_cart != null && count($current_cart) > 0) {
+            $cart = $current_cart;
+        }
 
         set_redirect_with_prev_session('checkout', $this->session_id());
         // redirect user to checkout page
-        $cart = CartRecord::create([
+        CartRecord::create([
             'session_id' => $this->session_id(),
             'cart' => $this->add_converted_currency($this->get_all_items()),
             'sub_total' => $this->sub_total,
@@ -67,7 +72,7 @@ class Cart extends Component
             'total' => $this->total,
         ]);
 
-        return redirect()->route('checkout', ['cart' => $cart]);
+        return redirect()->route('checkout');
     }
 
     private function update_database()

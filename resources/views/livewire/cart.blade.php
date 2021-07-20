@@ -66,7 +66,7 @@
                                 <div class="ibox-content">
                                     @if($items && count($items) > 0)   <a href="javascript:void(0)"
                                                                           class="btn btn-dark pull-right mb-4"
-                                                                          wire:click="gotoCheckout"><i
+                                                                          wire:click="gotoCheckout" .class="bg-gray" ><i
                                             class="fa fa fa-shopping-cart"></i> Checkout</a> @endif
                                     <a href="{{ route('shop') }}" class="btn btn-white"><i
                                             class="fa fa-arrow-left"></i> Continue shopping</a>

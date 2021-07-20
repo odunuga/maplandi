@@ -23,8 +23,7 @@ class Navbar extends Component
     {
         $currency = $this->get_currency_using_id($this->currency_id);
         set_user_currency($currency['id'], $currency['code']);
-        $this->emit('reload');
-        $this->render();
+        return redirect()->to(url()->current());
     }
 
     private function get_currency_using_id($id)

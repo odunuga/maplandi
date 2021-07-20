@@ -4,7 +4,6 @@
             <div class="ibox-title">
                 <h5>{{ __('cart.checkout.title') }}</h5>
             </div>
-
             @if($cart_details!=null && count($cart_details)>0)
                 <div class="ibox-content">
                     <form method="post" wire:submit.prevent="payment_gateway">
