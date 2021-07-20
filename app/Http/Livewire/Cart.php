@@ -64,7 +64,7 @@ class Cart extends Component
         // redirect user to checkout page
         CartRecord::create([
             'session_id' => $this->session_id(),
-            'cart' => $this->add_converted_currency($this->get_all_items()),
+            'cart' => isset($cart) && count($cart) > 0 ? $this->add_converted_currency($this->get_all_items()) : '',
             'sub_total' => $this->sub_total,
             'payment_currency' => get_user_currency()['id'],
             'payment_symbol' => get_user_currency()['code'],

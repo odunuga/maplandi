@@ -42,7 +42,7 @@ function currency_with_price($value = null, $currency_symbol = 'NGN')
     return $currency_symbol . ' ' . number_format($new_value);
 }
 
-function filtered_products(int $paginate, $category_id = null, int $range = null, $search = null, $order = null, $dir = null)
+function filtered_products( $paginate, $category_id = null,  $range = null, $search = null, $order = null, $dir = null)
 {
 
     $products = new Product();
@@ -113,6 +113,20 @@ function set_redirect_with_prev_session($to, $session_id, $name = 'redirect_to')
 {
     Cache::put($name, $to);
     Cache::put('prev_session', $session_id);
+}
+
+function clear_redirect_for_prev_session()
+{
+    Cache::forget('redirect_to');
+    Cache::forget('prev_session');
+}
+
+function get_cache_record($name)
+{
+    if (Cache::has($name)) {
+        return Cache::get($name);
+    }
+    return null;
 }
 
 function set_amount($code, $amount)

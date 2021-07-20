@@ -35,10 +35,17 @@ class CheckoutComponent extends Component
         if ($check_cart) {
             \Cart::session($this->session_id())->add($check_cart->cart);
             $cart_details = $this->move_previous_session_cart($check_cart->session_id);
+        } else if ($prev_cart_session = get_cache_record('prev_session')) {
+            $cart_details = $this->get_session_cart($prev_cart_session);
+            $this->clear_redirect_for_prev_session();
         } else {
             $cart_details = $this->get_cart($this->session_id());
         }
 
+        if ($cart_details && count($cart_details) > 0) {
             return view('components.checkout-component', ['cart_details' => $cart_details]);
+        }
+        return redirect()->route('cart')->with(['alert' => ['error' => 'Invalid data provided']]);
+
     }
 }
