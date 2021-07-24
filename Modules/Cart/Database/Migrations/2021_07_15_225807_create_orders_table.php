@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->enum('payment_type ', ['pay_now', 'pay_on_delivery']);
+            $table->enum('payment_type', ['pay_now', 'pay_on_delivery']);
             $table->string('user_id');
             $table->unsignedBigInteger('cart_id')->nullable();
             $table->string('status')->nullable()->default(false);

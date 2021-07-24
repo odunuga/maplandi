@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="{{ asset('vendor/css/rateit.css') }}"/>
 <link rel="stylesheet" href="{{ asset('vendor/css/toastr.css') }}"/>
 <link href="{{ asset('vendor/pace-master/themes/silver/pace-theme-mac-osx.css') }}" rel="stylesheet"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
 
 
 <!--FAVICONS-->

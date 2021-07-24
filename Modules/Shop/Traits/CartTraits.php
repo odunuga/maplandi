@@ -107,9 +107,11 @@ trait CartTraits
         return CartRecord::where('session_id', $session)->delete();
     }
 
-    private function clear_all_cart($session){
+    private function clear_all_cart($session)
+    {
         \Cart::session($this->session_id())->clear();
     }
+
     private function fetch_cart()
     {
         // check previous session cart
@@ -148,4 +150,70 @@ trait CartTraits
     {
         return \Modules\Shop\Entities\Cart::where('user_id', auth()->id())->where('session_id', $session)->first();
     }
+
+    private function store_cart_in_db($session_id, $cart, $payment_id, $payment_symbol)
+    {
+        $sub_total_count = 0;
+        $items = $this->get_all_items();
+        foreach ($items as $item) {
+            $sub_total_count += $this->set_amount($item['attributes']['code'], $item['price'] * $item['quantity']);
+        }
+        $sub_total = $sub_total_count;
+
+        $tax = $this->get_site_settings() && $this->get_site_settings()->tax ? $this->get_site_settings()->tax : 0;
+        $this->tax = $tax;
+        $tax_per = $sub_total !== 0 ? ($sub_total * ($tax / 100)) : 0;
+        $tax_added = $tax_per;
+        $total = $sub_total + $tax_per;
+        $check_exist = CartRecord::where('session_id', $session_id);
+        if ($check_exist->count() > 0) {
+            $cart = $check_exist->first();
+            $cart->update([
+                'cart' => $this->add_converted_currency($this->get_all_items()),
+                'sub_total' => $sub_total,
+                'payment_currency' => $payment_id,
+                'payment_symbol' => $payment_symbol,
+                'tax_added' => $tax_added,
+                'total' => $total,
+
+            ]);
+
+            return $cart;
+        } else {
+            $cart = CartRecord::create([
+                'session_id' => $session_id,
+                'cart' => $this->add_converted_currency($this->get_all_items()),
+                'sub_total' => $sub_total,
+                'payment_currency' => $payment_id,
+                'payment_symbol' => $payment_symbol,
+                'tax_added' => $tax_added,
+                'total' => $total,
+            ]);
+            return $cart;
+        }
+
+
+    }
+
+    private function add_converted_currency($items, $code = null)
+    {
+        $new_record = [];
+        foreach ($items as $item) {
+            $new_record[] = ['id' => $item['id'],
+                'name' => $item['name'],
+                'price' => $item['price'],
+                'quantity' => $item['quantity'],
+                'attributes' => [
+                    'symbol' => $item['attributes']['symbol'],
+                    'code' => $item['attributes']['code'],
+                    'category' => $item['attributes']['category'],
+                    'image' => $item['attributes']['image'],
+                    'description' => $item['attributes']['description'],
+                    'amount' => $this->set_amount($item['attributes']['code'], $item['price'] * $item['quantity'], $code)
+                ]
+            ];
+        }
+        return $new_record;
+    }
+
 }

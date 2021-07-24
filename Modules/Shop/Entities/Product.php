@@ -25,32 +25,32 @@ class Product extends Model
 
     protected $fillable = [];
 
-    public function image(): morphOne
+    public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    public function images(): morphMany
+    public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
     }
 
-    public function currency(): belongsTo
+    public function currency()
     {
         return $this->belongsTo(Currency::class);
     }
 
-    public function tags(): morphToMany
+    public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
-    public function category(): belongsTo
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function parameters(): belongsToMany
+    public function parameters()
     {
         return $this->belongsToMany(Parameter::class, 'product_parameters')->withPivot('value');
     }

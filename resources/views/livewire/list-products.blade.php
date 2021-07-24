@@ -34,8 +34,7 @@
                             <livewire:like :product="$item->id"/>
                         </li>
                         <li class="like">
-                            <livewire:add-to-cart :product="$item" :key="$item->sku" />
-
+                            <livewire:add-to-cart :product="$item->id" :key="$item->sku"/>
                         </li>
                     </ul>
                 </div>

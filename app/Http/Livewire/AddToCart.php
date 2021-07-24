@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Modules\Shop\Entities\Product;
 use Modules\Shop\Traits\CartTraits;
 
 class AddToCart extends Component
@@ -15,7 +16,7 @@ class AddToCart extends Component
     public $text;
     public $in_cart = false;
 
-    public function mount($product, $class = '', $text = false)
+    public function mount(Product $product, $class = '', $text = false)
     {
         $this->product = $product;
         $this->class = $class;
@@ -47,13 +48,17 @@ class AddToCart extends Component
                     'name' => $this->product->title,
                     'price' => $this->product->price,
                     'quantity' => 1,
-                    'attributes' => ['symbol' => $symbol, 'code' => $symbol_code, 'category' => $category, 'image' => $image, 'description' => $description]
+                    'attributes' => [
+                        'symbol' => $symbol,
+                        'code' => $symbol_code,
+                        'category' => $category,
+                        'image' => $image,
+                        'description' => $description
+                    ]
                 ];
             $this->add_cart($item);
             $this->emit('alert', ['success', __("cart.add_item")]);
         }
         $this->emit('updateItem');
-
-
     }
 }

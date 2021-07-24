@@ -4,10 +4,13 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Modules\Cart\Entities\Order;
+use Modules\Shop\Traits\CartTraits;
 use Unicodeveloper\Paystack\Facades\Paystack;
 
 class CheckoutDetails extends Component
 {
+    use CartTraits;
+
     public $cart_details;
     public $first_name;
     public $last_name;
@@ -25,6 +28,7 @@ class CheckoutDetails extends Component
 
     public function mount()
     {
+        $this->init();
         $this->first_name = auth()->user()->shipping_address ? auth()->user()->shipping_address->first_name : auth()->user()->name;
         $this->last_name = auth()->user()->shipping_address ? auth()->user()->shipping_address->last_name : auth()->user()->name;
         $this->email = auth()->user()->shipping_address ? auth()->user()->shipping_address->email : auth()->user()->email;
@@ -32,6 +36,38 @@ class CheckoutDetails extends Component
         $this->address = auth()->user()->shipping_address ? auth()->user()->shipping_address->address : '';
     }
 
+    public function init()
+    {
+        if (auth()->check() != true) {
+            redirect()->route('login');
+        }
+        // get the current session cart in db
+        $cart_check = $this->get_session_cart($this->session_id());
+        if ($cart_check->count() > 0) {
+            $cart_details = $cart_check->first();
+            // get previous cart session in db
+        } else {
+            $check_cart = $this->fetch_cart();
+            if ($check_cart && $cart_check->count() < 1) {
+                \Cart::session($this->session_id())->add($check_cart->cart);
+                $cart_details = $this->move_previous_session_cart($check_cart->session_id);
+
+            } else {
+                // store current cart in db and fetch it
+                $cart_items = $this->get_all_items();
+                $cart_details = $this->store_cart_in_db($this->session_id(), $cart_items, get_user_currency()['id'], get_user_currency()['code']);
+            }
+
+        }
+        $cart_details = collect($cart_details);
+        if ($cart_details && $cart_details !== [] && $cart_details->count() > 0) {
+            $this->cart_details = $cart_details;
+//        clear_redirect_for_prev_session();
+        } else {
+            session()->flash('error', 'Invalid data provided');
+            return redirect()->route('cart');
+        }
+    }
 
     public function cal_total_in_kobo()
     {

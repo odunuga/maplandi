@@ -3,6 +3,8 @@
 </a>
 
 
+@livewireScripts
+{{--<script src="{{ asset('vendor/livewire/livewire.js') }}"></script>--}}
 {{--<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> --}}
 <script src="{{ asset('vendor/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendor/js/wow.min.js') }}"></script>
@@ -85,10 +87,10 @@
         ghostTime: 100,
         maxProgressPerFrame: 20,
         easeFactor: 1.25,
-        startOnPageLoad:true,
-        restartOnPushState:true,
+        startOnPageLoad: true,
+        restartOnPushState: true,
         restartOnRequestAfter: 500,
-        target:'body',
+        target: 'body',
         elements: {
             checkInterval: 100,
             selectors: ['body']
@@ -99,17 +101,17 @@
             lagThreshold: 3
         },
         ajax: {
-            trackMethods: ['GET','POST'],
-            trackWebSockets:true,
+            trackMethods: ['GET', 'POST'],
+            trackWebSockets: true,
             ignoreURLs: []
         }
 
     }
 
+
     window.livewire.on('alert', data => {
         const type = data[0];
         const message = data[1];
-
         toastr[type](message);
         toastr.options = {
             "closeButton": false,
@@ -129,4 +131,15 @@
             "hideMethod": "fadeOut"
         }
     });
+    $(document).ready(function () {
+        @if($errors->any())
+            @foreach($errs = $errors->all() as $err)
+            toastr['error']('{{ $err }}');
+        @endforeach
+        @endif
+
+    })
+    ;
+
 </script>
+

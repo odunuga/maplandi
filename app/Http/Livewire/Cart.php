@@ -25,7 +25,7 @@ class Cart extends Component
     {
         $this->calculateTotals();
         $this->update_database();
-        return view('livewire.cart', ['items' => $this->get_all_items(),]);
+        return view('livewire.cart', ['items' => $this->get_all_items()]);
     }
 
     private function calculateTotals()
@@ -38,7 +38,7 @@ class Cart extends Component
         $this->sub_total = $sub_total;
         $tax = $this->get_site_settings() && $this->get_site_settings()->tax ? $this->get_site_settings()->tax : 0;
         $this->tax = $tax;
-        $tax_per = $sub_total != 0 ? ($sub_total * ($tax / 100)) : 0;
+        $tax_per = $sub_total !== 0 ? ($sub_total * ($tax / 100)) : 0;
         $this->tax_added = $tax_per;
         $this->total = $sub_total + $tax_per;
     }
@@ -62,15 +62,7 @@ class Cart extends Component
 
         set_redirect_with_prev_session('checkout', $this->session_id());
         // redirect user to checkout page
-        CartRecord::create([
-            'session_id' => $this->session_id(),
-            'cart' => isset($cart) && count($cart) > 0 ? $this->add_converted_currency($this->get_all_items()) : '',
-            'sub_total' => $this->sub_total,
-            'payment_currency' => get_user_currency()['id'],
-            'payment_symbol' => get_user_currency()['code'],
-            'tax_added' => $this->tax_added,
-            'total' => $this->total,
-        ]);
+        $this->store_cart_in_db($this->session_id(), isset($cart) && count($cart) > 0 ? $this->add_converted_currency($this->get_all_items()) : '', get_user_currency()['id'], get_user_currency()['code']);
 
         return redirect()->route('checkout');
     }
@@ -87,7 +79,7 @@ class Cart extends Component
             }
         }
 
-        if (isset($cart) && $cart != null && count($cart) > 0) {
+        if (isset($cart) && $cart !== null && collect($cart)->count() > 0) {
             $cart->update([
                 'cart' => $this->add_converted_currency($this->get_all_items()),
                 'sub_total' => $this->sub_total,
@@ -97,27 +89,6 @@ class Cart extends Component
                 'total' => $this->total,
             ]);
         }
-    }
-
-    private function add_converted_currency($items, $code = null)
-    {
-        $new_record = [];
-        foreach ($items as $item) {
-            $new_record[] = ['id' => $item['id'],
-                'name' => $item['name'],
-                'price' => $item['price'],
-                'quantity' => $item['quantity'],
-                'attributes' => [
-                    'symbol' => $item['attributes']['symbol'],
-                    'code' => $item['attributes']['code'],
-                    'category' => $item['attributes']['category'],
-                    'image' => $item['attributes']['image'],
-                    'description' => $item['attributes']['description'],
-                    'amount' => $this->set_amount($item['attributes']['code'], $item['price'] * $item['quantity'], $code)
-                ]
-            ];
-        }
-        return $new_record;
     }
 
 

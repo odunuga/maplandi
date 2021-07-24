@@ -1,4 +1,6 @@
-@if(count($hot_deals) > 0)
+
+@if($hot_deals!==[] && count($hot_deals) > 0)
+
     <section class="items-grid section custom-padding">
         <div class="container">
             <div class="row">
@@ -13,11 +15,9 @@
                 <div class="row">
                     @foreach($hot_deals as $deal)
                         <div class="col-lg-4 col-md-6 col-12">
-
                             <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                                 <div class="image">
-                                    <a href="{{url('shop/'.$deal->sku) }}" class="thumbnail"><img
-                                            src="{{ asset($deal->image?$deal->image->url:"") }}" alt="#"></a>
+                                    <a href="{{url('shop/'.$deal->sku) }}" class="thumbnail"><img src="{{ asset($deal->image?$deal->image->url:"") }}" alt="#"></a>
                                     <div class="product">
                                         <div class="product-image">
                                         </div>
@@ -25,7 +25,7 @@
                                             <p class="sale">For Sale</p>
 
                                         @endif
-                                        @if($deal->product_type=='new')
+                                        @if($deal->product_type=='rent')
                                             <span class="rent"> Rent </span>
                                         @endif
                                     </div>
@@ -45,7 +45,7 @@
                                     <div class="bottom-content">
                                         <p class="price">Price:
                                             <span>
-                                                 @if(isset($deal->currency) && $deal->currency->code!=get_user_currency()['code'])
+                                                 @if(isset($deal->currency) && $deal->currency->code!==get_user_currency()['code'])
                                                     {{ convert_to_user_currency($deal->price,$deal->currency->code) }}
                                                 @else
                                                     {{ currency_with_price($deal->price,$deal->currency->code) }}
@@ -64,15 +64,12 @@
             </div>
         </div>
     </section>
-
-    @push('scripts')
-        <script>
-            $(document).ready(function () {
-                $('.rateit').rateit();
-                $('.rateit').on('rated', function (event, value) {
-                    Livewire.emit('rated', {id: event.target.id, value: value})
-                })
-            });
-        </script>
-    @endpush
+    <script>
+        $(document).ready(function () {
+            $('.rateit').rateit();
+            $('.rateit').on('rated', function (event, value) {
+                Livewire.emit('rated', {id: event.target.id, value: value})
+            })
+        });
+    </script>
 @endif
