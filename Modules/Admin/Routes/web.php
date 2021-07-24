@@ -11,6 +11,7 @@
 |
 */
 
-Route::prefix('admin')->group(function() {
-    Route::get('/', 'AdminController@index');
+Route::prefix('control-room')->group(function () {
+    Route::get('/', 'AdminController@index')->name('control.room');
+    Route::get('/login', 'AdminController@showLogin')->name('control.login');
 });

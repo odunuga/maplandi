@@ -31,8 +31,8 @@
 <livewire:cart-modal key="{{ now() }}"/>
 {{ $slot }}
 @include('partials.footer')
-@livewireScripts
 
+@livewireScripts
 @include('partials.scripts')
 @stack('scripts')
 

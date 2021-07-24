@@ -36,8 +36,9 @@ class PaymentController extends Controller
                 'address' => ['required', 'min:10']
             ]);
 
+            dd(request()->all());
             if ($validate->fails()) {
-                return back()->with($validate->errors());
+                return back()->withErrors($validate);
             } else {
                 $this->update_shipping_address(request()->all());
                 return Paystack::getAuthorizationUrl()->redirectNow();

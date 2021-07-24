@@ -10,7 +10,6 @@
 
     <!-- Styles -->
     @include('partials.links')
-    @isset($styles) {{ $styles  }} @endisset
     @livewireStyles
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -41,10 +40,8 @@
 
 @stack('modals')
 
-@livewireScripts
 @include('partials.footer')
 @include('partials.scripts')
 {{--<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>--}}
-@isset($scripts) {{ $scripts }} @endisset
 </body>
 </html>

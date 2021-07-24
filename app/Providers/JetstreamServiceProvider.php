@@ -7,6 +7,7 @@ use App\Http\Responses\LoginResponse;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
+use Laravel\Fortify\Contracts\RegisterResponse as registerResponseContract;
 use Laravel\Fortify\Contracts\TwoFactorLoginResponse as TwoFactorLoginResponseContract;
 
 class JetstreamServiceProvider extends ServiceProvider
@@ -30,6 +31,7 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         $this->configurePermissions();
         $this->app->singleton(LoginResponseContract::class, LoginResponse::class);
+        $this->app->singleton(registerResponseContract::class, LoginResponse::class);
         $this->app->singleton(TwoFactorLoginResponseContract::class, LoginResponse::class);
         Jetstream::deleteUsersUsing(DeleteUser::class);
     }
