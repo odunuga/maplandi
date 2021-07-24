@@ -11,7 +11,16 @@
 |
 */
 
-Route::prefix('control-room')->group(function () {
+use Illuminate\Support\Facades\Route;
+
+
+Route::prefix('control-room')->middleware('auth')->group(function () {
     Route::get('/', 'AdminController@index')->name('control.room');
-    Route::get('/login', 'AdminController@showLogin')->name('control.login');
+    Route::get('/login', 'Auth\LoginController@showLogin')->name('control.login');
+    Route::get('/forgot-password', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('control.forgot');
+    Route::get('reset-password/{token}', 'Auth\ForgotPasswordController@showResetPasswordForm')->name('reset.password.get');
+
+    Route::post('/login', 'Auth\LoginController@loginAdmin')->name('control.login');
+    Route::post('reset-password', 'Auth\ForgotPasswordController@submitResetPasswordForm')->name('reset.password.post');
+
 });
