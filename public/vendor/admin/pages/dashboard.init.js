@@ -57,10 +57,6 @@
 
 
       Dashboard.prototype.init = function () {
-
-        
-
-
           //creating area chart
           var $areaData = [
               {y: '2013', a: 0, b: 0, c:0},
@@ -100,8 +96,11 @@
       $.Dashboard = new Dashboard, $.Dashboard.Constructor = Dashboard
 }(window.jQuery),
 
-//initializing 
-  function ($) {
-      "use strict";
-      $.Dashboard.init();
-  }(window.jQuery);
+//initializing
+
+        function ($) {
+            "use strict";
+            $.Dashboard.init();
+        }(window.jQuery);
+
+

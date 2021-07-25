@@ -164,6 +164,7 @@ class ProductTableSeeder extends Seeder
                             $pp->product_id = $product->id;
                             $pp->parameter_id = $pa->id;
                             $pp->value = $pa->id === 1 ? $pv1[random_int(0, count($pv1) - 1)] : $pv2[random_int(0, count($pv2) - 1)];
+                            $pp->stock = random_int(1, 100);
                             $pp->save();
                         }
 

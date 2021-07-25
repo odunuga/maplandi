@@ -18,6 +18,7 @@ class CreateProductParametersTable extends Migration
             $table->unsignedBigInteger('parameter_id');
             $table->unsignedBigInteger('product_id');
             $table->longText('value')->nullable();
+            $table->string('stock')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

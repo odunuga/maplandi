@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,7 +11,6 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Cart\Entities\ShippingAddress;
-use Nagy\LaravelRating\Traits\Like\CanLike;
 use Nagy\LaravelRating\Traits\Rate\CanRate;
 use Overtrue\LaravelLike\Traits\Liker;
 
@@ -22,6 +21,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use SoftDeletes;
+    use MustVerifyEmail;
     use Liker;
     use CanRate;
     use TwoFactorAuthenticatable;

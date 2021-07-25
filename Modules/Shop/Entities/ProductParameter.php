@@ -9,12 +9,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property mixed product_id
  * @property mixed parameter_id
  * @property mixed|string value
+ * @property mixed|string stock
  */
 class ProductParameter extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $guarded = [];
+
+    public function getInstockAttribute()
+    {
+        return $this->stock < 1;
+    }
 
     protected static function newFactory()
     {

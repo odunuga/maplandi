@@ -12,8 +12,9 @@ use Laravel\Sanctum\HasApiTokens;
 use Modules\Cart\Entities\ShippingAddress;
 use Nagy\LaravelRating\Traits\Rate\CanRate;
 use Overtrue\LaravelLike\Traits\Liker;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;

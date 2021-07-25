@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Maplandi') }} Admin</title>
 
-    @auth('admin')
+    @guest()
+        <link href="{{ asset('vendor/admin/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('vendor/admin/css/metismenu.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('vendor/admin/css/icons.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('vendor/admin/css/style.css') }}" rel="stylesheet" type="text/css">
+    @else
         <link href="{{ asset('vendor/admin/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('vendor/admin/css/metismenu.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('vendor/admin/css/icons.css') }}" rel="stylesheet" type="text/css">
@@ -21,30 +26,45 @@
         <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('vendor/admin/favicon/apple-icon-144x144.png') }}">
         <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('vendor/admin/favicon/apple-icon-152x152.png') }}">
         <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('vendor/admin/favicon/apple-icon-180x180.png') }}">
-        <link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('vendor/admin/favicon/android-icon-192x192.png') }}">
+        <link rel="icon" type="image/png" sizes="192x192"
+              href="{{ asset('vendor/admin/favicon/android-icon-192x192.png') }}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('vendor/admin/favicon/favicon-32x32.png') }}">
         <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('vendor/admin/favicon/favicon-96x96.png') }}">
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('vendor/admin/favicon/favicon-16x16.png') }}">
         <link rel="manifest" href="{{ asset('vendor/admin/favicon/manifest.json') }}">
         <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="./{{ asset('vendor/admin/favicon/ms-icon-144x144.png') }}">
+        <meta name="msapplication-TileImage" content="{{ asset('vendor/admin/favicon/ms-icon-144x144.png') }}">
         <meta name="theme-color" content="#ffffff">
+    @endguest
+    <script src="{{ asset('js/app.js') }}" defer></script>
+</head>
+<body class="{{ isset($body_class)?$body_class:'' }}">
+<div id="wrapper">
+    @auth()
+        @include('admin::partials.topbar')
+        @include('admin::partials.sidebar')
+        <div class="content-page">
+            {{$slot}}
+            <footer class="footer">
+                © Maplandi <span class="d-none d-sm-inline-block"> </span>.
+            </footer>
+        </div>
     @else
-        <link href="{{ asset('vendor/admin/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('vendor/admin/css/metismenu.min.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('vendor/admin/css/icons.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('vendor/admin/css/style.css') }}" rel="stylesheet" type="text/css">
+        {{$slot}}
+        <footer class="footer">
+            © Maplandi <span class="d-none d-sm-inline-block"> </span>.
+        </footer>
 
     @endauth
 
-</head>
-<body class="{{ isset($body_class)?$body_class:'' }}">
-
-{{$slot}}
-
-<script src="{{ asset('js/app.js') }}" defer></script>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-@auth('admin')
+{{--<script src="{{ asset('vendor/admin/js/jquery.min.js') }}"></script>--}}
+@guest()
+    <script src="{{asset('vendor/admin/js/metismenu.min.js')}}"></script>
+    <script src="{{asset('vendor/admin/js/jquery.slimscroll.js')}}"></script>
+    <script src="{{asset('vendor/admin/js/waves.min.js')}}"></script>
+@else
     <!-- jQuery  -->
     <script src="{{ asset('vendor/admin/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('vendor/admin/js/metismenu.min.js') }}"></script>
@@ -57,12 +77,7 @@
 
     <script src="{{ asset('vendor/admin/pages/dashboard.init.js') }}"></script>
 
-    <!-- App js -->
-    <script src="{{ asset('vendor/admin/js/app.js') }}"></script>
-@else
-    <script src="{{asset('vendor/admin/js/metismenu.min.js')}}"></script>
-    <script src="{{asset('vendor/admin/js/jquery.slimscroll.js')}}"></script>
-    <script src="{{asset('vendor/admin/js/waves.min.js')}}"></script>
-@endauth
+@endguest
+<script src="{{ asset('vendor/admin/js/app.js') }}"></script>
 </body>
 </html>

@@ -5,8 +5,8 @@ namespace Modules\Admin\Traits;
 
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\ValidationException;
 
 trait AuthenticatesAdmin
@@ -14,13 +14,7 @@ trait AuthenticatesAdmin
     use RedirectsLogin, LoginToggle;
 
 
-    public function showLogin()
-    {
-        return view('admin::auth.login');
-    }
-
-
-    public function login(Request $request)
+    public function loginAdmin(Request $request)
     {
         $this->validateLogin($request);
 
@@ -186,6 +180,6 @@ trait AuthenticatesAdmin
      */
     protected function guard()
     {
-        return Auth::guard();
+        return Auth::guard('admin_web');
     }
 }

@@ -6,8 +6,8 @@ namespace Modules\Admin\Traits;
 
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 
 trait RegistersAdmin
 {
@@ -25,9 +25,8 @@ trait RegistersAdmin
 
     /**
      * Handle a registration request for the application.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @return JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|mixed
      */
     public function register(Request $request)
     {
@@ -53,7 +52,7 @@ trait RegistersAdmin
      */
     protected function guard()
     {
-        return Auth::guard();
+        return Auth::guard('admin_web');
     }
 
     /**

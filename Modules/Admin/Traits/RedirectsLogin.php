@@ -4,6 +4,8 @@
 namespace Modules\Admin\Traits;
 
 
+use App\Providers\RouteServiceProvider;
+
 trait RedirectsLogin
 {
     /**
@@ -17,6 +19,6 @@ trait RedirectsLogin
             return $this->redirectTo();
         }
 
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : RouteServiceProvider::ADMIN;
     }
 }
