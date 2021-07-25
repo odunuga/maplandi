@@ -167,7 +167,6 @@ class ProductTableSeeder extends Seeder
                             $pp->stock = random_int(1, 100);
                             $pp->save();
                         }
-
                     }
                 });
 
