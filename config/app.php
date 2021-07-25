@@ -171,6 +171,7 @@ return [
         CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
         Nagy\LaravelRating\LaravelRatingServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -237,6 +238,9 @@ return [
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
         "LaravelRating" => \Nagy\LaravelRating\LaravelRatingFacade::class,
-    ],
+
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+
+        ],
 
 ];

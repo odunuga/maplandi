@@ -10,6 +10,17 @@
       'Currency' => 'AmrShawky\\LaravelCurrency\\Facade\\Currency',
     ),
   ),
+  'barryvdh/laravel-dompdf' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Barryvdh\\DomPDF\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'PDF' => 'Barryvdh\\DomPDF\\Facade',
+    ),
+  ),
   'binary-cats/laravel-sku' => 
   array (
     'providers' => 

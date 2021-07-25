@@ -44,5 +44,14 @@ class AdminController extends Controller
         return view('admin::transactions');
     }
 
+    public function users()
+    {
+        return view('admin::users');
+    }
+
+    public function print_page()
+    {
+        return view('admin::pdf.order_print');
+    }
 
 }

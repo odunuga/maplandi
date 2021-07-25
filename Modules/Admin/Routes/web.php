@@ -20,6 +20,8 @@ Route::prefix('control-room')->group(function () {
     Route::get('/stocks', 'AdminController@stocks')->name('control.stocks');
     Route::get('/items', 'AdminController@items')->name('control.items');
     Route::get('/transactions', 'AdminController@transactions')->name('control.transactions');
+    Route::get('/users', 'AdminController@users')->name('control.users');
+    Route::get('/print', 'AdminController@print_page')->name('control.print');
 
 
 //    Admin Login
