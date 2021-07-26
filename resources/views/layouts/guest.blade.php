@@ -35,6 +35,5 @@
 @livewireScripts
 @include('partials.scripts')
 @stack('scripts')
-
 </body>
 </html>

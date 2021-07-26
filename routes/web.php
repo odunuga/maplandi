@@ -15,9 +15,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('welcome');
 
     Route::get('/google/login', [SocialiteController::class, 'login'])->name('google.login');
 

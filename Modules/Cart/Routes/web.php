@@ -12,27 +12,30 @@
 */
 
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::prefix('cart')->group(function () {
-    Route::get('/', 'CartController@index')->name('cart');
+Route::group(['prefix' => LaravelLocalization::setLocale(),], function () {
+    Route::prefix('cart')->group(function () {
+        Route::get('/', 'CartController@index')->name('cart');
+    });
+
+    Route::prefix('checkout')->group(function () {
+        Route::get('/', 'CartController@checkout')->name('checkout');
+    });
+
+
+    Route::prefix('orders')->group(function () {
+        Route::get('/', 'CartController@orders')->name('orders');
+        Route::get('/{ref}', 'CartController@order_show')->name('order.show');
+    });
+
+    Route::prefix('payment')->group(function () {
+        Route::get('/', 'CartController@payment')->name('payment');
+        Route::get('/on-delivery', 'CartController@on_delivery')->name('payment.on_delivery');
+    });
+
+    Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
+
+
+    Route::get('/payment/callback', 'PaymentController@handleGatewayCallback')->name('handleGatewayCallback');
 });
-
-Route::prefix('checkout')->group(function () {
-    Route::get('/', 'CartController@checkout')->name('checkout');
-});
-
-
-Route::prefix('orders')->group(function () {
-    Route::get('/', 'CartController@orders')->name('orders');
-    Route::get('/{ref}', 'CartController@order_show')->name('order.show');
-});
-
-Route::prefix('payment')->group(function () {
-    Route::get('/', 'CartController@payment')->name('payment');
-    Route::get('/on-delivery', 'CartController@on_delivery')->name('payment.on_delivery');
-});
-
-Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
-
-
-Route::get('/payment/callback', 'PaymentController@handleGatewayCallback')->name('handleGatewayCallback');

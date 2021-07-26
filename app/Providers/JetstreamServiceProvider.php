@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use App\Actions\Jetstream\DeleteUser;
 use App\Http\Responses\LoginResponse;
+use App\Http\Responses\RegisterResponse;
+use App\Http\Responses\TwoFactorLoginResponse;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
@@ -19,7 +22,7 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Jetstream::ignoreRoutes();
     }
 
     /**
@@ -31,9 +34,10 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         $this->configurePermissions();
         $this->app->singleton(LoginResponseContract::class, LoginResponse::class);
-        $this->app->singleton(registerResponseContract::class, LoginResponse::class);
-        $this->app->singleton(TwoFactorLoginResponseContract::class, LoginResponse::class);
+        $this->app->singleton(registerResponseContract::class, RegisterResponse::class);
+        $this->app->singleton(TwoFactorLoginResponseContract::class, TwoFactorLoginResponse::class);
         Jetstream::deleteUsersUsing(DeleteUser::class);
+        $this->configureRoutes();
     }
 
     /**
@@ -51,5 +55,17 @@ class JetstreamServiceProvider extends ServiceProvider
             'update',
             'delete',
         ]);
+    }
+
+    protected function configureRoutes()
+    {
+        Route::group([
+            'namespace' => 'Laravel\Jetstream\Http\Controllers',
+            'domain' => config('jetstream.domain', null),
+            'prefix' => config('jetstream.prefix', config('jetstream.path')),
+        ], function () {
+            $this->loadRoutesFrom(base_path('routes/jetstream.php'));
+        });
+
     }
 }

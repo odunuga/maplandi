@@ -171,7 +171,10 @@ return [
         CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
         Nagy\LaravelRating\LaravelRatingServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
+//        Barryvdh\DomPDF\ServiceProvider::class,
+        DougSisk\CountryState\CountryStateServiceProvider::class,
+
+
         /*
          * Application Service Providers...
          */
@@ -239,7 +242,7 @@ return [
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
         "LaravelRating" => \Nagy\LaravelRating\LaravelRatingFacade::class,
 
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+//        'PDF' => Barryvdh\DomPDF\Facade::class,
 
         ],
 

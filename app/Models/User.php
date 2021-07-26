@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DougSisk\CountryState\CountryState;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,6 +15,12 @@ use Modules\Cart\Entities\ShippingAddress;
 use Nagy\LaravelRating\Traits\Rate\CanRate;
 use Overtrue\LaravelLike\Traits\Liker;
 
+
+/**
+ * Class User
+ * @package App\Models
+ *
+ */
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -36,7 +43,11 @@ class User extends Authenticatable
         'email',
         'password',
         'socialite_id',
-        'profile_photo_path'
+        'profile_photo_path',
+        'phone',
+        'address',
+        'country_code',
+        'state'
     ];
 
     /**
@@ -75,11 +86,16 @@ class User extends Authenticatable
         return $this->hasOne(ShippingAddress::class);
     }
 
+    public function getCountryAttribute()
+    {
+        return   auth()->user()->country_code ? (new CountryState)->getCountry(auth()->user()->country_code) : null;
+
+    }
+
     public function getImageAttribute($value)
     {
         $default = 'vendor/images/dashboard/noimg.png';
         if ($value) {
-
             if (substr($value->profile_photo_path, 0, 4) === "http") {
                 return $value->profile_photo_path;
             }

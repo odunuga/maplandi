@@ -25,13 +25,12 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 $to = RouteServiceProvider::HOME;
-                if (auth('admin')->check()) $to = RouteServiceProvider::ADMIN;
+                if (auth('admin_web')->check()) $to = RouteServiceProvider::ADMIN;
                 $check_session = Cache::has('redirect_to'); // check if redirect page is set
                 if ($check_session) {
                     $to = Cache::get('redirect_to'); // take user to redirect page
                     Cache::forget('redirect_to');
                 }
-
                 return redirect()->route($to);
             }
         }

@@ -10,17 +10,6 @@
       'Currency' => 'AmrShawky\\LaravelCurrency\\Facade\\Currency',
     ),
   ),
-  'barryvdh/laravel-dompdf' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Barryvdh\\DomPDF\\ServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'PDF' => 'Barryvdh\\DomPDF\\Facade',
-    ),
-  ),
   'binary-cats/laravel-sku' => 
   array (
     'providers' => 
@@ -44,6 +33,13 @@
     'aliases' => 
     array (
       'Cart' => 'Darryldecode\\Cart\\Facades\\CartFacade',
+    ),
+  ),
+  'dougsisk/laravel-country-state' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'DougSisk\\CountryState\\CountryStateServiceProvider',
     ),
   ),
   'facade/ignition' => 
@@ -214,6 +210,13 @@
     'providers' => 
     array (
       0 => 'Overtrue\\LaravelLike\\LikeServiceProvider',
+    ),
+  ),
+  'rinvex/countries' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Rinvex\\Country\\Providers\\CountryServiceProvider',
     ),
   ),
   'socialiteproviders/manager' => 

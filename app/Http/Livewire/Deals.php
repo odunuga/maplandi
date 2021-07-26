@@ -7,8 +7,15 @@ use Modules\Shop\Entities\Product;
 
 class Deals extends Component
 {
+    public $hot_deals;
+
 
     protected $listeners = ['rated' => 'implement_rating'];
+
+    public function mount($hot_deals)
+    {
+        $this->hot_deals = $hot_deals;
+    }
 
     public function implement_rating(array $value)
     {
@@ -21,14 +28,10 @@ class Deals extends Component
         } else {
             $this->emit('alert', ['error', 'You Are Not logged In']);
         }
-
     }
 
     public function render()
     {
-        $hot_deals = [];
-        if (Product::count() > 0)
-            $hot_deals = Product::with(['category', 'image', 'tags', 'currency'])->inRandomOrder()->where('hot', 1)->where('published', 1)->where('available', 1)->take(12)->get();
-        return view('livewire.deals', ['hot_deals' => $hot_deals]);
+        return view('livewire.deals', ['hot_deals' => $this->hot_deals]);
     }
 }
