@@ -16,7 +16,9 @@
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
+            @auth()
             'Authorization': 'Bearer {{auth()->user()->createToken('accessToken')->plainTextToken }}',
+            @endauth
             'X-CSRF-TOKEN': '{{csrf_token() }}'
         }
     });

@@ -34,6 +34,14 @@ class CheckoutDetails extends Component
         $this->email = auth()->user()->shipping_address ? auth()->user()->shipping_address->email : auth()->user()->email;
         $this->phone = auth()->user()->shipping_address ? auth()->user()->shipping_address->phone : auth()->user()->phone;
         $this->address = auth()->user()->shipping_address ? auth()->user()->shipping_address->address : '';
+
+        if ($this->cart_details && isset($this->cart_details->cart) && $this->cart_details->cart !== [] && count($this->cart_details->cart) > 0) {
+
+            return view('livewire.checkout-details', ['cart_details' => $this->cart_details]);
+        }
+
+        session()->flash('error', 'Invalid data provided');
+        return redirect('cart');
     }
 
     public function init()
@@ -60,9 +68,9 @@ class CheckoutDetails extends Component
 
         }
         $cart_details = collect($cart_details);
-        if ($cart_details && $cart_details !== [] && $cart_details->count() > 0) {
+        if ($cart_details && $cart_details !== [] && count($cart_details->cart) > 0) {
             $this->cart_details = $cart_details;
-//        clear_redirect_for_prev_session();
+            clear_redirect_for_prev_session();
         } else {
             session()->flash('error', 'Invalid data provided');
             return redirect()->route('cart');
@@ -103,7 +111,10 @@ class CheckoutDetails extends Component
     public function render()
     {
         $this->cal_total_in_kobo();
+
         return view('livewire.checkout-details', ['cart_details' => $this->cart_details]);
+
+
     }
 
     private function generate_on_delivery_id()

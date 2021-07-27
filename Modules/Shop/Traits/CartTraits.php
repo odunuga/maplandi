@@ -9,6 +9,7 @@ use App\Http\Livewire\Cart;
 use Illuminate\Support\Facades\Cache;
 use Modules\Admin\Traits\SiteSettingsTraits;
 use Modules\Cart\Entities\CartRecord;
+use Modules\Cart\Entities\SavedItem;
 
 trait CartTraits
 {
@@ -214,6 +215,24 @@ trait CartTraits
             ];
         }
         return $new_record;
+    }
+
+
+    private function delete_from_saved($id)
+    {
+        return SavedItem::where('user_id', auth()->id())->where('product_id', $id)->delete();
+    }
+
+    private function add_to_saved($id)
+    {
+        $check = SavedItem::where('user_id', auth()->id())->where('product_id', $id);
+        if ($check->count() < 1) {
+            SavedItem::create([
+                'user_id' => auth()->id(),
+                'product_id' => $id
+            ]);
+            $this->delete_cart($id);
+        }
     }
 
 }

@@ -35,7 +35,6 @@ class AddToCart extends Component
             $item = $this->get_single_item($this->product->sku);
             $this->delete_cart($item->id);
             $this->emit('alert', ['error', __('cart.remove_item')]);
-
         } else {
             $symbol = isset($this->product->currency) ? $this->product->currency->symbol : '';
             $symbol_code = isset($this->product->currency) ? $this->product->currency->code : '';

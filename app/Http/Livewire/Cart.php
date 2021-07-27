@@ -67,6 +67,7 @@ class Cart extends Component
         return redirect()->route('checkout');
     }
 
+
     private function update_database()
     {
         $check_cart = \Modules\Shop\Entities\Cart::where('session_id', $this->session_id());

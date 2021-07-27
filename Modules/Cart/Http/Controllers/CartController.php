@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Cart\Entities\Order;
+use Modules\Cart\Entities\SavedItem;
 use Modules\Shop\Traits\CartTraits;
 
 class CartController extends Controller
@@ -59,6 +60,7 @@ class CartController extends Controller
 
     public function saved_items()
     {
-        return view('cart::saved');
+        $items = SavedItem::with('product')->where('user_id', auth()->id())->paginate(10);
+        return view('cart::saved', ['items' => $items]);
     }
 }

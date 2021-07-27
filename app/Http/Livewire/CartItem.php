@@ -12,7 +12,8 @@ class CartItem extends Component
     public $item;
     public $confirm_delete;
     public $new_amount;
-    public function mount($item )
+
+    public function mount($item)
     {
         $this->item = $item;
     }
@@ -41,6 +42,13 @@ class CartItem extends Component
             $this->item = (object)$this->get_single_item($this->item['id']);
         }
         $this->emit('reloadItems', []);
+    }
+
+    public function save_item($id)
+    {
+        $this->add_to_saved($id);
+        $this->delete_from_saved($id);
+        $this->emit('reloadItems');
     }
 
     public function increment()

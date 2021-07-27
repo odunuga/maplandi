@@ -16,8 +16,9 @@
             <dt>Category: {{ $item['attributes']?$item['attributes']['category']:'' }}</dt>
         </dl>
 
-        <div class="m-t-sm">
-            @if($confirm_delete == $item['id'])
+        <div class="m-t-sm flex flex-inline">
+           <a href="javascript:void(0)" class="text-muted text-sm mx-3" wire:click="save_item('{{$item['id']}}')"><i class="lni lni-save" ></i> Save </a>
+        @if($confirm_delete == $item['id'])
                 <i class="fa fa-trash"></i>
                 Are you sure? <a href="javascript:void(0)" wire:click="removeItem()"><i
                         class="lni lni-checkmark text-danger"></i></a>  <a href="javascript:void(0)"

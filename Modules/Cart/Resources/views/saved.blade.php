@@ -133,46 +133,33 @@
                             <div class="my-items">
                                 <div class="item-list-title">
                                     <div class="row align-items-center">
-                                        <div class="col-lg-5 col-md-5 col-12">
+                                        <div class="col-lg-4 col-md-4 col-12">
                                             <p class="d-none d-lg-block">Product</p>
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-12">
                                             <p class="d-none d-lg-block">Category</p>
                                         </div>
 
-                                        <div class="col-lg-3 col-md-3 col-12 align-right">
-                                            <p class="d-none d-lg-block"> Action</p>
+                                        <div class="col-lg-2 col-md-2 col-12 align-right">
+                                            <p class="d-none d-lg-block"> Current Price</p>
                                         </div>
+                                        <div class="col-lg-2 col-md-2 col-12 align-right">
+                                            <p class="d-none d-lg-block"> Actions</p>
+                                        </div>
+
                                     </div>
                                 </div>
 
-
-                                <div class="single-item-list">
-                                    <div class="row align-items-center">
-                                        <div class="col-lg-5 col-md-5 col-12">
-                                            <div class="item-image">
-                                                <img src="../assets/images/my-items/my-item1.png" alt="#">
-                                                <div class="content">
-                                                    <h3 class="title"><a href="javascript:void(0)">Brand New Iphone 11
-                                                            Pro
-                                                            Max</a></h3>
-                                                    <span class="price">&#8358;800</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2 col-md-2 col-12">
-                                            <p>Electronic</p>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-3 col-12 align-right">
-                                            <ul class="action-btn">
-                                                <li><a href=""><i class="lni lni-cart"></i></a></li>
-
-                                            </ul>
-                                        </div>
+                                @if(isset($items) && count($items)>0)
+                                    @foreach($items as $item)
+                                        @livewire('single-saved-item',['product'=>$item->product])
+                                    @endforeach
+                                    {{ $items->links() }}
+                                @else
+                                    <div class="single-item-list">
+                                        <strong> No Items Yet</strong>
                                     </div>
-                                </div>
-
+                                @endif
 
                                 {{--                                <div class="pagination left">--}}
                                 {{--                                    <ul class="pagination-list">--}}

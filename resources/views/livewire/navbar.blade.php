@@ -99,7 +99,7 @@
                                         </a>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">
+                                    <li><a class="dropdown-item" href="{{ route('saved') }}">
                                             <span class> <b><i class="lni lni-heart" style="margin-right:10px"></i> </b> </span>
                                             {{ __('navbar.saved_items') }}
                                         </a>
