@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" xmlns:wire="http://www.w3.org/1999/xhtml">
     <div class="col-md-9">
         <div class="ibox">
             <div class="ibox-title">
@@ -130,7 +130,7 @@
                                 <input type="hidden" name="amount" value="{{ $total_in_kobo }}">
                                 <input type="hidden" name="currency" value="{{ get_user_currency()['code'] }}">
                                 <input type="hidden" name="metadata"
-                                       value="{{ json_encode(['cart'=>$cart_details['cart'],'sub_total'=>['sub_total'],'tax_added'=>$cart_details['tax_added'],'address'=>['first_name'=>$first_name,'last_name'=>$last_name,'email'=>$email,'phone'=>$phone,'address'=>$address]]) }}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
+                                       value="{{ json_encode(['cart'=>$cart_details['cart'],'sub_total'=>$cart_details['sub_total'],'tax_added'=>$cart_details['tax_added'],'address'=>['first_name'=>$first_name,'last_name'=>$last_name,'email'=>$email,'phone'=>$phone,'address'=>$address]]) }}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
                                 <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
                                 <button id="cardpay-btn" wire:dirty.attr="disabled" type="submit"
                                         class="btn btn-primary btn-lg"><i

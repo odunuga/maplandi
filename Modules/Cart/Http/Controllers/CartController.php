@@ -32,7 +32,8 @@ class CartController extends Controller
     public function orders()
     {
         if (auth()->check()) {
-            return view('cart::order');
+            $orders = Order::where('user_id', auth()->id())->latest()->get();
+            return view('cart::orders')->with(['orders' => $orders]);
         }
         session()->put('redirect_to', 'order');
         return redirect()->route('login');

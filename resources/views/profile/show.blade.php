@@ -1,44 +1,52 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+    <section class="dashboard section" style="margin-top:30px">
+        <div class="container">
+            <div class="row">
+                @include('cart::inc.sidebar')
+                <div class="col-lg-9 col-md-12 col-12">
+                    <x-slot name="header">
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                            {{ __('Profile') }}
+                        </h2>
+                    </x-slot>
+                    <div>
+                        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+                            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
+                                @livewire('profile.update-profile-information-form',['state.countries'=>$countries ])
+                                <x-jet-section-border/>
+                            @endif
 
-    <div>
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                @livewire('profile.update-profile-information-form',['state.countries'=>$countries ])
-                <x-jet-section-border/>
-            @endif
+                            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
+                                <div class="mt-10 sm:mt-0">
+                                    @livewire('profile.update-password-form')
+                                </div>
 
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.update-password-form')
+                                <x-jet-section-border/>
+                            @endif
+
+                            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
+                                <div class="mt-10 sm:mt-0">
+                                    @livewire('profile.two-factor-authentication-form')
+                                </div>
+
+                                <x-jet-section-border/>
+                            @endif
+
+                            <div class="mt-10 sm:mt-0">
+                                @livewire('profile.logout-other-browser-sessions-form')
+                            </div>
+
+                            @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
+                                <x-jet-section-border/>
+
+                                <div class="mt-10 sm:mt-0">
+                                    @livewire('profile.delete-user-form')
+                                </div>
+                            @endif
+                        </div>
+                    </div>
                 </div>
-
-                <x-jet-section-border/>
-            @endif
-
-            @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.two-factor-authentication-form')
-                </div>
-
-                <x-jet-section-border/>
-            @endif
-
-            <div class="mt-10 sm:mt-0">
-                @livewire('profile.logout-other-browser-sessions-form')
             </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-                <x-jet-section-border/>
-
-                <div class="mt-10 sm:mt-0">
-                    @livewire('profile.delete-user-form')
-                </div>
-            @endif
         </div>
-    </div>
+    </section>
 </x-app-layout>

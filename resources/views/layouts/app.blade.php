@@ -10,6 +10,7 @@
 
     <!-- Styles -->
     @include('partials.links')
+    @yield('styles')
     @livewireStyles
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

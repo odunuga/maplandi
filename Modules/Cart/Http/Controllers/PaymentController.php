@@ -36,7 +36,6 @@ class PaymentController extends Controller
                 'address' => ['required', 'min:10']
             ]);
 
-            dd(request()->all());
             if ($validate->fails()) {
                 return back()->withErrors($validate);
             } else {
@@ -55,12 +54,14 @@ class PaymentController extends Controller
     public function handleGatewayCallback()
     {
         $paymentDetails = Paystack::getPaymentData();
+        dd($paymentDetails);
         if (Order::where('reference', $paymentDetails['data']['reference'])->count() < 1) {
 
             $address = $paymentDetails['data']['metadata']['address'];
             $order = new Order();
             $order->payment_type = 'pay_now'; //'pay_now', 'pay_on_delivery'
             $order->user_id = auth()->id();
+            $order->cart_id = $paymentDetails['data']['order_id'];
             $order->status = $paymentDetails['status'];
             $order->message = $paymentDetails['message'];
             $order->cart_id = $paymentDetails['data']['order_id'];

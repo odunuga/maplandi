@@ -29,6 +29,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),], function () {
         Route::get('/{ref}', 'CartController@order_show')->name('order.show');
     });
 
+    Route::prefix('saved')->group(function(){
+       Route::get('/','CartController@saved_items')->name('saved');
+    });
     Route::prefix('payment')->group(function () {
         Route::get('/', 'CartController@payment')->name('payment');
         Route::get('/on-delivery', 'CartController@on_delivery')->name('payment.on_delivery');

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Modules\Cart\Http\Controllers\ApiCartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/cart', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/cart', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('orders', [ApiCartController::class, 'orders'])->name('api-cart.orders');
 });
