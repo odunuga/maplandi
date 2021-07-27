@@ -3,11 +3,13 @@
 namespace Modules\Cart\Entities;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Shop\Entities\Cart;
 
 /**
+ * @property int id
  * @property boolean status
  * @property mixed message
  * @property mixed transaction_id
@@ -32,6 +34,7 @@ use Modules\Shop\Entities\Cart;
  * @property string payment_type
  * @property int|string|null sub_total
  * @property int|string|null tax_added
+ * @property int delivery_status
  */
 class Order extends Model
 {
@@ -40,7 +43,9 @@ class Order extends Model
     protected $guarded = [];
     protected $casts = [
         'paid_at' => 'datetime',
-        'cart' => 'array'
+        'cart' => 'array',
+        'status' => 'bool',
+        'transaction_status' => 'bool'
     ];
 
     public function buyer()
@@ -51,6 +56,39 @@ class Order extends Model
     public function cart()
     {
         return $this->belongsTo(Cart::class);
+    }
+
+    public function formatUsers()
+    {
+
+        return [
+            'id' => $this->id,
+            'cart_id' => $this->cart_id,
+            'reference' => $this->reference,
+            'created_at' => $this->created_at->format('d M Y'),
+            'payment_type' => $this->payment_type,
+            'amount' => $this->amount,
+            'paid_at' => $this->paid_at->format('d M Y H:m a'),
+            'status' => $this->status ? 'Successful' : 'Failed',
+            'is_delivered' => $this->is_delivered
+        ];
+    }
+
+    public function getIsDeliveredAttribute()
+    {
+        if ($this->delivery_status === 0) {
+            return 'Pending';
+        }
+        if ($this->delivery_status === 1) {
+            return 'On Transit';
+        }
+        if ($this->delivery_status === 2) {
+            return 'Delivered';
+        }
+        if ($this->delivery_status === 3) {
+            return 'Cancelled';
+        }
+        return 'Pending';
     }
 
     protected static function newFactory()

@@ -54,7 +54,7 @@ class PaymentController extends Controller
     public function handleGatewayCallback()
     {
         $paymentDetails = Paystack::getPaymentData();
-        dd($paymentDetails);
+
         if (Order::where('reference', $paymentDetails['data']['reference'])->count() < 1) {
 
             $address = $paymentDetails['data']['metadata']['address'];

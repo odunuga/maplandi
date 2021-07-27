@@ -56,4 +56,9 @@ class CartController extends Controller
     {
         return view('cart::order_confirmation');
     }
+
+    public function saved_items()
+    {
+        return view('cart::saved');
+    }
 }

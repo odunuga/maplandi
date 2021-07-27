@@ -13,9 +13,7 @@ class ApiCartController extends Controller
 
     public function orders()
     {
-        return response()->json(auth()->check());
-
-        $orders = Order::where('user_id', auth()->id())->get();
+        $orders = Order::where('user_id', auth()->id())->latest()->get()->map->formatUsers();
         return response()->json(['data' => $orders]);
     }
 }

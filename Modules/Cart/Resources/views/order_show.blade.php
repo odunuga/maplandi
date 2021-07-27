@@ -124,54 +124,115 @@
     <section class=" section mb-5" style="margin-top:40px">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <h4 class="text-center mb-5">{{ __('orders.single_order.title') }}{{ $order->reference }}
-                    </h4>
-                    <div class="container">
-                        <div class="wrapper wrapper-content animated fadeInRight">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div class="ibox">
-                                        <div class="ibox-title">
-                                            <h5>Payment Information</h5>
-                                        </div>
-                                        <div class="ibox-content">
-                                            <div class="card-group">
-                                                Reference: {{ $order->payment_type }}
+                @include('cart::inc.sidebar')
+                <div class="col-lg-9 col-md-12 col-12">
+                    <div class="main-content">
+                        <div class="dashboard-block mt-0">
+                            <h3 class="block-title"> {{ __('orders.single_order.title') }}
+                                <strong>#{{ $order->reference }}</strong></h3>
+
+                            <div class="container">
+                                <div class="wrapper wrapper-content animated fadeInRight">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="ibox">
+                                                <div class="ibox-title">
+                                                    <h5>Payment Information</h5>
+                                                </div>
+                                                <div class="ibox-content">
+                                                    <div class="card-group">
+                                                        Status: {{ $order->status == 1?'Successful':'Failed'}}
+                                                    </div>
+                                                    <div class="card-group">
+                                                        Payment Type: {{ $order->payment_type }}
+                                                    </div>
+                                                    <div class="card-group">
+                                                        Transaction ID: {{ $order->transaction_id }}
+                                                    </div>
+                                                    <div class="card-group">
+                                                        Payment Type: {{ ucfirst($order->payment_type) }}
+                                                    </div>
+                                                    <div class="card-group">
+                                                        Channel: {{ $order->channel }}
+                                                    </div>
+                                                    <div class="card-group">
+                                                        Amount: {{ currency_with_price($order->amount,$order->currency) }}
+                                                    </div>
+                                                    <div class="card-group">
+                                                        Payment Message: {{ $order->payment_message }}
+                                                    </div>
+                                                    <div class="card-group">
+                                                        Transaction
+                                                        status: {{ $order->transaction_confirmed==1||$order->transaction_confirmed==true?'Yes':'No' }}
+                                                    </div>
+                                                    <div class="card-group">
+                                                        Delivery
+                                                        status: {{ $order->is_delivered }}
+                                                    </div>
+                                                    <div class="card-group mt-5">
+                                                        <a href="{{ route('orders') }}"
+                                                           class="btn btn-outline-info"> {{__('buttons.back')}}</a>
+                                                    </div>
+                                                </div>
+
                                             </div>
-                                            <div class="card-group">
-                                                Transaction ID: {{ $order->transaction_id }}
-                                            </div>
-                                            <div class="card-group">
-                                                Payment Type: {{ ucfirst($order->payment_type) }}
-                                            </div>
-                                            <div class="card-group">
-                                                Channel: {{ $order->channel }}
-                                            </div>
-                                            <div class="card-group">
-                                                Amount: {{ currency_with_price($order->amount,$order->currency) }}
-                                            </div>
-                                            <div class="card-group">
-                                                Payment Message: {{ $order->payment_message }}
-                                            </div>
-                                            <div class="card-group">
-                                                Transaction status: {{ $order->transaction_confirmed===true||$order->transaction_confirmed==='true'?'Yes':'No' }}
-                                            </div>
-                                            <div class="card-group">
-                                                <a href="{{ route('orders') }}" class="btn btn-outline-info"> {{__('buttons.back')}}</a>
-                                            </div>
-                                            <div class="card-group"></div>
+
                                         </div>
 
                                     </div>
+                                </div>
+                                <div class="my-items">
+                                    <div class="item-list-title">
+                                        <div class="row align-items-center">
+                                            <div class="col-lg-5 col-md-5 col-12">
+                                                <p class="d-none d-lg-block">Product</p>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-12">
+                                                <p class="d-none d-lg-block">Category</p>
+                                            </div>
+
+                                            <div class="col-lg-2 col-md-2 col-12 align-right">
+                                                <p class="d-none d-lg-block"> Quantity</p>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-12 align-right">
+                                                <p class="d-none d-lg-block"> Amount</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @foreach($order->cart as $item)
+                                        <div class="single-item-list">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-5 col-md-5 col-12">
+                                                    <div class="item-image">
+                                                        <img src="{{ asset($item['attributes']['image']) }}" alt="#">
+                                                        <div class="content">
+                                                            <h3 class="title"><a href="javascript:void(0)">
+                                                                    {{ $item['name'] }}
+                                                                </a></h3>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-12">
+                                                    <p>{{ $item['attributes']['category'] }}</p>
+                                                </div>
+
+                                                <div class="col-lg-2 col-md-2 col-12 align-right">
+                                                    {{ $item['quantity'] }}
+                                                </div>
+
+                                                <div class="col-lg-3 col-md-3 col-12 align-right">
+                                                    {{ currency_with_price($item['price'],$item['attributes']['symbol']) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
 
                                 </div>
-
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>

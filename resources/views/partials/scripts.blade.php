@@ -1,8 +1,6 @@
 <a href="#" class="scroll-top btn-hover">
     <i class="lni lni-chevron-up"></i>
 </a>
-
-
 @livewireScripts
 {{--<script src="{{ asset('vendor/livewire/livewire.js') }}"></script>--}}
 {{--<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> --}}
@@ -14,7 +12,14 @@
 <script src="{{ asset('vendor/js/main.js') }}"></script>
 <script src="{{ asset('vendor/js/toastr.min.js') }}"></script>
 <script src="{{ asset('vendor/pace-master/pace.js') }}"></script>
+
 <script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'Authorization': 'Bearer {{auth()->user()->createToken('accessToken')->plainTextToken }}',
+            'X-CSRF-TOKEN': '{{csrf_token() }}'
+        }
+    });
     //========= Category Slider
     let cat = document.getElementsByClassName('category-slider');
 

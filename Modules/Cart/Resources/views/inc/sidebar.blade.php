@@ -8,7 +8,7 @@
             <ul>
                 <li><a class="{{ Route::is('dashboard')?'active':'' }}" href="{{route('dashboard')}}"><i
                             class="lni lni-dashboard"></i> Dashboard</a></li>
-                r
+
                 <li><a class="{{ Route::is('profile.show')?'active':'' }}" href="{{ route('profile.show') }}"><i
                             class="lni lni-cart"></i> Account</a></li>
                 <li><a class="{{ Route::is('orders')?'active':'' }}" href="{{ route('orders') }}"><i

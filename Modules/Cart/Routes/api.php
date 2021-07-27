@@ -19,6 +19,8 @@ use Modules\Cart\Http\Controllers\ApiCartController;
 //    return $request->user();
 //});
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::post('orders', [ApiCartController::class, 'orders'])->name('api-cart.orders');
+
+
 });

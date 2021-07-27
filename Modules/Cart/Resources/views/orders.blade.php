@@ -133,41 +133,41 @@
                         <div class="dashboard-block mt-0">
                             <h3 class="block-title">Order History</h3>
 
-                            <div class="my-items">
-                                <table id="orders" class="table table-responsive">
-                                    <thead>
-                                    <tr>
-                                        <td>Reference</td>
-                                        <td>Created At</td>
-                                        <td>Payment Type</td>
-                                        <td>Amount</td>
-                                        <td>Paid At</td>
-                                        <td> Status</td>
-                                        <td>Actions</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @if(isset($orders))
-                                        @foreach($orders as $item)
-                                            <tr>
-                                                <td>{{ $item->reference }}</td>
-                                                <td>{{ $item->created_at->diffForHumans() }}</td>
-                                                <td>{{ $item->payment_type }}</td>
-                                                <td>{{ $item->amount }}</td>
-                                                <td>{{ $item->paid_at->diffForHumans() }}</td>
-                                                <td>{{ $item->status}}</td>
-                                                <td><a href="{{ url('order/',$item->id)  }}"><i
-                                                            class="lni lni-eye"></i> </a></td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
+                            <table id="orders" class="table shoping-cart-table" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <td>Reference</td>
+                                    <td>Order Date</td>
+                                    <td>Payment Type</td>
+                                    <td>Amount</td>
+                                    <td>Paid At</td>
+                                    <td> Status</td>
+                                    <td> Delivered?</td>
+                                    <td>Actions</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @if(isset($orders))
+                                    @foreach($orders as $item)
+                                        <tr>
+                                            <td>{{ $item->reference }}</td>
+                                            <td>{{ $item->created_at->format('d M Y') }}</td>
+                                            <td>{{ $item->payment_type }}</td>
+                                            <td>{{ $item->amount }}</td>
+                                            <td>{{ $item->paid_at->format('d M Y H:m a') }}</td>
+                                            <td>{{ $item->status ? 'Successful' : 'Failed'}}</td>
+                                            <td>{{ $item->is_delivered }}</td>
+                                            <td><a href="{{ url('order/',$item->reference)  }}"><i
+                                                        class="lni lni-eye"></i> </a></td>
+                                        </tr>
+                                    @endforeach
+                                @endif
 
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
 
+                    </div>
                     {{--                    <div class="pagination left">--}}
                     {{--                        <ul class="pagination-list">--}}
                     {{--                            <li><a href="javascript:void(0)">1</a></li>--}}
@@ -179,7 +179,6 @@
                     {{--                    </div>--}}
 
                 </div>
-
             </div>
         </div>
     </section>
@@ -191,20 +190,12 @@
         <script type="text/javascript"
                 src="https://cdn.datatables.net/v/dt/dt-1.10.25/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/r-2.2.9/sl-1.3.3/datatables.min.js"></script>
         <script>
-            $.ajaxSetup({
-                header: {
-                    'CSRFToken': '{{csrf_token()}}',
-                    'X-CSRF-TOKEN': '{{csrf_token()}}'
-                }
-            });
+
             $(document).ready(function () {
                 $('#orders').DataTable({
                     ajax: {
                         type: "POST",
-                        url: '{{ route('api-cart.orders') }}',
-                        data: {
-                            'csrf_token': '{{csrf_token()}}'
-                        },
+                        url: '{{ route('api-cart.orders') }}'
                     },
                     columns: [
                         {
@@ -226,10 +217,12 @@
                             data: 'status'
                         },
                         {
+                            data: 'is_delivered'
+                        },
+                        {
                             data: null,
-                            render: function (row, data) {
-                                let url = '{{url('/')}}';
-                                return '<a href="' + url + 'orders/' + data.id + '"><i class="lni lni-eye"></i> </a>';
+                            render: function (data, type, row) {
+                                return '<a href="{{url('/')}}/order/' + data.reference + '"><i class="lni lni-eye"></i> </a>';
                             }
                         },
                     ]
