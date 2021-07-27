@@ -27,6 +27,7 @@
 
 </div>
 @include('admin::partials.scripts')
-{{ $scripts?$scripts:"" }}
+@stack('scripts')
+{{ isset($scripts)?$scripts:"" }}
 </body>
 </html>

@@ -42,7 +42,7 @@ function currency_with_price($value = null, $currency_symbol = 'NGN')
     return $currency_symbol . ' ' . number_format($new_value);
 }
 
-function filtered_products( $paginate, $category_id = null,  $range = null, $search = null, $order = null, $dir = null)
+function filtered_products($paginate, $category_id = null, $range = null, $search = null, $order = null, $dir = null)
 {
 
     $products = new Product();
@@ -138,8 +138,8 @@ function convert_to_user_currency($amount, $code)
 {
     $user_currency = get_user_currency();
     if ($code !== $user_currency['code']) {
-        $converted = set_amount($code, $amount);
+        $converted = set_amount($code, (float)$amount);
         return currency_with_price($converted, $user_currency['code']);
     }
-    return currency_with_price($amount, $code);
+    return currency_with_price((float)$amount, $code);
 }

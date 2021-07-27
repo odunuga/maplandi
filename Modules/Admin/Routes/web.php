@@ -23,6 +23,10 @@ Route::prefix('control-room')->group(function () {
     Route::get('/users', 'AdminController@users')->name('control.users');
     Route::get('/print', 'AdminController@print_page')->name('control.print');
 
+    Route::get('/order/{order}', 'AdminController@order_show')->name('admin.orders.update');
+
+
+    Route::post('/order/update', 'AdminController@update_order')->name('admin.order.update');
 
 //    Admin Login
     Route::get('/login', 'Auth\LoginController@showLogin')->name('control.login');

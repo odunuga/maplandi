@@ -23,7 +23,14 @@ class Product extends Model
     use Likeable;
     use InteractsWithViews;
 
-    protected $fillable = [];
+    protected $guarded = [];
+
+    protected $casts = [
+        'published' => 'bool',
+        'featured' => 'bool',
+        'hot' => 'bool',
+        'available' => 'bool'
+    ];
 
     public function image()
     {
@@ -52,7 +59,28 @@ class Product extends Model
 
     public function parameters()
     {
-        return $this->belongsToMany(Parameter::class, 'product_parameters')->withPivot('value');
+        return $this->belongsToMany(Parameter::class, 'product_parameters')->withPivot(['value', 'stock']);
+    }
+
+    public function admin_format()
+    {
+        $parameters = [];
+        if ($this->parameters) {
+            foreach ($this->parameters as $para) {
+                $parameters[$para->title] = $para->pivot->value;
+            }
+        }
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'parameters' => $parameters,
+            'published' => $this->published,
+            'featured' => $this->featured,
+            'hot' => $this->hot,
+            'price' => currency_with_price($this->price, $this->currency->symbol),
+            'image' => asset($this->image->url)
+
+        ];
     }
 
     protected static function newFactory()

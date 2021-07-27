@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Modules\Admin\Http\Controllers\ApiAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/admin', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/latest_products', [ApiAdminController::class, 'get_latest_products'])->name('admin.latest_products');
+    Route::post('/admin_orders', [ApiAdminController::class, 'get_orders'])->name('admin.orders');
+
+
 });

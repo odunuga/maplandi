@@ -2,6 +2,7 @@
 
 return [
     'add_item' => 'Item Added to Cart',
+    'empty_stock' => 'Item Empty in Stock',
     'remove_item' => 'Item Removed from Cart',
     'empty_cart' => 'Cart Empty go <a href="' . route("shop") . '" class="text-danger">Shopping</a> ',
     'remove_saved' => 'Saved Item Deleted',

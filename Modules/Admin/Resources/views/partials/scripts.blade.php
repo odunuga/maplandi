@@ -1,6 +1,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 {{--<script src="{{ asset('vendor/admin/js/jquery.min.js') }}"></script>--}}
+
 @guest()
     <script src="{{asset('vendor/admin/js/metismenu.min.js')}}"></script>
     <script src="{{asset('vendor/admin/js/jquery.slimscroll.js')}}"></script>
@@ -8,6 +9,16 @@
 @else
     <!-- jQuery  -->
     <script src="{{ asset('vendor/admin/js/bootstrap.bundle.min.js') }}"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                @auth()
+                'Authorization': 'Bearer {{auth()->user()->createToken('accessToken')->plainTextToken }}',
+                @endauth
+                'X-CSRF-TOKEN': '{{csrf_token() }}'
+            }
+        });
+    </script>
     <script src="{{ asset('vendor/admin/js/metismenu.min.js') }}"></script>
     <script src="{{ asset('vendor/admin/js/jquery.slimscroll.js') }}"></script>
     <script src="{{ asset('vendor/admin/js/waves.min.js') }}"></script>

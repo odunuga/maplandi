@@ -7,10 +7,6 @@
                     <div class="col-sm-6 mb-3">
                         <h4 class="page-title">Orders</h4>
                     </div>
-
-
-
-
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-right">
                             <li class="breadcrumb-item"><a href="javascript:void(0);">Maplandi</a></li>
@@ -32,92 +28,23 @@
                                 <div class="col-md-10 ">
                                     <b class="h5 mt-0  mb-5 text-small">Orders</b>
                                 </div>
-
-
                             </div>
-
-
-
                             <div class="table-responsive" style="margin-top:10px">
-                                <table class="table table-hover">
+                                <table id="orders" class="table table-hover">
                                     <thead>
                                     <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Reference</th>
                                         <th scope="col">Customer</th>
-                                        <th scope="col">Item</th>
                                         <th scope="col">Amount</th>
                                         <th scope="col">Location</th>
-                                        <th scope="col" >Date</th>
-                                        <th scope="col" colspan="2">Status</th>
-
-
+                                        <th scope="col">Payment Status</th>
+                                        <th scope="col">Delivered?</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>Daniel Daneil</td>
-
-                                        <td>
-                                            <div>
-                                                <img src="../assets/images/item-1.jpg" alt="" class="thumb-md rounded-circle mr-2">
-                                                Iphone 11
-                                            </div>
-
-                                        </td>
-
-                                        <td>
-                                            $9,420,000
-
-                                        </td>
-
-                                        <td>Lagos,Nigeria</td>
-                                        <td>15/1/2018</td>
-
-                                        <td><span class="badge badge-warning">Pending</span></td>
-
-
-                                        <td>
-                                            <div>
-                                                <button class="btn btn-primary btn-sm">Mark As Completed</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-
-
-
-
-
-
-                                    <tr>
-                                        <td>Daniel Daneil</td>
-
-                                        <td>
-                                            <div>
-                                                <img src="../assets/images/item-1.jpg" alt="" class="thumb-md rounded-circle mr-2">
-                                                Iphone 11
-                                            </div>
-
-                                        </td>
-
-                                        <td>
-                                            $9,420,000
-
-                                        </td>
-
-                                        <td>Lagos,Nigeria</td>
-                                        <td>15/1/2018</td>
-
-                                        <td><span class="badge badge-success">Delivered</span></td>
-
-
-
-                                    </tr>
-
-
-
-
-
-                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -131,26 +58,77 @@
 
 
             <!--PAGINATION-->
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-end">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
+            {{--            <nav aria-label="Page navigation example">--}}
+            {{--                <ul class="pagination justify-content-end">--}}
+            {{--                    <li class="page-item disabled">--}}
+            {{--                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>--}}
+            {{--                    </li>--}}
+            {{--                    <li class="page-item"><a class="page-link" href="#">1</a></li>--}}
+            {{--                    <li class="page-item"><a class="page-link" href="#">2</a></li>--}}
+            {{--                    <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
+            {{--                    <li class="page-item">--}}
+            {{--                        <a class="page-link" href="#">Next</a>--}}
+            {{--                    </li>--}}
+            {{--                </ul>--}}
+            {{--            </nav>--}}
 
         </div>
-
 
 
         <!-- container-fluid -->
 
     </div>
     <!-- content -->
+    @push('scripts')
+        <script type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+        <script type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+        <script type="text/javascript"
+                src="https://cdn.datatables.net/v/dt/dt-1.10.25/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/r-2.2.9/sl-1.3.3/datatables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#orders').DataTable({
+                    ajax: {
+                        type: "POST",
+                        url: '{{ route('admin.orders') }}',
+                        dataSrc: 'orders'
+                    },
+                    columns: [
+                        {
+                            data: 'id'
+                        },
+                        {
+                            data: 'reference'
+                        },
+
+                        {
+                            data: 'customer'
+                        },
+                        {
+                            data: 'amount'
+                        },
+                        {
+                            data: 'location'
+                        },
+                        {
+                            data: 'status'
+                        },
+                        {
+                            data: 'delivered'
+                        },
+                        {
+                            data: 'date'
+                        },
+                        {
+                            data: null,
+                            render: function (data) {
+                                return "<a href='{{ url('control-room/order') }}/" + data.id + "'><i class='fa fa-pencil-alt text-success'></i></a>";
+                            }
+                        }
+                    ]
+                })
+            });
+        </script>
+    @endpush
 </x-master-layout>

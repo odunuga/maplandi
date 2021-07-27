@@ -34,30 +34,58 @@ class AddToCart extends Component
         if ($this->check_cart_item($this->product->sku)) {
             $item = $this->get_single_item($this->product->sku);
             $this->delete_cart($item->id);
+            $this->add_item_stock($this->product);
             $this->emit('alert', ['error', __('cart.remove_item')]);
         } else {
-            $symbol = isset($this->product->currency) ? $this->product->currency->symbol : '';
-            $symbol_code = isset($this->product->currency) ? $this->product->currency->code : '';
-            $category = isset($this->product->category) ? $this->product->category->title : '';
-            $image = isset($this->product->image->url) ? $this->product->image->url : '';
-            $description = isset($this->product->description) ? substr($this->product->description, 0, 100) : '';
-            $item =
-                [
-                    'id' => $this->product->sku,
-                    'name' => $this->product->title,
-                    'price' => $this->product->price,
-                    'quantity' => 1,
-                    'attributes' => [
-                        'symbol' => $symbol,
-                        'code' => $symbol_code,
-                        'category' => $category,
-                        'image' => $image,
-                        'description' => $description
-                    ]
-                ];
-            $this->add_cart($item);
-            $this->emit('alert', ['success', __("cart.add_item")]);
+            // check if product exist in stock
+            if ($this->check_product_stock($this->product)) {
+                $symbol = isset($this->product->currency) ? $this->product->currency->symbol : '';
+                $symbol_code = isset($this->product->currency) ? $this->product->currency->code : '';
+                $category = isset($this->product->category) ? $this->product->category->title : '';
+                $image = isset($this->product->image->url) ? $this->product->image->url : '';
+                $description = isset($this->product->description) ? substr($this->product->description, 0, 100) : '';
+                $item =
+                    [
+                        'id' => $this->product->sku,
+                        'name' => $this->product->title,
+                        'price' => $this->product->price,
+                        'quantity' => 1,
+                        'attributes' => [
+                            'symbol' => $symbol,
+                            'code' => $symbol_code,
+                            'category' => $category,
+                            'image' => $image,
+                            'description' => $description
+                        ]
+                    ];
+                $this->add_cart($item);
+                $this->reduce_stock_value($this->product);
+                $this->emit('alert', ['success', __("cart.add_item")]);
+                $this->emit('updateItem');
+            } else {
+                $this->emit('alert', ['error' => __('cart.empty_stock')]);
+            }
         }
-        $this->emit('updateItem');
+
+    }
+
+    private function check_product_stock($product)
+    {
+        if ($product->parameters->stock > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    private function reduce_stock_value($product)
+    {
+        --$product->parameters->stock;
+        return $product->update();
+    }
+
+    private function add_item_stock($product)
+    {
+        ++$product->parameters->stock;
+        return $product->update();
     }
 }

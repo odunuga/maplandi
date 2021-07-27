@@ -6,6 +6,10 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Traits\AdminTraits;
+use Modules\Cart\Entities\Order;
+use Modules\Shop\Entities\Parameter;
+use Modules\Shop\Entities\Product;
+use Modules\Shop\Entities\ProductParameter;
 
 class AdminController extends Controller
 {
@@ -21,7 +25,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin::index');
+        $menu = $this->get_dashboard_menu();
+        return view('admin::index')->with(['menu' => $menu]);
     }
 
     public function orders()
@@ -31,12 +36,34 @@ class AdminController extends Controller
 
     public function stocks()
     {
-        return view('admin::stocks');
+        $stocks = Product::with(['parameters', 'image'])->get();
+        return view('admin::stocks')->with(['stocks' => $stocks]);
     }
 
     public function items()
     {
         return view('admin::item.index');
+    }
+
+    public function order_show(Order $order)
+    {
+        return view('admin::single_order')->with(['order' => $order]);
+    }
+
+    public function update_order()
+    {
+        if (request()->has('id')) {
+            $id = (int)request()->get('id');
+            $confirm_transaction = custom_filter_var(request()->get('confirm_transaction'));
+            $delivery_status = custom_filter_var(request()->get('delivery_status'));
+            $order = Order::where('id', $id)->firstOrFail();
+            if ($confirm_transaction) {
+                $order->transaction_confirmed = $confirm_transaction == "on" ? true : false;
+                $order->delivery_status = (int)$delivery_status;
+                $order->update();
+                return back()->with(['success' => 'Update Successful']);
+            }
+        }
     }
 
     public function transactions()
@@ -53,5 +80,39 @@ class AdminController extends Controller
     {
         return view('admin::pdf.order_print');
     }
+
+    private function get_dashboard_menu()
+    {
+        $total_products = Product::count();
+        $in_stock = ProductParameter::all()->sum('stock');
+        $orders = $orders = Order::all();
+        $sold_items = $this->sum_all_order_products($orders);
+        $total_cost = $this->sum_all_amount($orders);
+
+        return compact('total_products', 'in_stock', 'sold_items', 'total_cost');
+    }
+
+    private function sum_all_amount($orders)
+    {
+        $currency = get_user_currency();
+        $orders->where('status', 1);
+        $sum = 0.0;
+        foreach ($orders as $order) {
+            $amount = (float)$order->amount;
+            $sum += set_amount($currency['code'], $amount);
+        }
+        return currency_with_price($sum, $currency['code']);
+    }
+
+    private function sum_all_order_products($orders)
+    {
+        $sum = 0;
+
+        foreach ($orders as $order) {
+            $sum += count($order['cart']);
+        }
+        return $sum;
+    }
+
 
 }

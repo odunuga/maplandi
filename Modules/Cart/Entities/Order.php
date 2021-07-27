@@ -50,7 +50,7 @@ class Order extends Model
 
     public function buyer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function cart()
@@ -89,6 +89,21 @@ class Order extends Model
             return 'Cancelled';
         }
         return 'Pending';
+    }
+
+    public function format_admin_orders()
+    {
+        $address = $this->first_name . ' ' . $this->last_name . ' at ' . $this->address;
+        return [
+            'id' => $this->id,
+            'reference' => $this->reference,
+            'customer' => $this->buyer->name,
+            'amount' => currency_with_price($this->amount, $this->currency),
+            'location' => $address,
+            'status' => $this->status == true ? 'Successful' : 'Failed',
+            'delivered' => $this->is_delivered,
+            'date' => $this->created_at->format('d M Y')
+        ];
     }
 
     protected static function newFactory()
