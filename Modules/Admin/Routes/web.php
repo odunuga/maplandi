@@ -25,7 +25,8 @@ Route::prefix('control-room')->group(function () {
     Route::post('/settings/update', 'AdminController@settings_update')->name('control.settings.update');
 
     Route::get('/items', 'ProductController@index')->name('control.items');
-    Route::get('/items', 'ProductController@index')->name('control.items');
+
+    Route::post('/item/delete', 'ProductController@delete')->name('control.product.delete');
 
     Route::get('builder/{id}', 'ProductController@builder')->name('control.build.category');
 

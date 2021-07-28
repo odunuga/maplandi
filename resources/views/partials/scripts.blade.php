@@ -144,7 +144,6 @@
             toastr['error']('{{ $err }}');
         @endforeach
         @endif
-
     });
 
 </script>

@@ -45,20 +45,25 @@ class AddProduct extends Component
     ];
 
 
-    public function mount(Product $product)
+    public function mount($product_id = null)
     {
-        $this->product_id = $product->id;
-        $this->title = $product->title;
-        $this->description = $product->description;
-        $this->sku = $product->sku;
-        $this->price = $product->price;
-        $this->product_type = $product->product_type;
-        $this->stock = $product->stock;
-        $this->currency_id = $product->currency_id;
-        $this->featured = $product->featured;
-        $this->available = $product->available;
-        $this->published = $product->published;
-        $this->cat = $product->category_id;
+
+        if ($product_id) {
+            $product = Product::where('id', $product_id)->first();
+            $this->product_id = $product->id;
+            $this->title = $product->title;
+            $this->description = $product->description;
+            $this->sku = $product->sku;
+            $this->price = $product->price;
+            $this->product_type = $product->product_type;
+            $this->stock = $product->stock;
+            $this->currency_id = $product->currency_id;
+            $this->featured = $product->featured;
+            $this->available = $product->available;
+            $this->published = $product->published;
+            $this->cat = $product->category_id;
+        }
+
     }
 
     public function add_product()

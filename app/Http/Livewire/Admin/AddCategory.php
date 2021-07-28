@@ -18,7 +18,7 @@ class AddCategory extends Component
             $slug = Str::slug($category);
             $tooltip = 'Information about ' . $category;
             $category_id = $this->category_id;
-            $made = \Modules\Shop\Entities\Category::create([
+            \Modules\Shop\Entities\Category::create([
                 'category_id' => $category_id,
                 'title' => $category,
                 'slug' => $slug,

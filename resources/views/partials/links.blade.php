@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="{{ asset('vendor/css/glightbox.min.css') }}"/>
 <link rel="stylesheet" href="{{ asset('vendor/css/main.css') }}"/>
 <link rel="stylesheet" href="{{ asset('vendor/css/rateit.css') }}"/>
-<link rel="stylesheet" href="{{ asset('vendor/css/toastr.css') }}"/>
 <link href="{{ asset('vendor/pace-master/themes/silver/pace-theme-mac-osx.css') }}" rel="stylesheet"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
 
@@ -31,3 +30,4 @@
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="{{ asset('vendor/favicon/ms-icon-144x144.png') }}">
 <meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="{{ asset('vendor/css/toastr.css') }}"/>

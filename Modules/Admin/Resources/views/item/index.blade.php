@@ -36,7 +36,6 @@
                         <h3 class="mt-4 ">{{ $total }}</h3>
                     </div>
                 </div>
-
                 <!--CATEGORY SECTION-->
 
                 <b class="h5 mt-0  mb text-small">Categories</b>
@@ -58,7 +57,7 @@
     <!--END OF CATEGORY SECTION-->
 
     <!-- START ROW -->
-    <div class="row" style="margin-top:20px">
+    <div class="row my-5" style="margin-top:20px">
         <div class="col-xl-12">
             <div class="card m-b-30">
                 <div class="card-body">
@@ -104,7 +103,7 @@
 
                                         <!--DELETE ITEM POST MODAL TRIGGGER BTN-->
                                         <td>
-                                            <button data-bs-toggle="modal" data-bs-target="#DM"
+                                            <button onclick="deleteItem('{{$item->sku}}','{{$item->title}}')"
                                                     class="btn btn-light btn-sm">
                                                 <i class="fas fa-trash text-danger"></i>
                                             </button>
@@ -123,27 +122,30 @@
                     </div>
 
 
-                {{--                        <!--DELETE ITEM Modal -->--}}
-                {{--                        <div class="modal fade" id="DM" tabindex="-1" aria-labelledby="exampleModalLabel"--}}
-                {{--                             aria-hidden="true">--}}
-                {{--                            <div class="modal-dialog">--}}
-                {{--                                <div class="modal-content">--}}
-                {{--                                    <div class="modal-body">--}}
-                {{--                                        <i class=" fas fa-exclamation-circle text-warning" style="font-size:70px;"></i>--}}
-                {{--                                        <h5> Are you sure?You won't be able to revert this! </h5>--}}
+                    <!--DELETE ITEM Modal -->
+                    <div class="modal fade" id="DM" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <i class=" fas fa-exclamation-circle text-warning" style="font-size:70px;"></i>
+                                    <h4>Delete <span id="title"></span></h4>
+                                    <input hidden id="deleteId" name="deleteId"/>
+                                    <p> Are you sure? You won't be able to revert this! </p>
 
-                {{--                                    </div>--}}
-                {{--                                    <div class="modal-footer">--}}
-                {{--                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close--}}
-                {{--                                        </button>--}}
-                {{--                                        <button type="submit" class="btn btn-primary">Delete</button>--}}
-                {{--                                    </div>--}}
-                {{--                                </div>--}}
-                {{--                            </div>--}}
-                {{--                        </div>--}}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                    </button>
+                                    <button onclick="confirmDelete()" type="submit" class="btn btn-primary">Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
-                <!--PAGINATION-->
+                    <!--PAGINATION-->
                     @if(isset($products))
                         {{ $products->links() }}
                     @endif
@@ -192,4 +194,32 @@
             </div>
         </div>
     </div>
+    <script>
+        let deleteItem = (id, title) => {
+            $('#title').text(title);
+            $('#DM').modal('show');
+            $('#deleteId').val(id);
+        }
+        let confirmDelete = () => {
+            let id = $('#deleteId').val();
+            console.log(id);
+            let url = '{{ route('control.product.delete') }}';
+            let data = {'sku': id};
+            $.ajax({
+                'url': url,
+                'type': 'post',
+                'data': data,
+                success: function (data) {
+                    if (data.response == 'success') {
+                        $('#title').text('');
+                        $('#deleteId').val('');
+                        $('#DM').modal('hide');
+                        window.location.href = '{{ url() ->current()}}';
+                    }
+                    Livewire.emit('alert', [data.response, data.response]);
+                }
+            });
+
+        }
+    </script>
 </x-master-layout>

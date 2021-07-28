@@ -52,10 +52,27 @@ class ProductController extends Controller
             $check = Product::with(['image', 'images', 'currency', 'tags', 'category', 'parameters'])->where('sku', $sku);
             if ($check->count() > 0) {
                 $product = $check->first();
-                return view('admin::item.edit')->with(['product' => $product, ]);
+                return view('admin::item.edit')->with(['product' => $product,]);
             }
         }
         return back()->with(['error', 'Product Not Found']);
+    }
+
+    public function delete()
+    {
+        $message = 'Error Cant locate item';
+        $response = 'error';
+        if (request()->has('sku')) {
+            $sku = custom_filter_var(request()->get('sku'));
+            $product_check = Product::with()->where('sku', $sku);
+            if ($product_check->count() > 0) {
+                $product_check->delete();
+                $message = 'Item Delete Successfully';
+                $response = 'success';
+            }
+
+        }
+        return response()->json(['response' => $response, 'message' => $message]);
     }
 
 }

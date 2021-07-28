@@ -78,7 +78,7 @@ class Product extends Model
             'featured' => $this->featured,
             'hot' => $this->hot,
             'price' => currency_with_price($this->price, $this->currency->symbol),
-            'image' => asset($this->image->url)
+            'image' => asset(isset($this->image) ? $this->image->url : '')
 
         ];
     }
@@ -100,7 +100,7 @@ class Product extends Model
             'featured' => $this->featured,
             'hot' => $this->hot,
             'amount' => currency_with_price($this->price, $this->currency->symbol),
-            'image' => asset($this->image->url),
+            'image' =>asset(isset($this->image) ? $this->image->url : ''),
             'stock' => $this->stock,
             'product_type' => $this->product_type
 
