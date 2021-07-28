@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Shop\Entities\Category;
+use Modules\Shop\Entities\Currency;
 use Modules\Shop\Entities\Parameter;
 use Modules\Shop\Entities\ParameterBuilder;
 use Modules\Shop\Entities\Product;
@@ -27,7 +28,8 @@ class ProductController extends Controller
     {
         $cats = Category::with(['category', 'sub_categories'])->get();
         $total = Product::count();
-        $products = Product::with(['category', 'currency', 'image', 'parameters'])->simplePaginate(20);
+        $products = Product::with(['category', 'currency', 'image', 'parameters'])->orderByDesc('id')->simplePaginate(20);
+
         return view('admin::item.index')->with(['categories' => $cats, 'total' => $total, 'products' => $products]);
     }
 
@@ -47,10 +49,12 @@ class ProductController extends Controller
     public function edit($sku)
     {
         if ($sku) {
-            $check = Product::where('sku', $sku);
+            $check = Product::with(['image', 'images', 'currency', 'tags', 'category', 'parameters'])->where('sku', $sku);
             if ($check->count() > 0) {
                 $product = $check->first();
-                return view('admin::edit_product')->with(['product' => $product]);
+                $currencies = Currency::all();
+                $categories = Category::all();
+                return view('admin::item.edit')->with(['product' => $product, 'currencies' => $currencies, 'categories' => $categories]);
             }
         }
         return back()->with(['error', 'Product Not Found']);

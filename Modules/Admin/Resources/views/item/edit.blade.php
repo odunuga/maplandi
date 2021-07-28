@@ -20,8 +20,6 @@
             <!-- end page-title -->
 
 
-
-
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card m-b-30">
@@ -35,14 +33,11 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" required placeholder="Item Name"/>
                                 </div>
-
                                 <div class="form-group">
                                     <div>
                                         <input type="text" class="form-control mb-3" required
                                                placeholder="Item Price"/>
                                     </div>
-
-
 
                                     <div class="form-group">
                                         <div>
@@ -54,8 +49,6 @@
                                             </select>
 
                                         </div>
-
-
 
                                     </div>
                                     <hr class="divider"></hr>
@@ -83,9 +76,6 @@
                                                placeholder="Model"/>
                                     </div>
                                 </div>
-
-
-
 
 
                                 <div class="form-group">
@@ -125,8 +115,10 @@
                                             </div>
 
                                             <div class="text-center m-t-15">
-                                                <button type="submit" form="itemimage" class="btn btn-primary waves-effect waves-light">
-                                                    Add Images</button>
+                                                <button type="submit" form="itemimage"
+                                                        class="btn btn-primary waves-effect waves-light">
+                                                    Add Images
+                                                </button>
 
                                             </div>
 
@@ -144,7 +136,6 @@
                             </form>
 
 
-
                         </div> <!-- end row -->
 
 
@@ -153,12 +144,6 @@
 
                 </div>
                 <!-- content -->
-
-
-
-
-
-
 
 
                 <footer class="footer">

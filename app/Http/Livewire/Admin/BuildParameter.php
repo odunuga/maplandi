@@ -56,7 +56,7 @@ class BuildParameter extends Component
             $prop = new ParameterBuilder();
             $prop->parameter_id = $this->parameter['id'];
         }
-        $prop->type_id = $this->new_id;
+        $prop->type_id = $this->new_id ?? strtolower($this->type_name);
         $prop->type_name = $this->new_name;
         $prop->type = strtolower($this->new_type);
         $prop->class = $this->class;

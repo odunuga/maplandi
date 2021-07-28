@@ -57,7 +57,6 @@
 
     <!--END OF CATEGORY SECTION-->
 
-
     <!-- START ROW -->
     <div class="row" style="margin-top:20px">
         <div class="col-xl-12">
@@ -87,22 +86,19 @@
                             @if(isset($products))
                                 @foreach($products as $item)
                                     <tr>
-                                        <td>HOT 10</td>
-                                        <td>4,120,000</td>
-                                        <td>New</td>
-                                        <td>Infinix</td>
-                                        <td>XEFEGE</td>
-
+                                        <td>{{ $item->title }}</td>
+                                        <td>{{ currency_with_price($item->price,$item->currency->symbol) }}</td>
                                         <td>
                                             <div>
-                                                <img src="../assets/images/item-1.jpg" alt=""
+                                                <img src="{{ isset($item->image)?asset($item->image->url):'' }}" alt=""
                                                      class="thumb-md rounded-circle mr-2 ">
                                             </div>
                                         </td>
 
 
                                         <td>
-                                            <a href="edit-item.html" class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="{{ url('control-room/product/'.$item->sku.'/edit') }}"
+                                               class="btn btn-primary btn-sm">Edit</a>
 
                                         </td>
 
@@ -114,7 +110,6 @@
                                             </button>
 
                                         </td>
-
 
                                     </tr>
                                 @endforeach
@@ -196,6 +191,5 @@
                 @livewire('admin.add-product')
             </div>
         </div>
-    </div>
     </div>
 </x-master-layout>

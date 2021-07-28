@@ -25,7 +25,6 @@
                 <!-- end row -->
             </div>
             <div class="col">
-
                 <!-- end page-title -->
                 <b class="h5 mt-0  mb text-small">{{ $category->title }} Category Builder </b>
                 <a class="btn btn-primary align-right" href="javascript:void(0)"
@@ -43,9 +42,7 @@
             </div>
         </div>
         <div class="row">
-
             <div class="col">
-
                 <div class="row" style="margin-top:20px">
                     <div class="col-xl-12">
                         <div class="card m-b-30">
@@ -74,8 +71,12 @@
                                                         }
                                                         echo '<'.$item->type.' class="'.$item->class.'" id="'.$item->type_id.'" name="'.$item->type_name.'"><option>Select</option>'.$items.' </'.$item->type.'>';
                                                         }
-
-
+                                                    if($item->type=="radio"){
+   echo '<'.$item->type.' class="'.$item->class.'" name="'.$item->type_name.'" id="'.$item->type_id.'"> </'.$item->type.'>';
+                                                    }
+                                                    if($item->type=="checkbox"){
+                                                       echo '<'.$item->type.' class="'.$item->class.'" name="'.$item->type_name.'" id="'.$item->type_id.'"> </'.$item->type.'>';
+                                                    }
                                                     @endphp
 
                                                 </div>
@@ -86,7 +87,6 @@
                                                     Build
                                                 </button>
                                             </div>
-
                                         </div>
                                     @endforeach
 
@@ -95,7 +95,6 @@
                         </div>
                     </div>
                     <div class="col-12">
-
                         <a href="{{ route('control.items') }}" class="btn btn-secondary">Back</a>
                     </div>
                 </div>
