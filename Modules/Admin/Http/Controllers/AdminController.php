@@ -95,9 +95,32 @@ class AdminController extends Controller
         return view('admin::transactions');
     }
 
-    public function print_page()
+    public function print_page($ref)
     {
-        return view('admin::pdf.order_print');
+        if ($ref) {
+            $order = Order::with('buyer')->where('reference', $ref)->firstOrFail();
+            return view('admin::pdf.order_print')->with(['order' => $order]);
+        }
+        /**
+         *
+         * [{
+         * "id":"-00167889",
+         * "name":"Aut recusandae ut rerum tempora nihil suscipit sunt.",
+         * "price":2197,
+         * "quantity":1,
+         * "attributes":{
+         * "symbol":"\u20a6",
+         * "code":"NGN",
+         * "category":"Computing",
+         *
+         * "image":"\/vendor\/images\/item-details\/image1.jpg",
+         * "description":"Inventore placeat culpa eaque et est reprehenderit similique et facere ea dolorem necessitatibus con",
+         * "amount":2197
+         * }},
+         * {"id":"-37796205","name":"Nam vero enim voluptas aut non optio non.","price":4105,"quantity":1,"attributes":{"symbol":"\u20a6","code":"NGN","category":"Events","image":"\/vendor\/images\/items-grid\/author-3.jpg","description":"Dolor reprehenderit quo accusantium maiores quam illum consequatur iusto quia rem libero in tempore ","amount":4105}},{"id":"-42489612","name":"Dolor molestias officiis provident aut aut voluptate vitae.","price":7893,"quantity":1,"attributes":{"symbol":"\u20a6","code":"NGN","category":"Events","image":"\/vendor\/images\/items-grid\/img5.jpg","description":"Rerum eum blanditiis laboriosam sequi est veniam non omnis quas nam dolore et dolorem reiciendis vol","amount":7893}}]
+         */
+
+
     }
 
 

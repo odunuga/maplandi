@@ -35,4 +35,11 @@ class ApiAdminController extends Controller
         $users = User::with('shipping_address')->get();
         return response()->json(['users' => $users]);
     }
+
+    public function get_transactions()
+    {
+        $trans = Order::with('buyer')->orderByDesc('id')->get()->map->format_transaction_record();
+        return response()->json(['transactions' => $trans]);
+
+    }
 }

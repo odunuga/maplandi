@@ -53,6 +53,7 @@ class AddToCart extends Component
                         'attributes' => [
                             'symbol' => $symbol,
                             'code' => $symbol_code,
+                            'converted_code' => get_user_currency()['code'],
                             'category' => $category,
                             'image' => $image,
                             'description' => $description

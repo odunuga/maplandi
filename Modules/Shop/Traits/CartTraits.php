@@ -210,6 +210,7 @@ trait CartTraits
                 'attributes' => [
                     'symbol' => $item['attributes']['symbol'],
                     'code' => $item['attributes']['code'],
+                    'converted_code' => $item['attributes']['converted_code'],
                     'category' => $item['attributes']['category'],
                     'image' => $item['attributes']['image'],
                     'description' => $item['attributes']['description'],

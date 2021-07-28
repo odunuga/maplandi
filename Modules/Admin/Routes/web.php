@@ -32,7 +32,8 @@ Route::prefix('control-room')->group(function () {
 
     Route::get('/transactions', 'AdminController@transactions')->name('control.transactions');
     Route::get('/users', 'AdminController@users')->name('control.users');
-    Route::get('/print', 'AdminController@print_page')->name('control.print');
+
+    Route::get('/invoice/{ref}', 'AdminController@print_page')->name('control.invoice');
 
     Route::get('/order/{order}', 'AdminController@order_show')->name('admin.orders.update');
 

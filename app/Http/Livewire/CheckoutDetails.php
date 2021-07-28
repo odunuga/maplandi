@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Modules\Cart\Entities\Order;
 use Modules\Shop\Traits\CartTraits;
@@ -116,7 +117,7 @@ class CheckoutDetails extends Component
 
     private function generate_on_delivery_id()
     {
-        return auth()->id() . time() . $this->cart_details['id'];
+        return 'POD' . Str::random(4) . auth()->id() . time() . $this->cart_details['id'];
     }
 
     private function save_on_delivery_order()

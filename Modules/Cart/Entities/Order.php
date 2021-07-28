@@ -41,6 +41,7 @@ class Order extends Model
     use HasFactory;
 
     protected $guarded = [];
+
     protected $casts = [
         'paid_at' => 'datetime',
         'cart' => 'array',
@@ -103,6 +104,21 @@ class Order extends Model
             'status' => $this->status == true ? 'Successful' : 'Failed',
             'delivered' => $this->is_delivered,
             'date' => $this->created_at->format('d M Y')
+        ];
+    }
+
+    public function format_transaction_record()
+    {
+        $address = $this->first_name . ' ' . $this->last_name . ' at ' . $this->address;
+        return [
+            'id' => $this->id,
+            'customer' => $this->buyer->name,
+            'amount' => currency_with_price($this->amount, $this->currency),
+            'items' => $this->cart,
+            'location' => $address,
+            'date' => $this->created_at->format('d M Y'),
+            'invoice' => url('control-room/invoice/' . $this->reference)
+
         ];
     }
 
