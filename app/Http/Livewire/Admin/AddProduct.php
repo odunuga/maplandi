@@ -15,6 +15,8 @@ class AddProduct extends Component
 {
     use WithFileUploads;
 
+    public $sku;
+    public $product_id;
     public $image;
     public $images;
     public $categories;
@@ -42,8 +44,24 @@ class AddProduct extends Component
         'product_type' => 'required'
     ];
 
-    public
-    function add_product()
+
+    public function mount(Product $product)
+    {
+        $this->product_id = $product->id;
+        $this->title = $product->title;
+        $this->description = $product->description;
+        $this->sku = $product->sku;
+        $this->price = $product->price;
+        $this->product_type = $product->product_type;
+        $this->stock = $product->stock;
+        $this->currency_id = $product->currency_id;
+        $this->featured = $product->featured;
+        $this->available = $product->available;
+        $this->published = $product->published;
+        $this->cat = $product->category_id;
+    }
+
+    public function add_product()
     {
         $image = $this->image->store("products");
 
@@ -52,11 +70,10 @@ class AddProduct extends Component
             $images[] = $photo->store('products');
         }
 
-        $check = Product::where('category_id', (int)$this->cat)->where('title', custom_filter_var($this->title)
-        )->where('slug', Str::slug($this->title));
-        if ($check->count() < 1) {
+        $check = Product::where('id', $this->product_id)->where('sku', $this->sku);
+        if ($check->count() > 0) {
 
-            $product = Product::create([
+            $product = $check->first()->update([
                 'category_id' => (int)$this->cat,
                 'title' => custom_filter_var($this->title),
                 'slug' => Str::slug($this->title),
@@ -70,12 +87,12 @@ class AddProduct extends Component
                 'stock' => (int)$this->stock
             ]);
             $img = new Image();
-            $img->url = 'vendor/images/'.$image;
+            $img->url = 'vendor/images/' . $image;
             $product->image()->save($img);
             if ($images && count($images) > 0) {
                 foreach ($images as $single_img) {
                     $img = new Image();
-                    $img->url = 'vendor/images/'.$single_img;
+                    $img->url = 'vendor/images/' . $single_img;
                     $product->images()->save($img);
                 }
             }
@@ -86,8 +103,7 @@ class AddProduct extends Component
         $this->emit('alert', ['success', 'Product Added Successfully']);
     }
 
-    private
-    function store_parameter($product)
+    private function store_parameter($product)
     {
 
         if ($this->params && count($this->params) > 0)

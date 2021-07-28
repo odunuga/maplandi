@@ -76,7 +76,7 @@
         </div>
         <div class="form-group">
             <label>Description</label>
-            <textarea id="rich_description" class="form-control" wire:model.lazy="description"
+            <textarea id="rich_description" class="form-control" wire:model.lazy="description" rows="5"
                       placeholder="Product Description" required>
             </textarea>
         </div>
