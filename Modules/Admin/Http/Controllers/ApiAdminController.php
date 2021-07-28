@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -26,5 +27,12 @@ class ApiAdminController extends Controller
     {
         $stocks = Product::with(['parameters', 'image'])->latest()->get()->map->format_admin_stock();
         return response()->json(['stocks' => $stocks]);
+    }
+
+
+    public function get_users()
+    {
+        $users = User::with('shipping_address')->get();
+        return response()->json(['users' => $users]);
     }
 }

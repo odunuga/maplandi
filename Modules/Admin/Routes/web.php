@@ -19,6 +19,10 @@ Route::prefix('control-room')->group(function () {
     Route::get('/orders', 'AdminController@orders')->name('control.orders');
     Route::get('/stocks', 'AdminController@stocks')->name('control.stocks');
 
+    Route::get('/users', 'AdminController@users')->name('control.users');
+    Route::get('/settings', 'AdminController@settings')->name('control.settings');
+    Route::get('/settings/edit', 'AdminController@settings_edit')->name('control.settings.edit');
+    Route::post('/settings/update', 'AdminController@settings_update')->name('control.settings.update');
 
     Route::get('/items', 'ProductController@index')->name('control.items');
     Route::get('/items', 'ProductController@index')->name('control.items');

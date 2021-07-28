@@ -33,6 +33,18 @@
                         <span> Transaction History </span></a>
                 </li>
 
+                <li>
+                    <a href="{{ route('control.users') }}" class="waves-effect">
+                        <i class="fas fa-users"></i>
+                        <span> Users </span></a>
+                </li>
+
+                <li>
+                    <a href="{{ route('control.settings') }}" class="waves-effect">
+                        <i class="fas fa-tools"></i>
+                        <span> Settings </span></a>
+                </li>
+
 
                 <li>
 
@@ -41,9 +53,9 @@
                         <i class="icon-key"></i><span> LOGOUT </span>
                     </a>
                     <form id="logout" action="{{ route('logout') }}" method="POST">@csrf
-{{--                        <button class="waves-effect" type="submit"><i--}}
-{{--                                class="icon-key"></i>{{__('navbar.logout')}}--}}
-{{--                        </button>--}}
+                        {{--                        <button class="waves-effect" type="submit"><i--}}
+                        {{--                                class="icon-key"></i>{{__('navbar.logout')}}--}}
+                        {{--                        </button>--}}
                     </form>
                 </li>
 

@@ -11,6 +11,7 @@ use Modules\Shop\Entities\Currency;
  * @package Modules\Admin\Entities
  * @property mixed site_name
  * @property mixed site_motto
+ * @property mixed site_logo
  * @property mixed site_cac
  * @property mixed site_description
  * @property mixed site_email
@@ -21,6 +22,8 @@ use Modules\Shop\Entities\Currency;
  * @property mixed twitter_handler
  * @property mixed linkedin_handler
  * @property mixed instagram_handler
+ * @property mixed default_currency
+ * @property mixed tax
  */
 class GeneralSetting extends Model
 {

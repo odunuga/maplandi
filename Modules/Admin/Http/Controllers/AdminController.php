@@ -6,13 +6,16 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Traits\AdminTraits;
+use Modules\Admin\Traits\SiteSettingsTraits;
 use Modules\Cart\Entities\Order;
+use Modules\Shop\Entities\Currency;
 use Modules\Shop\Entities\Parameter;
 use Modules\Shop\Entities\Product;
 use Modules\Shop\Entities\ProductParameter;
 
 class AdminController extends Controller
 {
+    use SiteSettingsTraits;
 
     public function __construct()
     {
@@ -39,6 +42,28 @@ class AdminController extends Controller
         return view('admin::stocks');
     }
 
+    public function users()
+    {
+        return view('admin::users.index');
+    }
+
+    public function settings()
+    {
+        return view('admin::settings');
+    }
+
+    public function settings_edit()
+    {
+        $currencies = Currency::all();
+        return view('admin::settings_edit')->with(['currencies' => $currencies]);
+    }
+
+    public function settings_update()
+    {
+        $settings = request()->all();
+        $this->update_site_settings($settings);
+        return view('admin::settings')->with(['success' => 'Update Successful']);
+    }
 
     public function order_show(Order $order)
     {
@@ -68,11 +93,6 @@ class AdminController extends Controller
     public function transactions()
     {
         return view('admin::transactions');
-    }
-
-    public function users()
-    {
-        return view('admin::users');
     }
 
     public function print_page()
