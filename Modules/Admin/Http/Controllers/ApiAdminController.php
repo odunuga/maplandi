@@ -32,7 +32,7 @@ class ApiAdminController extends Controller
 
     public function get_users()
     {
-        $users = User::with('shipping_address')->get();
+        $users = User::with('shipping_address')->get()->map->format_admin_users();
         return response()->json(['users' => $users]);
     }
 

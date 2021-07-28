@@ -38,7 +38,8 @@
                                         <th scope="col">Verified</th>
                                         <th scope="col">state</th>
                                         <th scope="col"> country</th>
-                                        <th scope="col" colspan="2">Image</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -68,7 +69,7 @@
                 $('#users').DataTable({
                     ajax: {
                         type: "POST",
-                        url: '{{ route('admin.latest_products') }}',
+                        url: '{{ route('admin.users') }}',
                         dataSrc: 'users'
                     },
                     columns: [
@@ -102,8 +103,7 @@
                         {
                             data: null,
                             render: function (data) {
-
-                                return '<i class="lni lni-eye"></i>'
+                                return '<i class="fa fa-eye"></i>'
                             }
                         }
 

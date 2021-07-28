@@ -88,8 +88,23 @@ class User extends Authenticatable
 
     public function getCountryAttribute()
     {
-        return   auth()->user()->country_code ? (new CountryState)->getCountry(auth()->user()->country_code) : null;
+        return auth()->user()->country_code ? (new CountryState)->getCountry(auth()->user()->country_code) : null;
 
+    }
+
+    public function format_admin_users()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'verified' => $this->verified_at ? true : false,
+            'state' => $this->state,
+            'country' => $this->country,
+            'image' => asset($this->image),
+
+        ];
     }
 
     public function getImageAttribute($value)

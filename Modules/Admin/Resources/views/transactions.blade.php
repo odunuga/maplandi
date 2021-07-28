@@ -45,7 +45,6 @@
                                         <th scope="col">Date</th>
                                         <th scope="col">Invoice</th>
 
-
                                     </tr>
                                     </thead>
                                     <tbody>
