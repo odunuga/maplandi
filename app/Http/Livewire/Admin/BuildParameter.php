@@ -22,8 +22,13 @@ class BuildParameter extends Component
 
     public function prepareBuild($data)
     {
-        $this->parameter = $data;
-        $this->new_name = $data['title'];
+        $this->parameter = $data['properties'];
+
+        $this->new_name = $data['properties']['type_name'] ? $data['properties']['type_name'] : $data['title'];
+        $this->new_id = $data['properties']['type_id'];
+        $this->new_type = $data['properties']['type'];
+        $this->class = $data['properties']['class'];
+        $this->attributes = $data['properties']['attributes'];
     }
 
     public function add_data()

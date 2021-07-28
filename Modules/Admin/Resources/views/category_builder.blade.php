@@ -53,11 +53,11 @@
                             <div class="card-body">
                                 @if(isset($parameters) && count($parameters)>0)
                                     @foreach($parameters as $para)
-                                        <div class="d-flex ">
+                                        <div class="d-flex">
                                             <div class="mx-4 my-1">
                                                 <label>{{ $para->title }}</label></div>
                                             @if(isset($para->properties))
-                                                <div class="mx-4 my-1">
+                                                <div class="mx-4 my-1 flex-grow-1">
                                                     @php
                                                         $item = $para->properties;
 
@@ -80,7 +80,7 @@
 
                                                 </div>
                                             @endif
-                                            <div class="mx-4 my-1">
+                                            <div class="mx-4 my-1 right">
                                                 <button class="btn btn-secondary btn-sm"
                                                         onclick="buildParameter({{json_encode($para)}})">
                                                     Build
@@ -93,6 +93,10 @@
                                 @endif
                             </div>
                         </div>
+                    </div>
+                    <div class="col-12">
+
+                        <a href="{{ route('control.items') }}" class="btn btn-secondary">Back</a>
                     </div>
                 </div>
             </div>
