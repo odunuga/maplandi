@@ -36,14 +36,9 @@ class AdminController extends Controller
 
     public function stocks()
     {
-        $stocks = Product::with(['parameters', 'image'])->get();
-        return view('admin::stocks')->with(['stocks' => $stocks]);
+        return view('admin::stocks');
     }
 
-    public function items()
-    {
-        return view('admin::item.index');
-    }
 
     public function order_show(Order $order)
     {
@@ -59,12 +54,16 @@ class AdminController extends Controller
             $order = Order::where('id', $id)->firstOrFail();
             if ($confirm_transaction) {
                 $order->transaction_confirmed = $confirm_transaction == "on" ? true : false;
+                if ($confirm_transaction == "on" && $order->paid_at == null) {
+                    $order->paid_at = now();
+                }
                 $order->delivery_status = (int)$delivery_status;
                 $order->update();
                 return back()->with(['success' => 'Update Successful']);
             }
         }
     }
+
 
     public function transactions()
     {
@@ -81,10 +80,11 @@ class AdminController extends Controller
         return view('admin::pdf.order_print');
     }
 
+
     private function get_dashboard_menu()
     {
         $total_products = Product::count();
-        $in_stock = ProductParameter::all()->sum('stock');
+        $in_stock = Product::all()->sum('stock');
         $orders = $orders = Order::all();
         $sold_items = $this->sum_all_order_products($orders);
         $total_cost = $this->sum_all_amount($orders);

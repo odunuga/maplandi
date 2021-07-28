@@ -19,5 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/latest_products', [ApiAdminController::class, 'get_latest_products'])->name('admin.latest_products');
     Route::post('/admin_orders', [ApiAdminController::class, 'get_orders'])->name('admin.orders');
 
+    Route::post('/admin_stocks', [ApiAdminController::class, 'get_stocks'])->name('admin.stocks');
+
 
 });

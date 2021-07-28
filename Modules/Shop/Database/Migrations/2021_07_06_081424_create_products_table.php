@@ -28,7 +28,7 @@ class CreateProductsTable extends Migration
             $table->boolean('available')->nullable()->default(true);
             $table->integer('report_count')->nullable()->default(0);
             $table->enum('product_type', ['sell', 'rent', null])->nullable()->default('sell');
-
+            $table->double('stock')->nullable()->default(0);
             $table->timestamps();
         });
     }

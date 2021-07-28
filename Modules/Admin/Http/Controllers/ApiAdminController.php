@@ -21,4 +21,10 @@ class ApiAdminController extends Controller
         $orders = Order::with('buyer')->latest()->get()->map->format_admin_orders();
         return response()->json(['orders' => $orders]);
     }
+
+    public function get_stocks()
+    {
+        $stocks = Product::with(['parameters', 'image'])->latest()->get()->map->format_admin_stock();
+        return response()->json(['stocks' => $stocks]);
+    }
 }

@@ -71,7 +71,7 @@ class AddToCart extends Component
 
     private function check_product_stock($product)
     {
-        if ($product->parameters->stock > 0) {
+        if ($product->stock > 0) {
             return true;
         }
         return false;
@@ -79,13 +79,13 @@ class AddToCart extends Component
 
     private function reduce_stock_value($product)
     {
-        --$product->parameters->stock;
+        --$product->stock;
         return $product->update();
     }
 
     private function add_item_stock($product)
     {
-        ++$product->parameters->stock;
+        ++$product->stock;
         return $product->update();
     }
 }

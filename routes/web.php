@@ -3,6 +3,7 @@
 use App\Http\Controllers\SocialiteController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Modules\Shop\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +23,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     Route::get('oauth/google/callback', [SocialiteController::class, 'webhook']);
 
-    Route::get('/password/first',[SocialiteController::class,'password_set'])->name('password.first');
+    Route::get('/password/first', [SocialiteController::class, 'password_set'])->name('password.first');
 
-    Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-}
-);
+    Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [ShopController::class, 'welcome'])->name('dashboard');
+});

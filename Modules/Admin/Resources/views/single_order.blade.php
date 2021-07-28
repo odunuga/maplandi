@@ -173,7 +173,7 @@
                                         </div>
                                         <div class="single-item-list">
                                             <strong>Paid At:</strong> <span
-                                                class="font-semibold">{{ $order->paid_at->format('d D M Y') }}</span>
+                                                class="font-semibold">{{ isset($order->paid_at)?$order->paid_at->format('d D M Y'):'Pending' }}</span>
                                         </div>
                                         <div class="single-item-list">
                                             <strong>Channel:</strong> <span
@@ -201,56 +201,58 @@
                                                 class="font-semibold">{{ $order->customer_code }}</span></div>
                                         <div class="single-item-list"><strong>Transaction Status:</strong> <span
                                                 class="font-semibold">{{ $order->transaction_confirmed==1||$order->transaction_confirmed==true?'Yes':'No'  }}</span>
-                                        <div class="single-item-list"><strong>Order Delivered:</strong> <span
-                                                class="font-semibold">{{ $order->is_delivered }}</span>
-                                        </div>
-                                        <div class="single-item-list"><h3>Cart</h3></div>
-                                        <div class="my-items">
-                                            <table class="table">
-                                                <thead>
-                                                <tr>
-                                                    <th>Image</th>
-                                                    <th>Name</th>
-                                                    <th>Category</th>
-                                                    <th>Quantity</th>
-                                                    <th>Cost</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                @foreach($order->cart as $item)
+                                            <div class="single-item-list"><strong>Order Delivered:</strong> <span
+                                                    class="font-semibold">{{ $order->is_delivered }}</span>
+                                            </div>
+                                            <div class="single-item-list"><h3>Cart</h3></div>
+                                            <div class="my-items">
+                                                <table class="table">
+                                                    <thead>
                                                     <tr>
-                                                        <td class="single-item-list">
-
-                                                            <img src="{{ asset($item['attributes']['image']) }}"
-                                                                 alt="#">
-                                                        </td>
-                                                        <td>
-                                                            <h3 class="title"><a href="javascript:void(0)">
-                                                                    {{ $item['name'] }}
-                                                                </a></h3>
-                                                        </td>
-
-                                                        <td>
-                                                            <p>{{ $item['attributes']['category'] }}</p>
-                                                        </td>
-
-                                                        <td>
-                                                            {{ $item['quantity'] }}
-                                                        </td>
-
-                                                        <td>
-                                                            {{ currency_with_price($item['price'],$item['attributes']['symbol']) }}
-                                                        </td>
-
-
+                                                        <th>Image</th>
+                                                        <th>Name</th>
+                                                        <th>Category</th>
+                                                        <th>Quantity</th>
+                                                        <th>Cost</th>
                                                     </tr>
-                                                @endforeach
+                                                    </thead>
+                                                    <tbody>
 
-                                                </tbody>
-                                            </table>
+                                                    @foreach($order->cart as $item)
+                                                        <tr>
+                                                            <td class="single-item-list">
+
+                                                                <img src="{{ asset($item['attributes']['image']) }}"
+                                                                     class="img-thumbnail h-25 rounded-2"
+                                                                     alt="#">
+                                                            </td>
+                                                            <td>
+                                                                <h3 class="title"><a href="javascript:void(0)">
+                                                                        {{ $item['name'] }}
+                                                                    </a></h3>
+                                                            </td>
+
+                                                            <td>
+                                                                <p>{{ $item['attributes']['category'] }}</p>
+                                                            </td>
+
+                                                            <td>
+                                                                {{ $item['quantity'] }}
+                                                            </td>
+
+                                                            <td>
+                                                                {{ currency_with_price($item['price'],$item['attributes']['symbol']) }}
+                                                            </td>
 
 
+                                                        </tr>
+                                                    @endforeach
+
+                                                    </tbody>
+                                                </table>
+
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -259,78 +261,79 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="">
-            <div class="dt-buttons">
-                <a href="{{ route('control.orders') }}" class="btn btn-secondary"><i class="fa fa-backward"></i> Back</a>
-                <button class="btn btn-primary" onclick="editOrderStatus()"><i class="fa fa-pencil-alt"></i> Edit
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="exampleModalLabel">
-                        <i class="lni lni-cart-full" style="color:red; font-size:25px;"></i>
-                        Update Order Status</h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
-                            class="fa fa-times"></i></button>
+            <div class="">
+                <div class="dt-buttons">
+                    <a href="{{ route('control.orders') }}" class="btn btn-secondary"><i class="fa fa-backward"></i>
+                        Back</a>
+                    <button class="btn btn-primary" onclick="editOrderStatus()"><i class="fa fa-pencil-alt"></i> Edit
+                    </button>
                 </div>
-                <form action="{{ route('admin.order.update') }}" method="post">
-                    @csrf
-                    <input hidden name="id" value="{{ $order->id }}"/>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <ol class="list-group list-group-numbered">
-
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <label for="confirmT" class="label">Confirm Transaction</label>
-                                            <input type="checkbox" id="confirmT" name="confirm_transaction"
-                                                   @if($order->transaction_confirmed==1) checked @endif />
-
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <label for="delivery_status" class="delivery_status">Confirm Delivery</label>
-                                            <select id="delivery_status" name="delivery_status" class="form-select">
-                                                <option>Select</option>
-                                                <option value="0">Pending</option>
-                                                <option value="1">On Transit</option>
-                                                <option value="2">Delivered</option>
-                                                <option value="3">Cancelled</option>
-                                            </select>
-                                        </div>
-                                    </li>
-
-
-                                </ol>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-sm ">
-                            Update
-                        </button>
-
-                    </div>
-                </form>
-
             </div>
         </div>
-    </div>
+        <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="exampleModalLabel">
+                            <i class="lni lni-cart-full" style="color:red; font-size:25px;"></i>
+                            Update Order Status</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                                class="fa fa-times"></i></button>
+                    </div>
+                    <form action="{{ route('admin.order.update') }}" method="post">
+                        @csrf
+                        <input hidden name="id" value="{{ $order->id }}"/>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <ol class="list-group list-group-numbered">
 
-    @push('scripts')
-        <script>
-            let editOrderStatus = () => {
-                $('#orderModal').modal('show');
-            }
-        </script>
+                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                            <div class="ms-2 me-auto">
+                                                <label for="confirmT" class="label">Confirm Transaction</label>
+                                                <input type="checkbox" id="confirmT" name="confirm_transaction"
+                                                       @if($order->transaction_confirmed==1) checked @endif />
+
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                            <div class="ms-2 me-auto">
+                                                <label for="delivery_status" class="delivery_status">Confirm
+                                                    Delivery</label>
+                                                <select id="delivery_status" name="delivery_status" class="form-select">
+                                                    <option>Select</option>
+                                                    <option value="0">Pending</option>
+                                                    <option value="1">On Transit</option>
+                                                    <option value="2">Delivered</option>
+                                                    <option value="3">Cancelled</option>
+                                                </select>
+                                            </div>
+                                        </li>
+
+
+                                    </ol>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-sm ">
+                                Update
+                            </button>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        @push('scripts')
+            <script>
+                let editOrderStatus = () => {
+                    $('#orderModal').modal('show');
+                }
+            </script>
     @endpush
 </x-master-layout>

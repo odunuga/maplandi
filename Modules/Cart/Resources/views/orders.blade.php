@@ -154,7 +154,7 @@
                                             <td>{{ $item->created_at->format('d M Y') }}</td>
                                             <td>{{ $item->payment_type }}</td>
                                             <td>{{ $item->amount }}</td>
-                                            <td>{{ $item->paid_at->format('d M Y H:m a') }}</td>
+                                            <td>{{ isset($item->paid_at)?$item->paid_at->format('d M Y H:m a'):'Not Paid' }}</td>
                                             <td>{{ $item->status ? 'Successful' : 'Failed'}}</td>
                                             <td>{{ $item->is_delivered }}</td>
                                             <td><a href="{{ url('order/',$item->reference)  }}"><i

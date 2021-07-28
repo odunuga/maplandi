@@ -105,7 +105,10 @@ trait CartTraits
 
     private function clear_session_cart($session)
     {
-        return CartRecord::where('session_id', $session)->orWhere('user_id', auth()->id())->delete();
+        $check = CartRecord::where('session_id', $session);
+        if ($check->count() > 0) {
+            $check->delete();
+        }
     }
 
     private function clear_all_cart($session)

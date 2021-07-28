@@ -68,7 +68,7 @@ class Order extends Model
             'created_at' => $this->created_at->format('d M Y'),
             'payment_type' => $this->payment_type,
             'amount' => $this->amount,
-            'paid_at' => $this->paid_at->format('d M Y H:m a'),
+            'paid_at' => $this->paid_at ? $this->paid_at->format('d M Y H:m a') : 'Not Paid',
             'status' => $this->status ? 'Successful' : 'Failed',
             'is_delivered' => $this->is_delivered
         ];

@@ -59,7 +59,7 @@ class Product extends Model
 
     public function parameters()
     {
-        return $this->belongsToMany(Parameter::class, 'product_parameters')->withPivot(['value', 'stock']);
+        return $this->belongsToMany(Parameter::class, 'product_parameters')->withPivot(['value']);
     }
 
     public function admin_format()
@@ -81,6 +81,31 @@ class Product extends Model
             'image' => asset($this->image->url)
 
         ];
+    }
+
+    public function format_admin_stock()
+    {
+        $parameters = [];
+        if ($this->parameters) {
+            foreach ($this->parameters as $para) {
+                $parameters[$para->title] = $para->pivot->value;
+            }
+        }
+        return [
+            'id' => $this->id,
+            'sku' => $this->sku,
+            'title' => $this->title,
+            'parameters' => $parameters,
+            'published' => $this->published,
+            'featured' => $this->featured,
+            'hot' => $this->hot,
+            'amount' => currency_with_price($this->price, $this->currency->symbol),
+            'image' => asset($this->image->url),
+            'stock' => $this->stock,
+            'product_type' => $this->product_type
+
+        ];
+
     }
 
     protected static function newFactory()

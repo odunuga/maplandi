@@ -18,12 +18,18 @@ Route::prefix('control-room')->group(function () {
     Route::get('/', 'AdminController@index')->name('control.room');
     Route::get('/orders', 'AdminController@orders')->name('control.orders');
     Route::get('/stocks', 'AdminController@stocks')->name('control.stocks');
-    Route::get('/items', 'AdminController@items')->name('control.items');
+    Route::get('/items', 'ProductController@index')->name('control.items');
+    Route::get('builder/{id}', 'ProductController@builder')->name('control.build.category');
+
+
     Route::get('/transactions', 'AdminController@transactions')->name('control.transactions');
     Route::get('/users', 'AdminController@users')->name('control.users');
     Route::get('/print', 'AdminController@print_page')->name('control.print');
 
     Route::get('/order/{order}', 'AdminController@order_show')->name('admin.orders.update');
+
+    Route::get('/product/{sku}/edit', 'ProductController@edit')->name('admin.product.edit');
+    Route::get('/product/{sku}/edit', 'ProductController@add')->name('admin.product.add');
 
 
     Route::post('/order/update', 'AdminController@update_order')->name('admin.order.update');

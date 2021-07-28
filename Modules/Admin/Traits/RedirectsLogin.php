@@ -15,10 +15,11 @@ trait RedirectsLogin
      */
     public function redirectPath()
     {
-        if (method_exists($this, 'redirectTo')) {
-            return $this->redirectTo();
-        }
+//        if (method_exists($this, 'redirectTo')) {
+//            return $this->redirectTo();
+//        }
 
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : RouteServiceProvider::ADMIN;
+//        return property_exists($this, 'redirectTo') ? $this->redirectTo : RouteServiceProvider::ADMIN;
+        return   RouteServiceProvider::ADMIN;
     }
 }

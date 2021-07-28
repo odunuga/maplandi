@@ -64,10 +64,11 @@
                                     </tbody>
                                 </table>
                                 <div class="ibox-content">
-                                    @if($items && count($items) > 0)   <a href="javascript:void(0)"
-                                                                          class="btn btn-dark pull-right mb-4"
-                                                                          wire:click="gotoCheckout" .class="bg-gray" ><i
-                                            class="fa fa fa-shopping-cart"></i> Checkout</a> @endif
+                                    @if($items && count($items) > 0)
+                                        <a href="javascript:void(0)" class="btn btn-dark pull-right mb-4"
+                                           wire:click="gotoCheckout"><i
+                                                class="fa fa fa-shopping-cart"></i> Checkout <i
+                                                class="lni lni-spinner lni-is-spinning" wire:loading></i> </a> @endif
                                     <a href="{{ route('shop') }}" class="btn btn-white"><i
                                             class="fa fa-arrow-left"></i> Continue shopping</a>
 

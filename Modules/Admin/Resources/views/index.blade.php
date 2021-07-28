@@ -103,20 +103,20 @@
                         {
                             data: null,
                             render: function (data) {
-                                return data.published === true ? '<i class="fa fa-check fa-3x text-success"></i>' : '<i class="fa fa-times fa-3x text-danger"></i>';
+                                return data.published === true ? '<i class="fa fa-check fa-2x text-success"></i>' : '<i class="fa fa-times fa-2x text-danger"></i>';
 
                             }
                         },
                         {
                             data: null,
                             render: function (data) {
-                                return data.featured === true ? '<i class="fa fa-check fa-3x text-success"></i>' : '<i class="fa fa-times fa-3x text-danger"></i>';
+                                return data.featured === true ? '<i class="fa fa-check fa-2x text-success"></i>' : '<i class="fa fa-times fa-2x text-danger"></i>';
                             }
                         },
                         {
                             data: 'hot',
                             render: function (data) {
-                                return data.hot === true ? '<i class="fa fa-check fa-3x text-success"></i>' : '<i class="fa fa-times fa-3x text-danger"></i>';
+                                return data.hot === true ? '<i class="fa fa-check fa-2x text-success"></i>' : '<i class="fa fa-times fa-2x text-danger"></i>';
                             }
                         },
                         {
@@ -125,7 +125,7 @@
                         {
                             data: null,
                             render: function (data) {
-                                return '<img src="' + data.image + '" class="img-fluid h-25" />';
+                                return '<img src="' + data.image + '" class="img-fluid h-25 rounded-2" />';
                             }
                         },
 

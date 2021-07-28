@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Modules\Cart\Entities\Order;
 use Modules\Shop\Traits\CartTraits;
@@ -35,8 +36,8 @@ class CheckoutDetails extends Component
         $this->phone = auth()->user()->shipping_address ? auth()->user()->shipping_address->phone : auth()->user()->phone;
         $this->address = auth()->user()->shipping_address ? auth()->user()->shipping_address->address : '';
 
-        if ($this->cart_details && isset($this->cart_details->cart) && $this->cart_details->cart !== [] && count($this->cart_details->cart) > 0) {
 
+        if ($this->cart_details && isset($this->cart_details['cart']) && $this->cart_details['cart'] !== [] && count($this->cart_details['cart']) > 0) {
             return view('livewire.checkout-details', ['cart_details' => $this->cart_details]);
         }
 
@@ -67,14 +68,10 @@ class CheckoutDetails extends Component
             }
 
         }
-        $cart_details = collect($cart_details);
-        if ($cart_details && $cart_details !== [] && count($cart_details->cart) > 0) {
-            $this->cart_details = $cart_details;
-            clear_redirect_for_prev_session();
-        } else {
-            session()->flash('error', 'Invalid data provided');
-            return redirect()->route('cart');
-        }
+
+        $this->cart_details = collect($cart_details);
+        clear_redirect_for_prev_session();
+
     }
 
     public function cal_total_in_kobo()
@@ -119,7 +116,7 @@ class CheckoutDetails extends Component
 
     private function generate_on_delivery_id()
     {
-        return time() . $this->cart_details['id'];
+        return auth()->id() . time() . $this->cart_details['id'];
     }
 
     private function save_on_delivery_order()
@@ -133,7 +130,7 @@ class CheckoutDetails extends Component
         $order->message = 'on_delivery';
         $order->cart_id = $this->cart_details['id'];
         $order->transaction_id = $transaction_id;
-        $order->reference = encrypt($transaction_id);
+        $order->reference = $transaction_id;
         $order->amount = $this->cart_details['total'];
         $order->payment_message = null;
         $order->gateway_response = null;
@@ -152,8 +149,9 @@ class CheckoutDetails extends Component
         $order->customer_code = null;
         $order->transaction_confirmed = false;
 
+        $this->clear_all_cart($this->session_id());
+        $this->clear_session_cart($this->session_id());
         return $order->save();
-
 
     }
 }

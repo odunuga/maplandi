@@ -32,7 +32,7 @@ class ShopController extends Controller
     {
         $hot_deals = [];
         if (Product::count() > 0)
-            $hot_deals = Product::with(['category', 'image', 'tags', 'currency'])->inRandomOrder()->where('hot', 1)->where('published', 1)->where('available', 1)->take(12)->get();
+            $hot_deals = Product::with(['category', 'image', 'tags', 'currency'])->inRandomOrder()->where('hot', 1)->where('stock', '>', 0)->where('published', 1)->where('available', 1)->take(12)->get();
         $product = new Product();
         $latest_products = $this->get_latest($product);
         $random_products = $this->get_random($product);
@@ -44,18 +44,18 @@ class ShopController extends Controller
 
     private function get_latest($product)
     {
-        return $product->latest()->where('published', 1)->where('available', 1)->get()->take($this->take)->load(['image', 'tags', 'category', 'currency']);
+        return $product->latest()->where('stock', '>', 0)->where('published', 1)->where('available', 1)->get()->take($this->take)->load(['image', 'tags', 'category', 'currency']);
 
     }
 
     private function get_random($product)
     {
-        return $product->inRandomOrder()->where('published', 1)->where('available', 1)->get()->take($this->take)->load(['image', 'tags', 'category', 'currency']);
+        return $product->inRandomOrder()->where('stock', '>', 0)->where('published', 1)->where('available', 1)->get()->take($this->take)->load(['image', 'tags', 'category', 'currency']);
     }
 
     private function get_popular($product)
     {
-        return $product->where('published', 1)->where('available', 1)->orderByViews()->get()->take($this->take)->load(['image', 'tags', 'category', 'currency']);
+        return $product->where('stock', '>', 0)->where('published', 1)->where('available', 1)->orderByViews()->get()->take($this->take)->load(['image', 'tags', 'category', 'currency']);
     }
 
 

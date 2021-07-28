@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class ParameterBuilder
  * @package Modules\Shop\Entities
+ * @property integer parameter_id
  * @property mixed|string type_name
  * @property mixed|string type_id
  * @property mixed|string type
+ * @property mixed|string class
  * @property array attributes
  *
  */

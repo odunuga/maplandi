@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Maplandi') }} Admin</title>
     @include('admin::partials.links')
+    @livewireStyles
 </head>
 <body class="{{ isset($body_class)?$body_class:'' }}">
 <div id="wrapper">

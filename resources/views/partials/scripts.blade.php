@@ -145,8 +145,7 @@
         @endforeach
         @endif
 
-    })
-    ;
+    });
 
 </script>
 
