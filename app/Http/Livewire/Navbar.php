@@ -19,11 +19,11 @@ class Navbar extends Component
         return view('livewire.navbar', ['currencies' => $currencies]);
     }
 
-    public function set_new_currency()
+    public function set_new_currency($url)
     {
         $currency = $this->get_currency_using_id($this->currency_id);
         set_user_currency($currency['id'], $currency['code']);
-        return redirect()->to(url()->current());
+        return redirect($url);
     }
 
     private function get_currency_using_id($id)

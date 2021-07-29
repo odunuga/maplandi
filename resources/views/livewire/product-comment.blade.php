@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="col-12">
-                <div class="button">
+                <div class="button" @guest disabled @endguest>
                     <button type="submit" class="btn">Post Comment</button>
                 </div>
             </div>

@@ -38,14 +38,16 @@
 
                     <div class="single-widget range">
                         <h3>Price Range</h3>
-                        <input type="range" class="form-range" name="range" step="100" min="1000" max="900000" value="900000"
+                        <input type="range" class="form-range" name="range" step="100" min="1000" max="900000"
+                               value="900000"
                                wire:model="range" ondragover="rangePrimary.value='{{$range}}'"
                             {{--
                             Livewire.emit('newRange',value)--}}
                         >
                         <div class="range-inner">
                             {{--                            <label>$</label>--}}
-                            <input type="text" id="rangePrimary" value="{{currency_with_price($range,'$')}}"
+                            <input type="text" id="rangePrimary"
+                                   value="{{currency_with_price($range,get_user_currency()['code'])}}"
                                    placeholder="100"/>
                         </div>
                     </div>

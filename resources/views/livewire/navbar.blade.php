@@ -126,7 +126,7 @@
                             <livewire:cart-counter key="{{now()}}"/>
                         </button>
                         <select class="form-select-sm text-dark" wire:model="currency_id"
-                                onchange="$emit('set_new_currency')">
+                                onchange="livewire.emit('set_new_currency',{{url()->current()}})">
 
                             @foreach($currencies as $currency)
                                 <option value="{{ $currency['id'] }}">

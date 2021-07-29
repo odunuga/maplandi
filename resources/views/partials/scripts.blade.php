@@ -34,6 +34,7 @@
             mouseDrag: true,
             gutter: 0,
             nav: false,
+            center:true,
             controls: true,
             controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
             responsive: {
@@ -66,6 +67,7 @@
             mouseDrag: true,
             gutter: 0,
             nav: true,
+            center:true,
             controls: false,
             controlsText: ['<i class="lni lni-arrow-left"></i>', '<i class="lni lni-arrow-right"></i>'],
             responsive: {

@@ -108,6 +108,10 @@
                         <label>Available</label>
                     </div>
                     <div class="form-group">
+                        <input type="checkbox" wire:model.lazy="hot" class="check-and-pass">
+                        <label>Hot</label>
+                    </div>
+                    <div class="form-group">
                         <input type="checkbox" wire:model.lazy="published" class="check-and-pass">
                         <label>Published</label>
                     </div>

@@ -31,8 +31,9 @@ class AddCategory extends Component
                 'tooltip' => $tooltip
             ]);
 
-            if ($this->photo) {
-                $icon = 'vendor/images/'.$this->photo->store('photos');
+            $icon = 'vendor/images/' . $this->photo->store('photos');
+
+            if ($icon) {
                 $img = new Image();
                 $img->url = $icon;
                 $cat->image()->save($img);
