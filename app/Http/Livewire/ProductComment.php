@@ -32,13 +32,15 @@ class ProductComment extends Component
     public function sendNewComment()
     {
         if (!auth()->check()) {
-            return abort(403,'Login Required'); // or you can return the user to the login page
+            return abort(403, 'Login Required'); // or you can return the user to the login page
         }
         $comment = new Comment();
         $comment->comment_by_id = auth()->id();
         $comment->name = $this->name;
         $comment->email = $this->email;
         $comment->body = custom_filter_var($this->comment);
+        $comment->save();
+
         $this->emit('alert', ['success', 'Message sent successfully']);
         $this->reset();
     }

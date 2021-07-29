@@ -30,6 +30,6 @@ class WhyChooseUsComponent extends Component
      */
     public function render()
     {
-        return view('components.whychooseus');
+        return view('components.why-choose-us-component');
     }
 }

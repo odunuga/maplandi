@@ -11,6 +11,11 @@ use Modules\Shop\Traits\CartTraits;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','verified'])->except(['index']);
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable

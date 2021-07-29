@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Notifications\CheckoutProcessed;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -152,7 +153,9 @@ class CheckoutDetails extends Component
 
         $this->clear_all_cart($this->session_id());
         $this->clear_session_cart($this->session_id());
-        return $order->save();
+        $order->save();
+        auth()->user()->notify(new CheckoutProcessed($order));
+        return $order;
 
     }
 }

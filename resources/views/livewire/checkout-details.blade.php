@@ -133,7 +133,7 @@
                                        value="{{ json_encode(['cart'=>$cart_details['cart'],'sub_total'=>$cart_details['sub_total'],'tax_added'=>$cart_details['tax_added'],'address'=>['first_name'=>$first_name,'last_name'=>$last_name,'email'=>$email,'phone'=>$phone,'address'=>$address]]) }}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
                                 <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
                                 <button id="cardpay-btn" wire:dirty.attr="disabled" type="submit"
-                                        class="btn btn-primary btn-lg"><i
+                                        class="btn btn-danger btn-lg"><i
                                         class="lni lni-credit-cards"></i>
                                     Pay Now
                                 </button>
@@ -141,7 +141,7 @@
 
                             <!--PAY ON DELIVERY BTN-->
                             <button wire:click="pay_on_delivery_order_confirmation" id="pod-btn"
-                                    class="btn btn-primary btn-lg">
+                                    class="btn btn-danger btn-lg">
                                 <i class="lni lni-delivery"></i>
                                 Pay on Delivery <i class="lni lni-spinner lni-is-spinning" wire:loading></i>
                             </button>

@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Notifications\ProductDelivered;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -81,6 +82,9 @@ class AdminController extends Controller
                 $order->transaction_confirmed = $confirm_transaction == "on" ? true : false;
                 if ($confirm_transaction == "on" && $order->paid_at == null) {
                     $order->paid_at = now();
+                }
+                if ($delivery_status == 1) {
+                    auth()->user()->notify(new ProductDelivered($order));
                 }
                 $order->delivery_status = (int)$delivery_status;
                 $order->update();

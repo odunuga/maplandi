@@ -1,4 +1,3 @@
-
 @if($hot_deals!==[] && count($hot_deals) > 0)
 
     <section class="items-grid section custom-padding">
@@ -17,7 +16,8 @@
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                                 <div class="image">
-                                    <a href="{{url('shop/'.$deal->sku) }}" class="thumbnail"><img src="{{ asset($deal->image?$deal->image->url:"") }}" alt="#"></a>
+                                    <a href="{{url('shop/'.$deal->sku) }}" class="thumbnail"><img
+                                            src="{{ asset($deal->image?$deal->image->url:"") }}" alt="#"></a>
                                     <div class="product">
                                         <div class="product-image">
                                         </div>
@@ -26,7 +26,7 @@
 
                                         @endif
                                         @if($deal->product_type=='rent')
-                                            <span class="rent"> Rent </span>
+                                            <span class="flat-badge rent"> Rent </span>
                                         @endif
                                     </div>
                                     @if($deal->featured)
@@ -36,7 +36,8 @@
                                 </div>
                                 <div class="content">
                                     <div class="top-content">
-                                        <a href="javascript:void(0)" class="tag">{{ $deal->category->title }}</a>
+                                        <a href="javascript:void(0)"
+                                           class="tag">{{ isset($deal->category)?$deal->category->title:'' }}</a>
                                         <h3 class="title">
                                             <a href="{{ url('shop/'.$deal->sku) }}">{{ $deal->title }}</a>
                                         </h3>

@@ -29,11 +29,7 @@ Mastercard</span>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <ul>
-                                    <li><a href="javascript:void(0)">Chicago</a></li>
-                                    <li><a href="javascript:void(0)">New York City</a></li>
-                                    <li><a href="javascript:void(0)">San Francisco</a></li>
-                                    <li><a href="javascript:void(0)">Washington</a></li>
-                                    <li><a href="javascript:void(0)">Boston</a></li>
+                                    <li><a href="javascript:void(0)">Lagos</a></li>
                                 </ul>
                             </div>
 
@@ -48,8 +44,8 @@ Mastercard</span>
                         <ul>
                             <li><a href="javascript:void(0)">About Us</a></li>
                             <li><a href="javascript:void(0)">How It's Works</a></li>
-                            <li><a href="javascript:void(0)">Login</a></li>
-                            <li><a href="javascript:void(0)">Signup</a></li>
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Signup</a></li>
                             <li><a href="javascript:void(0)">Help & Support</a></li>
                         </ul>
                     </div>
@@ -57,13 +53,12 @@ Mastercard</span>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
 
-                    <div class="single-footer f-contact">
+                    <div class="single-footer  f-contact">
                         <h3>Contact</h3>
                         <ul>
-                            <li>23 New Design Str, Lorem Upsum 10<br> Hudson Yards, USA</li>
-                            <li>Tel. +(123) 1800-567-8990 <br> Mail. <a
-                                    href="https://demo.graygrids.com/cdn-cgi/l/email-protection" class="__cf_email__"
-                                    data-cfemail="81f2f4f1f1eef3f5c1e2ede0f2f2e8e6f3e8e5f2afe2eeec">[email&#160;protected]</a>
+                            <li>{!! isset($site_settings)?$site_settings->site_address:'' !!}</li>
+                            <li>Tel.{{ isset($site_settings)?$site_settings->contact_number:'' }}<br> Mail. <a
+                                    href="mailto:{{ isset($site_settings)?$site_settings->site_email:'' }}">{{ isset($site_settings)?$site_settings->site_email:'' }}</a>
                             </li>
                         </ul>
                     </div>
@@ -100,12 +95,16 @@ Mastercard</span>
 
                             </ul>
                             <ul class="footer-social">
-                                <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
+                                <li><a href="{{ isset($site_settings)?$site_settings->facebook_handle:'' }}"><i
+                                            class="lni lni-facebook-filled"></i></a>
                                 </li>
-                                <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a>
+                                <li><a href="{{isset($site_settings)?$site_settings->twitter_handle:''}}:''"><i
+                                            class="lni lni-twitter-original"></i></a>
                                 </li>
-                                <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
-                                <li><a href="javascript:void(0)"><i class="lni lni-linkedin-original"></i></a>
+                                <li><a href="{{ isset($site_settings)?$site_settings->instagram_handle:'' }}"><i
+                                            class="lni lni-instagram"></i></a></li>
+                                <li><a href="{{  isset($site_settings)?$site_settings->linkedin_handle:''  }}"><i
+                                            class="lni lni-linkedin-original"></i></a>
                                 </li>
                             </ul>
                         </div>

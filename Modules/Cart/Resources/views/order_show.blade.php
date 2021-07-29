@@ -171,7 +171,7 @@
                                                     </div>
                                                     <div class="card-group mt-5">
                                                         <a href="{{ route('orders') }}"
-                                                           class="btn btn-outline-info"> {{__('buttons.back')}}</a>
+                                                           class="btn btn-outline-secondary"> {{__('buttons.back')}}</a>
                                                     </div>
                                                 </div>
 
@@ -199,7 +199,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     @foreach($order->cart as $item)
                                         <div class="single-item-list">
                                             <div class="row align-items-center">

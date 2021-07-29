@@ -3,6 +3,7 @@
 namespace Modules\Cart\Http\Controllers;
 
 
+use App\Notifications\InvoicePaid;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 use Modules\Cart\Entities\Order;
@@ -18,7 +19,7 @@ class PaymentController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'verified']);
     }
 
     /**
@@ -88,7 +89,7 @@ class PaymentController extends Controller
             $order->save();
 
             //TODO Emit Payment Event Information
-
+            auth()->user()->notify(new InvoicePaid($order));
             $this->clear_session_cart($this->session_id());
 
         } else {

@@ -49,13 +49,13 @@
             </div>
         </section>
 
-        <x-whychooseuscomponent/>
+        <x-why-choose-us-component/>
 
-        <x-testimonialcomponent/>
+        <x-testimonial-component/>
 
-        <x-featurescomponent/>
+        <x-features-component/>
 
-        <x-contactuscomponent/>
+        <x-contact-us-component/>
 
         <x-map/>
 

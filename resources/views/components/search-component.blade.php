@@ -70,7 +70,10 @@
                             <a href="{{ url('shop').'?category='.$cat->slug.'&'.http_build_query(request()->except('category')) }}"
                                class="single-cat">
                                 <div class="icon">
-                                    <img src="{{ asset($cat->image->url) }}" alt="{{ $cat->title }} thumbnail">
+                                    @if(isset($cat->image))
+                                        <img src="{{ asset(isset($cat->image)?$cat->image->url:"") }}"
+                                             alt="{{ $cat->title }} thumbnail">
+                                    @endif
                                 </div>
                                 <h3>{{ $cat->title }}</h3>
                                 <h5 class="total">{{ $cat->products->count() }}</h5>

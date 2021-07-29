@@ -6,11 +6,9 @@
         </div>
         <div class="dashboard-menu">
             <ul>
-                <li><a class="{{ Route::is('dashboard')?'active':'' }}" href="{{route('dashboard')}}"><i
+                <li><a class="{{ Route::is('profile.show')?'active':'' }}" href="{{route('profile.show')}}"><i
                             class="lni lni-dashboard"></i> Dashboard</a></li>
 
-                <li><a class="{{ Route::is('profile.show')?'active':'' }}" href="{{ route('profile.show') }}"><i
-                            class="lni lni-cart"></i> Account</a></li>
                 <li><a class="{{ Route::is('orders')?'active':'' }}" href="{{ route('orders') }}"><i
                             class="lni lni-cart"></i> Orders</a></li>
                 <li><a class="{{ Route::is('saved')?'active':'' }}" href="{{ route('saved') }}"><i

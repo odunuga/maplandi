@@ -29,7 +29,6 @@ class ProductController extends Controller
         $cats = Category::with(['category', 'sub_categories'])->get();
         $total = Product::count();
         $products = Product::with(['category', 'currency', 'image', 'parameters'])->orderByDesc('id')->simplePaginate(20);
-
         return view('admin::item.index')->with(['categories' => $cats, 'total' => $total, 'products' => $products]);
     }
 

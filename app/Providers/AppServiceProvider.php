@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use DougSisk\CountryState\CountryState;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Modules\Admin\Traits\SiteSettingsTraits;
 use Modules\Shop\Repository\ShopInterface;
@@ -20,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         view()->composer('*', function ($view) {
-            return $view->with(['site_settings' => $this->get_site_settings(),'countries' => (new CountryState())->getCountries()]);
+            return $view->with(['site_settings' => $this->get_site_settings(), 'countries' => (new CountryState())->getCountries()]);
         });
 
 
@@ -40,6 +41,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Schema::defaultStringLength(191);
     }
 }

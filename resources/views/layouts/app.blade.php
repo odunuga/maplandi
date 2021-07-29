@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -18,10 +17,17 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body class="font-sans antialiased">
-
 <x-jet-banner/>
 <livewire:navbar key="{{ now() }}"/>
 <livewire:cart-modal key="{{ now() }}"/>
+<div class="preloader">
+    <div class="preloader-inner">
+        <div class="preloader-icon">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
 <div class="min-h-screen bg-gray-100">
 {{--    @livewire('navigation-menu')--}}
 

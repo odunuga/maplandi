@@ -108,7 +108,7 @@
             lagThreshold: 3
         },
         ajax: {
-            trackMethods: ['GET', 'POST'],
+            trackMethods: [ 'POST'],
             trackWebSockets: true,
             ignoreURLs: []
         }
