@@ -11,6 +11,11 @@ class AddParameter extends Component
     public $parameter_id;
     public $lock;
 
+    protected $rules = [
+        'category' => 'required',
+        'name' => 'required',
+    ];
+
     public function add_parameter()
     {
         $name = $this->name;
@@ -33,7 +38,6 @@ class AddParameter extends Component
         $this->emit('alert', ['success', 'New parameter Added']);
         $this->redirect(url('control-room/builder/' . $this->category->id));
     }
-
 
 
     public function render()

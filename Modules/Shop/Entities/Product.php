@@ -62,6 +62,20 @@ class Product extends Model
         return $this->belongsToMany(Parameter::class, 'product_parameters')->withPivot(['value']);
     }
 
+
+    public function getImageUrlAttribute()
+    {
+        $default = 'vendor/images/dashboard/noimg.png';
+        $value = $this->image;
+        if ($value) {
+            if (substr($value->url, 0, 4) === "http") {
+                return $value->url;
+            }
+            return asset($value->url);
+        }
+        return asset($default);
+    }
+
     public function admin_format()
     {
         $parameters = [];
@@ -100,7 +114,7 @@ class Product extends Model
             'featured' => $this->featured,
             'hot' => $this->hot,
             'amount' => currency_with_price($this->price, $this->currency->symbol),
-            'image' =>asset(isset($this->image) ? $this->image->url : ''),
+            'image' => asset(isset($this->image) ? $this->image->url : ''),
             'stock' => $this->stock,
             'product_type' => $this->product_type
 

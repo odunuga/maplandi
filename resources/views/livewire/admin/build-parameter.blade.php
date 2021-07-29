@@ -22,7 +22,7 @@
             <label>ID of Input</label>
             <input type="text" wire:model.lazy="new_id" class="form-control" placeholder="Input ID"/>
         </div>
-
+        <input hidden wire:model="parameter_id">
         @if($new_type==='select')
             <div class="form-group">
                 <label>Extra Data (for dropdown field)</label>

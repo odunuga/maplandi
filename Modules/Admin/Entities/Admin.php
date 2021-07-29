@@ -74,7 +74,7 @@ class Admin extends Authenticatable
         return $this->hasOne(ShippingAddress::class);
     }
 
-    public function getImageAttribute($value)
+    public function getImageUrlAttribute($value)
     {
         $default = 'vendor/images/dashboard/noimg.png';
         if ($value) {

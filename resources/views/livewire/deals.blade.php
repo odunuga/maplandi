@@ -17,7 +17,7 @@
                             <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                                 <div class="image">
                                     <a href="{{url('shop/'.$deal->sku) }}" class="thumbnail"><img
-                                            src="{{ asset($deal->image?$deal->image->url:"") }}" alt="#"></a>
+                                            src="{{ $deal->image_url }}" alt="#"></a>
                                     <div class="product">
                                         <div class="product-image">
                                         </div>

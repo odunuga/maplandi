@@ -40,7 +40,20 @@ class Category extends Model
 
     public function parameters()
     {
-        return $this->hasMany(Parameter::class);
+        return $this->hasMany(Parameter::class, 'category_id', 'id');
+    }
+
+    public function getImageUrlAttribute()
+    {
+        $default = 'vendor/images/dashboard/noimg.png';
+        $value = $this->image;
+        if ($value) {
+            if (substr($value->url, 0, 4) === "http") {
+                return $value->url;
+            }
+            return asset($value->url);
+        }
+        return asset($default);
     }
 
     protected static function newFactory()

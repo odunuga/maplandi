@@ -2,7 +2,7 @@
     <div class="row align-items-center">
         <div class="col-lg-4 col-md-4 col-12">
             <div class="item-image">
-                <img src="{{ asset($product->image->url) }}"
+                <img src="{{  $product->image_url }}"
                      alt="thumbnail">
                 <div class="content">
                     <h3 class="title"><a href="javascript:void(0)">

@@ -135,7 +135,6 @@
             let buildParameter = (data) => {
                 Livewire.emit('BuildApp', data);
                 $('#buildParameter').modal('show');
-
             };
 
         </script>

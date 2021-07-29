@@ -4,7 +4,7 @@
             <div class="col-lg-5 col-md-7 col-12">
                 <div class="image">
                     <a href="{{ url('shop/'.$item->sku) }}"><img
-                            src="{{ asset($item->image->url) }}" alt="#"></a>
+                            src="{{ $item->image_url }}" alt="#"></a>
                     @if($item->featured)
                         <i class=" cross-badge lni lni-bolt"></i>
                     @endif

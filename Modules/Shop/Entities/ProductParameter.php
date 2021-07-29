@@ -17,11 +17,6 @@ class ProductParameter extends Model
 
     protected $guarded = [];
 
-    public function getInstockAttribute()
-    {
-        return $this->stock < 1;
-    }
-
     protected static function newFactory()
     {
         return \Modules\Shop\Database\factories\ProductParameterFactory::new();

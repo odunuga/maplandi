@@ -15,6 +15,10 @@
             <input class="form-control" wire:model.lazy="name" placeholder="Enter Category name"
                    required>
         </div>
+        <div class="form-group">
+            <input type="file" wire:model="photo">
+            @error('photo') <span class="error">{{ $message }}</span> @enderror
+        </div>
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Add <i class="lni lni-is-spinning lni-spinner"></i>

@@ -45,7 +45,7 @@
                                         <div class="single-item-grid">
                                             <div class="image">
                                                 <a href="{{ url('shop/'.$product->sku) }}"><img
-                                                        src="{{ asset($product->image?$product->image->url:"") }}"
+                                                        src="{{ $product->image_url }}"
                                                         alt="#"></a>
                                                 @if($product->featured)
                                                     <i class=" cross-badge lni lni-bolt"></i>
@@ -95,7 +95,7 @@
                                         <div class="single-item-grid">
                                             <div class="image">
                                                 <a href="{{ url('shop/'.$product->sku) }}"><img
-                                                        src="{{ asset($product->image?$product->image->url:"") }}"
+                                                        src="{{ $product->image_url}}"
                                                         alt="#"></a>
                                                 @if($product->featured)
                                                     <i class=" cross-badge lni lni-bolt"></i>
@@ -145,7 +145,7 @@
                                         <div class="single-item-grid">
                                             <div class="image">
                                                 <a href="{{ url('shop/'.$product->sku) }}"><img
-                                                        src="{{ asset($product->image?$product->image->url:"") }}"
+                                                        src="{{ $product->image_url }}"
                                                         alt="#"></a>
                                                 @if($product->featured)
                                                     <i class=" cross-badge lni lni-bolt"></i>

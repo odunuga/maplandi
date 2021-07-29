@@ -19,6 +19,7 @@ class CreateParameterBuildersTable extends Migration
             $table->string('type_name');
             $table->string('type_id')->nullable();
             $table->enum('type', ['input', 'textarea', 'select', 'radio', 'check'])->nullable()->default('input');
+            $table->string('class')->nullable();
             $table->longText('attributes')->nullable();
             $table->softDeletes();
             $table->timestamps();

@@ -202,7 +202,7 @@
         }
         let confirmDelete = () => {
             let id = $('#deleteId').val();
-            console.log(id);
+            // console.log(id);
             let url = '{{ route('control.product.delete') }}';
             let data = {'sku': id};
             $.ajax({

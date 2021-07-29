@@ -59,6 +59,20 @@ class Order extends Model
         return $this->belongsTo(Cart::class);
     }
 
+    public function getImageUrlAttribute()
+    {
+        $default = 'vendor/images/dashboard/noimg.png';
+        $value = $this->image;
+        if ($value) {
+            if (substr($value->url, 0, 4) === "http") {
+                return $value->url;
+            }
+            return asset($value->url);
+        }
+        return asset($default);
+    }
+
+
     public function formatUsers()
     {
 

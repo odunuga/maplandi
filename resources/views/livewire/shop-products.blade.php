@@ -25,7 +25,7 @@
                                 @foreach($categories as $cat)
                                     <li>
                                         <a href="javascript:void(0)" wire:click="filterCategory('{{$cat->slug}}')">
-                                            <img src="{{ asset($cat->image->url) }}"
+                                            <img src="{{ asset($cat->image_url) }}"
                                                  alt="{{ $cat->title }} thumbnail"
                                                  style="height:1.5em"> {{ $cat->title }}
                                             <span>{{ format_number($cat->products->count()) }}</span></a>

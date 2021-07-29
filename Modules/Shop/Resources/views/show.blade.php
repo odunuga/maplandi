@@ -9,7 +9,7 @@
                             <main id="gallery">
                                 <div class="main-img">
                                     @isset($product->image)
-                                        <img src="{{ $product->image->url }}" id="current"
+                                        <img src="{{ $product->image_url }}" id="current"
                                              alt="{{ $product->title }} thumbnail">
                                     @endisset
                                 </div>
