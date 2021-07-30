@@ -5,10 +5,10 @@
                 <div class="col-lg-5 col-12">
                     <div class="single-head">
                         <div class="contant-inner-title">
-                            <h2>Our Contacts & Location</h2>
+                            <h2>{{__('texts.contact_location')}}</h2>
                         </div>
                         <div class="single-info">
-                            <h3>Opening hours</h3>
+                            <h3>{{__('texts.opening_hours')}}</h3>
                             <ul>
                                 @isset($site_settings)
                                     @foreach($site_settings->opening_hours as $item)
@@ -18,7 +18,7 @@
                             </ul>
                         </div>
                         <div class="single-info">
-                            <h3>Contact info</h3>
+                            <h3>{{__('texts.contact_info')}}</h3>
                             <ul>
                                 @isset($site_settings)
                                     <li>{{ $site_settings->site_address }}</li>
@@ -34,7 +34,7 @@
                             </ul>
                         </div>
                         <div class="single-info contact-social">
-                            <h3>Social contact</h3>
+                            <h3>{{__('texts.social_contact')}}</h3>
                             <ul>
                                 @isset($site_settings->facebook_handler)
                                     <li><a href="{{$site_settings->facebook_handler}}"><i
@@ -59,11 +59,10 @@
                 <div class="col-lg-7 col-12">
                     <div class="form-main">
                         <div class="form-title">
-                            <h2>Get in Touch</h2>
-                            <p>Want to make a custom order, partnerships or other enquiries leave us a message</p>
+                            <h2>{{__('texts.get_in_touch')}}</h2>
+                            <p>{{__("texts.get_in_touch_body")}}</p>
                         </div>
-                            <livewire:contact-us />
-
+                        <livewire:contact-us/>
                     </div>
                 </div>
             </div>

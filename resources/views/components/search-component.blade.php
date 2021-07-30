@@ -5,7 +5,8 @@
                 <div class="hero-text text-center">
 
                     <div class="section-heading">
-                        <h2 class="wow fadeInUp" data-wow-delay=".3s">Welcome to {{ $site_settings->site_name }}</h2>
+                        <h2 class="wow fadeInUp"
+                            data-wow-delay=".3s">{{__('texts.welcome_title')}} {{ $site_settings->site_name }}</h2>
                         <p class="wow fadeInUp" data-wow-delay=".5s">{{ $site_settings->site_motto }}</p>
                     </div>
 
@@ -21,7 +22,7 @@
                                 <div class="search-input">
                                     <label for="category"><i class="lni lni-grid-alt theme-color"></i></label>
                                     <select name="category" id="category">
-                                        <option value="" selected disabled>Categories</option>
+                                        <option value="" selected disabled>{{__('texts.categories')}}</option>
                                         <option value="*">All</option>
                                         @foreach($categories as $cat)
                                             <option value="{{ $cat->slug }}">{{ $cat->title }}</option>
@@ -32,7 +33,8 @@
 
                             <div class="col-md-5 p-0">
                                 <div class="search-btn button">
-                                    <button class="btn" onclick="search()"><i class="lni lni-search-alt"></i> Search
+                                    <button class="btn" onclick="search()"><i
+                                            class="lni lni-search-alt"></i> {{__("texts.search")}}
                                     </button>
                                 </div>
                             </div>

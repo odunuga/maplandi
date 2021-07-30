@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Notifications\Notification;
 use Livewire\Component;
 
 class ContactUs extends Component
@@ -25,8 +26,7 @@ class ContactUs extends Component
 
     public function submit()
     {
-        $validatedData = $this->validate();
-
+        $this->validate();
         $this->sendMail();
         $this->reset();
         $this->emit('alert', ['success', 'Message sent successfully']);
@@ -36,7 +36,15 @@ class ContactUs extends Component
     private function sendMail()
     {
         // Send Mail Here
-
+        $mail = collect([
+            'name' => $this->name,
+            'subject' => $this->subject,
+            'phone' => $this->phone,
+            'message' => $this->message
+        ]);
+        Notification::route('mail', [
+            env('MAIL_FROM_ADDRESS') => 'Admin'
+        ])->notify(new \App\Notifications\ContactUs($mail));
     }
 
 

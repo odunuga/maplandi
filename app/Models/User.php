@@ -128,5 +128,8 @@ class User extends Authenticatable implements HasLocalePreference, EmailVerifica
         return $this->locale;
     }
 
-
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new MyVerificationNotification());
+    }
 }

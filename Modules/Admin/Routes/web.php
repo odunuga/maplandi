@@ -30,6 +30,7 @@ Route::prefix('control-room')->group(function () {
 
     Route::get('builder/{id}', 'ProductController@builder')->name('control.build.category');
 
+    Route::get('/comments_abuse', 'AdminController@abuse')->name('control.abuse');
 
     Route::get('/transactions', 'AdminController@transactions')->name('control.transactions');
     Route::get('/users', 'AdminController@users')->name('control.users');

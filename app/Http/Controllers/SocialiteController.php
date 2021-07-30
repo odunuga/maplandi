@@ -32,6 +32,10 @@ class SocialiteController extends Controller
 
         $check_user = User::where(['email' => $userSocial->getEmail()])->first();  // check if we have user details in our db
         if ($check_user) {
+            if ($check_user->email_verified_at === null) {
+                $check_user->email_verified_at = now();
+                $check_user->update();
+            }
             Auth::login($check_user); // login the user
             // check if user has not changed default password
             if (Hash::check($userSocial->getId(), $check_user->password)) {

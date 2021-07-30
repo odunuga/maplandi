@@ -7,20 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ProductDelivered extends Notification
+class ContactUs extends Notification
 {
     use Queueable;
-
-    public $order;
+    public $info;
 
     /**
      * Create a new notification instance.
      *
-     * @param $order
+     * @return void
      */
-    public function __construct($order)
+    public function __construct($info)
     {
-        $this->order = $order;
+        $this->info = $info;
     }
 
     /**
@@ -42,18 +41,15 @@ class ProductDelivered extends Notification
      */
     public function toMail($notifiable)
     {
-        if (isset($this->order->buyer) && $this->order->buyer) {
-            $line1 = 'Dear ' . $this->order->buyer->name;
-
-        } else {
-            $line1 = '';
-        }
-        $line2 = 'Thank you for purchasing from us. Kindly contact us in case you have any questions, challenges or suggestions.';
+        $subject = 'Maplandi Contact Us Mail From ' . $this->info['name'];
+        $head = 'Subject of Mail is ' . $this->info['subject'];
+        $body = 'You have a new mail from ' . $this->info['name'] . '<br/> <br/>' . $this->info['message'];
+        $footer = 'Contact ' . $this->info['name'] . ' on ' . $this->info['phone'];
         return (new MailMessage)
-            ->greeting($line1)
-            ->line($line2)
-            ->action('View Order', url('order/' . $this->order->reference))
-            ->line('Thank you for using our application!');
+            ->subject($subject)
+            ->greeting($head)
+            ->line($body)
+            ->line($footer);
     }
 
     /**

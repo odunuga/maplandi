@@ -7,7 +7,9 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Cart\Entities\Order;
+use Modules\Shop\Entities\CommentReport;
 use Modules\Shop\Entities\Product;
+use Modules\Shop\Entities\ProductReport;
 
 class ApiAdminController extends Controller
 {
@@ -45,7 +47,20 @@ class ApiAdminController extends Controller
 
     public function dropzone_update()
     {
-
         return response()->json([]);
+    }
+
+    public function get_comment_report()
+    {
+        $reports = CommentReport::with(['reporter', 'comment'])->latest()->get();
+
+        return response()->json(['comments' => $reports]);
+    }
+
+    public function get_product_report()
+    {
+        $reports = ProductReport::with(['reporter', 'product'])->latest()->get();
+
+        return response()->json(['products' => $reports]);
     }
 }

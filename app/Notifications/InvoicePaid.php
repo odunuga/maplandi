@@ -51,7 +51,7 @@ class InvoicePaid extends Notification
         $line2 = 'Thank You for Purchasing from us. Your payment for order #' . $this->order->reference . ' has been received successfully.';
         return (new MailMessage)
             ->subject('Invoice Paid')
-            ->line($line1)
+            ->greeting($line1)
             ->line($line2)
             ->action('Notification Action', url('order/' . $this->order->reference))
             ->line('Thank you for your patronage.');

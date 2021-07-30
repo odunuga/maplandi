@@ -16,7 +16,8 @@
                    required>
         </div>
         <div class="form-group">
-            <input type="file" wire:model="icon">
+            <label for="image" class="label"><i class="fa fa-shopping-bag"></i> {{ __('text.add_icon') }}</label>
+            <input id="image" hidden type="file" wire:model="icon">
             @error('icon') <span class="error">{{ $message }}</span> @enderror
         </div>
     </div>

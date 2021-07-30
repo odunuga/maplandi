@@ -16,7 +16,7 @@ use Modules\Shop\Entities\ProductParameter;
 
 class AdminController extends Controller
 {
-    use SiteSettingsTraits;
+    use SiteSettingsTraits, AdminTraits;
 
     public function __construct()
     {
@@ -112,38 +112,10 @@ class AdminController extends Controller
 
     }
 
-
-    private function get_dashboard_menu()
+    public function abuse()
     {
-        $total_products = Product::count();
-        $in_stock = Product::all()->sum('stock');
-        $orders = $orders = Order::all();
-        $sold_items = $this->sum_all_order_products($orders);
-        $total_cost = $this->sum_all_amount($orders);
+        return view('admin::comment.abuse');
 
-        return compact('total_products', 'in_stock', 'sold_items', 'total_cost');
-    }
-
-    private function sum_all_amount($orders)
-    {
-        $currency = get_user_currency();
-        $orders->where('status', 1);
-        $sum = 0.0;
-        foreach ($orders as $order) {
-            $amount = (float)$order->amount;
-            $sum += set_amount($currency['code'], $amount);
-        }
-        return currency_with_price($sum, $currency['code']);
-    }
-
-    private function sum_all_order_products($orders)
-    {
-        $sum = 0;
-
-        foreach ($orders as $order) {
-            $sum += count($order['cart']);
-        }
-        return $sum;
     }
 
 
