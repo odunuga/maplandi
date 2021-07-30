@@ -31,14 +31,17 @@
                             </div>
 
                             <div class="table-responsive">
-                                <table id="comment" class="table table-hover">
+                                <table id="orders" class="table table-hover">
                                     <thead>
                                     <tr>
                                         <th scope="col">ID</th>
-                                        <th scope="col">Reporter</th>
-                                        <th scope="col">Commenter</th>
-                                        <th scope="col">Comment</th>
-                                        <th scope="col">Actions</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Parameters</th>
+                                        <th scope="col">Published</th>
+                                        <th scope="col">Featured</th>
+                                        <th scope="col">Hot</th>
+                                        <th scope="col"> Price</th>
+                                        <th scope="col" colspan="2">Image</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -52,6 +55,7 @@
 
             </div>
             <!-- END ROW -->
+
         </div>
         <!-- container-fluid -->
     </div>
@@ -66,24 +70,54 @@
                 src="https://cdn.datatables.net/v/dt/dt-1.10.25/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/r-2.2.9/sl-1.3.3/datatables.min.js"></script>
         <script>
             $(document).ready(function () {
-                $('#comment').DataTable({
+                $('#orders').DataTable({
                     ajax: {
                         type: "POST",
-                        url: '{{ route('admin.comment.report') }}',
-                        dataSrc: 'comment'
+                        url: '{{ route('admin.latest_products') }}',
+                        dataSrc: 'adverts'
                     },
                     columns: [
                         {
                             data: 'id'
                         },
                         {
-                            data: 'reporter'
+                            data: 'title'
                         },
                         {
-                            data: 'commenter'
+                            data: null,
+                            render: function (data) {
+                                let prep = '<ul class="list-group">';
+                                if (data.parameters) {
+                                    for (prop in data.parameters) {
+                                        prep += '<li class="list-group-item border-0"> ' + `${prop} - ${data.parameters[prop]}` + '</li>';
+                                    }
+                                }
+                                prep += '</ul>';
+                                console.log(prep);
+                                return prep;
+                            }
                         },
                         {
-                            data: 'comment'
+                            data: null,
+                            render: function (data) {
+                                return data.published === true ? '<i class="fa fa-check fa-2x text-success"></i>' : '<i class="fa fa-times fa-2x text-danger"></i>';
+
+                            }
+                        },
+                        {
+                            data: null,
+                            render: function (data) {
+                                return data.featured === true ? '<i class="fa fa-check fa-2x text-success"></i>' : '<i class="fa fa-times fa-2x text-danger"></i>';
+                            }
+                        },
+                        {
+                            data: 'hot',
+                            render: function (data) {
+                                return data.hot === true ? '<i class="fa fa-check fa-2x text-success"></i>' : '<i class="fa fa-times fa-2x text-danger"></i>';
+                            }
+                        },
+                        {
+                            data: 'price'
                         },
                         {
                             data: null,

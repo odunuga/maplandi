@@ -28,6 +28,13 @@ class Comment extends Model
         return $this->belongsTo(Product::class);
     }
 
+    public function format_admin_comments()
+    {
+        return [
+
+        ];
+    }
+
     protected static function newFactory()
     {
         return \Modules\Shop\Database\factories\CommentFactory::new();

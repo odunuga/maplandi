@@ -31,13 +31,14 @@
                             </div>
 
                             <div class="table-responsive">
-                                <table id="comment" class="table table-hover">
+                                <table id="comments" class="table table-hover">
                                     <thead>
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Reporter</th>
                                         <th scope="col">Commenter</th>
                                         <th scope="col">Comment</th>
+                                        <th scope="col">Date</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                     </thead>
@@ -45,13 +46,13 @@
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
                     </div>
                 </div>
 
             </div>
             <!-- END ROW -->
+
         </div>
         <!-- container-fluid -->
     </div>
@@ -66,11 +67,11 @@
                 src="https://cdn.datatables.net/v/dt/dt-1.10.25/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/r-2.2.9/sl-1.3.3/datatables.min.js"></script>
         <script>
             $(document).ready(function () {
-                $('#comment').DataTable({
+                $('#orders').DataTable({
                     ajax: {
                         type: "POST",
                         url: '{{ route('admin.comment.report') }}',
-                        dataSrc: 'comment'
+                        dataSrc: 'comments'
                     },
                     columns: [
                         {

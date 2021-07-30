@@ -114,9 +114,39 @@ class AdminController extends Controller
 
     public function abuse()
     {
-        return view('admin::comment.abuse');
-
+        return view('admin::comments.abuse');
     }
 
+    public function comment()
+    {
+        return view('admin::comments.comment');
+    }
+
+    public function comment_report()
+    {
+        return view('admin::comments.comment_report');
+    }
+
+
+    public function tags_tags_add()
+    {
+        return view('admin::tags');
+    }
+    /////////////////////////////////DELETE ///////////////////////////
+
+    public function tags_delete()
+    {
+        return view('admin::tags');
+    }
+
+    public function comment_report_delete()
+    {
+        return view('admin::comments.comment_report');
+    }
+
+    public function product_report_delete()
+    {
+        return view('admin::comments.product_report');
+    }
 
 }

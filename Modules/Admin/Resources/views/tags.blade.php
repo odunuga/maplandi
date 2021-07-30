@@ -5,12 +5,12 @@
             <div class="page-title-box">
                 <div class="row align-items-center">
                     <div class="col-sm-6 mb-3">
-                        <h4 class="page-title">Comment Report</h4>
+                        <h4 class="page-title">Product Tags</h4>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-right">
                             <li class="breadcrumb-item"><a href="javascript:void(0);">Maplandi</a></li>
-                            <li class="breadcrumb-item active">Comment Report</li>
+                            <li class="breadcrumb-item active">Product Tags</li>
                         </ol>
                     </div>
                 </div>
@@ -26,18 +26,16 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-10 ">
-                                    <b class="h5 mt-0  mb-5 text-small">Comment Report</b>
+                                    <b class="h5 mt-0  mb-5 text-small">Product Tags</b>
                                 </div>
                             </div>
 
                             <div class="table-responsive">
-                                <table id="comment" class="table table-hover">
+                                <table id="tags" class="table table-hover">
                                     <thead>
                                     <tr>
                                         <th scope="col">ID</th>
-                                        <th scope="col">Reporter</th>
-                                        <th scope="col">Commenter</th>
-                                        <th scope="col">Comment</th>
+                                        <th scope="col">Tag Title</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                     </thead>
@@ -52,6 +50,7 @@
 
             </div>
             <!-- END ROW -->
+
         </div>
         <!-- container-fluid -->
     </div>
@@ -66,29 +65,23 @@
                 src="https://cdn.datatables.net/v/dt/dt-1.10.25/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/r-2.2.9/sl-1.3.3/datatables.min.js"></script>
         <script>
             $(document).ready(function () {
-                $('#comment').DataTable({
+                $('#tags').DataTable({
                     ajax: {
                         type: "POST",
-                        url: '{{ route('admin.comment.report') }}',
-                        dataSrc: 'comment'
+                        url: '{{ route('admin.tags') }}',
+                        dataSrc: 'tags'
                     },
                     columns: [
                         {
                             data: 'id'
                         },
                         {
-                            data: 'reporter'
-                        },
-                        {
-                            data: 'commenter'
-                        },
-                        {
-                            data: 'comment'
+                            data: 'title'
                         },
                         {
                             data: null,
                             render: function (data) {
-                                return '<a href="' + data.delete + '" class="btn btn-sm text-danger" > Delete </a>';
+                                return '<a href="{{ url('tags/delete')  }}/' + data.delete + '" class="btn btn-sm text-danger" > Delete </a>';
                             }
                         },
 

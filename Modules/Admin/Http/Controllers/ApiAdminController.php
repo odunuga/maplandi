@@ -7,9 +7,11 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Cart\Entities\Order;
+use Modules\Shop\Entities\Comment;
 use Modules\Shop\Entities\CommentReport;
 use Modules\Shop\Entities\Product;
 use Modules\Shop\Entities\ProductReport;
+use Modules\Shop\Entities\Tag;
 
 class ApiAdminController extends Controller
 {
@@ -50,17 +52,36 @@ class ApiAdminController extends Controller
         return response()->json([]);
     }
 
-    public function get_comment_report()
+    public function get_tags()
     {
-        $reports = CommentReport::with(['reporter', 'comment'])->latest()->get();
+        $tags = Tag::latest()->get();
+        return response()->json(['tags' => $tags]);
 
+    }
+
+    public function abuse()
+    {
+        $reports = CommentReport::with(['reporter', 'comment'])->latest()->get()
+            ->map->format_comment_report();
         return response()->json(['comments' => $reports]);
     }
 
     public function get_product_report()
     {
-        $reports = ProductReport::with(['reporter', 'product'])->latest()->get();
-
+        $reports = ProductReport::with(['reporter', 'product'])->latest()->get()->map->format_product_report();
         return response()->json(['products' => $reports]);
+    }
+
+    public function get_comments()
+    {
+        $comments = Comment::with('user')->latest()->map->format_admin_comments();
+        return response()->json(['comments' => $comments]);
+    }
+
+
+    public function adverts()
+    {
+        $adverts = '';
+        return response()->json(['adverts' => $adverts]);
     }
 }
