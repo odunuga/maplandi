@@ -131,7 +131,7 @@ class AddProduct extends Component
         $this->store_parameter($product);
 
         $this->reset();
-        $this->emit('alert', ['success', 'Product Added Successfully']);
+        $this->emit('alert', ['success', __('texts.product_loaded_success')]);
     }
 
     private function store_parameter($product)

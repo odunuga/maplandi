@@ -18,7 +18,7 @@
                             <li>
                                 <a href="javascript:void(0)" wire:click="filterCategory('*')">
                                     <i class="lni lni-home"></i> All
-                                    <span>{{ format_number(\Modules\Shop\Entities\Product::count()) }}</span>
+                                    <span>{{ product_count() }}</span>
                                 </a>
                             </li>
                             @isset($categories)

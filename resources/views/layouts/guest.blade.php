@@ -28,7 +28,12 @@
     </div>
 </div>
 <livewire:navbar key="{{ now() }}"/>
-<livewire:cart-modal key="{{ now() }}"/>
+<div class="modal modal-dialog-scrollable fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <livewire:cart-modal key="{{ now() }}"/>
+    </div>
+</div>
 {{ $slot }}
 @include('partials.footer')
 

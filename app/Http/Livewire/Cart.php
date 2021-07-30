@@ -55,10 +55,7 @@ class Cart extends Component
             }
         }
         // check if cart is not empty
-        $current_cart = $this->get_all_items();
-        if ($current_cart != null && count($current_cart) > 0) {
-            $cart = $current_cart;
-        }
+        $cart = $this->get_all_items();
 
         set_redirect_with_prev_session('checkout', $this->session_id());
         // redirect user to checkout page

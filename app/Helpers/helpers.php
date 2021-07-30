@@ -47,7 +47,7 @@ function filtered_products($paginate, $category_id = null, $range = null, $searc
 
     $products = new Product();
 
-    $filtered_products = $products::with(['image', 'tags', 'category', 'currency'])->where('published', 1)->where('available', 1);
+    $filtered_products = $products::with(['image', 'tags', 'category', 'currency'])->where('stock', '>', 0)->where('published', 1)->where('available', 1);
 
 
     if ($category_id) {
@@ -85,8 +85,14 @@ function custom_filter_var($input, $type = FILTER_SANITIZE_STRING)
 function get_categories()
 {
     return \Modules\Shop\Entities\Category::with(['category', 'sub_categories', 'image', 'products' => function ($product) {
-        return $product->where('published', 1)->where('available', 1);
+        return $product->where('stock', '>', 0)->where('published', 1)->where('available', 1);
     }])->get();
+}
+
+
+function product_count()
+{
+    return Product::where('stock', '>', 0)->where('published', 1)->where('available', 1)->count();
 }
 
 function get_category_from_slug($slug)

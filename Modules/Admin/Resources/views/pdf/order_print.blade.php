@@ -17,7 +17,6 @@
                 </div> <!-- end row -->
             </div>
             <!-- end page-title -->
-
             <div class="row">
                 <div class="col-12">
                     <div class="card m-b-30">
@@ -136,23 +135,13 @@
 
                                 </div>
                             </div> <!-- end row -->
-
                         </div>
                     </div>
                 </div> <!-- end col -->
             </div> <!-- end row -->
-
-
         </div>
         <!-- container-fluid -->
-
     </div>
-    <!-- content -->
-
-    <!-- content -->
-    @slot('scripts')
-        <script src="{{ asset('vendor/admin/pages/Orders.init.js') }}"></script>
-    @endslot
 </x-master-layout>
 
 

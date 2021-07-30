@@ -52,7 +52,9 @@
                                             />
                                         </div>
                                         <div class="form-group">
-                                            <label>Site CAC</label>: <input type="text" class="form-control" value="{{ $site_settings->site_cac }}" name="site_cac"
+                                            <label>Site CAC</label>: <input type="text" class="form-control"
+                                                                            value="{{ $site_settings->site_cac }}"
+                                                                            name="site_cac"
                                                                             placeholder="Site CAC"
                                             />
                                         </div>
@@ -77,7 +79,9 @@
                                                                                   required/>
                                         </div>
                                         <div class="form-group">
-                                            <label>Site Address</label>: <input type="text" name="site_address" class="form-control" value="{{ $site_settings->site_address }}"
+                                            <label>Site Address</label>: <input type="text" name="site_address"
+                                                                                class="form-control"
+                                                                                value="{{ $site_settings->site_address }}"
                                                                                 placeholder="Site Address"
                                                                                 required/>
                                         </div>
@@ -125,7 +129,8 @@
                                             @if(isset($currencies))
                                                 <label>Default Currency</label>:
                                                 <select name="default_currency" class="form-control" required>
-                                                    <option value="">{{ $site_settings->currency->name }}</option>
+                                                    <option value=""
+                                                            disabled>{{ $site_settings->currency->name }}</option>
                                                     @foreach($currencies as $item)
                                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                     @endforeach

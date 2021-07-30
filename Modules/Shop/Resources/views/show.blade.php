@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <section class="item-details section" style="margin-top:60px">
         <div class="container">
             <div class="top-area">

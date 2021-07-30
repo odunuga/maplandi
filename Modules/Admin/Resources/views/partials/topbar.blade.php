@@ -3,7 +3,7 @@
 
     <!-- LOGO -->
     <div class="topbar-left">
-        <a href="{{ route('control.room') }}" class="logo">
+        <a href="{{ route('control.room') }}" class="logo d-print-none" >
                     <span class="logo-light">
                         <img src="{{ asset('vendor/admin/images/logo1.png')}}" alt="" height="70"></span>
         </a>
@@ -14,7 +14,7 @@
 
     </div>
 
-    <nav class="navbar-custom">
+    <nav class="navbar-custom d-print-none">
         <ul class="navbar-right list-inline float-right mb-0">
             <!-- full screen -->
             <li class="dropdown notification-list list-inline-item d-none d-md-inline-block">

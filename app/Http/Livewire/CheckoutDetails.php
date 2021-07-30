@@ -62,7 +62,6 @@ class CheckoutDetails extends Component
             if ($check_cart && $cart_check->count() < 1) {
                 \Cart::session($this->session_id())->add($check_cart->cart);
                 $cart_details = $this->move_previous_session_cart($check_cart->session_id);
-
             } else {
                 // store current cart in db and fetch it
                 $cart_items = $this->get_all_items();
@@ -123,39 +122,44 @@ class CheckoutDetails extends Component
 
     private function save_on_delivery_order()
     {
+        $this->validate();
 
-        $transaction_id = $this->generate_on_delivery_id();
-        $order = new Order();
-        $order->payment_type = 'pay_on_delivery';
-        $order->user_id = auth()->id();
-        $order->status = 'pending';
-        $order->message = 'on_delivery';
-        $order->cart_id = $this->cart_details['id'];
-        $order->transaction_id = $transaction_id;
-        $order->reference = $transaction_id;
-        $order->amount = $this->cart_details['total'];
-        $order->payment_message = null;
-        $order->gateway_response = null;
-        $order->paid_at = null;
-        $order->channel = 'on_delivery';
-        $order->currency = $this->cart_details['payment_currency'];
-        $order->cart = $this->cart_details['cart'];
-        $order->sub_total = $this->cart_details['sub_total'];
-        $order->tax_added = $this->cart_details['tax_added'];
-        $order->first_name = $this->first_name;
-        $order->last_name = $this->last_name;
-        $order->email = $this->email;
-        $order->phone = $this->phone;
-        $order->address = $this->address;
-        $order->fees = null;
-        $order->customer_code = null;
-        $order->transaction_confirmed = false;
+        if ($this->cart_details['cart']) {
 
-        $this->clear_all_cart($this->session_id());
-        $this->clear_session_cart($this->session_id());
-        $order->save();
-        auth()->user()->notify(new CheckoutProcessed($order));
-        return $order;
+            $transaction_id = $this->generate_on_delivery_id();
+            $order = new Order();
+            $order->payment_type = 'pay_on_delivery';
+            $order->user_id = auth()->id();
+            $order->status = 'pending';
+            $order->message = 'on_delivery';
+            $order->cart_id = $this->cart_details['id'];
+            $order->transaction_id = $transaction_id;
+            $order->reference = $transaction_id;
+            $order->amount = $this->cart_details['total'];
+            $order->payment_message = null;
+            $order->gateway_response = null;
+            $order->paid_at = null;
+            $order->channel = 'on_delivery';
+            $order->currency = (int)$this->cart_details['payment_currency'];
+            $order->cart = $this->cart_details['cart'];
+            $order->sub_total = $this->cart_details['sub_total'];
+            $order->tax_added = $this->cart_details['tax_added'];
+            $order->first_name = $this->first_name;
+            $order->last_name = $this->last_name;
+            $order->email = $this->email;
+            $order->phone = $this->phone;
+            $order->address = $this->address;
+            $order->fees = null;
+            $order->customer_code = null;
+            $order->transaction_confirmed = false;
+
+            $this->clear_all_cart($this->session_id());
+            $this->clear_session_cart($this->session_id());
+            $order->save();
+            auth()->user()->notify(new CheckoutProcessed($order->load('payment_currency')));
+            return $order;
+        }
+        return redirect(route('cart'));
 
     }
 }

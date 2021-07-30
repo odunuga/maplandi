@@ -62,11 +62,11 @@ class AddToCart extends Component
                 $this->add_cart($item);
                 $this->reduce_stock_value($this->product);
                 $this->emit('alert', ['success', __("cart.add_item")]);
-                $this->emit('updateItem');
             } else {
                 $this->emit('alert', ['error' => __('cart.empty_stock')]);
             }
         }
+        $this->emit('updateItem');
 
     }
 

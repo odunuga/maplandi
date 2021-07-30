@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\SocialiteController;
+use App\Models\User;
+use App\Notifications\NewRegistration;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Modules\Shop\Http\Controllers\ShopController;
@@ -26,4 +28,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::get('/password/first', [SocialiteController::class, 'password_set'])->name('password.first');
 
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [ShopController::class, 'welcome'])->name('dashboard');
+
+
 });

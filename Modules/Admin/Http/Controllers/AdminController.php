@@ -73,12 +73,14 @@ class AdminController extends Controller
 
     public function update_order()
     {
+        $message = 'No Update Done';
+        $response = 'error';
         if (request()->has('id')) {
             $id = (int)request()->get('id');
             $confirm_transaction = custom_filter_var(request()->get('confirm_transaction'));
             $delivery_status = custom_filter_var(request()->get('delivery_status'));
             $order = Order::where('id', $id)->firstOrFail();
-            if ($confirm_transaction) {
+            if ($confirm_transaction || $delivery_status) {
                 $order->transaction_confirmed = $confirm_transaction == "on" ? true : false;
                 if ($confirm_transaction == "on" && $order->paid_at == null) {
                     $order->paid_at = now();
@@ -87,10 +89,12 @@ class AdminController extends Controller
                     auth()->user()->notify(new ProductDelivered($order));
                 }
                 $order->delivery_status = (int)$delivery_status;
+                $response = 'success';
+                $message = 'Update Successful';
                 $order->update();
-                return back()->with(['success' => 'Update Successful']);
             }
         }
+        return back()->with([$response => $message]);
     }
 
 

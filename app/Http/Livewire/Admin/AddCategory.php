@@ -14,7 +14,7 @@ class AddCategory extends Component
 
     public $name;
     public $category_id = null;
-    public $photo;
+    public $icon;
 
     public function add_category()
     {
@@ -24,14 +24,25 @@ class AddCategory extends Component
             $slug = Str::slug($category);
             $tooltip = 'Information about ' . $category;
             $category_id = $this->category_id;
-            $cat = \Modules\Shop\Entities\Category::create([
-                'category_id' => $category_id,
-                'title' => $category,
-                'slug' => $slug,
-                'tooltip' => $tooltip
-            ]);
+            $check = \Modules\Shop\Entities\Category::where('category_id', $category_id);
+            if ($check->count() > 0) {
+                $cat = $check->first();
+                $cat->forceFill([
+                    'title' => $category,
+                    'slug' => $slug,
+                    'tooltip' => $tooltip
+                ]);
+            } else {
+                $cat = \Modules\Shop\Entities\Category::create([
+                    'category_id' => $category_id,
+                    'title' => $category,
+                    'slug' => $slug,
+                    'tooltip' => $tooltip
+                ]);
 
-            $icon = 'vendor/images/' . $this->photo->store('photos');
+            }
+
+            $icon = 'vendor/images/' . $this->icon->store('category');
 
             if ($icon) {
                 $img = new Image();

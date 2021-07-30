@@ -1,5 +1,4 @@
 <x-jet-form-section submit="updateProfileInformation">
-
     <x-slot name="title">
         {{ __('Profile Information') }}
     </x-slot>
@@ -93,7 +92,7 @@
         <!-- Country -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="country" value="{{ __('Country') }}"/>
-            <select name="country_code" class="mt-1 block w-full" wire:model.lazy="state.country_code">
+            <select name="country_code" class="form-select form-select-sm w-20p" wire:model.lazy="state.country_code" style="width: 30%">
                 <option>{{ auth()->user()->country?auth()->user()->country->getName():'Select One' }}</option>
                 @foreach($countries as $key=>$item)
                     <option value="{{ $key }}">{{ $item }}</option>

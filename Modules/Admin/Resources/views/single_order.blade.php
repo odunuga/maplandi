@@ -123,7 +123,7 @@
 
 
     <!-- Start content -->
-    <div class="content">
+    <div class="content pb-5">
         <div class="container-fluid">
             <div class="page-title-box">
                 <div class="row align-items-center">
@@ -278,7 +278,7 @@
                         <h6 class="modal-title" id="exampleModalLabel">
                             <i class="lni lni-cart-full" style="color:red; font-size:25px;"></i>
                             Update Order Status</h6>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i
                                 class="fa fa-times"></i></button>
                     </div>
                     <form action="{{ route('admin.order.update') }}" method="post">
@@ -310,15 +310,13 @@
                                                 </select>
                                             </div>
                                         </li>
-
-
                                     </ol>
                                 </div>
                             </div>
 
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-sm ">
+                            <button type="submit" class="btn btn-sm btn-danger">
                                 Update
                             </button>
 

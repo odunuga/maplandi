@@ -88,6 +88,7 @@ trait VerifiesAdminEmails
                 : redirect($this->redirectPath());
         }
 
+
         $request->user()->sendEmailVerificationNotification();
 
         return $request->wantsJson()

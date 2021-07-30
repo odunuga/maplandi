@@ -1,5 +1,5 @@
 <!-- ========== Left Sidebar Start ========== -->
-<div class="left side-menu">
+<div class="left side-menu d-print-none">
     <div class="slimscroll-menu" id="remove-scroll">
 
         <!--- Sidemenu -->

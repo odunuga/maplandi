@@ -25,5 +25,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/get_users', [ApiAdminController::class, 'get_users'])->name('admin.users');
     Route::post('/get_transactions', [ApiAdminController::class, 'get_transactions'])->name('admin.transactions');
 
+    Route::post('/dropzone/upload',[ApiAdminController::class,'dropzone_update'])->name('admin.dropzone.update');
 
 });

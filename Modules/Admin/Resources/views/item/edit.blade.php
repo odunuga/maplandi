@@ -21,4 +21,5 @@
         </div>
     </div>
     <!-- content -->
+
 </x-master-layout>

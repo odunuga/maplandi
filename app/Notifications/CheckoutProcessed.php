@@ -50,11 +50,9 @@ class CheckoutProcessed extends Notification
         }
         $line2 = 'Your Order #' . $this->order->reference . ', has been received and is currently been processed.';
         return (new MailMessage)
-            ->subject('Checkout Processing')
-            ->line($line1)
-            ->line($line2)
-            ->action('View Here', url('order/' . $this->order->reference))
-            ->line('Thank you for your patronage.');
+            ->subject('Order Received')
+            ->markdown('notify.order_status', ['order' => $this->order]);
+
     }
 
     /**

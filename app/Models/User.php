@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Notifications\ResetUserPassword;
 use DougSisk\CountryState\CountryState;
-use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail as EmailVerification;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -21,14 +23,13 @@ use Overtrue\LaravelLike\Traits\Liker;
  * @package App\Models
  *
  */
-class User extends Authenticatable
+class User extends Authenticatable implements HasLocalePreference, EmailVerification
 {
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
     use SoftDeletes;
-    use MustVerifyEmail;
     use Liker;
     use CanRate;
     use TwoFactorAuthenticatable;
@@ -121,4 +122,11 @@ class User extends Authenticatable
         }
         return asset($default);
     }
+
+    public function preferredLocale()
+    {
+        return $this->locale;
+    }
+
+
 }

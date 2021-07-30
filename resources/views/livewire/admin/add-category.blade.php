@@ -16,8 +16,8 @@
                    required>
         </div>
         <div class="form-group">
-            <input type="file" wire:model="photo">
-            @error('photo') <span class="error">{{ $message }}</span> @enderror
+            <input type="file" wire:model="icon">
+            @error('icon') <span class="error">{{ $message }}</span> @enderror
         </div>
     </div>
     <div class="modal-footer">

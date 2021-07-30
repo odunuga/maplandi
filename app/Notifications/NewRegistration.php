@@ -42,14 +42,11 @@ class NewRegistration extends Notification
      */
     public function toMail($notifiable)
     {
-        $line1 = 'Dear ' . $this->user->name;
-        $line2 = 'Thank you for registering on our web application. ';
+        $url = url('shop');
+
         return (new MailMessage)
             ->subject('New Registration Information')
-            ->line($line1)
-            ->line($line2)
-            ->action('Shop', url('shop'))
-            ->line('Thank you for your patronage.');
+            ->markdown('notify.new_registration', ['url' => $url, 'user' => $this->user]);
     }
 
     /**

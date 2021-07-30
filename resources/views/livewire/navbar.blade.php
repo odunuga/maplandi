@@ -125,9 +125,9 @@
                             </strong>
                             <livewire:cart-counter key="{{now()}}"/>
                         </button>
-                        <select class="form-select-sm text-dark" wire:model="currency_id"
-                                onchange="livewire.emit('set_new_currency',{{url()->current()}})">
-
+                        <select class="form-select form-select-sm w-20p text-dark" wire:model="currency_id"
+                                onchange="livewire.emit('set_new_currency','{{url()->current()}}')" style="width: 10%">
+                            <option value="" readonly selected>{{ get_user_currency()['code'] }}</option>
                             @foreach($currencies as $currency)
                                 <option value="{{ $currency['id'] }}">
                                     {{ $currency['symbol'] }}
@@ -136,7 +136,7 @@
                         </select>
                         <span class="mx-2 my-1">
                             <i wire:offline.class.remove="bg-success" wire:offline.class="bg-danger"
-                               class="lni lni-bg-circle animate-ping  bg-success"> </i>
+                               class="lni lni-bg-circle bg-success"> </i>
                         </span>
 
                         <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"

@@ -42,4 +42,10 @@ class ApiAdminController extends Controller
         return response()->json(['transactions' => $trans]);
 
     }
+
+    public function dropzone_update()
+    {
+
+        return response()->json([]);
+    }
 }

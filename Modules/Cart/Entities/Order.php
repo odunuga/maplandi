@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Shop\Entities\Cart;
+use Modules\Shop\Entities\Currency;
 
 /**
  * @property int id
@@ -44,6 +45,9 @@ class Order extends Model
 
     protected $casts = [
         'paid_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
         'cart' => 'array',
         'status' => 'bool',
         'transaction_status' => 'bool'
@@ -57,6 +61,11 @@ class Order extends Model
     public function cart()
     {
         return $this->belongsTo(Cart::class);
+    }
+
+    public function payment_currency()
+    {
+        return $this->belongsTo(Currency::class, 'currency', 'id');
     }
 
     public function getImageUrlAttribute()

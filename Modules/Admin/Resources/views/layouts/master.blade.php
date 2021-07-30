@@ -3,9 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Maplandi') }} Admin</title>
     @include('admin::partials.links')
+    @if(Route::is('control.invoice'))
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    @else
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    @endif
     @livewireStyles
 </head>
 <body class="{{ isset($body_class)?$body_class:'' }}">
@@ -21,7 +25,7 @@
         </div>
     @else
         {{$slot}}
-        <footer class="footer">
+        <footer class="footer d-print-none ">
             © Maplandi <span class="d-none d-sm-inline-block"></span>.
         </footer>
     @endauth
@@ -30,5 +34,6 @@
 @include('admin::partials.scripts')
 @stack('scripts')
 {{ isset($scripts)?$scripts:"" }}
+<script src="{{ asset('vendor/admin/js/app.js') }}"></script>
 </body>
 </html>

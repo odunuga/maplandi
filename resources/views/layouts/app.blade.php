@@ -7,8 +7,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
     <!-- Styles -->
+    @if(!Route::is('shop'))
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @endif
     @include('partials.links')
     @yield('styles')
     @livewireStyles
@@ -19,7 +21,12 @@
 <body class="font-sans antialiased">
 <x-jet-banner/>
 <livewire:navbar key="{{ now() }}"/>
-<livewire:cart-modal key="{{ now() }}"/>
+<div class="modal modal-dialog-scrollable fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <livewire:cart-modal key="{{ now() }}"/>
+    </div>
+</div>
 <div class="preloader">
     <div class="preloader-inner">
         <div class="preloader-icon">

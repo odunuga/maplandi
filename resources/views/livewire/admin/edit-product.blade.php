@@ -115,6 +115,12 @@
                         <input type="checkbox" wire:model.lazy="published" class="check-and-pass">
                         <label>Published</label>
                     </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary waves-effect waves-light">
+                            Update Changes
+                        </button>
+
+                    </div>
                 </form>
 
             </div>
@@ -124,58 +130,72 @@
     <div class="col-lg-6">
         <div class="card m-b-30">
             <div class="card-body">
+                <form wire:submit.prevent="update_images" class="dropzone">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card m-b-30">
+                                <div class="card-body">
+                                    <h4 class="mt-0 header-title">Display Image</h4>
+                                    @if (isset($image))
+                                        <img src="{{ $image->temporaryUrl() }}" class="img-thumbnail h-12">
+                                    @elseif (isset($uploaded_image))
+                                        <img src="{{ $uploaded_image }}" class="img-thumbnail h-12">
+                                    @endif
+                                    <p class="sub-title">supports (PNG & JPEG only 5MB Max file size).
+                                    </p>
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card m-b-30">
-                            <div class="card-body">
-
-                                <h4 class="mt-0 header-title">Image Upoad</h4>
-                                <p class="sub-title">supports (PNG & JPEG only 5MB Max file size).
-                                </p>
-
-                                <div class="m-b-30">
-                                    <form id="itemimage" action="#" class="dropzone">
+                                    <div class="m-b-30">
                                         <div class="fallback">
-                                            <input name="file" type="file" multiple="multiple" required>
+                                            <input wire:model="image" type="file" required>
                                         </div>
-                                    </form>
+                                    </div>
+
+                                    {{--                                    <div class="text-center m-t-15">--}}
+                                    {{--                                        <button type="submit" form="itemimage"--}}
+                                    {{--                                                class="btn btn-primary waves-effect waves-light">--}}
+                                    {{--                                            Add Images--}}
+                                    {{--                                        </button>--}}
+                                    {{--                                    </div>--}}
+
                                 </div>
-
-                                <div class="text-center m-t-15">
-                                    <button type="submit" form="itemimage"
-                                            class="btn btn-primary waves-effect waves-light">
-                                        Add Images
-                                    </button>
-
-                                </div>
-
                             </div>
-                        </div>
-                    </div> <!-- end col -->
-                </div> <!-- end row -->
+                        </div> <!-- end col -->
+                        <div class="col-12">
+                            <div class="card m-b-30">
+                                <div class="card-body">
+                                    <h4 class="mt-0 header-title">Other Images Upload</h4>
+                                    <p class="sub-title">supports (PNG & JPEG only 5MB Max file size).
+                                    </p>
+                                    <div class="m-b-30">
+                                        <div class="fallback">
+                                            <input wire:model="images" type="file" multiple="multiple">
+                                        </div>
+                                    </div>
 
-                <div>
-                    <button type="submit" form="newitem" class="btn btn-primary waves-effect waves-light">
-                        Update Changes
-                    </button>
+                                    {{--                                    <div class="text-center m-t-15">--}}
+                                    {{--                                        <button type="submit" form="itemimage"--}}
+                                    {{--                                                class="btn btn-primary waves-effect waves-light">--}}
+                                    {{--                                            Add Images--}}
+                                    {{--                                        </button>--}}
+                                    {{--                                    </div>--}}
 
-                </div>
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+                    </div> <!-- end row -->
+
+                    <div>
+                        <button type="submit" wire:loading.attr="disabled" wire:target="images"
+                                class="btn btn-primary waves-effect waves-light">
+                            Upload Images
+                        </button>
+
+                    </div>
                 </form>
-
-
             </div> <!-- end row -->
-
-
         </div>
         <!-- container-fluid -->
-
     </div>
     <!-- content -->
-
-
-    <footer class="footer">
-        © Maplandi <span class="d-none d-sm-inline-block"> </span>.
-    </footer>
 
 </div>

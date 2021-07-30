@@ -13,7 +13,7 @@ class CartController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','verified'])->except(['index']);
+        $this->middleware(['auth:sanctum', 'verified'])->except(['index']);
     }
 
     /**
