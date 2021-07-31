@@ -11,6 +11,7 @@ use Modules\Shop\Entities\Comment;
 use Modules\Shop\Entities\CommentReport;
 use Modules\Shop\Entities\Product;
 use Modules\Shop\Entities\ProductReport;
+use Modules\Shop\Entities\Promotion;
 use Modules\Shop\Entities\Tag;
 
 class ApiAdminController extends Controller
@@ -59,7 +60,7 @@ class ApiAdminController extends Controller
 
     }
 
-    public function abuse()
+    public function comment_report()
     {
         $reports = CommentReport::with(['reporter', 'comment'])->latest()->get()
             ->map->format_comment_report();
@@ -79,9 +80,9 @@ class ApiAdminController extends Controller
     }
 
 
-    public function adverts()
+    public function get_promotions()
     {
-        $adverts = '';
+        $adverts = Promotion::with('image')->latest()->get()->map->format_admin_promotion();
         return response()->json(['adverts' => $adverts]);
     }
 }

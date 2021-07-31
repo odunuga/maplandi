@@ -5,7 +5,7 @@
             <livewire:product-comment :comment="$comment" key="{{$comment->id}}"/>
         @endforeach
     @else
-        <p class="text-center p-6">{{ __('shop.no-comment') }}</p>
+        <p class="text-center p-6">{{ __('comments') }}</p>
     @endif
 </div>
 <div class="single-block comment-form">

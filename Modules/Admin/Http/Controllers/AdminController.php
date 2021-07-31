@@ -13,6 +13,7 @@ use Modules\Shop\Entities\Currency;
 use Modules\Shop\Entities\Parameter;
 use Modules\Shop\Entities\Product;
 use Modules\Shop\Entities\ProductParameter;
+use Modules\Shop\Entities\Tag;
 
 class AdminController extends Controller
 {
@@ -112,12 +113,7 @@ class AdminController extends Controller
 
     }
 
-    public function abuse()
-    {
-        return view('admin::comments.abuse');
-    }
-
-    public function comment()
+    public function comments()
     {
         return view('admin::comments.comment');
     }
@@ -127,16 +123,43 @@ class AdminController extends Controller
         return view('admin::comments.comment_report');
     }
 
+    public function product_report()
+    {
+        return view('admin::comments.product_report');
+    }
 
+    public function tags()
+    {
+        return view('admin::tags');
+    }
+
+    public function promotions()
+    {
+        return view('admin::advertisement');
+    }
+
+    ////////////////////////////////// ADD //////////////////////////////
     public function tags_tags_add()
     {
         return view('admin::tags');
     }
-    /////////////////////////////////DELETE ///////////////////////////
+
+    //////////////////////////// DELETE ///////////////////////////
 
     public function tags_delete()
     {
-        return view('admin::tags');
+        $message = 'Error Cant locate item';
+        $response = 'error';
+        if (request()->has('id')) {
+            $id = custom_filter_var(request()->get('id'));
+            $tag_check = Tag::where('id', $id);
+            if ($tag_check->count() > 0) {
+                $tag_check->delete();
+                $message = 'Item Delete Successfully';
+                $response = 'success';
+            }
+        }
+        return response()->json(['response' => $response, 'message' => $message]);
     }
 
     public function comment_report_delete()

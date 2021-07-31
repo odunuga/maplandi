@@ -30,14 +30,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/get_tags', [ApiAdminController::class, 'get_tags'])->name('admin.tags');
 
-    Route::post('/admin.abuse', [ApiAdminController::class, 'abuse'])->name('admin.comment.report');
+    Route::post('/admin_comment_report', [ApiAdminController::class, 'comment_report'])->name('admin.comments.report');
 
     Route::post('/admin_product_report', [ApiAdminController::class, 'get_product_report'])->name('admin.product.report');
 
+    Route::post('/admin_comments', [ApiAdminController::class, 'get_comments'])->name('admin.comments');
 
 
-
-
+    Route::post('/admin_promotions', [ApiAdminController::class, 'get_promotions'])->name('admin.promotionst');
 
 
 });

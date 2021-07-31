@@ -27,7 +27,11 @@ return [
     '24hrs' => '24/7 Customer Support',
     'features' => 'Features',
     'best_quality' => 'Best Quality',
-    'affordable' => 'Affordable Prices'
+    'affordable' => 'Affordable Prices',
+    'empty_tag_title' => 'No Tag Title Provided',
+    'duplicate_tag_created' => 'Duplicate Tag Found',
+    'tag_created' => 'Tag Created Successfully',
+    'tag_updated' => 'Tag Updated Successfully'
 
 
 ];

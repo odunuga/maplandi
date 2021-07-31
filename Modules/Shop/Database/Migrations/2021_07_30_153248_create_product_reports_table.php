@@ -17,7 +17,7 @@ class CreateProductReportsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
-            $table->longText('comment')->nullable();
+            $table->longText('comments')->nullable();
             $table->timestamps();
         });
     }

@@ -16,12 +16,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('control-room')->group(function () {
     Route::get('/', 'AdminController@index')->name('control.room');
+
     Route::get('/orders', 'AdminController@orders')->name('control.orders');
+
     Route::get('/stocks', 'AdminController@stocks')->name('control.stocks');
 
     Route::get('/users', 'AdminController@users')->name('control.users');
+
     Route::get('/settings', 'AdminController@settings')->name('control.settings');
+
     Route::get('/settings/edit', 'AdminController@settings_edit')->name('control.settings.edit');
+
     Route::post('/settings/update', 'AdminController@settings_update')->name('control.settings.update');
 
     Route::get('/items', 'ProductController@index')->name('control.items');
@@ -33,6 +38,7 @@ Route::prefix('control-room')->group(function () {
     Route::get('/comments_abuse', 'AdminController@abuse')->name('control.abuse');
 
     Route::get('/transactions', 'AdminController@transactions')->name('control.transactions');
+
     Route::get('/users', 'AdminController@users')->name('control.users');
 
     Route::get('/invoice/{ref}', 'AdminController@print_page')->name('control.invoice');
@@ -41,10 +47,23 @@ Route::prefix('control-room')->group(function () {
 
     Route::get('/product/{sku}/edit', 'ProductController@edit')->name('admin.product.edit');
 
+
+    Route::get('tags', 'AdminController@tags')->name('control.tags');
+
+    Route::get('comments', 'AdminController@comments')->name('control.comments');
+
+    Route::get('comment/report', 'AdminController@comment_report')->name('control.comment.report');
+
+    Route::get('product/report', 'AdminController@product_report')->name('control.product.report');
+
+    Route::get('promotions', 'AdminController@promotions')->name('control.promotions');
+
+    ////////////////////////////////////////////////////////////////////////////////
+
     Route::post('/order/update', 'AdminController@update_order')->name('admin.order.update');
 
 
-    Route::post('/tags/add', 'AdminController@tags_add')->name('control.tags.delete');
+    Route::post('/tags/add', 'AdminController@tags_add')->name('control.tags.add');
 
     Route::post('/tags/delete', 'AdminController@tags_delete')->name('control.tags.delete');
 

@@ -137,7 +137,7 @@ return [
     |
     | Here you can define which commands will be visible and used in your
     | application. If for example you don't use some of the commands provided
-    | you can simply comment them out.
+    | you can simply comments them out.
     |
     */
     'commands' => [

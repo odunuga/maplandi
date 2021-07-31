@@ -70,7 +70,7 @@
                 $('#orders').DataTable({
                     ajax: {
                         type: "POST",
-                        url: '{{ route('admin.comment') }}',
+                        url: '{{ route('admin.comments') }}',
                         dataSrc: 'comments'
                     },
                     columns: [

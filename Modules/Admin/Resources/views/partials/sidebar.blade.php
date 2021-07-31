@@ -32,17 +32,31 @@
                         <i class="fas fa-credit-card"></i>
                         <span> Transaction History </span></a>
                 </li>
-
                 <li>
-                    <a href="{{ route('control.users') }}" class="waves-effect">
-                        <i class="fas fa-users"></i>
-                        <span> Users </span></a>
+                    <a href="{{ route('control.tags') }}" class="waves-effect">
+                        <i class="fas fa-tags"></i>
+                        <span> Product Tags </span></a>
+                </li>
+                <li>
+                    <a href="{{ route('control.comments') }}" class="waves-effect">
+                        <i class="fas fa-comment-alt"></i>
+                        <span> Comments </span></a>
                 </li>
 
                 <li>
-                    <a href="{{ route('control.settings') }}" class="waves-effect">
-                        <i class="fas fa-tools"></i>
-                        <span> Settings </span></a>
+                    <a href="{{ route('control.comment.report') }}" class="waves-effect">
+                        <i class="fas fa-comment"></i><i class="fas fa-phone"></i>
+                        <span> Comment Report </span></a>
+                </li>
+                <li>
+                    <a href="{{ route('control.product.report') }}" class="waves-effect">
+                        <i class="fas fa-shopping-cart"></i><i class="fas fa-phone"></i>
+                        <span> Product Report </span></a>
+                </li>
+                <li>
+                    <a href="{{ route('control.promotions') }}" class="waves-effect">
+                        <i class="fas fa-bullhorn"></i>
+                        <span> Promotions </span></a>
                 </li>
 
 

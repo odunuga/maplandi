@@ -3,9 +3,9 @@ return [
     'information' => 'Information',
     'description' => 'Description',
     'tags' => 'Tags',
-    'no-comment' => 'No Comments',
+    'no-comments' => 'No Comments',
     'comments' => 'Comments',
-    'post-a-comment'=>'Post a comment',
+    'post-a-comments'=>'Post a comments',
 
 
 ];
