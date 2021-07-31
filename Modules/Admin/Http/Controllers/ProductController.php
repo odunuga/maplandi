@@ -63,7 +63,7 @@ class ProductController extends Controller
         $response = 'error';
         if (request()->has('sku')) {
             $sku = custom_filter_var(request()->get('sku'));
-            $product_check = Product::with()->where('sku', $sku);
+            $product_check = Product::with(['image', 'comment'])->where('sku', $sku);
             if ($product_check->count() > 0) {
                 $product_check->delete();
                 $message = 'Item Delete Successfully';
