@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <div class="ibox">
                     @if(isset($items)&&count($items)>0)
-                        <div class="ibox-title mb-5">
+                        <div class="ibox-title mp-5">
                             <!--ITEM COUNTER-->
                             <span
                                 class="pull-right">(<strong>{{ isset($items)&&count($items)>0?count($items):0 }}</strong>) items</span>
@@ -17,8 +17,7 @@
                                     <tbody>
                                     @if($items && count($items) > 0)
                                         @foreach($items as $item)
-                                            <livewire:cart-item :item="$item"
-                                                                key="{{ $item['id'] }}"/>
+                                            @livewire('cart-item',['item'=>$item],key($item->id))
                                         @endforeach
 
                                         <tr>
@@ -44,15 +43,26 @@
                                                     ({{ $tax }}%) @endif
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr aria-colspan="2">
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                             <td>
                                                 <label>Total: </label>
+                                                @if($promos) <span class="text-sm">Discount @foreach($promos as $promo)
+                                                        <label>{{ $promo->getName() }}, </label> @endforeach</span> @endif
                                             </td>
-                                            <td class="text-danger">
-                                                {{ currency_with_price($total,get_user_currency()['code']) }}
+                                            <td class="text-md-center">
+                                                @if($there_is_coupon)
+                                                    <strike
+                                                        class="text-danger text-sm">{{ currency_with_price($total,get_user_currency()['code']) }}  </strike>
+                                                    <span class="text-sm">+Discount: </span>  <span
+                                                        class="text-danger">{{ currency_with_price($prev_total,get_user_currency()['code']) }} </span>
+                                                @else
+                                                    <span
+                                                        class="text-danger">{{ currency_with_price($total,get_user_currency()['code']) }}</span>
+                                                @endif
+
                                             </td>
                                         </tr>
 
@@ -76,7 +86,6 @@
                             </div>
 
                         </div>
-
                     @else
                         <div class="ibox-titel my-5 text-center">
                             {!! __('cart.empty_cart') !!}

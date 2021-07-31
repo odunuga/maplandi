@@ -19,7 +19,6 @@
             <h3 class="title">
                 <a href="{{ url('shop/'.$item->sku) }}">{{ $item->title }}</a>
             </h3>
-
             <ul class="info">
                 <li class="price">
                     @if(isset($item->currency) && $item->currency->code!=get_user_currency()['code'])

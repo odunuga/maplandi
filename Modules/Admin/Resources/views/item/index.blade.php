@@ -1,4 +1,5 @@
 <x-master-layout>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" type="text/css"/>
     <!-- Start content -->
     <div class="content">
         <div class="container-fluid">
@@ -53,7 +54,6 @@
             </div>
         </div>
     </div>
-
     <!--END OF CATEGORY SECTION-->
 
     <!-- START ROW -->
@@ -104,8 +104,13 @@
                                         <!--DELETE ITEM POST MODAL TRIGGGER BTN-->
                                         <td>
                                             <button onclick="deleteItem('{{$item->sku}}','{{$item->title}}')"
-                                                    class="btn btn-light btn-sm">
-                                                <i class="fas fa-trash text-danger"></i>
+                                                    class="btn btn-light btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+
+                                            <button onclick="addTag('{{$item->sku}}')"
+                                                    class="btn btn-light btn-sm btn-dark">
+                                                <i class="fas fa-tags"></i>
                                             </button>
 
                                         </td>
@@ -137,7 +142,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
                                     </button>
-                                    <button onclick="confirmDelete()" type="submit" class="btn btn-primary">Delete
+                                    <button onclick="confirmDelete()" type="submit" class="btn btn-danger">Delete
                                     </button>
                                 </div>
                             </div>
@@ -194,32 +199,69 @@
             </div>
         </div>
     </div>
-    <script>
-        let deleteItem = (id, title) => {
-            $('#title').text(title);
-            $('#DM').modal('show');
-            $('#deleteId').val(id);
-        }
-        let confirmDelete = () => {
-            let id = $('#deleteId').val();
-            // console.log(id);
-            let url = '{{ route('control.product.delete') }}';
-            let data = {'sku': id};
-            $.ajax({
-                'url': url,
-                'type': 'post',
-                'data': data,
-                success: function (data) {
-                    if (data.response == 'success') {
-                        $('#title').text('');
-                        $('#deleteId').val('');
-                        $('#DM').modal('hide');
-                        window.location.href = '{{ url() ->current()}}';
-                    }
-                    Livewire.emit('alert', [data.response, data.response]);
-                }
-            });
+    <div class="modal fade" id="addTag" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">x
+                    </button>
+                </div>
+                @livewire('admin.tag-to-product')
+            </div>
+        </div>
+    </div>
+    @push('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+        <script>
+            let deleteItem = (id, title) => {
+                $('#title').text(title);
+                $('#DM').modal('show');
+                $('#deleteId').val(id);
+            };
+            let addTag = (sku) => {
+                let tagModal = $('#addTag');
+                window.livewire.emit('setProductTag', sku);
+                tagModal.modal('show');
+                setTimeout(showSelect, 2000);
+            };
 
-        }
-    </script>
+            let showSelect = () => {
+                $(document).ready(function () {
+                    $('#selectTags').select2({
+                        tags: true,
+                    });
+                })
+            };
+
+            window.livewire.on('close_product_tag', function () {
+                $('#addTag').modal('close');
+            });
+            let emitUpdate = () => {
+                window.livewire.emit('tagUpdate', $('#selectTags').val());
+            };
+            let confirmDelete = () => {
+                let id = $('#deleteId').val();
+                // console.log(id);
+                let url = '{{ route('control.product.delete') }}';
+                let data = {'sku': id};
+                $.ajax({
+                    'url': url,
+                    'type': 'post',
+                    'data': data,
+                    success: function (data) {
+                        if (data.response == 'success') {
+                            $('#title').text('');
+                            $('#deleteId').val('');
+                            $('#DM').modal('hide');
+                            window.location.href = '{{ url() ->current()}}';
+                        }
+                        Livewire.emit('alert', [data.response, data.response]);
+                    }
+                });
+
+            }
+        </script>
+    @endpush
 </x-master-layout>

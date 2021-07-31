@@ -26,7 +26,7 @@ class CheckoutDetails extends Component
         'first_name' => 'required',
         'email' => 'required',
         'phone' => 'required',
-        'address' => ['required', 'min:10']
+        'address' => ['required', 'min:8']
     ];
 
     public function mount()
@@ -67,9 +67,7 @@ class CheckoutDetails extends Component
                 $cart_items = $this->get_all_items();
                 $cart_details = $this->store_cart_in_db($this->session_id(), $cart_items, get_user_currency()['id'], get_user_currency()['code']);
             }
-
         }
-
         $this->cart_details = collect($cart_details);
         clear_redirect_for_prev_session();
 
@@ -90,11 +88,11 @@ class CheckoutDetails extends Component
             "email" => $this->email,
             "cartId" => $this->cart_details['id'],
             "amount" => $this->total_in_kobo,
-            "currency" => get_user_currency()['code'],
+            "currency" => $this->cart_details['payment_currency'],
             "metadata" => json_encode(['cart' => $this->cart_details['cart'], 'address' => ['first_name' => $this->first_name, 'last_name' => $this->last_name, 'email' => $this->email, 'phone' => $this->phone, 'address' => $this->address]]),
             "reference" => Paystack::genTranxRef()
         ];
-        return \Redirect::route('pay')->with($payment_data);
+//        return \Redirect::route('pay')->with($payment_data);
     }
 
     public function pay_on_delivery_order_confirmation()

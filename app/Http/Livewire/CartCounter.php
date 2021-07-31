@@ -8,7 +8,6 @@ use Modules\Shop\Traits\CartTraits;
 class CartCounter extends Component
 {
     use CartTraits;
-
     public $count;
     protected $listeners = ['updateItem' => 'updateCount'];
 

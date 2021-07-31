@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use Darryldecode\Cart\CartCondition;
 use Livewire\Component;
 use Modules\Shop\Entities\Product;
+use Modules\Shop\Entities\Promotion;
 use Modules\Shop\Traits\CartTraits;
 
 class AddToCart extends Component
@@ -29,6 +31,10 @@ class AddToCart extends Component
         return view('livewire.add-to-cart');
     }
 
+    /**
+     * @throws \Darryldecode\Cart\Exceptions\InvalidConditionException
+     *
+     */
     public function toggle_item()
     {
         if ($this->check_cart_item($this->product->sku)) {
@@ -40,24 +46,49 @@ class AddToCart extends Component
             // check if product exist in stock
             if ($this->check_product_stock($this->product)) {
                 $symbol = isset($this->product->currency) ? $this->product->currency->symbol : '';
-                $symbol_code = isset($this->product->currency) ? $this->product->currency->code : '';
+                $symbol_code = isset($this->product->currency) ? $this->product->currency->code : 'NGN';
                 $category = isset($this->product->category) ? $this->product->category->title : '';
                 $image = isset($this->product->image->url) ? $this->product->image->url : '';
                 $description = isset($this->product->description) ? substr($this->product->description, 0, 100) : '';
-                $item =
+                $buying_code = get_user_currency()['code'];
+                $buying_symbol = get_currency_symbol_from_id(get_user_currency()['id']); //
+                $price = $this->set_amount($buying_code, $this->product->price);
+
+
+                $condition = $this->get_condition($this->product->id);
+                $item = $condition ?
                     [
                         'id' => $this->product->sku,
                         'name' => $this->product->title,
-                        'price' => $this->product->price,
+                        'price' => $price ?: $this->product->price,
                         'quantity' => 1,
                         'attributes' => [
-                            'symbol' => $symbol,
-                            'code' => $symbol_code,
-                            'converted_code' => get_user_currency()['code'],
+                            'selling_symbol' => $symbol,
+                            'selling_code' => $symbol_code,
+                            'buying_code' => $price ? $buying_code : $symbol_code,
+                            'buying_symbol' => $buying_symbol,
+                            'selling_price' => $this->product->price,
                             'category' => $category,
                             'image' => $image,
                             'description' => $description
-                        ]
+                        ],
+                        'conditions' => $condition
+                    ] :
+                    [
+                        'id' => $this->product->sku,
+                        'name' => $this->product->title,
+                        'price' => $price,
+                        'quantity' => 1,
+                        'attributes' => [
+                            'selling_symbol' => $symbol,
+                            'selling_code' => $symbol_code,
+                            'buying_code' => $buying_code,
+                            'buying_symbol' => $buying_symbol,
+                            'selling_price' => $this->product->price,
+                            'category' => $category,
+                            'image' => $image,
+                            'description' => $description
+                        ],
                     ];
                 $this->add_cart($item);
                 $this->reduce_stock_value($this->product);
@@ -78,6 +109,33 @@ class AddToCart extends Component
         return false;
     }
 
+    /**
+     * @param $id
+     * @return array
+     * @throws \Darryldecode\Cart\Exceptions\InvalidConditionException
+     *
+     */
+    private function get_condition($id)
+    {
+        $condition = [];
+        $check_conditions = Promotion::where('condition', 1);
+        if ($check_conditions->count() > 0) {
+            $conditions = $check_conditions->get();
+            foreach ($conditions as $each) {
+                $products = collect($each->products);
+                if ($products->contains((int)$id)) {
+                    $condition[] = new CartCondition([
+                        'name' => $each->title,
+                        'type' => 'promo',
+                        'value' => $each->rate,
+                    ]);
+                }
+            }
+        }
+        // check all promotion if there is any that is for product base
+        return $condition;
+    }
+
     private function reduce_stock_value($product)
     {
         --$product->stock;
@@ -89,4 +147,5 @@ class AddToCart extends Component
         ++$product->stock;
         return $product->update();
     }
+
 }

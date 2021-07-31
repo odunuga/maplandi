@@ -157,18 +157,18 @@ trait CartTraits
 
     private function store_cart_in_db($session_id, $cart, $payment_id, $payment_symbol)
     {
+        $sub_total = 0;
         $sub_total_count = 0;
         $items = $this->get_all_items();
         foreach ($items as $item) {
-            $sub_total_count += $this->set_amount($item['attributes']['code'], $item['price'] * $item['quantity']);
+            $sub_total += ($item['price'] * $item['quantity']);
         }
         $sub_total = $sub_total_count;
-
         $tax = $this->get_site_settings() && $this->get_site_settings()->tax ? $this->get_site_settings()->tax : 0;
         $this->tax = $tax;
         $tax_per = $sub_total !== 0 ? ($sub_total * ($tax / 100)) : 0;
         $tax_added = $tax_per;
-        $total = $sub_total + $tax_per;
+        $total =  \Cart::session($this->session_id())->getSubTotal() + $tax_per;
         $check_exist = CartRecord::where('session_id', $session_id);
         if ($check_exist->count() > 0) {
             $cart = $check_exist->first();
@@ -208,13 +208,14 @@ trait CartTraits
                 'price' => $item['price'],
                 'quantity' => $item['quantity'],
                 'attributes' => [
-                    'symbol' => $item['attributes']['symbol'],
-                    'code' => $item['attributes']['code'],
-                    'converted_code' => $item['attributes']['converted_code'],
                     'category' => $item['attributes']['category'],
                     'image' => $item['attributes']['image'],
                     'description' => $item['attributes']['description'],
-                    'amount' => $this->set_amount($item['attributes']['code'], $item['price'] * $item['quantity'], $code)
+                    'selling_symbol' => $item['attributes']['selling_symbol'],
+                    'selling_code' => $item['attributes']['selling_code'],
+                    'buying_code' => $item['attributes']['buying_code'],
+                    'buying_symbol' => $item['attributes']['buying_symbol'],
+                    'selling_price' => $item['attributes']['selling_price'],
                 ]
             ];
         }

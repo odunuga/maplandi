@@ -36,7 +36,9 @@ return [
     'add_promo_image' => 'Add Promo Image',
     'success_promotion' => 'Promotion Created Successfully',
     'error_promotion' => 'Promotion Created Failed',
-    'product_not_found' => 'Product Not Found'
+    'product_not_found' => 'Product Not Found',
+    'error_fetching' => 'Error Fetching Item',
+    'product_tag' => 'Product Tags Added'
 
 
 ];

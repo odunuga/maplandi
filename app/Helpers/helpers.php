@@ -149,3 +149,10 @@ function convert_to_user_currency($amount, $code)
     }
     return currency_with_price((float)$amount, $code);
 }
+
+function get_currency_symbol_from_id($id)
+{
+    $currency = \Modules\Shop\Entities\Currency::where('id', $id)->first();
+    if ($currency) return $currency->symbol;
+    return;
+}

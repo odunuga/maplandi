@@ -109,14 +109,13 @@
                     @if($cart_details)
                         @foreach($cart_details['cart'] as $item)
                             <span class="text-muted  mb-3">
-                                    {{ $item['name'] }} - {{ currency_with_price($item['attributes']['amount'],$cart_details['payment_symbol']) }}
+                                    {{ $item['name'] }} - {{ currency_with_price($item['price'],$cart_details['payment_symbol']) }}
                                 </span>
                         @endforeach
                     @endif
                     <div class="m-t-sm">
                         <div class="btn-group">
                             <!--PAY WITH CARD BTN-->
-
                             <form method="post" action="{{ route('pay') }}" accept-charset="UTF-8"
                                   class="form-horizontal"
                                   role="form">

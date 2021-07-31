@@ -14,12 +14,10 @@ class Cart extends Component
     public $tax = 0.0;
     public $tax_added = 0.0;
     public $sub_total = 0.0;
-    protected $listeners = ['reloadItems' => 'reloadCartItems'];
-
-    public function reloadCartItems()
-    {
-        $this->render();
-    }
+    public $prev_total = 0.0;
+    public $there_is_coupon = false;
+    public $promos;
+    protected $listeners = ['reloadItems' => '$refresh'];
 
     public function render()
     {
@@ -33,14 +31,18 @@ class Cart extends Component
         $sub_total = 0;
         $items = $this->get_all_items();
         foreach ($items as $item) {
-            $sub_total += $this->set_amount($item['attributes']['code'], $item['price'] * $item['quantity']);
+            $sub_total += ($item['price'] * $item['quantity']);
         }
         $this->sub_total = $sub_total;
         $tax = $this->get_site_settings() && $this->get_site_settings()->tax ? $this->get_site_settings()->tax : 0;
         $this->tax = $tax;
         $tax_per = $sub_total !== 0 ? ($sub_total * ($tax / 100)) : 0;
         $this->tax_added = $tax_per;
-        $this->total = $sub_total + $tax_per;
+        $this->prev_total = $sub_total + $tax_per;
+        $cartConditions = \Cart::session($this->session_id())->getConditions();
+        $this->there_is_coupon = ($cartConditions && count($cartConditions) > 0);
+        $this->promos = ($cartConditions && count($cartConditions) > 0) ? $cartConditions : [];
+        $this->total = \Cart::session($this->session_id())->getSubTotal() + $tax_per;
     }
 
     public function gotoCheckout()
@@ -59,7 +61,7 @@ class Cart extends Component
 
         set_redirect_with_prev_session('checkout', $this->session_id());
         // redirect user to checkout page
-        $this->store_cart_in_db($this->session_id(), isset($cart) && count($cart) > 0 ? $this->add_converted_currency($this->get_all_items()) : '', get_user_currency()['id'], get_user_currency()['code']);
+        $this->store_cart_in_db($this->session_id(), isset($cart) && count($cart) > 0 ? $this->get_all_items() : '', get_user_currency()['id'], get_user_currency()['code']);
 
         return redirect()->route('checkout');
     }

@@ -665,13 +665,7 @@
                                                                                 <td align="right"
                                                                                     style="padding:0;Margin:0"><p
                                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">
-                                                                                        @isset($item['attributes']['converted_code'])
-                                                                                            {{ currency_with_price($item['attributes']['amount'],$item['attributes']['converted_code'])  }}
-                                                                                        @elseif($item['attributes']['amount'])
-                                                                                            {{ currency_with_price($item['attributes']['amount'],$item['attributes']['symbol'])  }}
-                                                                                        @else
-                                                                                            {{ currency_with_price($item['price'], $item['attributes']['symbol']) }}
-                                                                                        @endif
+                                                                                        {{ currency_with_price($item['price'],isset($item['attributes']['buying_currency'])?$item['attributes']['buying_currency']:'') }}
                                                                                     </p></td>
                                                                             </tr>
                                                                         </table>
