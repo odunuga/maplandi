@@ -1,4 +1,3 @@
-
 <div class="row">
     @if(isset($menu))
         <div class="col-sm-6 col-xl-3">
@@ -10,7 +9,7 @@
                     <div>
                         <h5 class="font-16">Total Items</h5>
                     </div>
-                    <h3 class="mt-4">{{ $menu['total_products'] }}</h3>
+                    <h3 class="mt-4">{{ format_number($menu['total_products']) }}</h3>
                 </div>
             </div>
         </div>
@@ -24,7 +23,7 @@
                     <div>
                         <h5 class="font-16">Total Revenue</h5>
                     </div>
-                    <h3 class="mt-4">{{ $menu['total_cost'] }}</h3>
+                    <h3 class="mt-4">{{ format_number($menu['total_cost']) }}</h3>
 
                 </div>
             </div>
@@ -39,7 +38,7 @@
                     <div>
                         <h5 class="font-16">Items In-Stock</h5>
                     </div>
-                    <h3 class="mt-4">{{ $menu['in_stock'] }}</h3>
+                    <h3 class="mt-4">{{ format_number($menu['in_stock']) }}</h3>
                 </div>
             </div>
         </div>
@@ -53,7 +52,7 @@
                     <div>
                         <h5 class="font-16">Sold items</h5>
                     </div>
-                    <h3 class="mt-4">{{ $menu['sold_items'] }}</h3>
+                    <h3 class="mt-4">{{ format_number($menu['sold_items']) }}</h3>
                 </div>
             </div>
         </div>

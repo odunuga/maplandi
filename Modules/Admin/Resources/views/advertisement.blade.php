@@ -1,4 +1,5 @@
 <x-master-layout>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" type="text/css"/>
     <!-- Start content -->
     <div class="content">
         <div class="container-fluid">
@@ -30,7 +31,7 @@
                                 </div>
                                 <div class="col-md-2 mb-3" style="margin-top:20px">
                                     <a class="btn btn-primary" href="javascript:void(0)"
-                                       onclick="$('#addPromo').modal('show')">Add Promo </a>
+                                       onclick="$('#addPromo').modal('show')">New Promo </a>
                                 </div>
                             </div>
 
@@ -39,14 +40,15 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">ID</th>
-                                        <th scope="col" colspan="2">Image</th>
+                                        <th scope="col">Image</th>
                                         <th scope="col">Title</th>
+                                        <th scope="col">Rate</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Start Date</th>
                                         <th scope="col">End Date</th>
                                         <th scope="col">Continuous</th>
+                                        <th scope="col">Condition</th>
                                         <th scope="col"> Actions</th>
-
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -103,6 +105,7 @@
     </div>
 
     @push('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
         <script>
             let deleteItem = (id, title) => {
                 $('#title').text(title);
@@ -129,8 +132,25 @@
                     }
                 });
             };
+            window.livewire.on('selectChanged', function () {
+                setTimeout(makeSelect, 2000);
+            });
 
 
+            let emitUpdate = () => {
+                window.livewire.emit('product_update', $('#selectProducts').val());
+            };
+
+
+            let makeSelect = () => {
+                let select = $('#selectProducts');
+                select.select2({})
+            }
+
+            let editItem = (data) => {
+                Livewire.emit('edit_promo', {id: data});
+                $('#addPromo').modal('show');
+            }
         </script>
         <script type="text/javascript"
                 src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
@@ -143,7 +163,7 @@
                 $('#promotions').DataTable({
                     ajax: {
                         type: "POST",
-                        url: '{{ route('admin.latest_products') }}',
+                        url: '{{ route('admin.promotions') }}',
                         dataSrc: 'promotions'
                     },
                     columns: [
@@ -152,7 +172,16 @@
                         },
 
                         {
-                            data: 'image'
+                            data: null,
+                            render: function (data) {
+                                return '<img src="' + data.image + '"  class="img-thumbnail h-12">';
+                            }
+                        },
+                        {
+                            data: 'title',
+                        },
+                        {
+                            data: 'rate',
                         },
                         {
                             data: 'description',
@@ -167,9 +196,13 @@
                             data: 'continuous'
                         },
                         {
+                            data: 'condition'
+                        },
+                        {
                             data: null,
                             render: function (data) {
-                                return '<a   href="javascript:void(0)" onclick="deleteItem(' + data.id + ',\'' + data.title + '\')" class="btn btn-sm  text-danger" > Delete Report </a><br> ';
+                                return '<a  href="javascript:void(0)" onclick="editItem(' + data.id + ')" class="btn btn-sm btn-outline-dark text-dark" > Edit </a>' +
+                                    '<a   href="javascript:void(0)" onclick="deleteItem(' + data.id + ',\'' + data.title + '\')" class="btn btn-sm  btn-danger" > Delete Report </a><br> ';
                             }
                         },
 

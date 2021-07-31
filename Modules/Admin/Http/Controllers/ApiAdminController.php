@@ -83,6 +83,6 @@ class ApiAdminController extends Controller
     public function get_promotions()
     {
         $adverts = Promotion::with('image')->latest()->get()->map->format_admin_promotion();
-        return response()->json(['adverts' => $adverts]);
+        return response()->json(['promotions' => $adverts]);
     }
 }

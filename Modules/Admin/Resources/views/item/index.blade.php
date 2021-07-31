@@ -33,7 +33,7 @@
                         <div>
                             <h5 class="font-16">Total Items</h5>
                         </div>
-                        <h3 class="mt-4 ">{{ $total }}</h3>
+                        <h3 class="mt-4 ">{{ format_number($total) }}</h3>
                     </div>
                 </div>
                 <!--CATEGORY SECTION-->

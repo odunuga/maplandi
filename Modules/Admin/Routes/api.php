@@ -37,7 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/admin_comments', [ApiAdminController::class, 'get_comments'])->name('admin.comments');
 
 
-    Route::post('/admin_promotions', [ApiAdminController::class, 'get_promotions'])->name('admin.promotionst');
+    Route::post('/admin_promotions', [ApiAdminController::class, 'get_promotions'])->name('admin.promotions');
 
 
 });

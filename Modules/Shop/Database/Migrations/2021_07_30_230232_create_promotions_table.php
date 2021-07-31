@@ -17,9 +17,12 @@ class CreatePromotionsTable extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->longText('description')->nullable();
+            $table->string('rate')->nullable();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
+            $table->longText('products')->nullable();
             $table->boolean('continuous')->nullable()->default(false);
+            $table->boolean('condition')->nullable()->default(false);
             $table->timestamps();
         });
     }

@@ -31,7 +31,11 @@ return [
     'empty_tag_title' => 'No Tag Title Provided',
     'duplicate_tag_created' => 'Duplicate Tag Found',
     'tag_created' => 'Tag Created Successfully',
-    'tag_updated' => 'Tag Updated Successfully'
+    'tag_updated' => 'Tag Updated Successfully',
+    'add_image' => 'Add Image',
+    'add_promo_image' => 'Add Promo Image',
+    'success_promotion'=>'Promotion Created Successfully',
+    'error_promotion'=>'Promotion Created Failed'
 
 
 ];
