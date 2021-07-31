@@ -30,12 +30,15 @@ class ProductReport extends Model
     {
         $reporter = isset($this->reporter) ? $this->reporter->name : '';
         $product = isset($this->product) ? $this->product->title : '';
+        $image = isset($this->product) ? $this->product->image_url : '';
+
         $message = isset($this->comment) ? $this->comment : '';
         return [
             'id' => $this->id,
             'reporter' => $reporter,
             'message' => $message,
             'product' => $product,
+            'product_image' => $image,
             'created_at' => $this->created_at->format('h:m a, d M Y')
         ];
     }

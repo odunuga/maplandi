@@ -197,6 +197,7 @@ class AdminController extends Controller
         $response = 'error';
         if (request()->has('id')) {
             $id = custom_filter_var(request()->get('id'));
+
             $tag_check = ProductReport::where('id', $id);
             if ($tag_check->count() > 0) {
                 $tag_check->delete();

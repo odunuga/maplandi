@@ -28,6 +28,10 @@
                                 <div class="col-md-10 ">
                                     <b class="h5 mt-0  mb-5 text-small">Promotions</b>
                                 </div>
+                                <div class="col-md-2 mb-3" style="margin-top:20px">
+                                    <a class="btn btn-primary" href="javascript:void(0)"
+                                       onclick="$('#addPromo').modal('show')">Add Promo </a>
+                                </div>
                             </div>
 
                             <div class="table-responsive">
@@ -62,7 +66,72 @@
     </div>
     <!-- content -->
 
+
+    <div class="modal fade" id="addPromo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Promotion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">x
+                    </button>
+                </div>
+                @livewire('admin.add-promotion')
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="confirmDelete" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <i class=" fas fa-exclamation-circle text-warning" style="font-size:70px;"></i>
+                    <h4>Delete Report by <span id="title"></span></h4>
+                    <input hidden id="deleteId" name="deleteId"/>
+                    <p>Users Report on products contribute to data analysis and might be useful in the future.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                    <button onclick="confirmDelete()" type="submit" class="btn btn-primary">Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
+        <script>
+            let deleteItem = (id, title) => {
+                $('#title').text(title);
+                $('#confirmDelete').modal('show');
+                $('#deleteId').val(id);
+            };
+            let confirmDelete = () => {
+                let id = $('#deleteId').val();
+                // console.log(id);
+                let url = '{{ route('control.product_report.delete') }}';
+                let data = {'id': id};
+                $.ajax({
+                    'url': url,
+                    'type': 'post',
+                    'data': data,
+                    success: function (data) {
+                        if (data.response == 'success') {
+                            $('#title').text('');
+                            $('#deleteId').val('');
+                            $('#confirmDelete').modal('hide');
+                            window.location.href = '{{ url() ->current()}}';
+                        }
+                        Livewire.emit('alert', [data.response, data.response]);
+                    }
+                });
+            };
+
+
+        </script>
         <script type="text/javascript"
                 src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
         <script type="text/javascript"
@@ -100,7 +169,7 @@
                         {
                             data: null,
                             render: function (data) {
-                                return '<a href="' + data.delete + '" class="btn btn-sm text-danger" > Delete </a>';
+                                return '<a   href="javascript:void(0)" onclick="deleteItem(' + data.id + ',\'' + data.title + '\')" class="btn btn-sm  text-danger" > Delete Report </a><br> ';
                             }
                         },
 

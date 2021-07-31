@@ -36,8 +36,9 @@
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Reporter</th>
-                                        <th scope="col">Product</th>
                                         <th scope="col">Message</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Product Image</th>
                                         <th scope="col">Date</th>
                                         <th scope="col">Actions</th>
                                     </tr>
@@ -57,8 +58,55 @@
         <!-- container-fluid -->
     </div>
     <!-- content -->
-
+    <div class="modal fade" id="confirmDelete" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <i class=" fas fa-exclamation-circle text-warning" style="font-size:70px;"></i>
+                    <h4>Delete Report by <span id="title"></span></h4>
+                    <input hidden id="deleteId" name="deleteId"/>
+                    <p>Users Report on products contribute to data analysis and might be useful in the future.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                    <button onclick="confirmDelete()" type="submit" class="btn btn-primary">Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     @push('scripts')
+        <script>
+            let deleteItem = (id, title) => {
+                $('#title').text(title);
+                $('#confirmDelete').modal('show');
+                $('#deleteId').val(id);
+            };
+            let confirmDelete = () => {
+                let id = $('#deleteId').val();
+                // console.log(id);
+                let url = '{{ route('control.product_report.delete') }}';
+                let data = {'id': id};
+                $.ajax({
+                    'url': url,
+                    'type': 'post',
+                    'data': data,
+                    success: function (data) {
+                        if (data.response == 'success') {
+                            $('#title').text('');
+                            $('#deleteId').val('');
+                            $('#confirmDelete').modal('hide');
+                            window.location.href = '{{ url() ->current()}}';
+                        }
+                        Livewire.emit('alert', [data.response, data.response]);
+                    }
+                });
+            };
+
+
+        </script>
         <script type="text/javascript"
                 src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
         <script type="text/javascript"
@@ -81,15 +129,24 @@
                             data: 'reporter'
                         },
                         {
+                            data: 'message'
+                        },
+                        {
                             data: 'product'
                         },
                         {
-                            data: 'message'
+                            data: 'created_at'
                         },
                         {
                             data: null,
                             render: function (data) {
-                                return '<a href="{{ url('/product/report/') }}' + data.delete + '/delete" class="btn btn-sm text-danger" > Delete </a>';
+                                return '<img src="' + data.product_image + '" class="img-thumbnail h-25 rounded-2" />';
+                            }
+                        },
+                        {
+                            data: null,
+                            render: function (data) {
+                                return '<a   href="javascript:void(0)" onclick="deleteItem(' + data.id + ',\'' + data.reporter + '\')" class="btn btn-sm  text-danger" > Delete Report </a><br> ';
                             }
                         },
 
