@@ -131,7 +131,8 @@ class AddProduct extends Component
         $this->store_parameter($product);
 
         $this->reset();
-        $this->emit('alert', ['success', __('texts.product_loaded_success')]);
+        session()->flash('success', __('texts.product_loaded_success'));
+        return $this->redirect(route('control.items'));
     }
 
     private function store_parameter($product)

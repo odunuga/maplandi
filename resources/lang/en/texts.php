@@ -34,8 +34,9 @@ return [
     'tag_updated' => 'Tag Updated Successfully',
     'add_image' => 'Add Image',
     'add_promo_image' => 'Add Promo Image',
-    'success_promotion'=>'Promotion Created Successfully',
-    'error_promotion'=>'Promotion Created Failed'
+    'success_promotion' => 'Promotion Created Successfully',
+    'error_promotion' => 'Promotion Created Failed',
+    'product_not_found' => 'Product Not Found'
 
 
 ];

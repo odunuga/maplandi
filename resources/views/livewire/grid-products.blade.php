@@ -1,4 +1,4 @@
-<div class="col-lg-4 col-m-6 col-12">
+<div class="col-lg-4 col-md-6 col-12">
     <div class="single-item-grid">
         <div class="image">
             <a href="{{ url('shop/'.$item->sku) }}"><img

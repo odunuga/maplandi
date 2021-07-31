@@ -26,7 +26,7 @@ class ProductComment extends Component
 
     public function render()
     {
-        return view('livewire.product-comments', ['comments' => $this->comments]);
+        return view('livewire.product-comment', ['comments' => $this->comments]);
     }
 
     public function sendNewComment()

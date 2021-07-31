@@ -65,9 +65,7 @@
                             <h3>{{__('shop.description')}}</h3>
                             {!! $product->description !!}
                         </div>
-
-                        <livewire:product-comment :comments="$product->comments" key="{{now()}}"/>
-
+                        @livewire('product-comment',['comments'=>$product->comments])
                     </div>
                     <div class="col-lg-4 col-md-5 col-12">
                         <div class="item-details-sidebar">

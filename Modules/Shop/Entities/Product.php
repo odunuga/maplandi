@@ -62,6 +62,10 @@ class Product extends Model
         return $this->belongsToMany(Parameter::class, 'product_parameters')->withPivot(['value']);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'id', 'product_id');
+    }
 
     public function getImageUrlAttribute()
     {
