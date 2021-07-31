@@ -63,9 +63,13 @@ Route::prefix('control-room')->group(function () {
     Route::post('/order/update', 'AdminController@update_order')->name('admin.order.update');
 
 
-    Route::post('/tags/add', 'AdminController@tags_add')->name('control.tags.add');
-
     Route::post('/tags/delete', 'AdminController@tags_delete')->name('control.tags.delete');
+
+    Route::post('/comment/delete', 'AdminController@comment_delete')->name('control.comment.delete');
+
+    Route::post('/comment_report/delete', 'AdminController@comment_report_delete')->name('control.comment_report.delete');
+
+    Route::post('/comment_report/delete', 'AdminController@product_report_delete')->name('control.product_report.delete');
 
 
     Route::post('comment_report/delete', 'AdminController@comment_report_delete')->name('control.comment_report.delete');

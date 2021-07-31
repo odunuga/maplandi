@@ -9,10 +9,13 @@ use Illuminate\Routing\Controller;
 use Modules\Admin\Traits\AdminTraits;
 use Modules\Admin\Traits\SiteSettingsTraits;
 use Modules\Cart\Entities\Order;
+use Modules\Shop\Entities\Comment;
+use Modules\Shop\Entities\CommentReport;
 use Modules\Shop\Entities\Currency;
 use Modules\Shop\Entities\Parameter;
 use Modules\Shop\Entities\Product;
 use Modules\Shop\Entities\ProductParameter;
+use Modules\Shop\Entities\ProductReport;
 use Modules\Shop\Entities\Tag;
 
 class AdminController extends Controller
@@ -138,12 +141,6 @@ class AdminController extends Controller
         return view('admin::advertisement');
     }
 
-    ////////////////////////////////// ADD //////////////////////////////
-    public function tags_tags_add()
-    {
-        return view('admin::tags');
-    }
-
     //////////////////////////// DELETE ///////////////////////////
 
     public function tags_delete()
@@ -155,7 +152,23 @@ class AdminController extends Controller
             $tag_check = Tag::where('id', $id);
             if ($tag_check->count() > 0) {
                 $tag_check->delete();
-                $message = 'Item Delete Successfully';
+                $message = 'Tag Delete Successfully';
+                $response = 'success';
+            }
+        }
+        return response()->json(['response' => $response, 'message' => $message]);
+    }
+
+    public function comment_delete()
+    {
+        $message = 'Error Cant locate item';
+        $response = 'error';
+        if (request()->has('id')) {
+            $id = custom_filter_var(request()->get('id'));
+            $tag_check = Comment::where('id', $id);
+            if ($tag_check->count() > 0) {
+                $tag_check->delete();
+                $message = 'Comment Deleted Successfully';
                 $response = 'success';
             }
         }
@@ -164,12 +177,34 @@ class AdminController extends Controller
 
     public function comment_report_delete()
     {
-        return view('admin::comments.comment_report');
+        $message = 'Error Cant locate item';
+        $response = 'error';
+        if (request()->has('id')) {
+            $id = custom_filter_var(request()->get('id'));
+            $tag_check = CommentReport::where('id', $id);
+            if ($tag_check->count() > 0) {
+                $tag_check->delete();
+                $message = 'Comment Deleted Successfully';
+                $response = 'success';
+            }
+        }
+        return response()->json(['response' => $response, 'message' => $message]);
     }
 
     public function product_report_delete()
     {
-        return view('admin::comments.product_report');
+        $message = 'Error Cant locate item';
+        $response = 'error';
+        if (request()->has('id')) {
+            $id = custom_filter_var(request()->get('id'));
+            $tag_check = ProductReport::where('id', $id);
+            if ($tag_check->count() > 0) {
+                $tag_check->delete();
+                $message = 'Report Deleted Successfully';
+                $response = 'success';
+            }
+        }
+        return response()->json(['response' => $response, 'message' => $message]);
     }
 
 }

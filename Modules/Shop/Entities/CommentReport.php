@@ -21,22 +21,27 @@ class CommentReport extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function comment()
+    public function message()
     {
         return $this->belongsTo(Comment::class, 'comment_id', 'id');
     }
 
     public function format_comment_report()
     {
-        $comment_by = isset($this->comment->comment_by) ? $this->comment->comment_by : '';
-        $comment = isset($this->comment) ? $this->comment->body : '';
+        $comment_by = isset($this->message->comment_by) ? $this->message->comment_by->name : '';
+
+        $message = isset($this->message) ? $this->message->body : '';
         $reporter = isset($this->reporter) ? $this->reporter->name : '';
+        $comments = isset($this->comment) ? $this->comment : '';
+
         return [
             'id' => $this->id,
             'reporter' => $reporter,
+            'reporter_comment' => $comments,
+            'comment_id' => $this->comment_id,
             'commenter' => $comment_by,
-            'comment' => $comment,
-            'date' => $this->created_at->format('h:m a, d M Y'),
+            'message' => $message,
+            'date' => $this->created_at->format('h:ma, d M Y'),
         ];
     }
 

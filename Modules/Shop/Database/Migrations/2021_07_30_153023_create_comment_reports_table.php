@@ -17,7 +17,7 @@ class CreateCommentReportsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('comment_id');
-            $table->longText('comments')->nullable();
+            $table->longText('comment')->nullable();
             $table->timestamps();
         });
     }

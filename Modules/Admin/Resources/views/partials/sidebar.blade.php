@@ -55,7 +55,7 @@
                 </li>
                 <li>
                     <a href="{{ route('control.promotions') }}" class="waves-effect">
-                        <i class="fas fa-bullhorn"></i>
+                       <i class="fas fa-bullhorn"></i>
                         <span> Promotions </span></a>
                 </li>
 

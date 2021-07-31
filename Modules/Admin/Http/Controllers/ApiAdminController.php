@@ -62,7 +62,7 @@ class ApiAdminController extends Controller
 
     public function comment_report()
     {
-        $reports = CommentReport::with(['reporter', 'comment'])->latest()->get()
+        $reports = CommentReport::with(['reporter', 'message'])->latest()->get()
             ->map->format_comment_report();
         return response()->json(['comments' => $reports]);
     }
@@ -75,7 +75,7 @@ class ApiAdminController extends Controller
 
     public function get_comments()
     {
-        $comments = Comment::with('user')->latest()->map->format_admin_comments();
+        $comments = Comment::with('comment_by')->latest()->get()->map->format_admin_comments();
         return response()->json(['comments' => $comments]);
     }
 

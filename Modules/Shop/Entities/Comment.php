@@ -33,7 +33,7 @@ class Comment extends Model
         return [
             'id' => $this->id,
             'commenter' => isset($this->comment_by) ? $this->comment_by->name : '',
-            'comments' => $this->comment,
+            'comment' => $this->comment,
             'date' => $this->created_at->format('h:m a, d M Y')
         ];
     }
