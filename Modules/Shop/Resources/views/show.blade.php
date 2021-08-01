@@ -67,8 +67,8 @@
                         </div>
                         <div class="single-block comments">
                             <h3>{{__('shop.comments')}}</h3>
-                            @if($product->comments)
-                                @foreach($product->comments as $comment)
+                            @if($comments)
+                                @foreach($comments as $comment)
                                     <livewire:single-comment :comment="$comment" key="{{$comment->id}}"/>
                                 @endforeach
                             @else
@@ -76,7 +76,7 @@
                             @endif
                         </div>
                         <div class="pagination pagination-sm">
-                            {{ $product->comments->links() }}
+                            {{ $comments->links() }}
                         </div>
                         @livewire('product-comment',['product_id'=>$product->id])
                     </div>

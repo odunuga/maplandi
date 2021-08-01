@@ -70,8 +70,9 @@ class ShopController extends Controller
         $product_check = $this->repo->findBySku($sku, ['image', 'comments', 'category', 'tags', 'currency', 'parameters']);
         if ($product_check->count() > 0) {
             $product = $product_check->first();
-
-            return view('shop::show')->with(compact('product'));
+            $comments = $this->repo->paginate($product->comments);
+//            dd($comments);
+            return view('shop::show')->with(compact('product', 'comments'));
         }
         session()->flash('error', __('texts.product_not_found'));
         return back();

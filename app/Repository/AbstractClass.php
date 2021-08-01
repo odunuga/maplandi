@@ -28,7 +28,7 @@ abstract class AbstractClass
      * @param Model|null $model
      * @return Model
      */
-    public function getModel(Model $model = null): Model
+    public function getModel(Model $model = null)
     {
         if ($model) {
             return $this->model = $model;
@@ -82,6 +82,7 @@ abstract class AbstractClass
         return $query->firstOrFail();
     }
 
+
     /**
      * fetch using relationship
      *
@@ -102,9 +103,10 @@ abstract class AbstractClass
      */
     public function paginate(Collection $collection, $per_page = null, $current_page = null)
     {
-        $offset = $collection->forPage($this->current_page, $this->per_page);
+        $per = $per_page !== null ? $per_page : $this->per_page;
+        $offset = $collection->forPage($this->current_page, $per);
         $total = count($collection);
-        return new LengthAwarePaginator($offset, $total, $this->per_page, Paginator::resolveCurrentPage(), ['path' => Paginator::resolveCurrentPath()]);
+        return new LengthAwarePaginator($offset, $total, $per, Paginator::resolveCurrentPage(), ['path' => Paginator::resolveCurrentPath()]);
     }
 
 
