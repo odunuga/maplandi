@@ -616,11 +616,13 @@
                                                                                     style="padding:0;Margin:0;padding-top:5px">
                                                                                     <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">
                                                                                         description: {{ isset($item['attributes']['description'])?$item['attributes']['description']:'' }}</p>
-                                                                                    <p> @if(isset($item['conditions']) && count($item['conditions'])>0) @foreach($item['conditions'] as $con)
-                                                                                            <span
-                                                                                                class="text-danger">{{ $con }}
+                                                                                    <p> @if(isset($item['conditions']) && count($item['conditions'])>0)
+                                                                                            Item
+                                                                                            Promo: @foreach($item['conditions'] as $con)
+                                                                                                <span
+                                                                                                    class="text-danger">{{ $con }}
                                                                                             </span>
-                                                                                        @endforeach
+                                                                                            @endforeach
 
                                                                                         @endif
                                                                                     </p>
@@ -703,7 +705,18 @@
                                                                 style="padding:0;Margin:0;padding-top:10px;padding-bottom:20px">
                                                                 <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">
                                                                     Subtotal:&nbsp;<strong>{{ currency_with_price($order->sub_total,$order->currency) }}</strong><br>Shipping:&nbsp;<strong>$0.00</strong><br>Tax:&nbsp;<strong>{{ currency_with_price($order->tax_added,$order->currency) }}</strong><br>Total:&nbsp;<strong>{{ currency_with_price($order->amount,$order->currency) }}</strong>
-                                                                </p></td>
+                                                                </p>
+                                                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">
+                                                                    @if(isset($order['conditions']) && count($order['conditions'])>0)
+                                                                        Promo: @foreach($order['conditions'] as $con)
+                                                                            <span
+                                                                                class="text-danger">
+                                                                            {{  $con }}
+                                                                              </span>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </p>
+                                                            </td>
                                                         </tr>
                                                     </table>
                                                 </td>

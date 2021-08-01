@@ -21,6 +21,7 @@ class CheckoutDetails extends Component
     public $phone;
     public $address;
     public $total_in_kobo;
+    public $conditions;
 
     protected $rules = [
         'first_name' => 'required',
@@ -37,8 +38,6 @@ class CheckoutDetails extends Component
         $this->email = auth()->user()->shipping_address ? auth()->user()->shipping_address->email : auth()->user()->email;
         $this->phone = auth()->user()->shipping_address ? auth()->user()->shipping_address->phone : auth()->user()->phone;
         $this->address = auth()->user()->shipping_address ? auth()->user()->shipping_address->address : '';
-
-
         if ($this->cart_details && isset($this->cart_details['cart']) && $this->cart_details['cart'] !== [] && count($this->cart_details['cart']) > 0) {
             return view('livewire.checkout-details', ['cart_details' => $this->cart_details]);
         }
@@ -90,7 +89,7 @@ class CheckoutDetails extends Component
             "cartId" => $this->cart_details['id'],
             "amount" => $this->total_in_kobo,
             "currency" => $this->cart_details['payment_currency'],
-            "metadata" => json_encode(['cart' => $this->cart_details['cart'], 'address' => ['first_name' => $this->first_name, 'last_name' => $this->last_name, 'email' => $this->email, 'phone' => $this->phone, 'address' => $this->address]]),
+            "metadata" => json_encode(['cart' => $this->cart_details['cart'], 'address' => ['first_name' => $this->first_name, 'last_name' => $this->last_name, 'email' => $this->email, 'phone' => $this->phone, 'address' => $this->address, 'conditions' => $this->get_cart_conditions()]]),
             "reference" => Paystack::genTranxRef()
         ];
 //        return \Redirect::route('pay')->with($payment_data);
@@ -108,11 +107,13 @@ class CheckoutDetails extends Component
     public function render()
     {
         $this->cal_total_in_kobo();
-
+        $conditions = $this->get_cart_conditions();
+        $this->conditions = $this->get_condition_names($conditions);
         return view('livewire.checkout-details', ['cart_details' => $this->cart_details]);
 
 
     }
+
 
     private function generate_on_delivery_id()
     {
@@ -148,6 +149,7 @@ class CheckoutDetails extends Component
             $order->email = $this->email;
             $order->phone = $this->phone;
             $order->address = $this->address;
+            $order->conditions = $this->get_cart_conditions();
             $order->fees = null;
             $order->customer_code = null;
             $order->transaction_confirmed = false;

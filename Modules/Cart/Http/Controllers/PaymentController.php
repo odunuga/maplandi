@@ -83,6 +83,7 @@ class PaymentController extends Controller
             $order->email = $address['email'];
             $order->phone = $address['phone'];
             $order->address = $address['address'];
+            $order->conditions = $paymentDetails['data']['metadata']['conditions'];
             $order->fees = $paymentDetails['data']['fees'];
             $order->customer_code = $paymentDetails['data']['customer']['customer_code'];
             $order->transaction_confirmed = $paymentDetails['data']['status'] === "success";

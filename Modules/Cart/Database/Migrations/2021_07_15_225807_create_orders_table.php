@@ -37,6 +37,7 @@ class CreateOrdersTable extends Migration
             $table->string('email')->nullable();
             $table->longText('address')->nullable();
             $table->string('fees')->nullable();
+            $table->longText('conditions')->nullable();
             $table->string('customer_code')->nullable();
             $table->boolean('transaction_confirmed')->nullable()->default(false);
             $table->integer('delivery_status')->nullable()->default(0);

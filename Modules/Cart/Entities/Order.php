@@ -26,6 +26,7 @@ use Modules\Shop\Entities\Currency;
  * @property mixed last_name
  * @property mixed email
  * @property mixed address
+ * @property mixed conditions
  * @property mixed fees
  * @property mixed customer_code
  * @property bool transaction_confirmed
@@ -49,6 +50,7 @@ class Order extends Model
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
         'cart' => 'array',
+        'conditions' => 'array',
         'status' => 'bool',
         'transaction_status' => 'bool'
     ];

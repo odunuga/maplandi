@@ -92,6 +92,10 @@ trait CartTraits
         return $this->get_site_settings()->currency;
     }
 
+    private function get_cart_conditions()
+    {
+        return \Cart::session($this->session_id())->getConditions();
+    }
 
     private function check_session_cart()
     {
@@ -175,7 +179,7 @@ trait CartTraits
 
         // get cart conditions
         $total = \Cart::session($this->session_id())->getTotal();
-        $conditions = \Cart::session($this->session_id())->getConditions();
+        $conditions = $this->get_cart_conditions();
 
         $check_exist = CartRecord::where('session_id', $session_id);
         if ($check_exist->count() > 0) {
@@ -214,9 +218,7 @@ trait CartTraits
         $condition = [];
         foreach ($items as $item) {
             if ($item->conditions) {
-                foreach ($item->getConditions() as $con) {
-                    $condition[] = $con->getName();
-                }
+                $condition = $this->get_condition_names($item->conditions);
             }
             $new_record[] = ['id' => $item['id'],
                 'name' => $item['name'],
@@ -238,6 +240,16 @@ trait CartTraits
         return $new_record;
     }
 
+    private function get_condition_names($conditions)
+    {
+        $condition = [];
+        if ($conditions && count($conditions)) {
+            foreach ($conditions as $item) {
+                $condition[] = $item->getName();
+            }
+        }
+        return $condition;
+    }
 
     private function delete_from_saved($id)
     {
@@ -256,10 +268,6 @@ trait CartTraits
         }
     }
 
-    private function get_cart_conditions()
-    {
-        return \Cart::session($this->session_id())->getConditions();
-    }
 
     /**
      * @param $id
