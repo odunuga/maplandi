@@ -175,6 +175,7 @@ trait CartTraits
 
         // get cart conditions
         $total = \Cart::session($this->session_id())->getTotal();
+        $conditions = \Cart::session($this->session_id())->getConditions();
 
         $check_exist = CartRecord::where('session_id', $session_id);
         if ($check_exist->count() > 0) {
@@ -186,7 +187,7 @@ trait CartTraits
                 'payment_symbol' => $payment_symbol,
                 'tax_added' => $tax_added,
                 'total' => $total,
-
+                'conditions' => $conditions
             ]);
 
             return $cart;
@@ -199,6 +200,7 @@ trait CartTraits
                 'payment_symbol' => $payment_symbol,
                 'tax_added' => $tax_added,
                 'total' => $total,
+                'conditions' => $conditions
             ]);
             return $cart;
         }
@@ -206,10 +208,16 @@ trait CartTraits
 
     }
 
-    private function add_converted_currency($items, $code = null)
+    private function add_converted_currency($items)
     {
         $new_record = [];
+        $condition = [];
         foreach ($items as $item) {
+            if ($item->conditions) {
+                foreach ($item->getConditions() as $con) {
+                    $condition[] = $con->getName();
+                }
+            }
             $new_record[] = ['id' => $item['id'],
                 'name' => $item['name'],
                 'price' => $item['price'],
@@ -223,7 +231,8 @@ trait CartTraits
                     'buying_code' => $item['attributes']['buying_code'],
                     'buying_symbol' => $item['attributes']['buying_symbol'],
                     'selling_price' => $item['attributes']['selling_price'],
-                ]
+                ],
+                'conditions' => $condition
             ];
         }
         return $new_record;
@@ -298,7 +307,7 @@ trait CartTraits
                     'name' => $each->title,
                     'type' => 'promo',
                     'value' => '-' . $each->rate,
-                    'target' => 'subtotal'
+                    'target' => 'total'
                 ]);
 
             }

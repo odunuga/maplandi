@@ -22,6 +22,7 @@ class CreateCartRecordsTable extends Migration
             $table->string('total');
             $table->string('payment_currency');
             $table->string('payment_symbol');
+            $table->longText('conditions')->nullable();
             $table->timestamps();
         });
     }

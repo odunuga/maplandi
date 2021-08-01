@@ -27,7 +27,7 @@ return [
          * SKU separator
          *
          */
-        'separator' => '-',
+        'separator' => 'sku-',
 
         /*
          * Shall SKUs be enforced to be unique

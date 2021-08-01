@@ -24,6 +24,7 @@ class CreateCartsTable extends Migration
             $table->string('payment_currency');
             $table->string('payment_symbol');
             $table->boolean('payed')->nullable()->default(false);
+            $table->longText('conditions')->nullable();
             $table->timestamps();
         });
     }

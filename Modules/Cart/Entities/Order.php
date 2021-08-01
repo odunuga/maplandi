@@ -65,7 +65,7 @@ class Order extends Model
 
     public function payment_currency()
     {
-        return $this->belongsTo(Currency::class, 'currency', 'id');
+        return $this->belongsTo(Currency::class, 'currency', 'code');
     }
 
     public function getImageUrlAttribute()

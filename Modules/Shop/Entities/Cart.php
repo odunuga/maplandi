@@ -17,7 +17,8 @@ class Cart extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'cart' => 'array'
+        'cart' => 'array',
+        'conditions' => 'array'
     ];
 
 

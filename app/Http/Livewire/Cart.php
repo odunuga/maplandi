@@ -72,10 +72,9 @@ class Cart extends Component
         }
         // check if cart is not empty
         $cart = $this->get_all_items();
-
         set_redirect_with_prev_session('checkout', $this->session_id());
         // redirect user to checkout page
-        $this->store_cart_in_db($this->session_id(), isset($cart) && count($cart) > 0 ? $this->get_all_items() : '', get_user_currency()['id'], get_user_currency()['code']);
+        $this->store_cart_in_db($this->session_id(), $this->get_all_items(), get_user_currency()['id'], get_user_currency()['code']);
 
         return redirect()->route('checkout');
     }
@@ -94,6 +93,8 @@ class Cart extends Component
         }
 
         if (isset($cart) && $cart !== null && collect($cart)->count() > 0) {
+            $conditions = \Cart::session($this->session_id())->getConditions();
+
             $cart->update([
                 'cart' => $this->add_converted_currency($this->get_all_items()),
                 'sub_total' => $this->sub_total,
@@ -101,6 +102,7 @@ class Cart extends Component
                 'payment_symbol' => get_user_currency()['code'],
                 'tax_added' => $this->tax_added,
                 'total' => $this->total,
+                'conditions' => $conditions
             ]);
         }
     }

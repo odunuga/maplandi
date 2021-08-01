@@ -616,6 +616,14 @@
                                                                                     style="padding:0;Margin:0;padding-top:5px">
                                                                                     <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">
                                                                                         description: {{ isset($item['attributes']['description'])?$item['attributes']['description']:'' }}</p>
+                                                                                    <p> @if(isset($item['conditions']) && count($item['conditions'])>0) @foreach($item['conditions'] as $con)
+                                                                                            <span
+                                                                                                class="text-danger">{{ $con }}
+                                                                                            </span>
+                                                                                        @endforeach
+
+                                                                                        @endif
+                                                                                    </p>
                                                                                 </td>
                                                                             </tr>
                                                                         </table>
@@ -737,7 +745,7 @@
                                                                     method:&nbsp;<strong>{{ ucfirst($order->payment_type) }}</strong>
                                                                 </p>
                                                                 <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">
-                                                                    Currency:&nbsp;<strong>{{ $order->payment_currency->name }}</strong>
+                                                                    Currency:&nbsp;<strong>{{ isset($order->payment_currency)?$order->payment_currency->name:'' }}</strong>
                                                                 </p></td>
                                                         </tr>
                                                     </table>

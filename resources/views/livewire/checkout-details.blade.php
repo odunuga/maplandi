@@ -24,7 +24,6 @@
                                            placeholder="Last name">
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-12">
                                 <div class="form-group mb-3">
                                     <input name="phone" type="text" wire:dirty.class="border-red-500"
@@ -109,43 +108,47 @@
                     @if($cart_details)
                         @foreach($cart_details['cart'] as $item)
                             <span class="text-muted  mb-3">
-                                    {{ $item['name'] }} - {{ currency_with_price($item['price'],$cart_details['payment_symbol']) }}
+                                    {{ $item['name'] }}
                                 </span>
-                        @endforeach
-                    @endif
-                    <div class="m-t-sm">
-                        <div class="btn-group">
-                            <!--PAY WITH CARD BTN-->
-                            <form method="post" action="{{ route('pay') }}" accept-charset="UTF-8"
-                                  class="form-horizontal"
-                                  role="form">
-                                @csrf
-                                <input type="hidden" name="email" value="{{ $email }}"> {{-- required --}}
-                                <input type="hidden" name="order_id" value="{{ $cart_details['id'] }}">
-                                <input hidden name="first_name" value="{{ $first_name }}"/>
-                                <input hidden name="last_name" value="{{ $last_name }}"/>
-                                <input hidden name="phone" value="{{ $phone }}"/>
-                                <input hidden name="address" value="{{ $address }}"/>
-                                <input type="hidden" name="amount" value="{{ $total_in_kobo }}">
-                                <input type="hidden" name="currency" value="{{ get_user_currency()['code'] }}">
-                                <input type="hidden" name="metadata"
-                                       value="{{ json_encode(['cart'=>$cart_details['cart'],'sub_total'=>$cart_details['sub_total'],'tax_added'=>$cart_details['tax_added'],'address'=>['first_name'=>$first_name,'last_name'=>$last_name,'email'=>$email,'phone'=>$phone,'address'=>$address]]) }}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
-                                <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
-                                <button id="cardpay-btn" wire:dirty.attr="disabled" type="submit"
-                                        class="btn btn-danger btn-lg"><i
-                                        class="lni lni-credit-cards"></i>
-                                    Pay Now
-                                </button>
-                            </form>
+                            @if(isset($item['conditions']) && count($item['conditions'])>0) @foreach($item['conditions'] as $con)
+                                <span class="text-danger">{{ $con }}</span> @endforeach
 
-                            <!--PAY ON DELIVERY BTN-->
-                            <button wire:click="pay_on_delivery_order_confirmation" id="pod-btn"
-                                    class="btn btn-danger btn-lg">
-                                <i class="lni lni-delivery"></i>
-                                Pay on Delivery <i class="lni lni-spinner lni-is-spinning" wire:loading></i>
-                            </button>
-                        </div>
-                    </div>
+                                @endif
+                            @endforeach
+                            @endif
+                            <div class="m-t-sm">
+                                <div class="btn-group">
+                                    <!--PAY WITH CARD BTN-->
+                                    <form method="post" action="{{ route('pay') }}" accept-charset="UTF-8"
+                                          class="form-horizontal"
+                                          role="form">
+                                        @csrf
+                                        <input type="hidden" name="email" value="{{ $email }}"> {{-- required --}}
+                                        <input type="hidden" name="order_id" value="{{ $cart_details['id'] }}">
+                                        <input hidden name="first_name" value="{{ $first_name }}"/>
+                                        <input hidden name="last_name" value="{{ $last_name }}"/>
+                                        <input hidden name="phone" value="{{ $phone }}"/>
+                                        <input hidden name="address" value="{{ $address }}"/>
+                                        <input type="hidden" name="amount" value="{{ $total_in_kobo }}">
+                                        <input type="hidden" name="currency" value="{{ get_user_currency()['code'] }}">
+                                        <input type="hidden" name="metadata"
+                                               value="{{ json_encode(['cart'=>$cart_details['cart'],'sub_total'=>$cart_details['sub_total'],'tax_added'=>$cart_details['tax_added'],'address'=>['first_name'=>$first_name,'last_name'=>$last_name,'email'=>$email,'phone'=>$phone,'address'=>$address]]) }}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
+                                        <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
+                                        <button id="cardpay-btn" wire:dirty.attr="disabled" type="submit"
+                                                class="btn btn-danger btn-lg"><i
+                                                class="lni lni-credit-cards"></i>
+                                            Pay Now
+                                        </button>
+                                    </form>
+
+                                    <!--PAY ON DELIVERY BTN-->
+                                    <button wire:click="pay_on_delivery_order_confirmation" id="pod-btn"
+                                            class="btn btn-danger btn-lg">
+                                        <i class="lni lni-delivery"></i>
+                                        Pay on Delivery <i class="lni lni-spinner lni-is-spinning" wire:loading></i>
+                                    </button>
+                                </div>
+                            </div>
                 </div>
 
                 <div class="ibox-content text-center">
