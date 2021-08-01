@@ -26,23 +26,31 @@ class Cart extends Component
         return view('livewire.cart', ['items' => $this->get_all_items()]);
     }
 
+    /**
+     * @throws \Darryldecode\Cart\Exceptions\InvalidConditionException
+     */
     private function calculateTotals()
     {
-        $sub_total = 0;
         $items = $this->get_all_items();
-        foreach ($items as $item) {
-            $sub_total += ($item['price'] * $item['quantity']);
-        }
-        $this->sub_total = $sub_total;
+
+        $this->sub_total = \Cart::session($this->session_id())->getSubTotal();
+
         $tax = $this->get_site_settings() && $this->get_site_settings()->tax ? $this->get_site_settings()->tax : 0;
         $this->tax = $tax;
-        $tax_per = $sub_total !== 0 ? ($sub_total * ($tax / 100)) : 0;
-        $this->tax_added = $tax_per;
-        $this->prev_total = $sub_total + $tax_per;
-        $cartConditions = \Cart::session($this->session_id())->getConditions();
+
+        $this->tax_added = $this->sub_total * ($tax / 100);
+        //set tax
+        $tax_added = $this->create_tax_condition($tax);
+        $this->set_tax_condition($tax_added);
+
+        // get cart conditions
+        $set_conditions = $this->get_cart_condition();
+        \Cart::session($this->session_id())->condition($set_conditions);
+
+        $cartConditions = $this->get_cart_conditions();
         $this->there_is_coupon = ($cartConditions && count($cartConditions) > 0);
         $this->promos = ($cartConditions && count($cartConditions) > 0) ? $cartConditions : [];
-        $this->total = \Cart::session($this->session_id())->getSubTotal() + $tax_per;
+        $this->total = \Cart::session($this->session_id())->getTotal();
     }
 
     public function gotoCheckout()

@@ -6,10 +6,13 @@ namespace Modules\Shop\Traits;
 
 use AmrShawky\LaravelCurrency\Facade\Currency;
 use App\Http\Livewire\Cart;
+use Carbon\Carbon;
+use Darryldecode\Cart\CartCondition;
 use Illuminate\Support\Facades\Cache;
 use Modules\Admin\Traits\SiteSettingsTraits;
 use Modules\Cart\Entities\CartRecord;
 use Modules\Cart\Entities\SavedItem;
+use Modules\Shop\Entities\Promotion;
 
 trait CartTraits
 {
@@ -155,20 +158,24 @@ trait CartTraits
         return \Modules\Shop\Entities\Cart::where('user_id', auth()->id())->where('session_id', $session)->first();
     }
 
+    /**
+     * @param $session_id
+     * @param $cart
+     * @param $payment_id
+     * @param $payment_symbol
+     * @return mixed
+     * @throws \Darryldecode\Cart\Exceptions\InvalidConditionException
+     */
     private function store_cart_in_db($session_id, $cart, $payment_id, $payment_symbol)
     {
-        $sub_total = 0;
-        $sub_total_count = 0;
-        $items = $this->get_all_items();
-        foreach ($items as $item) {
-            $sub_total += ($item['price'] * $item['quantity']);
-        }
-        $sub_total = $sub_total_count;
+        $sub_total = \Cart::session($this->session_id())->getSubTotal();
+
         $tax = $this->get_site_settings() && $this->get_site_settings()->tax ? $this->get_site_settings()->tax : 0;
-        $this->tax = $tax;
-        $tax_per = $sub_total !== 0 ? ($sub_total * ($tax / 100)) : 0;
-        $tax_added = $tax_per;
-        $total =  \Cart::session($this->session_id())->getSubTotal() + $tax_per;
+        $tax_added = $this->sub_total * ($tax / 100);
+
+        // get cart conditions
+        $total = \Cart::session($this->session_id())->getTotal();
+
         $check_exist = CartRecord::where('session_id', $session_id);
         if ($check_exist->count() > 0) {
             $cart = $check_exist->first();
@@ -240,4 +247,82 @@ trait CartTraits
         }
     }
 
+    private function get_cart_conditions()
+    {
+        return \Cart::session($this->session_id())->getConditions();
+    }
+
+    /**
+     * @param $id
+     * @return array
+     * @throws \Darryldecode\Cart\Exceptions\InvalidConditionException
+     *
+     */
+    private function get_item_condition($id)
+    {
+        $now = Carbon::now();
+        $condition = [];
+        $check_conditions = Promotion::where('condition', 1)->whereDate('start_date', '<', $now)->whereDate('end_date', '>', $now);
+        if ($check_conditions->count() > 0) {
+            $conditions = $check_conditions->get();
+            foreach ($conditions as $each) {
+                $products = collect($each->products);
+                if ($products->contains((int)$id)) {
+                    $condition[] = new CartCondition([
+                        'name' => $each->title,
+                        'type' => 'promo',
+                        'value' => '-' . $each->rate,
+                    ]);
+                }
+            }
+        }
+        // check all promotion if there is any that is for product base
+        return $condition;
+    }
+
+    /**
+     * @param void
+     * @return array
+     * @throws \Darryldecode\Cart\Exceptions\InvalidConditionException
+     *
+     */
+    private function get_cart_condition()
+    {
+        $now = Carbon::now();
+        $condition = [];
+        $check_conditions = Promotion::where('condition', 0)->whereDate('start_date', '<', $now)->whereDate('end_date', '>', $now)->orWhere('continuous', 0);
+        if ($check_conditions->count() > 0) {
+            $conditions = $check_conditions->get();
+            foreach ($conditions as $each) {
+                $condition[] = new CartCondition([
+                    'name' => $each->title,
+                    'type' => 'promo',
+                    'value' => '-' . $each->rate,
+                    'target' => 'subtotal'
+                ]);
+
+            }
+        }
+        // check all promotion if there is any that is for product base
+        return $condition;
+    }
+
+    /**
+     * @param $tax
+     * @throws \Darryldecode\Cart\Exceptions\InvalidConditionException
+     */
+    private function create_tax_condition($tax)
+    {
+        return new  CartCondition(array(
+            'name' => 'TAX ' . $tax . '%',
+            'type' => 'tax',
+            'target' => 'subtotal',
+            'value' => '+' . $tax . '%',
+        ));
+    }
+
+    private function set_tax_condition($tax)
+    {
+        \Cart::session($this->session_id())->condition($tax);
+    }
 }

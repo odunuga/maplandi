@@ -55,7 +55,7 @@ class AddToCart extends Component
                 $price = $this->set_amount($buying_code, $this->product->price);
 
 
-                $condition = $this->get_condition($this->product->id);
+                $condition = $this->get_item_condition($this->product->id);
                 $item = $condition ?
                     [
                         'id' => $this->product->sku,
@@ -109,32 +109,7 @@ class AddToCart extends Component
         return false;
     }
 
-    /**
-     * @param $id
-     * @return array
-     * @throws \Darryldecode\Cart\Exceptions\InvalidConditionException
-     *
-     */
-    private function get_condition($id)
-    {
-        $condition = [];
-        $check_conditions = Promotion::where('condition', 1);
-        if ($check_conditions->count() > 0) {
-            $conditions = $check_conditions->get();
-            foreach ($conditions as $each) {
-                $products = collect($each->products);
-                if ($products->contains((int)$id)) {
-                    $condition[] = new CartCondition([
-                        'name' => $each->title,
-                        'type' => 'promo',
-                        'value' => $each->rate,
-                    ]);
-                }
-            }
-        }
-        // check all promotion if there is any that is for product base
-        return $condition;
-    }
+
 
     private function reduce_stock_value($product)
     {

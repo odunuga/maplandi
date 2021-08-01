@@ -54,10 +54,10 @@
                                             </td>
                                             <td class="text-md-center">
                                                 @if($there_is_coupon)
-                                                    <strike
-                                                        class="text-danger text-sm">{{ currency_with_price($total,get_user_currency()['code']) }}  </strike>
-                                                    <span class="text-sm">+Discount: </span>  <span
-                                                        class="text-danger">{{ currency_with_price($prev_total,get_user_currency()['code']) }} </span>
+{{--                                                    <strike--}}
+                                                    {{--                                                        class="text-danger text-sm">{{ currency_with_price($total,get_user_currency()['code']) }}  </strike>--}}
+                                                   <span
+                                                        class="text-danger">{{ currency_with_price($total,get_user_currency()['code']) }} </span>
                                                 @else
                                                     <span
                                                         class="text-danger">{{ currency_with_price($total,get_user_currency()['code']) }}</span>

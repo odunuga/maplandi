@@ -53,7 +53,7 @@ class InvoicePaid extends Notification
             ->subject('Invoice Paid')
             ->greeting($line1)
             ->line($line2)
-            ->action('Notification Action', url('order/' . $this->order->reference))
+            ->action('View Order', url('order/' . $this->order->reference))
             ->line('Thank you for your patronage.');
     }
 

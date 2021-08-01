@@ -81,6 +81,7 @@ class CheckoutDetails extends Component
 
     }
 
+
     public function submitCheckout()
     {
         $this->validate();

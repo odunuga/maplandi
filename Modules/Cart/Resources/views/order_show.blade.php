@@ -222,7 +222,7 @@
                                                 </div>
 
                                                 <div class="col-lg-3 col-md-3 col-12 align-right">
-                                                    {{ currency_with_price($item['price'],$item['attributes']['symbol']) }}
+                                                    {{ currency_with_price($item['price'],$item['attributes']['buying_symbol']) }}
                                                 </div>
                                             </div>
                                         </div>
