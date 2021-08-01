@@ -711,7 +711,7 @@
                                                                         Promo: @foreach($order['conditions'] as $con)
                                                                             <span
                                                                                 class="text-danger">
-                                                                            {{  $con }}
+                                                                            {{  $con }} @if($loop->last) @else, @endif
                                                                               </span>
                                                                         @endforeach
                                                                     @endif

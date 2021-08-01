@@ -5,6 +5,7 @@ namespace Modules\Shop\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Livewire\Livewire;
 use Modules\Shop\Entities\Product;
 use Modules\Shop\Repository\ShopInterface as Repo;
 
@@ -66,7 +67,6 @@ class ShopController extends Controller
      */
     public function show($sku)
     {
-
         $product_check = $this->repo->findBySku($sku, ['image', 'comments', 'category', 'tags', 'currency', 'parameters']);
         if ($product_check->count() > 0) {
             $product = $product_check->first();

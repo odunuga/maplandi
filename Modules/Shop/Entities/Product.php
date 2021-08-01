@@ -64,7 +64,7 @@ class Product extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'id', 'product_id');
+        return $this->hasMany(Comment::class);
     }
 
     public function getImageUrlAttribute()

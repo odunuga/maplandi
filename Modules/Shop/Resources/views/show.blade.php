@@ -65,7 +65,20 @@
                             <h3>{{__('shop.description')}}</h3>
                             {!! $product->description !!}
                         </div>
-                        @livewire('product-comment',['comments'=>$product->comments])
+                        <div class="single-block comments">
+                            <h3>{{__('shop.comments')}}</h3>
+                            @if($product->comments)
+                                @foreach($product->comments as $comment)
+                                    <livewire:single-comment :comment="$comment" key="{{$comment->id}}"/>
+                                @endforeach
+                            @else
+                                <p class="text-center p-6">{{ __('comments') }}</p>
+                            @endif
+                        </div>
+                        <div class="pagination pagination-sm">
+                            {{ $product->comments->links() }}
+                        </div>
+                        @livewire('product-comment',['product_id'=>$product->id])
                     </div>
                     <div class="col-lg-4 col-md-5 col-12">
                         <div class="item-details-sidebar">

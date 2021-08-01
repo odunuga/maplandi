@@ -1,6 +1,6 @@
 <div class="single-comment">
     <img
-        src="{{ asset(isset($comment->comment_by->image)?$comment->comment_by->image->url:'vendor/images/dashboard/noimg.png') }}"
+        src="{{ $comment->image_url }}"
         alt="#">
     <div class="content">
         <h4>

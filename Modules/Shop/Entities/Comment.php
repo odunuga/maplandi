@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property int|mixed|string|null comment_by_id
+ * @property int|mixed|string|null product_id
  * @property mixed body
  * @property mixed name
  * @property mixed email
