@@ -6,7 +6,7 @@
                 @include('admin::partials.center_logo')
                 <h5 class="font-18 text-center">{{__('Confirm Password')}}</h5>
 
-                <form class="form-horizontal m-t-30" action="{{ route('password.confirm') }}">
+                <form class="form-horizontal m-t-30" action="{{ route('control.forget.password.post') }}">
                     @csrf
                     <div class="form-group">
                         <div class="col-12">
@@ -34,10 +34,8 @@
                             @endif
                         </div>
                     </div>
-
-
+                </form>
             </div>
-            </form>
         </div>
     </div>
 </x-master-layout>

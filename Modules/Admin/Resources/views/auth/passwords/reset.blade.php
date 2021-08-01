@@ -6,13 +6,15 @@
                 @include('admin::partials.center_logo')
                 <h5 class="font-18 text-center">Update your Password</h5>
 
-                <form class="form-horizontal m-t-30" action="{{ route('password.update') }}">
+                <form class="form-horizontal m-t-30" method="post" action="{{ route('control.reset.password.post') }}">
+                    @csrf
                     <input type="hidden" name="token" value="{{ $token }}">
                     <div class="form-group">
                         <div class="col-12">
                             <input id="email" type="email"
                                    class="form-control @error('email') is-invalid @enderror" name="email"
-                                   value="{{ $email ?: old('email') }}" required autocomplete="email" autofocus>
+                                   value="{{ $email ?: old('email') }}" required autocomplete="email" autofocus
+                                   placeholder="Email">
                             @error('email')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -25,6 +27,7 @@
                         <div class="col-12">
                             <input id="password" type="password"
                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                   placeholder="Password"
                                    required autocomplete="new-password">
 
                             @error('password')
@@ -39,7 +42,8 @@
                     <div class="form-group">
                         <div class="col-12">
                             <input id="password-confirm" type="password" class="form-control"
-                                   name="password_confirmation" required autocomplete="new-password">
+                                   name="password_confirmation" required autocomplete="new-password"
+                                   placeholder="Confirm Password">
                         </div>
                     </div>
 

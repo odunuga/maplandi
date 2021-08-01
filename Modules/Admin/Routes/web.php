@@ -79,13 +79,24 @@ Route::prefix('control-room')->group(function () {
 
 //    Admin Login
     Route::get('/login', 'Auth\LoginController@showLogin')->name('control.login');
+
     Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('control.register');
 
-    Route::get('/forgot-password', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('control.forgot');
-    Route::get('reset-password/{token}', 'Auth\ForgotPasswordController@showResetPasswordForm')->name('reset.password.get');
+
 
     Route::post('/login', 'Auth\LoginController@loginAdmin')->name('control.login');
-    Route::post('/register', 'Auth\RegisterController@register')->name('control.register');
-    Route::post('reset-password', 'Auth\ForgotPasswordController@submitResetPasswordForm')->name('reset.password.post');
 
+    Route::post('/register', 'Auth\RegisterController@register')->name('control.register');
+
+
+//    Route::get('/forgot-password', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('control.forgot');
+//
+//    Route::get('/reset-password/{token}', 'Auth\ResetPasswordController@showResetForm')->name('reset.password.get');
+//
+//    Route::post('/reset-password', 'Auth\ResetPasswordController@reset')->name('reset.password.post');
+
+    Route::get('forget-password', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('control.forget.password.get');
+    Route::post('forget-password',   'Auth\ForgotPasswordController@submitForgetPasswordForm')->name('control.forget.password.post');
+    Route::get('reset-password/{token}',   'Auth\ResetPasswordController@showResetForm')->name('control.reset.password.get');
+    Route::post('reset-password',   'Auth\ResetPasswordController@submitResetPasswordForm')->name('control.reset.password.post');
 });

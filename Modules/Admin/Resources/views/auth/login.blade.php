@@ -51,7 +51,7 @@
 
                     <div class="form-group row m-t-30 m-b-0">
                         <div class="col-sm-7">
-                            <a href="{{ route('control.forgot') }}" class="text-muted"><i
+                            <a href="{{ route('control.forget.password.get') }}" class="text-muted"><i
                                     class="fa fa-lock m-r-5"></i> {{__('buttons.forgot')}}</a>
                         </div>
 

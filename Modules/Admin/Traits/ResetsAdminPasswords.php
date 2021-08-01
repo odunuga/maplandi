@@ -4,14 +4,17 @@
 namespace Modules\Admin\Traits;
 
 
+use App\Notifications\PasswordChanged;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Modules\Admin\Entities\Admin;
 
 trait ResetsAdminPasswords
 {
@@ -60,6 +63,35 @@ trait ResetsAdminPasswords
             : $this->sendResetFailedResponse($request, $response);
     }
 
+    public function submitResetPasswordForm(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:admins',
+            'password' => 'required|string|min:6|confirmed',
+            'password_confirmation' => 'required'
+        ]);
+
+        $updatePassword = DB::table('password_resets')
+            ->where([
+                'email' => $request->email,
+                'token' => $request->token
+            ])
+            ->first();
+
+        if (!$updatePassword) {
+            return back()->withInput()->with('error', 'Invalid token!');
+        }
+
+        $user = Admin::where('email', $request->email)->first();
+        $user->update(['password' => Hash::make($request->password)]);
+
+        $user->notify(new PasswordChanged($user));
+        DB::table('password_resets')->where(['email' => $request->email])->delete();
+
+        return redirect(route('control.login'))->with(['message' => 'Your password has been changed!']);
+    }
+
+
     /**
      * Get the password reset validation rules.
      *
@@ -69,7 +101,7 @@ trait ResetsAdminPasswords
     {
         return [
             'token' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|exists:admins',
             'password' => 'required|confirmed|min:8',
         ];
     }
@@ -183,6 +215,6 @@ trait ResetsAdminPasswords
      */
     protected function guard()
     {
-        return Auth::guard();
+        return Auth::guard('admin_web');
     }
 }

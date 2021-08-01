@@ -4,10 +4,17 @@
 namespace Modules\Admin\Traits;
 
 
+use App\Notifications\ForgotPassword;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Modules\Admin\Entities\Admin;
 
 trait SendsPasswordResetAdminEmails
 {
@@ -26,6 +33,7 @@ trait SendsPasswordResetAdminEmails
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @throws ValidationException
      */
     public function sendResetLinkEmail(Request $request)
     {
@@ -63,6 +71,59 @@ trait SendsPasswordResetAdminEmails
     protected function credentials(Request $request)
     {
         return $request->only('email');
+    }
+
+    public function submitForgetPasswordForm(Request $request)
+    {
+
+        $request->validate([
+            'email' => 'required|email|exists:admins',
+        ]);
+
+        $token = Str::random(64);
+
+        DB::table('password_resets')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => Carbon::now()
+        ]);
+
+        Notification::route('mail', $request->email)->notify(new ForgotPassword($token));
+
+        return back()->with(['success' => 'We have e-mailed your password reset link!']);
+    }
+
+    /**
+     * Write code on Method
+     *
+     * @param Request $request
+     * @return response()
+     */
+    public function submitResetPasswordForm(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:admins',
+            'password' => 'required|string|min:6|confirmed',
+            'password_confirmation' => 'required'
+        ]);
+
+        $updatePassword = DB::table('password_resets')
+            ->where([
+                'email' => $request->email,
+                'token' => $request->token
+            ])
+            ->first();
+
+        if (!$updatePassword) {
+            return back()->withInput()->with('error', 'Invalid token!');
+        }
+
+        $user = Admin::where('email', $request->email)
+            ->update(['password' => Hash::make($request->password)]);
+
+        DB::table('password_resets')->where(['email' => $request->email])->delete();
+
+        return redirect(route('control.login'))->with(['success' => 'Your password has been changed!']);
     }
 
     /**
@@ -108,6 +169,6 @@ trait SendsPasswordResetAdminEmails
      */
     public function broker()
     {
-        return Password::broker();
+        return Password::broker('admins');
     }
 }

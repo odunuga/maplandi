@@ -2,9 +2,14 @@
 
 namespace Modules\Admin\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+
+use App\Notifications\ResetUserPassword;
+use DougSisk\CountryState\CountryState;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail as EmailVerification;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -12,9 +17,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Modules\Cart\Entities\ShippingAddress;
 use Nagy\LaravelRating\Traits\Rate\CanRate;
 use Overtrue\LaravelLike\Traits\Liker;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements HasLocalePreference, EmailVerification
 {
     use HasApiTokens;
     use HasFactory;
@@ -24,6 +28,7 @@ class Admin extends Authenticatable
     use Liker;
     use CanRate;
     use TwoFactorAuthenticatable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -93,5 +98,16 @@ class Admin extends Authenticatable
     protected static function newFactory()
     {
         return \Modules\Admin\Database\factories\AdminFactory::new();
+    }
+
+
+    public function preferredLocale()
+    {
+        return $this->locale;
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new \App\Notifications\EmailVerification($this->name));
     }
 }

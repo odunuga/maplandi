@@ -7,20 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ForgotPassword extends Notification
+class PasswordChanged extends Notification
 {
     use Queueable;
-
-    public $token;
+    public $user;
 
     /**
      * Create a new notification instance.
      *
-     * @param $token
+     * @return void
      */
-    public function __construct($token)
+    public function __construct($user)
     {
-        $this->token = $token;
+        $this->user = $user;
     }
 
     /**
@@ -43,8 +42,8 @@ class ForgotPassword extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Forgot Your Password?')
-            ->markdown('notify.forgot_password', ['token' => route('control.reset.password.get', $this->token)]);
+            ->subject('Password Changed!')
+            ->markdown('notify.password_changed', ['user' => $this->user]);
     }
 
     /**
