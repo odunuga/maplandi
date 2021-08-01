@@ -316,7 +316,7 @@ trait CartTraits
         return new  CartCondition(array(
             'name' => 'TAX ' . $tax . '%',
             'type' => 'tax',
-            'target' => 'subtotal',
+            'target' => 'total',
             'value' => '+' . $tax . '%',
         ));
     }

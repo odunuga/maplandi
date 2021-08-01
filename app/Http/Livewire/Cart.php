@@ -14,13 +14,17 @@ class Cart extends Component
     public $tax = 0.0;
     public $tax_added = 0.0;
     public $sub_total = 0.0;
-    public $prev_total = 0.0;
     public $there_is_coupon = false;
     public $promos;
     protected $listeners = ['reloadItems' => '$refresh'];
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @throws \Darryldecode\Cart\Exceptions\InvalidConditionException
+     */
     public function render()
     {
+
         $this->calculateTotals();
         $this->update_database();
         return view('livewire.cart', ['items' => $this->get_all_items()]);
@@ -31,6 +35,8 @@ class Cart extends Component
      */
     private function calculateTotals()
     {
+//        $name = 'TAX 7.5%';
+//        \Cart::session($this->session_id())->removeCartCondition($name);
         $items = $this->get_all_items();
 
         $this->sub_total = \Cart::session($this->session_id())->getSubTotal();
