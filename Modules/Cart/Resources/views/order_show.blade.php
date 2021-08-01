@@ -184,7 +184,7 @@
                                 <div class="my-items">
                                     <div class="item-list-title">
                                         <div class="row align-items-center">
-                                            <div class="col-lg-5 col-md-5 col-12">
+                                            <div class="col-lg-4 col-md-4 col-12">
                                                 <p class="d-none d-lg-block">Product</p>
                                             </div>
                                             <div class="col-lg-2 col-md-2 col-12">
@@ -194,22 +194,24 @@
                                             <div class="col-lg-2 col-md-2 col-12 align-right">
                                                 <p class="d-none d-lg-block"> Quantity</p>
                                             </div>
-                                            <div class="col-lg-3 col-md-3 col-12 align-right">
+                                            <div class="col-lg-2 col-md-2 col-12 align-right">
                                                 <p class="d-none d-lg-block"> Amount</p>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-12 align-right">
+                                                <p class="d-none d-lg-block"> Actions</p>
                                             </div>
                                         </div>
                                     </div>
                                     @foreach($order->cart as $item)
                                         <div class="single-item-list">
                                             <div class="row align-items-center">
-                                                <div class="col-lg-5 col-md-5 col-12">
+                                                <div class="col-lg-4 col-md-4 col-12">
                                                     <div class="item-image">
                                                         <img src="{{ asset($item['attributes']['image']) }}" alt="#">
                                                         <div class="content">
                                                             <h3 class="title"><a href="javascript:void(0)">
                                                                     {{ $item['name'] }}
                                                                 </a></h3>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -221,8 +223,13 @@
                                                     {{ $item['quantity'] }}
                                                 </div>
 
-                                                <div class="col-lg-3 col-md-3 col-12 align-right">
+                                                <div class="col-lg-2 col-md-2 col-12 align-right">
                                                     {{ currency_with_price($item['price'],$item['attributes']['buying_symbol']) }}
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-12 align-right">
+                                                    <span onclick="report_product('{{$item['id']}}')"
+                                                          class="btn btn-danger btn-sm"
+                                                          title="{{__('texts.report_product_title')}}"> Report </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -235,7 +242,26 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="reportProductForm" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    @livewire('report-product-form')
+                </div>
+            </div>
+        </div>
 
     </section>
+    @push('scripts')
+        <script>
+            let report_product = (id) => {
+                window.livewire.emit('show_form', id);
+                $('#reportProductForm').modal('show');
+            };
+            window.livewire.on('hide_report_product_modal', function () {
+                $('#reportProductForm').modal('hide');
+            })
+        </script>
+    @endpush
 
 </x-app-layout>

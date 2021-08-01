@@ -130,7 +130,7 @@
                 @include('cart::inc.sidebar')
                 <div class="col-lg-9 col-md-12 col-12">
                     <div class="main-content">
-                        <div class="dashboard-block mt-0">
+                        <div class="dashboard-block table-responsive mt-0">
                             <h3 class="block-title">Order History</h3>
 
                             <table id="orders" class="table shoping-cart-table" style="width:100%">

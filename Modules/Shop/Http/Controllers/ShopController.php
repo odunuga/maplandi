@@ -3,9 +3,7 @@
 namespace Modules\Shop\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Livewire\Livewire;
 use Modules\Shop\Entities\Product;
 use Modules\Shop\Repository\ShopInterface as Repo;
 
@@ -67,12 +65,10 @@ class ShopController extends Controller
      */
     public function show($sku)
     {
-        $product_check = $this->repo->findBySku($sku, ['image', 'comments', 'category', 'tags', 'currency', 'parameters']);
+        $product_check = $this->repo->findBySku($sku);
         if ($product_check->count() > 0) {
             $product = $product_check->first();
-            $comments = $this->repo->paginate($product->comments);
-//            dd($comments);
-            return view('shop::show')->with(compact('product', 'comments'));
+            return view('shop::show')->with(compact('product'));
         }
         session()->flash('error', __('texts.product_not_found'));
         return back();

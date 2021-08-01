@@ -11,13 +11,22 @@ class ProductComment extends Component
     public $name;
     public $email;
     public $comment;
+    public $edit_id;
 
+    protected $listeners = ['editComment' => 'edit_comment'];
     protected $rules = [
         'name' => 'required',
         'email' => 'required',
         'comments' => 'required'
     ];
 
+    public function edit_comment($comment)
+    {
+        $this->comment = $comment['body'];
+        $this->name = $comment['name'];
+        $this->email = $comment['email'];
+        $this->edit_id = $comment['id'];
+    }
 
     public function mount()
     {
@@ -36,17 +45,23 @@ class ProductComment extends Component
         if (!auth()->check()) {
             return abort(403, 'Login Required'); // or you can return the user to the login page
         }
-        $comment = new Comment();
-        $comment->product_id = $this->product_id;
-        $comment->comment_by_id = auth()->id();
+        if ($this->edit_id) {
+            $comment = Comment::where('id', $this->edit_id)->first();
+        } else {
+            $comment = new Comment();
+            $comment->product_id = $this->product_id;
+            $comment->comment_by_id = auth()->id();
+
+        }
         $comment->name = $this->name;
         $comment->email = $this->email;
         $comment->body = custom_filter_var($this->comment);
         $comment->save();
 
+        $this->comment = '';
         $this->emit('new_comment');
         $this->emit('alert', ['success', 'Message sent successfully']);
-        $this->reset();
+
     }
 
 }

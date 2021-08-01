@@ -126,7 +126,6 @@
                         </table>
                     </div>
 
-
                     <!--DELETE ITEM Modal -->
                     <div class="modal fade" id="DM" tabindex="-1" aria-labelledby="exampleModalLabel"
                          aria-hidden="true">

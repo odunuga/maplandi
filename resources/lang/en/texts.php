@@ -38,7 +38,14 @@ return [
     'error_promotion' => 'Promotion Created Failed',
     'product_not_found' => 'Product Not Found',
     'error_fetching' => 'Error Fetching Item',
-    'product_tag' => 'Product Tags Added'
+    'product_tag' => 'Product Tags Added',
+    'report_sent' => 'Report as been sent Successfully',
+    'report_login_required' => 'Login Required to Report',
+    'comment_deleted' => 'Comment Deleted Successfully',
+    'wrong_comment' => 'Cannot Delete Other people\'s comment',
+    'delete_comment_error' => 'Delete Error, Try Again',
+    'report_product_title' => 'Report this product in case of problems',
+    'product_report_success'=>'Your report has been sent successfully'
 
 
 ];

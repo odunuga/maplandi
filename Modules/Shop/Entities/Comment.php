@@ -39,6 +39,19 @@ class Comment extends Model
         ];
     }
 
+    public function getImageUrlAttribute()
+    {
+        $default = 'vendor/images/dashboard/noimg.png';
+        $value = $this->image;
+        if ($value) {
+            if (substr($value->url, 0, 4) === "http") {
+                return $value->url;
+            }
+            return asset($value->url);
+        }
+        return asset($default);
+    }
+
     protected static function newFactory()
     {
         return \Modules\Shop\Database\factories\CommentFactory::new();
