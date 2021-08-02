@@ -86,7 +86,7 @@
                                 @foreach($products as $item)
                                     <tr>
                                         <td>{{ $item->title }}</td>
-                                        <td>{{ currency_with_price($item->price,$item->currency->symbol) }}</td>
+                                        <td>{{ currency_with_price($item->price,isset($item->currency)?$item->currency->symbol:'') }}</td>
                                         <td>
                                             <div>
                                                 <img src="{{ isset($item->image)?asset($item->image->url):'' }}" alt=""
