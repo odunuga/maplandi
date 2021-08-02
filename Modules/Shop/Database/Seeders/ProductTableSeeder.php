@@ -10,6 +10,7 @@ use Modules\Shop\Entities\Category;
 use Modules\Shop\Entities\Comment;
 use Modules\Shop\Entities\Currency;
 use Modules\Shop\Entities\Image;
+use Modules\Shop\Entities\ManyImage;
 use Modules\Shop\Entities\Parameter;
 use Modules\Shop\Entities\ParameterBuilder;
 use Modules\Shop\Entities\Product;
@@ -56,54 +57,54 @@ class ProductTableSeeder extends Seeder
                 ]);
             }
         }
-//        if (Category::count() < 1) {
-//            $categories = [
-//                ['title' => 'Automobile', 'image' => 'vendor/images/categories/car.svg'],
-//                ['title' => 'Electronics', 'image' => 'vendor/images/categories/laptop.svg'],
-//                ['title' => 'Computing', 'image' => 'vendor/images/categories/laptop.svg'],
-//                ['title' => 'Furniture', 'image' => 'vendor/images/categories/furniture.svg'],
-//                ['title' => 'Phones', 'image' => 'vendor/images/categories/phone.svg'],
-//                ['title' => 'Materials', 'image' => 'vendor/images/categories/fashion.svg'],
-//                ['title' => 'Laptops', 'image' => 'vendor/images/categories/laptop.svg'],
-//                ['title' => 'Health & Beauty', 'image' => 'vendor/images/categories/hospital.svg'],
-//                ['title' => 'Cloths', 'image' => 'vendor/images/categories/tshirt.svg'],
-//                ['title' => 'Education', 'image' => 'vendor/images/categories/education.svg'],
-//                ['title' => 'Gadgets', 'image' => 'vendor/images/categories/controller.svg'],
-//                ['title' => 'Luggage and Backpacks', 'image' => 'vendor/images/categories/travel.svg'],
-//                ['title' => 'Watches', 'image' => 'vendor/images/categories/watch.svg'],
-//                ['title' => 'Events', 'image' => 'vendor/images/categories/matrimony.svg'],
-//            ];
-//            foreach ($categories as $item) {
-//                $cat = Category::create([
-//                    'title' => $item['title'],
-//                    'slug' => Str::slug($item['title']),
-//                    'tooltip' => 'Information about ' . $item['title']
-//                ]);
-//                $img = new Image();
-//                $img->url = $item['image'];
-//                $cat->image()->save($img);
-//                if ($item['title'] == 'Electronics') {
-//                    $prop = new ParameterBuilder();
-//                    $prop->type_name = 'Type';
-//                    $prop->type_id = 'productType';
-//                    $prop->type = 'select';
-//                    $prop->attributes = ['audio & Music Accessories', 'Games Consoles Accessories', 'Headphones Accessories', 'Networking Product Accessories', 'Photo & Video Accessories'];
-//
-//
-//                    $prop1 = new ParameterBuilder();
-//                    $prop1->type_name = 'Condition';
-//                    $prop1->type_id = 'productCondition';
-//                    $prop1->type = 'select';
-//                    $prop1->attributes = ['Brand New', 'Used'];
-//                    $para = Parameter::create([
-//                        'category_id' => $cat->id,
-//                        'title' => 'Type'
-//                    ]);
-//                    $para->properties()->save($prop);
-//                    $para->properties()->save($prop1);
-//                }
-//            }
-//        }
+        if (Category::count() < 1) {
+            $categories = [
+                ['title' => 'Automobile', 'image' => 'vendor/images/categories/car.svg'],
+                ['title' => 'Electronics', 'image' => 'vendor/images/categories/laptop.svg'],
+                ['title' => 'Computing', 'image' => 'vendor/images/categories/laptop.svg'],
+                ['title' => 'Furniture', 'image' => 'vendor/images/categories/furniture.svg'],
+                ['title' => 'Phones', 'image' => 'vendor/images/categories/phone.svg'],
+                ['title' => 'Materials', 'image' => 'vendor/images/categories/fashion.svg'],
+                ['title' => 'Laptops', 'image' => 'vendor/images/categories/laptop.svg'],
+                ['title' => 'Health & Beauty', 'image' => 'vendor/images/categories/hospital.svg'],
+                ['title' => 'Cloths', 'image' => 'vendor/images/categories/tshirt.svg'],
+                ['title' => 'Education', 'image' => 'vendor/images/categories/education.svg'],
+                ['title' => 'Gadgets', 'image' => 'vendor/images/categories/controller.svg'],
+                ['title' => 'Luggage and Backpacks', 'image' => 'vendor/images/categories/travel.svg'],
+                ['title' => 'Watches', 'image' => 'vendor/images/categories/watch.svg'],
+                ['title' => 'Events', 'image' => 'vendor/images/categories/matrimony.svg'],
+            ];
+            foreach ($categories as $item) {
+                $cat = Category::create([
+                    'title' => $item['title'],
+                    'slug' => Str::slug($item['title']),
+                    'tooltip' => 'Information about ' . $item['title']
+                ]);
+                $img = new Image();
+                $img->url = $item['image'];
+                $cat->image()->save($img);
+                if ($item['title'] == 'Electronics') {
+                    $prop = new ParameterBuilder();
+                    $prop->type_name = 'Type';
+                    $prop->type_id = 'productType';
+                    $prop->type = 'select';
+                    $prop->attributes = ['audio & Music Accessories', 'Games Consoles Accessories', 'Headphones Accessories', 'Networking Product Accessories', 'Photo & Video Accessories'];
+
+
+                    $prop1 = new ParameterBuilder();
+                    $prop1->type_name = 'Condition';
+                    $prop1->type_id = 'productCondition';
+                    $prop1->type = 'select';
+                    $prop1->attributes = ['Brand New', 'Used'];
+                    $para = Parameter::create([
+                        'category_id' => $cat->id,
+                        'title' => 'Type'
+                    ]);
+                    $para->properties()->save($prop);
+                    $para->properties()->save($prop1);
+                }
+            }
+        }
 //        if (Category::count() > 1 && Product::count() < 1) {
 //            $tags = ['Bike', 'Services', 'Brand', 'Popular'];
 //            $images = [
@@ -142,7 +143,7 @@ class ProductTableSeeder extends Seeder
 //                    // set other images for product
 //                    $set_images = array_rand($images, 3);
 //                    foreach ($set_images as $img) {
-//                        $nim = new Image();
+//                        $nim = new ManyImage();
 //                        $nim->url = $img;
 //                        $product->images()->save($nim);
 //                    }

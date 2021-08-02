@@ -28,16 +28,16 @@ class EmailVerification extends Notification
      */
     public static $toMailCallback;
 
-    public $user;
+    public $name;
 
     /**
      * Create a new notification instance.
      *
-     * @param $user
+     * @return void
      */
-    public function __construct($user)
+    public function __construct($name)
     {
-        $this->user = $user;
+        $this->name = $name;
     }
 
     /**
@@ -79,7 +79,7 @@ class EmailVerification extends Notification
     {
         return (new MailMessage)
             ->subject(Lang::get('Verify Email Address'))
-            ->markdown('notify.new_registration', ['url' => $url, 'name' => $this->user->name]);
+            ->markdown('notify.new_registration', ['url' => $url, 'name' => $this->name]);
     }
 
     /**

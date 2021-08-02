@@ -123,7 +123,7 @@ class CheckoutDetails extends Component
     private function save_on_delivery_order()
     {
         $this->validate();
-
+        $cart_conditions = $this->get_cart_conditions();
         if ($this->cart_details['cart']) {
 
             $transaction_id = $this->generate_on_delivery_id();
@@ -149,7 +149,7 @@ class CheckoutDetails extends Component
             $order->email = $this->email;
             $order->phone = $this->phone;
             $order->address = $this->address;
-            $order->conditions = $this->get_cart_conditions();
+            $order->conditions = $this->get_condition_names($cart_conditions);
             $order->fees = null;
             $order->customer_code = null;
             $order->transaction_confirmed = false;

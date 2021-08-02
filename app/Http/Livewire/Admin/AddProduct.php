@@ -118,20 +118,31 @@ class AddProduct extends Component
         if ($image) {
             $img = new Image();
             $img->url = 'vendor/images/' . $image;
-            $product->image()->save($img);
+            $prev_image = isset($product->image) ? $product->image->id : '';
+            if ($prev_image && $product->image()) {
+                $product->image()->detach();
+                $product->image()->dissociate($prev_image);
+            }
+            $product->image()->associate($img);
         }
 
         if ($images && count($images) > 0) {
-            $product->images()->delete();
+
+            $prev_images = isset($product->images) ? $product->images->pluck('id')->toArray() : '';
+            if ($prev_images && $product->image()) {
+                $product->images()->detach();
+                $product->images()->disassociate($prev_images);
+            }
             foreach ($images as $single_img) {
                 $img = new Image();
                 $img->url = 'vendor/images/' . $single_img;
-                $product->images()->save($img);
+                $product->images()->associate($img);
             }
         }
         $this->store_parameter($product);
 
-        $this->reset();
+        $product->update();
+//        $this->reset();
         session()->flash('success', __('texts.product_loaded_success'));
         return $this->redirect(route('control.items'));
     }
@@ -146,7 +157,6 @@ class AddProduct extends Component
 
                 $product->parameters()->save($parameters);
                 $product->parameters()->updateExistingPivot($parameters->id, array('value' => $v), false);
-
             }
     }
 

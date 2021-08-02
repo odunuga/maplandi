@@ -580,67 +580,14 @@
                                         color: #666666;
                                       "
                                                                 >
-                                                                    Hello {{$user['name']}}, we're excited to have you
+                                                                    @isset($user) Hello {{$user->name}} @else Hello, @endisset we're excited to have you
                                                                     as we pride in getting you all you need for daily
                                                                     living at the best prices, to get started Shopping
                                                                     hit the link below.
                                                                 </p>
                                                             </td>
                                                         </tr>
-                                                        <tr style="border-collapse: collapse">
-                                                            <td
-                                                                align="center"
-                                                                style="
-                                      margin: 0;
-                                      padding-left: 10px;
-                                      padding-right: 10px;
-                                      padding-top: 35px;
-                                      padding-bottom: 35px;
-                                    "
-                                                            >
-                                    <span
-                                        class="es-button-border"
-                                        style="
-                                        border-style: solid;
-                                        border-color: #fefbf7;
-                                        background: #54ab68;
-                                        border-width: 1px;
-                                        display: inline-block;
-                                        border-radius: 2px;
-                                        width: auto;
-                                      "
-                                    >
-                                      <a
-                                          href="{{ $url }}"
-                                          class="button"
-                                          target="_blank"
-                                          style="
-                                          text-decoration: none;
-                                          -webkit-text-size-adjust: none;
-                                          -ms-text-size-adjust: none;
 
-                                          font-family: helvetica,
-                                            'helvetica neue', arial, verdana,
-                                            sans-serif;
-                                          font-size: 20px;
-                                          color: #ffffff;
-                                          border-style: solid;
-                                          border-color: rgba(250, 20, 20, 0.849);
-                                          border-width: 15px 30px;
-                                          display: inline-block;
-                                          background:  rgba(250, 20, 20, 0.849);
-                                          border-radius: 2px;
-                                          font-weight: normal;
-                                          font-style: normal;
-                                          line-height: 24px;
-                                          width: auto;
-                                          text-align: center;
-                                        "
-                                      >Start Shopping</a
-                                      ></span
-                                    >
-                                                            </td>
-                                                        </tr>
                                                         <tr style="border-collapse: collapse">
                                                             <td
                                                                 class="es-m-txt-l"
