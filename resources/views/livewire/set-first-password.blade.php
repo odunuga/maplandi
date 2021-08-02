@@ -14,8 +14,8 @@
         @error('password_confirmation') <span class="error">{{ $message }}</span> @enderror
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-sm btn-outline-primary"><i wire:loading
-                                                                        class="lni lni-is-spinning lni-spinner"></i> {{  __('buttons.update') }}
+        <button type="submit" class="btn btn-sm btn-outline-danger"><i wire:loading
+                                                                       class="lni lni-is-spinning lni-spinner"></i> {{  __('buttons.update') }}
         </button>
     </div>
 </form>

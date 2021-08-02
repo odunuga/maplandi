@@ -125,7 +125,7 @@
                                                 <td align="left" style="padding:0;Margin:0;width:560px">
                                                     <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr style="border-collapse:collapse">
-                                                            <td align="center" style="padding:35px;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:53px;color:#ffffff;font-size:35px">Maplandi<span style="font-size:52px"></span></p></td>
+                                                            <td align="center" style="padding:35px;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:53px;color:#ffffff;font-size:75px">Maplandi<span style="font-size:52px"></span></p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>

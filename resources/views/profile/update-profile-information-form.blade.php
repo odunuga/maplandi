@@ -28,7 +28,7 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->image }}" alt="{{ $this->user->name }}"
+                    <img src="{{ $this->user->image_url }}" alt="{{ $this->user->name }}"
                          class="rounded-full h-20 w-20 object-cover">
                 </div>
 
@@ -51,7 +51,7 @@
 
                 <x-jet-input-error for="photo" class="mt-2"/>
             </div>
-    @endif
+        @endif
 
     <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
@@ -88,12 +88,12 @@
                          wire:model.lazy="state.state"/>
             <x-jet-input-error for="state" class="mt-2"/>
         </div>
-
         <!-- Country -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="country" value="{{ __('Country') }}"/>
-            <select name="country_code" class="form-select form-select-sm w-20p" wire:model.lazy="state.country_code" style="width: 30%">
-                <option>{{ auth()->user()->country?auth()->user()->country->getName():'Select One' }}</option>
+            <select name="country_code" class="form-select form-select-sm w-20p" wire:model.lazy="state.country_code"
+                    style="width: 50%">
+                <option>{{ isset(auth()->user()->country)?auth()->user()->country->getName():'Select One' }}</option>
                 @foreach($countries as $key=>$item)
                     <option value="{{ $key }}">{{ $item }}</option>
                 @endforeach
@@ -109,22 +109,25 @@
             <x-jet-label for="shipping_first_name" value="{{ __('Shipping First Name') }}"/>
             <x-jet-input id="shipping_first_name" type="text" class="mt-1 block w-full"
                          placeholder="Shipping First Name"
-                         value="{{auth()->user()->shipping_address['first_name']}}"
+                         value="{{ isset(auth()->user()->shipping_address)?auth()->user()->shipping_address['first_name']:''}}"
                          wire:model.lazy="state.shipping_first_name"/>
-            <x-jet-input-error for="shipping_first_name" class="mt-2"/>
+            <x-jet-input-error for="state.shipping_first_name" class="mt-2"/>
         </div>
+
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="shipping_last_name" value="{{ __('Shipping Last Name') }}"/>
-            <x-jet-input id="shipping_last_name" type="text" class="mt-1 block w-full" placeholder="Shipping Last Name"  wire:model.lazy="state.shipping_last_name"
-                         value="{{auth()->user()->shipping_address['last_name']}}"
-                       />
+            <x-jet-input id="shipping_last_name" type="text" class="mt-1 block w-full" placeholder="Shipping Last Name"
+                         wire:model.lazy="state.shipping_last_name"
+                         value="{{isset(auth()->user()->shipping_address)?auth()->user()->shipping_address['last_name']:''}}"
+            />
             <x-jet-input-error for="shipping_last_name" class="mt-2"/>
         </div>
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="shipping_phone" value="{{ __('Shipping Phone') }}"/>
-            <x-jet-input id="shipping_phone" type="text" class="mt-1 block w-full" placeholder="Shipping Contact Number" wire:model.lazy="state.shipping_phone"
-                         value="{{auth()->user()->shipping_address['phone']}}"
-                        />
+            <x-jet-input id="shipping_phone" type="text" class="mt-1 block w-full" placeholder="Shipping Contact Number"
+                         wire:model.lazy="state.shipping_phone"
+                         value="{{isset(auth()->user()->shipping_address)?auth()->user()->shipping_address['phone']:''}}"
+            />
             <x-jet-input-error for="shipping_phone" class="mt-2"/>
             <div class="flex flex-inline m-2">
                 <x-jet-input id="same_phone" type="checkbox"
@@ -135,9 +138,10 @@
         </div>
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="shipping_email" value="{{ __('Shipping Email') }}"/>
-            <x-jet-input id="shipping_email" type="email" class="mt-1 block w-full" placeholder="Shipping Email Address" wire:model.lazy="state.shipping_email"
-                         value="{{auth()->user()->shipping_address['email']}}"
-                        />
+            <x-jet-input id="shipping_email" type="email" class="mt-1 block w-full" placeholder="Shipping Email Address"
+                         wire:model.lazy="state.shipping_email"
+                         value="{{isset(auth()->user()->shipping_address)?auth()->user()->shipping_address['email']:''}}"
+            />
             <x-jet-input-error for="shipping_email" class="mt-2"/>
             <div class="flex flex-inline m-2">
                 <x-jet-input id="same_email" type="checkbox"
@@ -148,7 +152,7 @@
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="shipping_address" value="{{ __('Shipping Address') }}"/>
             <x-jet-input id="shipping_address" type="text" class="mt-1 block w-full" placeholder="Shipping Address"
-                         value="{{auth()->user()->shipping_address['address']}}"
+                         value="{{isset(auth()->user()->shipping_address)?auth()->user()->shipping_address['address']:''}}"
                          wire:model.lazy="state.shipping_address"/>
             <x-jet-input-error for="address" class="mt-2"/>
             <div class="flex flex-inline m-2">

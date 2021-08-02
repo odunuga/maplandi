@@ -48,7 +48,8 @@ class User extends Authenticatable implements HasLocalePreference, EmailVerifica
         'phone',
         'address',
         'country_code',
-        'state'
+        'state',
+        'email_verified_at'
     ];
 
     /**
@@ -103,9 +104,24 @@ class User extends Authenticatable implements HasLocalePreference, EmailVerifica
             'verified' => $this->verified_at ? true : false,
             'state' => $this->state,
             'country' => $this->country,
-            'image' => asset($this->image),
+            'image' => asset($this->image_url),
 
         ];
+    }
+
+    public function getImageUrlAttribute($value)
+    {
+        $default = 'vendor/images/dashboard/noimg.png';
+        if ($value) {
+            if (substr($value->profile_photo_path, 0, 4) === "http") {
+                return $value->profile_photo_path;
+            }
+            if ($value->profile_photo_url) {
+                return $value->profile_photo_url;
+            }
+            return asset($default);
+        }
+        return asset($default);
     }
 
     public function getImageAttribute($value)
@@ -130,6 +146,6 @@ class User extends Authenticatable implements HasLocalePreference, EmailVerifica
 
     public function sendEmailVerificationNotification()
     {
-        $this->notify(new \App\Notifications\EmailVerification($this->name));
+        $this->notify(new \App\Notifications\EmailVerification($this));
     }
 }

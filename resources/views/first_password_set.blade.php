@@ -7,10 +7,9 @@
                         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                             {{ __('Welcome ').$user->name }}
                         </h2>
-                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                        <div class="  overflow-hidden  sm:rounded-lg">
                             {{__('welcome.first_password.message')}}
                         </div>
-
                         <livewire:set-first-password/>
                     </div>
                 </div>
