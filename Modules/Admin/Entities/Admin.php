@@ -108,6 +108,6 @@ class Admin extends Authenticatable implements HasLocalePreference, EmailVerific
 
     public function sendEmailVerificationNotification()
     {
-        $this->notify(new \App\Notifications\EmailVerification($this->name));
+        $this->notify(new \App\Notifications\EmailVerification($this));
     }
 }

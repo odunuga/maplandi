@@ -24,11 +24,16 @@
                     </h3>
 
                     <ul class="info">
-                        <li class="price">  @if(isset($item->currency) && $item->currency->code!=get_user_currency()['code'])
-                                {{ convert_to_user_currency($item->price,$item->currency->code) }}
+                        <li class="price">
+                            @isset($item->curerncy)
+                                @if(isset($item->currency) && $item->currency['code']!=get_user_currency()['code'])
+                                    {{ convert_to_user_currency($item->price,$item->currency['code']) }}
+                                @else
+                                    {{ currency_with_price($item->price,$item->currency['code']) }}
+                                @endif
                             @else
-                                {{ currency_with_price($item->price,$item->currency->code) }}
-                            @endif
+                                {{ currency_with_price($item->price) }}
+                            @endisset
                         </li>
                         <li class="like">
                             <livewire:like :product="$item->id"/>

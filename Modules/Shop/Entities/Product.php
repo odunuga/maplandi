@@ -95,7 +95,7 @@ class Product extends Model
             'published' => $this->published,
             'featured' => $this->featured,
             'hot' => $this->hot,
-            'price' => currency_with_price($this->price, $this->currency->symbol),
+            'price' => currency_with_price($this->price, isset($this->currency) ? $this->currency->symbol : ''),
             'image' => asset(isset($this->image) ? $this->image->url : '')
 
         ];

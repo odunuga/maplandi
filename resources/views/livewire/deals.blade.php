@@ -46,10 +46,15 @@
                                     <div class="bottom-content">
                                         <p class="price">Price:
                                             <span>
-                                                 @if(isset($deal->currency) && $deal->currency->code!==get_user_currency()['code'])
-                                                    {{ convert_to_user_currency($deal->price,$deal->currency->code) }}
+                                                @isset($deal->currency)
+
+                                                    @if(isset($deal->currency) && $deal->currency->code!==get_user_currency()['code'])
+                                                        {{ convert_to_user_currency($deal->price,$deal->currency->code) }}
+                                                    @else
+                                                        {{ currency_with_price($deal->price,$deal->currency->code) }}
+                                                    @endif
                                                 @else
-                                                    {{ currency_with_price($deal->price,$deal->currency->code) }}
+                                                    {{ currency_with_price($deal->price) }}
                                                 @endif
                                              </span>
                                         </p>

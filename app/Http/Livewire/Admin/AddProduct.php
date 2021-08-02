@@ -79,7 +79,7 @@ class AddProduct extends Component
             }
         }
 
-
+        $currency = $this->get_site_settings() && isset($this->get_site_settings()->default_currency) ? $this->get_site_settings()->default_currency : 1;
         $check = Product::where('id', $this->product_id)->where('sku', $this->sku);
         if ($check->count() > 0) {
 
@@ -89,7 +89,7 @@ class AddProduct extends Component
                 'slug' => Str::slug($this->title),
                 'description' => custom_filter_var($this->description),
                 'price' => (float)$this->price,
-                'currency_id' => (int)$this->currency_id,
+                'currency_id' => $this->currency_id ? (int)$this->currency_id : $currency,
                 'featured' => $this->featured,
                 'available' => $this->available,
                 'hot' => $this->hot,
@@ -122,6 +122,7 @@ class AddProduct extends Component
         }
 
         if ($images && count($images) > 0) {
+            $product->images()->delete();
             foreach ($images as $single_img) {
                 $img = new Image();
                 $img->url = 'vendor/images/' . $single_img;

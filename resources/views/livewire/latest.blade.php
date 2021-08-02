@@ -67,14 +67,19 @@
                                                 </h3>
                                                 <ul class="info">
                                                     <li class="price">
-                                                        @if(isset($product->currency) && $product->currency->code!=get_user_currency()['code'])
-                                                            {{ convert_to_user_currency($product->price,$product->currency->code) }}
+                                                        @isset($product->currency)
+                                                            @if(isset($product->currency) && $product->currency['code']!=get_user_currency()['code'])
+                                                                {{ convert_to_user_currency($product->price,$product->currency['code']) }}
+                                                            @else
+                                                                {{ currency_with_price($product->price,$product->currency['code']) }}
+                                                            @endif
                                                         @else
-                                                            {{ currency_with_price($product->price,$product->currency->code) }}
-                                                        @endif
+                                                            {{ currency_with_price($product->price) }}
+                                                        @endisset
                                                     </li>
                                                     <li class="like">
-                                                        <livewire:add-to-cart :product="$product->id" :key="$product->sku"
+                                                        <livewire:add-to-cart :product="$product->id"
+                                                                              :key="$product->sku"
                                                                               :class="'like'"/>
                                                     </li>
                                                 </ul>
@@ -117,14 +122,19 @@
                                                 </h3>
                                                 <ul class="info">
                                                     <li class="price">
-                                                        @if(isset($product->currency) && $product->currency->code!=get_user_currency()['code'])
-                                                            {{ convert_to_user_currency($product->price,$product->currency->code) }}
+                                                        @isset($product->currency)
+                                                            @if(isset($product->currency) && $product->currency['code']!=get_user_currency()['code'])
+                                                                {{ convert_to_user_currency($product->price,$product->currency['code']) }}
+                                                            @else
+                                                                {{ currency_with_price($product->price,$product->currency['code']) }}
+                                                            @endif
                                                         @else
-                                                            {{ currency_with_price($product->price,$product->currency->code) }}
-                                                        @endif
+                                                            {{ currency_with_price($product->price) }}
+                                                        @endisset
                                                     </li>
                                                     <li class="like">
-                                                        <livewire:add-to-cart :product="$product->id" :key="$product->sku"
+                                                        <livewire:add-to-cart :product="$product->id"
+                                                                              :key="$product->sku"
                                                                               :class="'like'"/>
                                                     </li>
                                                 </ul>
@@ -167,14 +177,19 @@
                                                 </h3>
                                                 <ul class="info">
                                                     <li class="price">
-                                                        @if(isset($product->currency) && $product->currency->code!=get_user_currency()['code'])
-                                                            {{ convert_to_user_currency($product->price,$product->currency->code) }}
+                                                        @isset($product->currency)
+                                                            @if(isset($product->currency) && $product->currency['code']!=get_user_currency()['code'])
+                                                                {{ convert_to_user_currency($product->price,$product->currency['code']) }}
+                                                            @else
+                                                                {{ currency_with_price($product->price,$product->currency['code']) }}
+                                                            @endif
                                                         @else
-                                                            {{ currency_with_price($product->price,$product->currency->code) }}
-                                                        @endif
+                                                            {{ currency_with_price($product->price) }}
+                                                        @endisset
                                                     </li>
                                                     <li class="like">
-                                                        <livewire:add-to-cart :product="$product->id" :key="$product->sku"
+                                                        <livewire:add-to-cart :product="$product->id"
+                                                                              :key="$product->sku"
                                                                               :class="'like'"/>
                                                     </li>
                                                 </ul>

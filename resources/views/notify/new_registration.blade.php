@@ -580,7 +580,7 @@
                                         color: #666666;
                                       "
                                                                 >
-                                                                    Hello {{$user->name}}, we're excited to have you
+                                                                    Hello {{$user['name']}}, we're excited to have you
                                                                     as we pride in getting you all you need for daily
                                                                     living at the best prices, to get started Shopping
                                                                     hit the link below.

@@ -39,12 +39,16 @@
                         <livewire:rating :deal="$product" :key="$product->id" class="flex flex-inline"/>
                         <br/>
                         <div class="price my-2 text-semibold">
-                            @if(isset($product->currency) && $product->currency->code!=get_user_currency()['code'])
-                                {{ currency_with_price($product->price,$product->currency->code) }}
-                                ~ {{ convert_to_user_currency($product->price,$product->currency->code) }}
+                            @isset($product->currency)
+                                @if(isset($product->currency) && $product->currency->code!=get_user_currency()['code'])
+                                    {{ currency_with_price($product->price,$product->currency->code) }}
+                                    ~ {{ convert_to_user_currency($product->price,$product->currency->code) }}
+                                @else
+                                    {{ currency_with_price($product->price,$product->currency->code) }}
+                                @endif
                             @else
-                                {{ currency_with_price($product->price,$product->currency->code) }}
-                            @endif
+                                {{ currency_with_price($product->price) }}
+                            @endisset
                         </div>
                         <!--ADD TO CART BUTTON-->
                         <livewire:add-to-cart :product="$product" :key="$product->sku" :text="true"/>
@@ -84,7 +88,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
                         </button>
-                        <button wire:click="deleteComment()"  type="submit"
+                        <button wire:click="deleteComment()" type="submit"
                                 class="btn btn-danger">Delete
                         </button>
                     </div>
@@ -114,7 +118,7 @@
                                 <livewire:single-comment :comment="$comment" key="{{$comment->id}}"/>
                             @endforeach
                         @else
-                            <p class="text-center p-6">{{ __('comments') }}</p>
+                            <p class="text-center p-6">{{ __('texts.no_comment') }}</p>
                         @endif
                     </div>
                     <div class="pagination pagination-sm">

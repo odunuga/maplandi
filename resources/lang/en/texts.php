@@ -12,6 +12,7 @@ return [
     'add_icon' => 'Add Icon',
     'welcome_title' => 'Welcome to ',
     'categories' => 'Categories',
+    'no_comment'=>'No Comment',
     'search' => 'Search',
     'shop_with_ease' => 'We are here to assist you throughout your online shopping experience with us. We want to ensure that you have an easy and pleasant interaction throughout.',
     'shop_with_ease_title' => 'Shop With Ease',
