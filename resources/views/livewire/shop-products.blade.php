@@ -55,6 +55,7 @@
                     <!--ADVERT BANNER-->
                     <div class="single-widget banner">
                         <h3>Advertisement</h3>
+
                         <a href="javascript:void(0)">
                             <img src="{{ asset('vendor/images/banner/banner.jpg') }}" alt="#">
                         </a>

@@ -74,7 +74,7 @@ class Cart extends Component
         $cart = $this->get_all_items();
         set_redirect_with_prev_session('checkout', $this->session_id());
         // redirect user to checkout page
-        $this->store_cart_in_db($this->session_id(), $this->get_all_items(), get_user_currency()['id'], get_user_currency()['code']);
+        $this->store_cart_in_db($this->session_id(), $cart, get_user_currency()['id'], get_user_currency()['code']);
 
         return redirect()->route('checkout');
     }

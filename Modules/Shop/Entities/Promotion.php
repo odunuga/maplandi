@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property mixed end_date
  * @property bool continuous
  * @property bool condition
+ * @property bool advert
  */
 class Promotion extends Model
 {
@@ -29,7 +30,8 @@ class Promotion extends Model
         'end_date' => 'datetime',
         'continuous' => 'bool',
         'products' => 'array',
-        'condition' => 'bool'
+        'condition' => 'bool',
+        'advert' => 'bool'
     ];
 
     public function image()
@@ -40,15 +42,18 @@ class Promotion extends Model
     public function format_admin_promotion()
     {
 
+        $start = isset($this->start_date) ? $this->start_date->format('H:ma, M d Y') : '';
+        $end = isset($this->end_date) ? $this->end_date->format('H:ma, M d Y') : '';
         $image = $this->image_url;
         return [
             'id' => $this->id,
+            'advert' => $this->advert,
             'image' => $image,
             'title' => $this->title,
             'rate' => $this->rate,
             'description' => $this->description,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
+            'start_date' => $start,
+            'end_date' => $end,
             'continuous' => $this->continuous,
             'condition' => $this->condition_title,
         ];

@@ -45,7 +45,7 @@ class AddTag extends Component
                 } else {
 
                     session()->flash('success', __('texts.tag_created'));
-                    $this->redirect(route('control.tags'));
+                    return $this->redirect(route('control.tags'));
                 }
             }
 

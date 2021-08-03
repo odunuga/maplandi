@@ -23,6 +23,7 @@ class CreatePromotionsTable extends Migration
             $table->longText('products')->nullable();
             $table->boolean('continuous')->nullable()->default(false);
             $table->boolean('condition')->nullable()->default(false);
+            $table->boolean('advert')->nullable()->default(true);
             $table->timestamps();
         });
     }

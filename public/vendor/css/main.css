@@ -1,11 +1,12 @@
 @import "https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap";
-
+/*@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap");*/
 html {
     scroll-behavior: smooth
 }
 
 body {
     font-family: jost, sans-serif;
+    /*font-family: "Poppins", sans-serif;*/
     font-weight: 400;
     font-style: normal;
     color: #888;

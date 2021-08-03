@@ -493,7 +493,7 @@
                                                                 style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px;font-size:0px">
                                                                 <a target="_blank"
                                                                    href="https://undraw.co/search#:~:text=Download%20PNG%20for-,blog,-posts%20/%20social%20media"
-                                                                   style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#5C68E2;font-size:14px"><img
+                                                                   style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#d4000c;font-size:14px"><img
                                                                         src="https://packmd.stripocdn.email/content/guids/CABINET_a6ebf8fdfdc006f89f34c58ad01fe6fc/images/59071627578923019.png"
                                                                         alt
                                                                         style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
@@ -535,7 +535,7 @@
                                                             <td align="center" style="padding:0;Margin:0"><h2
                                                                     style="Margin:0;line-height:31px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:26px;font-style:normal;font-weight:bold;color:#333333">
                                                                     Order&nbsp;<a target="_blank" href=""
-                                                                                  style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#5C68E2;font-size:26px">#{{ $order->reference }}</a>
+                                                                                  style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#d4000c;font-size:26px">#{{ $order->reference }}</a>
                                                                 </h2></td>
                                                         </tr>
                                                         <tr>
@@ -581,7 +581,7 @@
                                                                                 <td align="center"
                                                                                     style="padding:0;Margin:0;font-size:0px">
                                                                                     <img class="adapt-img"
-                                                                                         src="{{ isset($item['attributes']['image'])?$item['attributes']['image']:'' }}"
+                                                                                         src="{{ $item['attributes']['image'] ?: '' }}"
                                                                                          alt="product image"
                                                                                          style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"
                                                                                          width="70"></td>

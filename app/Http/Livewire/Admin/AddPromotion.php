@@ -20,7 +20,9 @@ class AddPromotion extends Component
     public $start_date;
     public $end_date;
     public $condition = 0;
-    public $continuous = 0;
+    public $continuous = 1;
+    public $advert = true;
+    public $type_name = '';
     public $all_products;
 
     protected $listeners = ['product_update' => 'update_product', 'edit_promo' => 'edit_promotion'];
@@ -32,7 +34,12 @@ class AddPromotion extends Component
 
     public function add_promotion()
     {
-        $promo = new Promotion();
+        $check_promotion = Promotion::where('title', "like", "%" . $this->title . "%")->where('condition', $this->condition)->where('rate', $this->rate);
+        if ($check_promotion->count() > 0) {
+            $promo = $check_promotion->first();
+        } else {
+            $promo = new Promotion();
+        }
         $promo->condition = $this->condition;
         $promo->title = $this->title;
         $promo->description = $this->description;
@@ -41,14 +48,16 @@ class AddPromotion extends Component
         $promo->end_date = $this->end_date;
         $promo->products = $this->products;
         $promo->continuous = $this->continuous;
+        $promo->advert = $this->advert;
         $promo->save();
 
-        $icon = 'vendor/images/' . $this->image->store('promo');
-        if ($icon) {
+        if ($this->image) {
+            $icon = 'vendor/images/' . $this->image->store('promo');
             $img = new Image();
             $img->url = $icon;
             $promo->image()->save($img);
         }
+
         session()->flash('success', __('texts.success_promotion'));
         return $this->redirect(route('control.promotions'));
 
@@ -66,6 +75,7 @@ class AddPromotion extends Component
         $this->end_date = $promotion->end_date;
         $this->condition = $promotion->condition;
         $this->continuous = $promotion->continuous;
+        $this->advert = $promotion->advert;
 
     }
 
@@ -73,6 +83,7 @@ class AddPromotion extends Component
     {
         $this->all_products = Product::select(['id', 'title'])->get();
         $this->emit('selectChanged');
+        $this->type_name = ($this->advert == 1 || $this->advert) == true ? 'Advert' : 'Promo';
         return view('livewire.admin.add-promotion');
     }
 }

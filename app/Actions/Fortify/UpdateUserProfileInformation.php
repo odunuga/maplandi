@@ -57,7 +57,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         }
 
         if (isset($input['shipping_phone'])) {
-            $address['phone'] =  custom_filter_var($input['shipping_phone'], FILTER_SANITIZE_NUMBER_INT);
+            $address['phone'] = custom_filter_var($input['shipping_phone'], FILTER_SANITIZE_NUMBER_INT);
         }
         if (isset($input['address'])) {
             $address['address'] = $input['shipping_address'];

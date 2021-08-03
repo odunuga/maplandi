@@ -11,7 +11,7 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-group mb-3">
                                     <input class="form-control " wire:dirty.class="border-red-500"
-                                           wire:model.lazy="first_name" name="first_name" type="text"
+                                           wire:model="first_name" name="first_name" type="text"
                                            placeholder="first Name" required>
                                     @error('first_name') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>

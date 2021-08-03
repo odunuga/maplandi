@@ -7,6 +7,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Shop\Entities\Currency;
 use Modules\Shop\Entities\Image;
+use Modules\Shop\Entities\ManyImage;
 
 class EditProduct extends Component
 {
@@ -113,7 +114,7 @@ class EditProduct extends Component
 
         if (isset($images) && count($images) > 0) {
             foreach ($images as $single_img) {
-                $img = new Image();
+                $img = new ManyImage;
                 $img->url = 'vendor/images/' . $single_img;
                 $product->images()->save($img);
             }

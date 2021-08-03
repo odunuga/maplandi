@@ -146,7 +146,7 @@
 
                                     <div class="m-b-30">
                                         <div class="fallback">
-                                            <input wire:model="image" type="file" required>
+                                            <input wire:model="image" type="file" >
                                         </div>
                                     </div>
 

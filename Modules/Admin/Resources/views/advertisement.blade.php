@@ -30,8 +30,8 @@
                                     <b class="h5 mt-0  mb-5 text-small">Promotions</b>
                                 </div>
                                 <div class="col-md-2 mb-3" style="margin-top:20px">
-                                    <a class="btn btn-primary" href="javascript:void(0)"
-                                       onclick="$('#addPromo').modal('show')">New Promo </a>
+                                    <a class="btn btn-danger" href="javascript:void(0)"
+                                       onclick="$('#addPromo').modal('show')">New </a>
                                 </div>
                             </div>
 
@@ -40,6 +40,7 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">ID</th>
+                                        <th scope="col">Type</th>
                                         <th scope="col">Image</th>
                                         <th scope="col">Title</th>
                                         <th scope="col">Rate</th>
@@ -90,14 +91,14 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <i class=" fas fa-exclamation-circle text-warning" style="font-size:70px;"></i>
-                    <h4>Delete Report by <span id="title"></span></h4>
+                    <h4>Delete <span id="title"></span></h4>
                     <input hidden id="deleteId" name="deleteId"/>
-                    <p>Users Report on products contribute to data analysis and might be useful in the future.</p>
+                    <p>You can just set their end date in the past to disable them instead of deleting completely.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
                     </button>
-                    <button onclick="confirmDelete()" type="submit" class="btn btn-primary">Delete
+                    <button onclick="confirmDelete()" type="submit" class="btn btn-danger">Delete
                     </button>
                 </div>
             </div>
@@ -172,6 +173,14 @@
                         {
                             data: 'id'
                         },
+                        {
+                            data: null,
+                            render: function (data) {
+                                let title = data.advert == 1 ? 'info' : 'success';
+                                let type = data.advert == 1 ? 'Advert' : 'Promo';
+                                return '<i class=" text-' + title + '"  >' + type + '</i>';
+                            }
+                        },
 
                         {
                             data: null,
@@ -203,8 +212,9 @@
                         {
                             data: null,
                             render: function (data) {
+                                let setTitle = data.advert == 1 ? 'Advert' : (data.title == 1);
                                 return '<a  href="javascript:void(0)" onclick="editItem(' + data.id + ')" class="btn btn-sm btn-outline-dark text-dark" > Edit </a>' +
-                                    '<a   href="javascript:void(0)" onclick="deleteItem(' + data.id + ',\'' + data.title + '\')" class="btn btn-sm  btn-danger" > Delete Report </a><br> ';
+                                    '<a   href="javascript:void(0)" onclick="deleteItem(' + data.id + ',\'' + setTitle + '\')" class="btn btn-sm btn-danger" > Delete  </a><br> ';
                             }
                         },
 
