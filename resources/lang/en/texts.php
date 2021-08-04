@@ -12,7 +12,7 @@ return [
     'add_icon' => 'Add Icon',
     'welcome_title' => 'Welcome to ',
     'categories' => 'Categories',
-    'no_comment'=>'No Comment',
+    'no_comment' => 'No Comment',
     'search' => 'Search',
     'shop_with_ease' => 'We are here to assist you throughout your online shopping experience with us. We want to ensure that you have an easy and pleasant interaction throughout.',
     'shop_with_ease_title' => 'Shop With Ease',
@@ -46,7 +46,12 @@ return [
     'wrong_comment' => 'Cannot Delete Other people\'s comment',
     'delete_comment_error' => 'Delete Error, Try Again',
     'report_product_title' => 'Report this product in case of problems',
-    'product_report_success'=>'Your report has been sent successfully'
+    'product_report_success' => 'Your report has been sent successfully',
+    'testimony_deleted' => 'Testimony Deleted',
+    'testimony_updated' => 'Testimony Updated',
+    'testimony_not_found' => 'Testimony Not Found',
+    'empty_testimony_body'=>'Empty Testimony Body ',
+    'error_fetching_testimony'=>'Error Fetching Testimony'
 
 
 ];

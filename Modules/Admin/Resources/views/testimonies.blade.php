@@ -70,7 +70,6 @@
                     <h4>Delete <span id="title"></span> Testimony?</h4>
                     <input hidden id="deleteId" name="deleteId"/>
                     <p> Are you sure? You won't be able to revert this! </p>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
@@ -92,7 +91,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">x
                     </button>
                 </div>
-                @livewire('admin.add-tag')
+                @livewire('admin.edit-testimony')
             </div>
         </div>
     </div>
@@ -125,7 +124,7 @@
                 });
             }
             let editItem = (id, title) => {
-                Livewire.emit('edit_tag', {id: id, title: title});
+                Livewire.emit('editTestimony', {id: id, title: title});
                 $('#addTag').modal('show');
             }
         </script>

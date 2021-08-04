@@ -74,6 +74,7 @@ class Product extends Model
         return asset($default);
     }
 
+
     public function admin_format()
     {
         $parameters = [];

@@ -109,19 +109,9 @@ class User extends Authenticatable implements HasLocalePreference, EmailVerifica
         ];
     }
 
-    public function getImageUrlAttribute($value)
+    public function getImageUrlAttribute()
     {
-        $default = 'vendor/images/dashboard/noimg.png';
-        if ($value) {
-            if (substr($value->profile_photo_path, 0, 4) === "http") {
-                return $value->profile_photo_path;
-            }
-            if ($value->profile_photo_url) {
-                return $value->profile_photo_url;
-            }
-            return asset($default);
-        }
-        return asset($default);
+        return $this->image;
     }
 
     public function getImageAttribute($value)
@@ -131,10 +121,14 @@ class User extends Authenticatable implements HasLocalePreference, EmailVerifica
             if (substr($value->profile_photo_path, 0, 4) === "http") {
                 return $value->profile_photo_path;
             }
-            if ($value->profile_photo_url) {
-                return $value->profile_photo_url;
+            return asset($value->profile_photo_path);
+        }
+        $value = $this->profile_photo_path;
+        if ($value) {
+            if (substr($value, 0, 4) === "http") {
+                return $value;
             }
-            return asset($default);
+            return asset('vendor/images/' . $value);
         }
         return asset($default);
     }

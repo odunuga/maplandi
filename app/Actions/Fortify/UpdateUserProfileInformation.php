@@ -36,6 +36,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         if (isset($input['photo'])) {
             $user->updateProfilePhoto($input['photo']);
         }
+
         if (isset($input['phone'])) $user->phone = custom_filter_var($input['phone'], FILTER_SANITIZE_NUMBER_INT);
 
         if (isset($input['address'])) $user->address = custom_filter_var($input['address']);
