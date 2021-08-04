@@ -11,10 +11,11 @@
         </div>
         <div class="form-group">
             <label class="label">Type</label>
-            <input type="radio" wire:model="advert" value="1" name="advert"><label class="label">Advert</label> <input
+            <input type="radio" wire:model="advert" value="1" name="advert"><label class="label">Advert</label> &nbsp;
+            &nbsp;<input
                 type="radio" wire:model="advert" value="0" name="advert"><label class="label">Promotion/Discount</label>
         </div>
-        @if($advert==false)
+        @if($advert==0)
             <div class="form-group">
                 <label class="label"> {{$type_name}} Name</label>
                 <input class="form-control" wire:model.lazy="title" placeholder="Enter  {{$type_name}} Name"
@@ -23,8 +24,9 @@
             </div>
             <div class="form-group">
                 <label class="label">Rate</label>
-                <input class="form-control" wire:model.lazy="rate"
+                <input class="form-control" wire:model="rate"
                        placeholder="Enter only one discount rate in % e.g -5% or-10% etc"
+                       title="Enter only one discount rate in % e.g -5% or-10% etc. Make sure you add the minus sign in front to let the system know you are subtracting that percentage from their fee. If you add + to it e.g +5%, then 5% of the amount would be added to the sum"
                        required>
                 @error('rate') <span class="error">{{ $message }}</span> @enderror
             </div>
@@ -51,7 +53,16 @@
             @error('start_date') <span class="error">{{ $message }}</span> @enderror
         </div>
 
-        @if($continuous && ($continuous!==0 || $continuous!=='0'))
+        <div class="form-group">
+            <label>This is a nonstop {{$type_name}}?</label>
+            <input type="radio" wire:model="continuous" value="1" name="continuous"><label class="label">
+                Yes</label> &nbsp; &nbsp;<input
+                type="radio" wire:model="continuous" value="0" name="continuous"><label class="label"> No</label>
+        </div>
+
+<div wire:ignore>
+
+        @if($continuous==0)
             <div class="form-group">
                 <label class="label">End Date</label>
                 <input type="datetime-local" class="form-control" wire:model.lazy="end_date" placeholder="dd/mm/yy"
@@ -59,30 +70,28 @@
                 @error('end_date') <span class="error">{{ $message }}</span> @enderror
             </div>
         @endif
-        <div class="form-group" wire:ignore>
-            <label>This is a nonstop {{$type_name}}?</label>
-            <input type="radio" class="checkbox-row" wire:model="continuous" name="continuous" value="1">&nbsp;Yes
-            <input type="radio" class="checkbox-row" wire:model="continuous" name="continuous" value="0">&nbsp;No
-        </div>
+    </div>
+        <div wire:ignore>
 
-        @if($advert==false||$advert==0)
-            @if($condition && ($condition===1 || $condition ==='1'))
-                <div class="form-group" wire:ignore>
-                    <select id="selectProducts" class="form-control form-control-custom "
-                            onchange="emitUpdate()"
-                            multiple>
-                        <option value="" disabled>Select Products to Apply on</option>
-                        @foreach($all_products as  $item)
-                            <option value="{{ $item->id }}">{{ $item->title }}</option>
-                        @endforeach
-                    </select>
-                </div>
+            @if($advert=='0'||$advert==0)
+                @if( ($condition===1 || $condition ==='1'))
+                    <div class="form-group">
+                        <select id="selectProducts" class="form-control form-control-custom "
+                                onchange="emitUpdate()"
+                                multiple>
+                            <option value="" disabled>Select Products to Apply on</option>
+                            @foreach($all_products as  $item)
+                                <option value="{{ $item->id }}">{{ $item->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
             @endif
-        @endif
+        </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-danger"  wire:loading.attr="disabled">Add <i class="fa fa-spinner fa-spin" wire:loading
-                                                            wire:target="add_promotion"></i>
+        <button type="submit" class="btn btn-danger" wire:loading.attr="disabled">Add <i class="fa fa-spinner fa-spin"
+                                                                                         wire:loading></i>
         </button>
     </div>
 </form>

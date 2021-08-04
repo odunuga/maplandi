@@ -81,6 +81,8 @@ Route::prefix('control-room')->group(function () {
 
     Route::post('product_report/delete', 'AdminController@product_report_delete')->name('control.product_report.delete');
 
+    Route::post('promotion/delete', 'AdminController@promotion_delete')->name('control.promotion.delete');
+
 
 //    Admin Login
     Route::get('/login', 'Auth\LoginController@showLogin')->name('control.login');

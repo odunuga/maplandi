@@ -14,14 +14,14 @@ class AddPromotion extends Component
 
     public $title;
     public $description;
-    public $rate;
+    public $rate = '';
     public $image;
     public $products = [];
     public $start_date;
     public $end_date;
     public $condition = 0;
     public $continuous = 1;
-    public $advert = true;
+    public $advert = 1;
     public $type_name = '';
     public $all_products;
 

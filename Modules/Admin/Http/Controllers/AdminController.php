@@ -17,6 +17,7 @@ use Modules\Shop\Entities\Parameter;
 use Modules\Shop\Entities\Product;
 use Modules\Shop\Entities\ProductParameter;
 use Modules\Shop\Entities\ProductReport;
+use Modules\Shop\Entities\Promotion;
 use Modules\Shop\Entities\Tag;
 use PHPUnit\Util\Test;
 
@@ -221,10 +222,26 @@ class AdminController extends Controller
         if (request()->has('id')) {
             $id = custom_filter_var(request()->get('id'));
 
-            $tag_check = ProductReport::where('id', $id);
-            if ($tag_check->count() > 0) {
-                $tag_check->delete();
+            $product_check = ProductReport::where('id', $id);
+            if ($product_check->count() > 0) {
+                $product_check->delete();
                 $message = 'Report Deleted Successfully';
+                $response = 'success';
+            }
+        }
+        return response()->json(['response' => $response, 'message' => $message]);
+    }
+
+    public function promotion_delete()
+    {
+        $message = 'Error Cant locate item';
+        $response = 'error';
+        if (request()->has('id')) {
+            $id = custom_filter_var(request()->get('id'));
+            $promo_check = Promotion::where('id', $id);
+            if ($promo_check->count() > 0) {
+                $promo_check->delete();
+                $message = 'Advert Deleted Successfully';
                 $response = 'success';
             }
         }

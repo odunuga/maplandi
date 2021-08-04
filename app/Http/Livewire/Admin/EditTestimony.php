@@ -30,7 +30,6 @@ class EditTestimony extends Component
     {
         if ($this->body) {
             if (isset($this->testimony)) {
-
                 $this->testimony->body = $this->body;
                 $this->testimony->publish = $this->publish;
                 $this->testimony->save();
