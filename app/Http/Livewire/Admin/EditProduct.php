@@ -93,10 +93,7 @@ class EditProduct extends Component
 
     public function update_images()
     {
-
         $product = $this->product;
-
-
         if (isset($this->image) && $this->image)
             $image = $this->image->store("products");
 
@@ -109,12 +106,14 @@ class EditProduct extends Component
         if (isset($image)) {
             $img = new Image();
             $img->url = 'vendor/images/' . $image;
+            $product->image()->delete();
             $product->image()->save($img);
         }
 
         if (isset($images) && count($images) > 0) {
+            $product->images()->delete();
             foreach ($images as $single_img) {
-                $img = new ManyImage;
+                $img = new ManyImage();
                 $img->url = 'vendor/images/' . $single_img;
                 $product->images()->save($img);
             }

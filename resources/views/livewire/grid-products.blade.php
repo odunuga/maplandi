@@ -1,4 +1,4 @@
-<div class="col-lg-3 col-md-4 col-sm-6">
+<div class="col-lg-3 col-md-4 col-6">
     <div class="single-item-grid">
         <div class="image">
             <a href="{{ url('shop/'.$item->sku) }}"><img
@@ -15,7 +15,7 @@
         </div>
         <div class="content">
             <a href="javascript:void(0)"
-               class="tag">{{ $item->category->title }}</a>
+               class="tag">{{ isset($item->category)?$item->category->title:'' }}</a>
             <h3 class="title">
                 <a href="{{ url('shop/'.$item->sku) }}">{{ $item->title }}</a>
             </h3>

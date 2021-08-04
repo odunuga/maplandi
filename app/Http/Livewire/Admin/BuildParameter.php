@@ -54,6 +54,7 @@ class BuildParameter extends Component
 
     private function save_updates()
     {
+        $type_name = isset($this->new_name) ? $this->new_name : '';
         if (isset($this->parameter)) {
             $check = ParameterBuilder::where('parameter_id', $this->parameter_id);
         } else {
@@ -66,7 +67,7 @@ class BuildParameter extends Component
             $prop = new ParameterBuilder();
             $prop->parameter_id = $this->parameter_id;
         }
-        $prop->type_id = $this->new_id ? $this->new_id : strtolower($this->type_name);
+        $prop->type_id = $this->new_id ? $this->new_id : strtolower($type_name);
 
         $prop->type_name = $this->new_name;
         $prop->type = strtolower($this->new_type);

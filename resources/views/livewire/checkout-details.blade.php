@@ -10,8 +10,8 @@
                         <div class="row">
                             <div class="col-lg-6 col-12">
                                 <div class="form-group mb-3">
-                                    <input class="form-control " wire:dirty.class="border-red-500"
-                                           wire:model="first_name" name="first_name" type="text"
+                                    <input class="form-control " wire.dirty.class="border-red-500"
+                                           wire:model.lazy="first_name" name="first_name" type="text"
                                            placeholder="first Name" required>
                                     @error('first_name') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
@@ -19,24 +19,24 @@
 
                             <div class="col-lg-6 col-12">
                                 <div class="form-group mb-3">
-                                    <input class="form-control" wire:dirty.class="border-red-500"
-                                           wire:model.dirty="last_name" name="last_name" type="text"
+                                    <input class="form-control" wire.dirty.class="border-red-500"
+                                           wire:model.lazy="last_name" name="last_name" type="text"
                                            placeholder="Last name">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group mb-3">
-                                    <input name="phone" type="text" wire:dirty.class="border-red-500"
-                                           wire:model.dirty="phone" class="form-control"
+                                    <input name="phone" type="text" wire.dirty.class="border-red-500"
+                                           wire:model.lazy="phone" class="form-control"
                                            placeholder="Mobile Number" required>
                                     @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
                                 <div class="form-group mb-3">
-                                    <input class="form-control" wire:dirty.class="border-red-500" name="email"
+                                    <input class="form-control" wire.dirty.class="border-red-500" name="email"
                                            type="email"
-                                           wire:model.dirty="email"
+                                           wire:model.lazy="email"
                                            placeholder="example@email.com" required>
                                     @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
@@ -44,8 +44,8 @@
 
                             <div class="col-12">
                                 <div class="form-group mb-3 message">
-                                <textarea class="form-control" wire:dirty.class="border-red-500"
-                                          wire:model.dirty="address" name="address"
+                                <textarea class="form-control" wire.dirty.class="border-red-500"
+                                          wire:model="address" name="address"
                                           placeholder="Shipping Address" required></textarea>
                                     @error('address') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
@@ -134,7 +134,7 @@
                                 <input type="hidden" name="metadata"
                                        value="{{ json_encode(['cart'=>$cart_details['cart'],'sub_total'=>$cart_details['sub_total'],'tax_added'=>$cart_details['tax_added'],'conditions'=>$conditions,'address'=>['first_name'=>$first_name,'last_name'=>$last_name,'email'=>$email,'phone'=>$phone,'address'=>$address]]) }}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
                                 <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
-                                <button id="cardpay-btn" wire:dirty.attr="disabled" type="submit"
+                                <button id="cardpay-btn" wire:loading.attr="disabled" type="submit"
                                         class="btn btn-danger btn-lg"><i
                                         class="lni lni-credit-cards"></i>
                                     Pay Now

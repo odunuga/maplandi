@@ -13,7 +13,7 @@
             <div class="single-head">
                 <div class="row">
                     @foreach($hot_deals as $deal)
-                        <div class="col-lg-4 col-md-6 col-12">
+                        <div class="col-lg-3 col-md-4 col-6">
                             <div class="single-grid wow fadeInUp" data-wow-delay=".2s">
                                 <div class="image">
                                     <a href="{{url('shop/'.$deal->sku) }}" class="thumbnail"><img
@@ -39,8 +39,7 @@
                                         <a href="javascript:void(0)"
                                            class="tag">{{ isset($deal->category)?$deal->category->title:'' }}</a>
                                         <h3 class="title">
-                                            <a href="{{ url('shop/'.$deal->sku) }}">{{ $deal->title }}</a>
-                                        </h3>
+                                            <a href="{{ url('shop/'.$deal->sku) }}">{{ $deal->title }}</a> </h3>
                                         <livewire:rating :deal="$deal" :key="$deal->id"/>
                                     </div>
                                     <div class="bottom-content">

@@ -5,12 +5,12 @@
             <div class="page-title-box">
                 <div class="row align-items-center">
                     <div class="col-sm-6 mb-3">
-                        <h4 class="page-title">Product Tags</h4>
+                        <h4 class="page-title"> Testimonies</h4>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-right">
                             <li class="breadcrumb-item"><a href="javascript:void(0);">Maplandi</a></li>
-                            <li class="breadcrumb-item active">Product Tags</li>
+                            <li class="breadcrumb-item active">Testimonies</li>
                         </ol>
                     </div>
                 </div>
@@ -26,20 +26,21 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-10 ">
-                                    <b class="h5 mt-0  mb-5 text-small">Product Tags</b>
+                                    <b class="h5 mt-0  mb-5 text-small">Testimonies</b>
                                 </div>
                                 <div class="col-md-2 mb-3" style="margin-top:20px">
-                                    <a class="btn btn-secondary" href="javascript:void(0)"
-                                       onclick="$('#addTag').modal('show')">Add Item </a>
+{{--                                    <a class="btn btn-secondary" href="javascript:void(0)"--}}
+{{--                                       onclick="$('#add').modal('show')">Add Item </a>--}}
                                 </div>
                             </div>
 
                             <div class="table-responsive">
-                                <table id="tags" class="table table-hover">
+                                <table id="test" class="table table-hover">
                                     <thead>
                                     <tr>
                                         <th scope="col">ID</th>
-                                        <th scope="col">Tag Title</th>
+                                        <th scope="col">Comment By</th>
+                                        <th scope="col">Body</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                     </thead>
@@ -66,7 +67,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <i class=" fas fa-exclamation-circle text-warning" style="font-size:70px;"></i>
-                    <h4>Delete <span id="title"></span></h4>
+                    <h4>Delete <span id="title"></span> Testimony?</h4>
                     <input hidden id="deleteId" name="deleteId"/>
                     <p> Are you sure? You won't be able to revert this! </p>
 
@@ -82,7 +83,7 @@
     </div>
 
 
-    <div class="modal fade" id="addTag" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="addTest" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -97,37 +98,37 @@
     </div>
 
     @push('scripts')
-    <script>
-        let deleteItem = (id, title) => {
-            $('#title').text(title);
-            $('#confirmDelete').modal('show');
-            $('#deleteId').val(id);
-        };
-        let confirmDelete = () => {
-            let id = $('#deleteId').val();
-            // console.log(id);
-            let url = '{{ route('control.tags.delete') }}';
-            let data = {'id': id};
-            $.ajax({
-                'url': url,
-                'type': 'post',
-                'data': data,
-                success: function (data) {
-                    if (data.response == 'success') {
-                        $('#title').text('');
-                        $('#deleteId').val('');
-                        $('#confirmDelete').modal('hide');
-                        window.location.href = '{{ url() ->current()}}';
+        <script>
+            let deleteItem = (id, title) => {
+                $('#title').text(title);
+                $('#confirmDelete').modal('show');
+                $('#deleteId').val(id);
+            };
+            let confirmDelete = () => {
+                let id = $('#deleteId').val();
+                // console.log(id);
+                let url = '{{ route('control.testimony.delete') }}';
+                let data = {'id': id};
+                $.ajax({
+                    'url': url,
+                    'type': 'post',
+                    'data': data,
+                    success: function (data) {
+                        if (data.response == 'success') {
+                            $('#title').text('');
+                            $('#deleteId').val('');
+                            $('#confirmDelete').modal('hide');
+                            window.location.href = '{{ url() ->current()}}';
+                        }
+                        Livewire.emit('alert', [data.response, data.response]);
                     }
-                    Livewire.emit('alert', [data.response, data.response]);
-                }
-            });
-        }
-        let editItem = (id,title) => {
-            Livewire.emit('edit_tag', {id:id,title:title});
-            $('#addTag').modal('show');
-        }
-    </script>
+                });
+            }
+            let editItem = (id, title) => {
+                Livewire.emit('edit_tag', {id: id, title: title});
+                $('#addTag').modal('show');
+            }
+        </script>
         <script type="text/javascript"
                 src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
         <script type="text/javascript"
@@ -140,19 +141,22 @@
                     ajax: {
                         type: "POST",
                         url: '{{ route('admin.tags') }}',
-                        dataSrc: 'tags'
+                        dataSrc: 'tests'
                     },
                     columns: [
                         {
                             data: 'id'
                         },
                         {
-                            data: 'title'
+                            data: 'comment_by'
+                        },
+                        {
+                            data: 'body'
                         },
                         {
                             data: null,
                             render: function (data) {
-                                return '<a  href="javascript:void(0)" onclick="editItem(' + data.id + ',\'' + data.title + '\')" class="btn btn-sm text-dark" > Edit </a>' + '<a  href="javascript:void(0)" onclick="deleteItem(' + data.id + ',\'' + data.title + '\')" class="btn btn-sm text-danger" > Delete </a>';
+                                return '<a  href="javascript:void(0)" onclick="editItem(' + data.id + ',\'' + data.comment_by + '\')" class="btn btn-sm text-dark" > Edit </a>' + '<a  href="javascript:void(0)" onclick="deleteItem(' + data.id + ',\'' + data.comment_by + '\')" class="btn btn-sm text-danger" > Delete </a>';
                             }
                         },
 

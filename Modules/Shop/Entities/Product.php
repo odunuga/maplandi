@@ -6,12 +6,6 @@ use BinaryCats\Sku\HasSku;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Nagy\LaravelRating\Traits\Rate\Rateable;
 use Overtrue\LaravelLike\Traits\Likeable;
 
@@ -96,7 +90,7 @@ class Product extends Model
             'featured' => $this->featured,
             'hot' => $this->hot,
             'price' => currency_with_price($this->price, isset($this->currency) ? $this->currency->symbol : ''),
-            'image' => asset(isset($this->image) ? $this->image->url : '')
+            'image' => asset(isset($this->image) ? $this->image_url : '')
 
         ];
     }
@@ -117,7 +111,7 @@ class Product extends Model
             'published' => $this->published,
             'featured' => $this->featured,
             'hot' => $this->hot,
-            'amount' => currency_with_price($this->price, $this->currency->symbol),
+            'amount' => currency_with_price($this->price, isset($this->currency->buyer_symbol) ? $this->currency->buyer_symbol : ''),
             'image' => asset(isset($this->image) ? $this->image->url : ''),
             'stock' => $this->stock,
             'product_type' => $this->product_type

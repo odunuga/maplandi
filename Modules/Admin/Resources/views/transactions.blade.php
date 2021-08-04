@@ -107,10 +107,9 @@
                         {
                             data: null,
                             render: function (data) {
-                                let list = '<ul>';
+                                let list = '<ul class="list-unstyled">';
                                 for (let x = 0; x < data.items.length; x++) {
-                                    console.log(data.items[x]);
-                                    list += '<li>' + data.items[x] + ' - ' + data.items[x][1] + '</li>';
+                                    list += '<li>' + data.items[x]['name'] + ' - ' + data.items[x]['quantity'] + 'qty</li>';
                                 }
                                 list += '</ul>';
                                 return list;
@@ -130,7 +129,7 @@
                             data: null,
                             render: function (data) {
 
-                                return '<a href="' + data.invoice + '"  class="btn btn-sm btn-primary" >Invoice</a>';
+                                return '<a href="' + data.invoice + '"  class="btn btn-sm btn-danger" >Invoice</a>';
                             }
                         },
 

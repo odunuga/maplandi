@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Modules\Shop\Entities\Promotion;
 
 class ShopProducts extends Component
 {
@@ -50,7 +51,8 @@ class ShopProducts extends Component
         $this->categories = get_categories(); // fetch all categories for sidebar
         $params = ['category' => $this->category, 'search' => $this->search, 'range' => $this->range, 'order_by' => $this->order_by, 'dir' => $this->dir, 'category_id' => $this->cat_id];
 
-        return view('livewire.shop-products', ['title' => $this->title, 'params' => $params]);
+        $advert = $this->get_advert();
+        return view('livewire.shop-products', ['title' => $this->title, 'params' => $params, 'advert' => $advert]);
     }
 
 
@@ -71,6 +73,12 @@ class ShopProducts extends Component
             $this->title = 'Accessories | Computing | Gadgets | Phones and a whole lot more.';
         }
 
+    }
+
+    private function get_advert()
+    {
+        $now = now();
+        return $advert = Promotion::where('advert', 1)->whereDate('start_date', '<', $now)->whereDate('end_date', '>', $now)->first();
     }
 
 

@@ -3944,6 +3944,18 @@ blockquote .shape {
     font-family: jost, sans-serif
 }
 
+.items-grid .single-grid .image .product .rent {
+    display: inline-block;
+    background: #32dc5d;
+    color: #fff;
+    font-size: 14px;
+    float: right;
+    font-weight: 500;
+    padding: 7px 15px;
+    border-radius: 6px;
+    font-family: jost, sans-serif
+}
+
 .items-grid .single-grid .image .item-position {
     display: inline-block;
     background: #dc3545;

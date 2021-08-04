@@ -6,7 +6,7 @@
                 @include('admin::partials.center_logo')
                 <h5 class="font-18 text-center">{{__("auth.login.title")}}</h5>
 
-                <form method="post" class="form-horizontal m-t-30" action="{{ route('control.login') }}">
+                <form method="post" class="form-horizontal m-t-30" action="{{ route('control.login.post') }}">
                     @csrf
                     <div class="form-group">
                         <div class="col-12">

@@ -104,7 +104,7 @@
                                         <!--DELETE ITEM POST MODAL TRIGGGER BTN-->
                                         <td>
                                             <button onclick="deleteItem('{{$item->sku}}','{{$item->title}}')"
-                                                    class="btn btn-light btn-sm btn-danger">
+                                                    class="btn  btn-sm btn-danger">
                                                 <i class="fas fa-trash"></i>
                                             </button>
 
@@ -139,7 +139,7 @@
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close
                                     </button>
                                     <button onclick="confirmDelete()" type="submit" class="btn btn-danger">Delete
                                     </button>

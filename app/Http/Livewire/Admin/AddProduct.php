@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Modules\Admin\Traits\SiteSettingsTraits;
 use Modules\Shop\Entities\Currency;
 use Modules\Shop\Entities\Image;
 use Modules\Shop\Entities\ParameterBuilder;
@@ -13,7 +14,7 @@ use Modules\Shop\Entities\ProductParameter;
 
 class AddProduct extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, SiteSettingsTraits;
 
     public $sku;
     public $product_id;
@@ -69,7 +70,8 @@ class AddProduct extends Component
 
     public function add_product()
     {
-        $image = $this->image->store("products");
+        if ($this->image)
+            $image = $this->image->store("products");
 
 
         if (isset($this->images)) {
@@ -78,15 +80,21 @@ class AddProduct extends Component
                 $images[] = $photo->store('products');
             }
         }
-
+        $title = custom_filter_var($this->title);
+        $slug = Str::slug($title);
         $currency = $this->get_site_settings() && isset($this->get_site_settings()->default_currency) ? $this->get_site_settings()->default_currency : 1;
+        $check1 = Product::where("slug", 'LIKE', '%' . $slug . '%');
+        if ($check1->count() > 0) {
+            $this->emit('alert', ['error', 'Duplicate Slug Encountered, Kindly change name']);
+            return;
+        }
         $check = Product::where('id', $this->product_id)->where('sku', $this->sku);
         if ($check->count() > 0) {
 
             $product = $check->first()->update([
                 'category_id' => (int)$this->cat,
-                'title' => custom_filter_var($this->title),
-                'slug' => Str::slug($this->title),
+                'title' => $title,
+                'slug' => $slug,
                 'description' => custom_filter_var($this->description),
                 'price' => (float)$this->price,
                 'currency_id' => $this->currency_id ? (int)$this->currency_id : $currency,

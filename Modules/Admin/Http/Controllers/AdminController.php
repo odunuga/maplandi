@@ -6,6 +6,7 @@ use App\Notifications\ProductDelivered;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Admin\Entities\Testimony;
 use Modules\Admin\Traits\AdminTraits;
 use Modules\Admin\Traits\SiteSettingsTraits;
 use Modules\Cart\Entities\Order;
@@ -17,6 +18,7 @@ use Modules\Shop\Entities\Product;
 use Modules\Shop\Entities\ProductParameter;
 use Modules\Shop\Entities\ProductReport;
 use Modules\Shop\Entities\Tag;
+use PHPUnit\Util\Test;
 
 class AdminController extends Controller
 {
@@ -107,6 +109,11 @@ class AdminController extends Controller
         return view('admin::transactions');
     }
 
+    public function testimonies()
+    {
+        return view('admin::testimonies');
+    }
+
     public function print_page($ref)
     {
         if ($ref) {
@@ -152,7 +159,23 @@ class AdminController extends Controller
             $tag_check = Tag::where('id', $id);
             if ($tag_check->count() > 0) {
                 $tag_check->delete();
-                $message = 'Tag Delete Successfully';
+                $message = 'Tag Deleted Successfully';
+                $response = 'success';
+            }
+        }
+        return response()->json(['response' => $response, 'message' => $message]);
+    }
+
+    public function testimony_delete()
+    {
+        $message = 'Error Cant locate item';
+        $response = 'error';
+        if (request()->has('id')) {
+            $id = custom_filter_var(request()->get('id'));
+            $tag_check = Testimony::where('id', $id);
+            if ($tag_check->count() > 0) {
+                $tag_check->delete();
+                $message = 'Testimony Deleted Successfully';
                 $response = 'success';
             }
         }

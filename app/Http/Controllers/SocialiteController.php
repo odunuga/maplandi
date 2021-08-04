@@ -32,7 +32,6 @@ class SocialiteController extends Controller
 
         $userSocial = Socialite::driver('google')->user(); // fetch user details from google
 
-
         $check_user = User::where(['email' => $userSocial->getEmail()])->first();  // check if we have user details in our db
         if ($check_user) {
             if ($check_user->email_verified_at === null) {
@@ -56,11 +55,12 @@ class SocialiteController extends Controller
             $user = User::create([
                 'name' => $userSocial->getName(),
                 'email' => $userSocial->getEmail(),
-                'profile_photo_path' => $userSocial->getAvatar(),
                 'password' => Hash::make($userSocial->getId()),
                 'socialite_id' => $userSocial->getId(),
                 'email_verified_at' => now()->toDateTime()
             ]);
+            $user->profile_photo_path = $userSocial->getAvatar();
+            $user->update();
             DB::table('password_resets')->insert([
                 'email' => $user->email,
                 'token' => $userSocial->accessTokenResponseBody['access_token'],

@@ -19,7 +19,7 @@
                                 <i class="lni lni-quotation"></i>
                             </div>
                             <div class="product">
-                                <img src="{{  $item->user->image }}" alt="#">
+                                <img src="{{  $item->user->image_url }}" alt="#">
                                 <h4 class="name">
                                     {{ $item->user->name}}
                                     <span class="deg">{{$item->created_at->diffForHumans()}}</span>

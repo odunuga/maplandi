@@ -17,12 +17,13 @@
         @if($prev)
             <div class="form-group">
                 <label>Current Tags are
-                    : @foreach($prev as $item)@if($loop->last)and {{ $item }}  @else {{ $item }}, @endif @endforeach</label>
+                    : @foreach($prev as $item) @if(count($prev)>1 && $loop->last) and {{ $item }}  @else {{ $item }}
+                    , @endif @endforeach</label>
             </div>
         @endif
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Add <i class="lni lni-is-spinning lni-spinner"></i>
+        <button type="submit" class="btn btn-danger">Add <i class="fa fa-spinner fa-spin" wire:loading></i>
         </button>
     </div>
 </form>

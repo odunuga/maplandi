@@ -58,12 +58,17 @@ Route::prefix('control-room')->group(function () {
 
     Route::get('promotions', 'AdminController@promotions')->name('control.promotions');
 
+    Route::get('testimonies','AdminController@testimonies')->name('control.testimonies');
+
+
     ////////////////////////////////////////////////////////////////////////////////
 
     Route::post('/order/update', 'AdminController@update_order')->name('admin.order.update');
 
 
     Route::post('/tags/delete', 'AdminController@tags_delete')->name('control.tags.delete');
+
+    Route::post('/testimony/delete', 'AdminController@testimony_delete')->name('control.testimony.delete');
 
     Route::post('/comment/delete', 'AdminController@comment_delete')->name('control.comment.delete');
 
@@ -80,17 +85,11 @@ Route::prefix('control-room')->group(function () {
 //    Admin Login
     Route::get('/login', 'Auth\LoginController@showLogin')->name('control.login');
 
-    Route::post('/login', 'Auth\LoginController@loginAdmin')->name('control.login');
+    Route::post('/login/post', 'Auth\LoginController@loginAdmin')->name('control.login.post');
 
-    $env = env('ENABLE_ADMIN_REGISTRATION');
-    if ($env === true || $env === "true") {
+    Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('control.register');
 
-        Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('control.register');
-
-        Route::post('/register', 'Auth\RegisterController@register')->name('control.register');
-
-    }
-
+    Route::post('/register', 'Auth\RegisterController@register')->name('control.register.post');
 
 //    Route::get('/forgot-password', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('control.forgot');
 //

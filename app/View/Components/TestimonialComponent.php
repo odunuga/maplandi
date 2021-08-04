@@ -19,8 +19,8 @@ class TestimonialComponent extends Component
     public function __construct()
     {
         $this->testimonials_title = 'What People Say';
-        $this->testimonials_details = "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.";
-        $this->testimonials = Testimony::with('user')->inRandomOrder()->get()->take(6);
+        $this->testimonials_details = "We are open to your requests, opinions and suggestions in ways of serving you better";
+        $this->testimonials = Testimony::with('user')->inRandomOrder()->where('publish',1)->get()->take(6);
     }
 
     /**

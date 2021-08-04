@@ -33,11 +33,12 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <address>
-                                                <strong>Billed To:</strong> {{ $order->buyer->name }}<br>
+                                                <strong>Billed
+                                                    To:</strong> {{ isset($order->buyer)?$order->buyer->name:'' }}<br>
                                                 <br>
-                                                {{ $order->buyer->address }}<br>
-                                                {{ $order->buyer->state }}<br>
-                                                {{ $order->buyer->country }}
+                                                {{ isset($order->buyer)?$order->buyer->address:'' }}<br>
+                                                {{ isset($order->buyer)?$order->buyer->state:'' }}<br>
+                                                {{ isset($order->buyer)?$order->buyer->country:'' }}
                                             </address>
                                         </div>
                                         <div class="col-6 text-right">
@@ -54,7 +55,7 @@
                                         <div class="col-6 m-t-30">
                                             <address>
                                                 <b>E-mail</b>:<br>
-                                                {{ $order->buyer->email }}
+                                                {{ isset($order->buyer)?$order->buyer->email:'' }}
                                             </address>
                                         </div>
                                         <div class="col-6 m-t-30 text-right">
@@ -92,7 +93,7 @@
                                                             <td>{{ $item['name'] }}</td>
                                                             <td class="text-center"></td>
                                                             <td class="text-center">{{ $item['quantity'] }}</td>
-                                                            <td class="text-right">{{ currency_with_price($item['attributes']['amount'], isset($item['attributes']['converted_code']) ?$item['attributes']['converted_code']:$item['attributes']['symbol']) }}</td>
+                                                            <td class="text-right">{{ currency_with_price($item['price'], isset($item['attributes']['buying_code']) ?$item['attributes']['buying_code']:$item['attributes']['buying_symbol']) }}</td>
                                                         </tr>
 
                                                     @endforeach
@@ -101,14 +102,14 @@
                                                         <td class="thick-line"></td>
                                                         <td class="thick-line text-center">
                                                             <strong>Subtotal</strong></td>
-                                                        <td class="thick-line text-right">{{ currency_with_price($order->sub_total, isset($item['attributes']['converted_code']) ?$item['attributes']['converted_code']:$item['attributes']['symbol']) }}</td>
+                                                        <td class="thick-line text-right">{{ currency_with_price($order->sub_total, isset($item['attributes']['buying_code']) ?$item['attributes']['buying_code']:$item['attributes']['buying_symbol']) }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="no-line"></td>
                                                         <td class="no-line"></td>
                                                         <td class="no-line text-center">
                                                             <strong>Tax</strong></td>
-                                                        <td class="no-line text-right">{{currency_with_price($order->tax_added, isset($item['attributes']['converted_code']) ?$item['attributes']['converted_code']:$item['attributes']['symbol'])}}</td>
+                                                        <td class="no-line text-right">{{currency_with_price($order->tax_added, isset($item['attributes']['buying_code']) ?$item['attributes']['buying_code']:$item['attributes']['buying_symbol'])}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="no-line"></td>
@@ -116,7 +117,7 @@
                                                         <td class="no-line text-center">
                                                             <strong>Total</strong></td>
                                                         <td class="no-line text-right"><h4
-                                                                class="m-0">{{ currency_with_price($order->amount, isset($item['attributes']['converted_code']) ?$item['attributes']['converted_code']:$item['attributes']['symbol']) }}</h4>
+                                                                class="m-0">{{ currency_with_price($order->amount, isset($item['attributes']['buying_code']) ?$item['attributes']['buying_code']:$item['attributes']['buying_symbol']) }}</h4>
                                                         </td>
                                                     </tr>
                                                     </tbody>

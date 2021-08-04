@@ -175,7 +175,7 @@ trait CartTraits
         $sub_total = \Cart::session($this->session_id())->getSubTotal();
 
         $tax = $this->get_site_settings() && $this->get_site_settings()->tax ? $this->get_site_settings()->tax : 0;
-        $tax_added = $this->sub_total * ($tax / 100);
+        $tax_added = $sub_total * ($tax / 100);
 
         // get cart conditions
         $total = \Cart::session($this->session_id())->getTotal();
@@ -279,12 +279,12 @@ trait CartTraits
     {
         $now = Carbon::now();
         $condition = [];
-        $check_conditions = Promotion::where('condition', 1)->whereDate('start_date', '<', $now)->whereDate('end_date', '>', $now);
+        $check_conditions = Promotion::where('advert', 0)->where('condition', 1)->whereDate('start_date', '<', $now)->whereDate('end_date', '>', $now);
         if ($check_conditions->count() > 0) {
             $conditions = $check_conditions->get();
             foreach ($conditions as $each) {
                 $products = collect($each->products);
-                if ($products->contains((int)$id)) {
+                if ($products->contains((int)$id) && $each->title) {
                     $condition[] = new CartCondition([
                         'name' => $each->title,
                         'type' => 'promo',
@@ -305,19 +305,23 @@ trait CartTraits
      */
     private function get_cart_condition()
     {
+
         $now = Carbon::now();
         $condition = [];
-        $check_conditions = Promotion::where('condition', 0)->whereDate('start_date', '<', $now)->whereDate('end_date', '>', $now)->orWhere('continuous', 0);
+        $check_conditions = Promotion::where('advert', 0)->where('condition', 0)->whereDate('start_date', '<', $now)->whereDate('end_date', '>', $now)->orWhere('continuous', 0);
         if ($check_conditions->count() > 0) {
             $conditions = $check_conditions->get();
+            $i = 0;
             foreach ($conditions as $each) {
-                $condition[] = new CartCondition([
-                    'name' => $each->title,
-                    'type' => 'promo',
-                    'value' => '-' . $each->rate,
-                    'target' => 'total'
-                ]);
-
+                if ($each->title)
+                    $condition[] = new CartCondition([
+                        'name' => $each->title,
+                        'type' => 'promo',
+                        'value' => '-' . $each->rate,
+                        'order' => $i,
+                        'target' => 'total'
+                    ]);
+                $i++;
             }
         }
         // check all promotion if there is any that is for product base

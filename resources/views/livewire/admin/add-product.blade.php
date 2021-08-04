@@ -125,7 +125,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary"> Add <i class="lni lni-is-spinning lni-spinner" wire:loading></i>
+        <button type="submit" class="btn btn-danger"> Add <i class="fa fa-spinner fa-spin" wire:loading></i>
         </button>
     </div>
 </form>

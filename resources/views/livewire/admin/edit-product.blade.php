@@ -8,10 +8,12 @@
                 </p>
                 <form id="newitem" wire:submit.prevent="update_product_details" method="post">
                     <div class="form-group">
+                        <label>Title</label>
                         <input type="text" wire:model.lazy="title" class="form-control" required
                                placeholder="Item Name"/>
                     </div>
                     <div class="form-group">
+                        <label>Currency</label>
                         <select class="form-control" wire:model.lazy="currency_id" required>
                             <option>Select One</option>
                             @if(isset($currencies))
@@ -22,17 +24,17 @@
                         </select>
                     </div>
                     <div class="form-group">
-
+                        <label>Price</label>
                         <input type="number" wire:model.lazy="price" class="form-control mb-3" required
                                placeholder="Item Price"/>
 
                     </div>
                     <div class="form-group">
-
+                        <label>Stock</label>
                         <input type="number" class="form-control" wire:model.lazy="stock" placeholder="Stock"/>
                     </div>
                     <div class="form-group">
-
+                        <label>Category</label>
                         <select class="form-control" wire:model="cat"
                                 wire:change="selected_category()">
                             <option value="">Select</option>
@@ -146,7 +148,7 @@
 
                                     <div class="m-b-30">
                                         <div class="fallback">
-                                            <input wire:model="image" type="file" >
+                                            <input wire:model="image" type="file">
                                         </div>
                                     </div>
 
@@ -185,8 +187,8 @@
                     </div> <!-- end row -->
 
                     <div>
-                        <button type="submit" wire:loading.attr="disabled" wire:target="images"
-                                class="btn btn-primary waves-effect waves-light">
+                        <button type="submit" wire:loading.attr="disabled"
+                                class="btn btn-danger waves-effect waves-light">
                             Upload Images
                         </button>
 

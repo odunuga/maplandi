@@ -6,7 +6,7 @@
                 @include('admin::partials.center_logo')
                 <h5 class="font-18 text-center">Update your Password</h5>
 
-                <form method="post" class="form-horizontal m-t-30" action="{{ route('control.register') }}">
+                <form method="post" class="form-horizontal m-t-30" action="{{ route('control.register.post') }}">
                     @csrf
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>

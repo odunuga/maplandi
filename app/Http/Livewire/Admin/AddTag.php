@@ -41,11 +41,12 @@ class AddTag extends Component
                     $tag = Tag::create([
                         'title' => custom_filter_var($this->title)
                     ]);
-                    $this->emit('alert', ['error', __('texts.duplicate_tag_created')]);
+                    session()->flash('success', __('texts.tag_created'));
+                    return redirect(route('control.tags'));
                 } else {
 
-                    session()->flash('success', __('texts.tag_created'));
-                    return $this->redirect(route('control.tags'));
+                    $this->emit('alert', ['error', __('texts.duplicate_tag_created')]);
+                    return  redirect(route('control.tags'));
                 }
             }
 

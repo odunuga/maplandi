@@ -23,8 +23,8 @@ class AddCategory extends Component
         if ($category) {
             $slug = Str::slug($category);
             $tooltip = 'Information about ' . $category;
-            $category_id = $this->category_id;
-            $check = \Modules\Shop\Entities\Category::where('category_id', $category_id);
+            $category_id = $this->category_id ? $this->category_id : null;
+            $check = \Modules\Shop\Entities\Category::where('title', 'LIKE', '%' . $this->name . '%');
             if ($check->count() > 0) {
                 $cat = $check->first();
                 $cat->forceFill([
@@ -42,13 +42,16 @@ class AddCategory extends Component
 
             }
 
-            $icon = 'vendor/images/' . $this->icon->store('category');
+            if ($this->icon)
+                $icon = 'vendor/images/' . $this->icon->store('category');
 
-            if ($icon) {
+            if (isset($icon)) {
                 $img = new Image();
                 $img->url = $icon;
                 $cat->image()->save($img);
             }
+
+            $cat->save();
 
             $this->category = '';
             $this->emit('alert', ['success', 'Category Created']);

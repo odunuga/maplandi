@@ -40,7 +40,7 @@
                             <div class="row">
                                 @foreach($latest_products as $product)
 
-                                    <div class="col-lg-3 col-md-4 col-12">
+                                    <div class="col-lg-3 col-md-4 col-6">
 
                                         <div class="single-item-grid">
                                             <div class="image">
@@ -95,7 +95,7 @@
                              aria-labelledby="nav-popular-tab">
                             <div class="row">
                                 @foreach($popular_products as $product)
-                                    <div class="col-lg-3 col-md-4 col-12">
+                                    <div class="col-lg-3 col-md-4  col-6">
 
                                         <div class="single-item-grid">
                                             <div class="image">
@@ -150,7 +150,7 @@
                         <div class="tab-pane fade" id="nav-random" role="tabpanel" aria-labelledby="nav-random-tab">
                             <div class="row">
                                 @foreach($random_products as $product)
-                                    <div class="col-lg-3 col-md-4 col-12">
+                                    <div class="col-lg-3 col-md-4  col-6">
 
                                         <div class="single-item-grid">
                                             <div class="image">

@@ -86,15 +86,17 @@ class Order extends Model
 
     public function formatUsers()
     {
+        $date = isset($this->created_at) ? $this->created_at->format('d M Y') : '';
+        $paid_at = isset($this->paid_at) ? $this->paid_at->format('d M Y H:m a') : 'Not Paid';
 
         return [
             'id' => $this->id,
             'cart_id' => $this->cart_id,
             'reference' => $this->reference,
-            'created_at' => $this->created_at->format('d M Y'),
+            'created_at' => $date,
             'payment_type' => $this->payment_type,
             'amount' => $this->amount,
-            'paid_at' => $this->paid_at ? $this->paid_at->format('d M Y H:m a') : 'Not Paid',
+            'paid_at' => $paid_at,
             'status' => $this->status ? 'Successful' : 'Failed',
             'is_delivered' => $this->is_delivered
         ];
@@ -119,25 +121,29 @@ class Order extends Model
 
     public function format_admin_orders()
     {
+        $name = isset($this->buyer, $this->buyer->name) ? $this->buyer->name : '';
         $address = $this->first_name . ' ' . $this->last_name . ' at ' . $this->address;
+        $date = isset($this->created_at) ? $this->created_at->format('d M Y') : '';
+
         return [
             'id' => $this->id,
             'reference' => $this->reference,
-            'customer' => $this->buyer->name,
+            'customer' => $name,
             'amount' => currency_with_price($this->amount, $this->currency),
             'location' => $address,
             'status' => $this->status == true ? 'Successful' : 'Failed',
             'delivered' => $this->is_delivered,
-            'date' => $this->created_at->format('d M Y')
+            'date' => $date
         ];
     }
 
     public function format_transaction_record()
     {
+        $name = isset($this->buyer, $this->buyer->name) ? $this->buyer->name : '';
         $address = $this->first_name . ' ' . $this->last_name . ' at ' . $this->address;
         return [
             'id' => $this->id,
-            'customer' => $this->buyer->name,
+            'customer' => $name,
             'amount' => currency_with_price($this->amount, $this->currency),
             'items' => $this->cart,
             'location' => $address,

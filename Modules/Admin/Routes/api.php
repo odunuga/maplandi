@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/admin_stocks', [ApiAdminController::class, 'get_stocks'])->name('admin.stocks');
 
     Route::post('/get_users', [ApiAdminController::class, 'get_users'])->name('admin.users');
+
     Route::post('/get_transactions', [ApiAdminController::class, 'get_transactions'])->name('admin.transactions');
 
 //    Route::post('/dropzone/upload',[ApiAdminController::class,'dropzone_update'])->name('admin.dropzone.update');
@@ -39,5 +40,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/admin_promotions', [ApiAdminController::class, 'get_promotions'])->name('admin.promotions');
 
-
+    Route::get('/admin_testimonies', [ApiAdminController::class,'get_testimonies'])->name('admin.testimonies');
 });

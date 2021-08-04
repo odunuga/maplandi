@@ -35,15 +35,15 @@ class PaymentController extends Controller
                 'first_name' => 'required',
                 'email' => 'required',
                 'phone' => 'required',
-                'address' => ['required', 'min:10']
+                'address' => ['required', 'min:5']
             ]);
 
             if ($validate->fails()) {
                 return back()->withErrors($validate);
-            } else {
-                $this->update_shipping_address(request()->all());
-                return Paystack::getAuthorizationUrl()->redirectNow();
             }
+
+            $this->update_shipping_address(request()->all());
+            return Paystack::getAuthorizationUrl()->redirectNow();
         } catch (\Exception $e) {
             return redirect()->back()->with(['alert' => ['error', $e->getMessage()]]);
         }

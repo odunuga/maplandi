@@ -154,7 +154,8 @@
 
                                         <div class="single-item-list">
                                             <strong>Buyer: </strong><span
-                                                class="font-semibold">{{ $order->buyer->name  }}</span></div>
+                                                class="font-semibold">{{ isset($order->buyer)?$order->buyer->name:''  }}</span>
+                                        </div>
                                         <div class="single-item-list"><strong>Status:</strong> <span
                                                 class="font-semibold">{{ $order->status==true?'Successful' : 'Failed' }}</span>
                                         </div>
@@ -241,7 +242,7 @@
                                                             </td>
 
                                                             <td>
-                                                                {{ currency_with_price($item['price'],$item['attributes']['symbol']) }}
+                                                                {{ currency_with_price($item['price'],$item['attributes']['buying_symbol']) }}
                                                             </td>
 
 

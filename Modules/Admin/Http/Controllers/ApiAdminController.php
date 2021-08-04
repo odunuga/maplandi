@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Admin\Entities\Testimony;
 use Modules\Cart\Entities\Order;
 use Modules\Shop\Entities\Comment;
 use Modules\Shop\Entities\CommentReport;
@@ -45,7 +46,6 @@ class ApiAdminController extends Controller
     {
         $trans = Order::with('buyer')->orderByDesc('id')->get()->map->format_transaction_record();
         return response()->json(['transactions' => $trans]);
-
     }
 
     public function dropzone_update()
@@ -84,5 +84,10 @@ class ApiAdminController extends Controller
     {
         $adverts = Promotion::with('image')->latest()->get()->map->format_admin_promotion();
         return response()->json(['promotions' => $adverts]);
+    }
+
+    public function get_testimonies(){
+        $tests = Testimony::with('image')->latest()->get()->map->format_admin_testimony();
+        return response()->json(['tests' => $tests]);
     }
 }

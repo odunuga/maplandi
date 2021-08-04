@@ -156,7 +156,7 @@
                                                         Channel: {{ $order->channel }}
                                                     </div>
                                                     <div class="card-group">
-                                                        Amount: {{ currency_with_price($order->amount,$order->currency) }}
+                                                        Amount: {{ currency_with_price($order->amount,isset($order->payment_currency,$order->payment_currency->symbol)?$order->payment_currency->symbol:'') }}
                                                     </div>
                                                     <div class="card-group">
                                                         Payment Message: {{ $order->payment_message }}

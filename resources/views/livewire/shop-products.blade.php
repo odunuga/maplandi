@@ -52,15 +52,17 @@
                         </div>
                     </div>
 
+                @if(isset($advert, $advert->image_url))
                     <!--ADVERT BANNER-->
-                    <div class="single-widget banner">
-                        <h3>Advertisement</h3>
+                        <div class="single-widget banner">
+                            <h3>Advertisement</h3>
+                            <a href="javascript:void(0)">
+                                <img src="{{ $advert->image_url }}" alt="#">
+                                {{--                                asset('vendor/images/banner/banner.jpg')--}}
+                            </a>
+                        </div>
 
-                        <a href="javascript:void(0)">
-                            <img src="{{ asset('vendor/images/banner/banner.jpg') }}" alt="#">
-                        </a>
-                    </div>
-
+                    @endif
                 </div>
             </div>
             <div class="col-lg-9 col-md-8 col-12">
