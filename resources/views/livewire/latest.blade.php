@@ -61,7 +61,7 @@
                                             </div>
                                             <div class="content">
                                                 <a href="javascript:void(0)"
-                                                   class="tag">{{ isset($deal->category)?$deal->category->title:'' }}</a>
+                                                   class="tag">{{ isset($product->category)?$product->category->title:'' }}</a>
                                                 <h3 class="title">
                                                     <a href="{{ url('shop/'.$product->sku) }}">{{ $product->title }}</a>
                                                 </h3>
@@ -116,7 +116,7 @@
                                             </div>
                                             <div class="content">
                                                 <a href="javascript:void(0)"
-                                                   class="tag">{{ isset($deal->category)?$deal->category->title:'' }}</a>
+                                                   class="tag">{{ isset($product->category)?$product->category->title:'' }}</a>
                                                 <h3 class="title">
                                                     <a href="{{ url('shop/'.$product->sku) }}">{{ $product->title }}</a>
                                                 </h3>
@@ -171,7 +171,7 @@
                                             </div>
                                             <div class="content">
                                                 <a href="javascript:void(0)"
-                                                   class="tag">{{ isset($deal->category)?$deal->category->title:'' }}</a>
+                                                   class="tag">{{ isset($product->category)?$product->category->title:'' }}</a>
                                                 <h3 class="title">
                                                     <a href="{{ url('shop/'.$product->sku) }}">{{ $product->title }}</a>
                                                 </h3>

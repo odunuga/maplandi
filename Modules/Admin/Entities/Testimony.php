@@ -21,10 +21,12 @@ class Testimony extends Model
     {
         $comment_by = isset($this->user) ? $this->user->name : '';
         $created_at = isset($this->created_at) ? $this->created_at->format('d m Y') : '';
+        $published = $this->publish ? 'Yes' : 'No';
         return [
             'id' => $this->id,
             'comment_by' => $comment_by,
             'body' => $this->body,
+            'publish' => $published,
             'created_by' => $created_at
         ];
     }

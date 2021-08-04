@@ -87,7 +87,7 @@ class ApiAdminController extends Controller
     }
 
     public function get_testimonies(){
-        $tests = Testimony::with('image')->latest()->get()->map->format_admin_testimony();
+        $tests = Testimony::latest()->get()->map->format_admin_testimony();
         return response()->json(['tests' => $tests]);
     }
 }

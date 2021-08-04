@@ -40,5 +40,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/admin_promotions', [ApiAdminController::class, 'get_promotions'])->name('admin.promotions');
 
-    Route::get('/admin_testimonies', [ApiAdminController::class,'get_testimonies'])->name('admin.testimonies');
+    Route::post('/admin_testimonies', [ApiAdminController::class, 'get_testimonies'])->name('admin.testimonies');
 });

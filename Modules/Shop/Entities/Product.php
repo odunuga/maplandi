@@ -3,13 +3,14 @@
 namespace Modules\Shop\Entities;
 
 use BinaryCats\Sku\HasSku;
-use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Nagy\LaravelRating\Traits\Rate\Rateable;
 use Overtrue\LaravelLike\Traits\Likeable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
 
-class Product extends Model
+class Product extends Model implements Viewable
 {
     use HasFactory;
     use Rateable;

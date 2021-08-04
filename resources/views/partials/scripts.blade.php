@@ -11,7 +11,14 @@
 <script src="{{ asset('vendor/js/main.js') }}"></script>
 <script src="{{ asset('vendor/js/toastr.min.js') }}"></script>
 {{--<script src="{{ asset('vendor/pace-master/pace.js') }}"></script>--}}
-
+<script>
+    $(document).ready(function () {
+        $('.rateit').rateit();
+        $('.rateit').on('rated', function (event, value) {
+            window.livewire.emit('rated', {id: event.target.id, value: value})
+        })
+    });
+</script>
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
@@ -33,7 +40,7 @@
             mouseDrag: true,
             gutter: 0,
             nav: false,
-            center:true,
+            center: true,
             controls: true,
             controlsText: ['<i class="lni lni-chevron-left"></i>', '<i class="lni lni-chevron-right"></i>'],
             responsive: {
@@ -66,7 +73,7 @@
             mouseDrag: true,
             gutter: 0,
             nav: true,
-            center:true,
+            center: true,
             controls: false,
             controlsText: ['<i class="lni lni-arrow-left"></i>', '<i class="lni lni-arrow-right"></i>'],
             responsive: {

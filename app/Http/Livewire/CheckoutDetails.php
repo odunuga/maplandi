@@ -140,7 +140,7 @@ class CheckoutDetails extends Component
             $order->gateway_response = null;
             $order->paid_at = null;
             $order->channel = 'on_delivery';
-            $order->currency = (int)$this->cart_details['payment_currency'];
+            $order->currency =  $this->cart_details['payment_currency'];
             $order->cart = $this->cart_details['cart'];
             $order->sub_total = $this->cart_details['sub_total'];
             $order->tax_added = $this->cart_details['tax_added'];

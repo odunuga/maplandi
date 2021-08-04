@@ -58,6 +58,11 @@
                        <i class="fas fa-bullhorn"></i>
                         <span> Promotions </span></a>
                 </li>
+                <li>
+                    <a href="{{ route('control.testimonies') }}" class="waves-effect">
+                       <i class="fas fa-bullseye"></i>
+                        <span> Testimonies </span></a>
+                </li>
 
 
                 <li>

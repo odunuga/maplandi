@@ -36,8 +36,9 @@
                                 @endisset
                             </ul>
                         </div>
-                        <livewire:rating :deal="$product" :key="$product->id" class="flex flex-inline"/>
+                        <livewire:rating :item="$product" :key="$product->id" class="flex flex-inline"/>
                         <br/>
+                        <i class="fa fa-eye"></i> {{ format_number(views($product)->count()) }}
                         <div class="price my-2 text-semibold">
                             @isset($product->currency)
                                 @if(isset($product->currency) && $product->currency->code!=get_user_currency()['code'])

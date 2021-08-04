@@ -8,6 +8,7 @@ use Modules\Admin\Entities\Testimony;
 class EditTestimony extends Component
 {
     public $body;
+    public $publish = true;
     public $testimony;
     protected $listeners = ['editTestimony' => 'edit_testimony'];
 
@@ -31,14 +32,15 @@ class EditTestimony extends Component
             if (isset($this->testimony)) {
 
                 $this->testimony->body = $this->body;
+                $this->testimony->publish = $this->publish;
                 $this->testimony->save();
                 session()->flash('success', __('texts.testimony_updated'));
-                return redirect(route('control.testimony'));
-            }else{
+                return redirect(route('control.testimonies'));
+            } else {
 
                 $this->emit('alert', ['error', __('texts.error_fetching_testimony')]);
             }
-        }else{
+        } else {
             $this->emit('alert', ['error', __('texts.empty_testimony_body')]);
         }
     }

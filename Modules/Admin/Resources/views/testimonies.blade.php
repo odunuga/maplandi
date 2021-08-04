@@ -41,6 +41,7 @@
                                         <th scope="col">ID</th>
                                         <th scope="col">Comment By</th>
                                         <th scope="col">Body</th>
+                                        <th scope="col">Published</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                     </thead>
@@ -117,7 +118,7 @@
                             $('#title').text('');
                             $('#deleteId').val('');
                             $('#confirmDelete').modal('hide');
-                            window.location.href = '{{ url() ->current()}}';
+                            window.location.href = '{{ url()->current()}}';
                         }
                         Livewire.emit('alert', [data.response, data.response]);
                     }
@@ -125,7 +126,7 @@
             }
             let editItem = (id, title) => {
                 Livewire.emit('editTestimony', {id: id, title: title});
-                $('#addTag').modal('show');
+                $('#addTest').modal('show');
             }
         </script>
         <script type="text/javascript"
@@ -136,10 +137,10 @@
                 src="https://cdn.datatables.net/v/dt/dt-1.10.25/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/r-2.2.9/sl-1.3.3/datatables.min.js"></script>
         <script>
             $(document).ready(function () {
-                $('#tags').DataTable({
+                $('#test').DataTable({
                     ajax: {
                         type: "POST",
-                        url: '{{ route('admin.tags') }}',
+                        url: '{{ route('admin.testimonies') }}',
                         dataSrc: 'tests'
                     },
                     columns: [
@@ -151,6 +152,9 @@
                         },
                         {
                             data: 'body'
+                        },
+                        {
+                            data: 'publish'
                         },
                         {
                             data: null,

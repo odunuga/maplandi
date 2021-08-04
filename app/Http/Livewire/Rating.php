@@ -6,9 +6,11 @@ use Livewire\Component;
 
 class Rating extends Component
 {
-    public $deal;
+    public $item;
     public $key;
     public $class;
+
+
 
     public function render()
     {

@@ -40,7 +40,7 @@
                                            class="tag">{{ isset($deal->category)?$deal->category->title:'' }}</a>
                                         <h3 class="title">
                                             <a href="{{ url('shop/'.$deal->sku) }}">{{ $deal->title }}</a> </h3>
-                                        <livewire:rating :deal="$deal" :key="$deal->id"/>
+                                        <livewire:rating :item="$deal" :key="$deal->id"/>
                                     </div>
                                     <div class="bottom-content">
                                         <p class="price">Price:
@@ -69,12 +69,5 @@
             </div>
         </div>
     </section>
-    <script>
-        $(document).ready(function () {
-            $('.rateit').rateit();
-            $('.rateit').on('rated', function (event, value) {
-                Livewire.emit('rated', {id: event.target.id, value: value})
-            })
-        });
-    </script>
+
 @endif

@@ -10,16 +10,17 @@ use Livewire\WithPagination;
 use Modules\Shop\Entities\Comment;
 use Modules\Shop\Entities\CommentReport;
 use Modules\Shop\Entities\Product;
+use Modules\Shop\Traits\RatingTraits;
 
 class ShowProduct extends Component
 {
-    use WithPagination;
+    use WithPagination, RatingTraits;
 
     public $product;
     public $delete_comment;
 
 
-    protected $listeners = ['new_comment' => '$refresh', 'about_to_delete' => 'set_delete_comment'];
+    protected $listeners = ['new_comment' => '$refresh', 'about_to_delete' => 'set_delete_comment', 'rated' => 'implement_rating'];
 
     public function mount($product_id)
     {

@@ -18,7 +18,6 @@ trait CartTraits
 {
     use SiteSettingsTraits;
 
-
     public function session_id()
     {
         return session()->getId();
