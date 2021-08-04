@@ -3,7 +3,7 @@
 
     <!-- LOGO -->
     <div class="topbar-left">
-        <a href="{{ route('control.room') }}" class="logo d-print-none" >
+        <a href="{{ route('control.room') }}" class="logo d-print-none">
                     <span class="logo-light">
                         <img src="{{ asset('vendor/admin/images/logo1.png')}}" alt="" height="70"></span>
         </a>
@@ -33,7 +33,8 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger" href="#"><i
+                        <a href="javascript:void(0)" class="dropdown-item text-danger"
+                           onclick="document.getElementById('logout').submit()"><i
                                 class="mdi mdi-power text-danger"></i> Logout</a>
                     </div>
                 </div>

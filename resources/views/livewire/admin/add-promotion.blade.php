@@ -44,6 +44,7 @@
                     @error('condition') <span class="error">{{ $message }}</span> @enderror
                 </div>
                 <div class="form-group">
+                    <label>Description</label>
                     @error('description') <span class="error">{{ $message }}</span> @enderror
                     <textarea class="form-control" wire:model.lazy="description" rows="5"></textarea>
                 </div>
@@ -79,7 +80,7 @@
 
             @if($advert==='0'||$advert===0)
                 @if( ($condition===1 || $condition ==='1'))
-                    <div class="form-group">
+                    <div class="form-group" wire:ignore>
                         <select id="selectProducts" class="form-control form-control-custom "
                                 onchange="emitUpdate()"
                                 multiple>
