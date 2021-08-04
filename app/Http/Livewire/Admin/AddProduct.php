@@ -8,6 +8,7 @@ use Livewire\WithFileUploads;
 use Modules\Admin\Traits\SiteSettingsTraits;
 use Modules\Shop\Entities\Currency;
 use Modules\Shop\Entities\Image;
+use Modules\Shop\Entities\ManyImage;
 use Modules\Shop\Entities\ParameterBuilder;
 use Modules\Shop\Entities\Product;
 use Modules\Shop\Entities\ProductParameter;
@@ -128,23 +129,21 @@ class AddProduct extends Component
             $img->url = 'vendor/images/' . $image;
             $prev_image = isset($product->image) ? $product->image->id : '';
             if ($prev_image && $product->image()) {
-                $product->image()->detach();
-                $product->image()->dissociate($prev_image);
+                $product->image()->delete();
             }
-            $product->image()->associate($img);
+            $product->image()->save($img);
         }
 
         if ($images && count($images) > 0) {
 
             $prev_images = isset($product->images) ? $product->images->pluck('id')->toArray() : '';
             if ($prev_images && $product->image()) {
-                $product->images()->detach();
-                $product->images()->disassociate($prev_images);
+                $product->images()->delete();
             }
             foreach ($images as $single_img) {
-                $img = new Image();
+                $img = new ManyImage();
                 $img->url = 'vendor/images/' . $single_img;
-                $product->images()->associate($img);
+                $product->images()->save($img);
             }
         }
         $this->store_parameter($product);

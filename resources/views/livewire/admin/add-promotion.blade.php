@@ -81,7 +81,7 @@
         @endif
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-danger">Add <i class="fa fa-spinner fa-spin" wire:loading
+        <button type="submit" class="btn btn-danger"  wire:loading.attr="disabled">Add <i class="fa fa-spinner fa-spin" wire:loading
                                                             wire:target="add_promotion"></i>
         </button>
     </div>

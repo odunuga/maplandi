@@ -11,7 +11,7 @@ class NewRegistration extends Notification
 {
     use Queueable;
 
-    public $user;
+    public $name;
 
     /**
      * Create a new notification instance.
@@ -20,7 +20,7 @@ class NewRegistration extends Notification
      */
     public function __construct($user)
     {
-        $this->user = $user;
+        $this->name = isset($user->name) ? $user->name : $user;
     }
 
     /**
@@ -43,8 +43,8 @@ class NewRegistration extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject(' Welcome ' . $this->user->name)
-            ->markdown('notify.new_registration', ['user' => $this->user]);
+            ->subject(' Welcome ' . $this->name)
+            ->markdown('notify.new_registration', ['user' => $this->name]);
     }
 
     /**

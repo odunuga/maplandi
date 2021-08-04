@@ -3,18 +3,20 @@
 namespace Modules\Shop\Entities;
 
 use BinaryCats\Sku\HasSku;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Nagy\LaravelRating\Traits\Rate\Rateable;
 use Overtrue\LaravelLike\Traits\Likeable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
-use CyrildeWit\EloquentViewable\Contracts\Viewable;
+use Rennokki\Rating\Contracts\Rateable;
+use Rennokki\Rating\Traits\CanBeRated;
 
-class Product extends Model implements Viewable
+class Product extends Model implements Viewable,Rateable
 {
+
     use HasFactory;
-    use Rateable;
     use HasSku;
+    use CanBeRated;
     use Likeable;
     use InteractsWithViews;
 

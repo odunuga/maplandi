@@ -580,7 +580,7 @@
                                         color: #666666;
                                       "
                                                                 >
-                                                                    @isset($user) Hello {{$user->name}} @else Hello, @endisset we're excited to have you
+                                                                    @isset($user) Hello {{$user}} @else Hello, @endisset we're excited to have you
                                                                     as we pride in getting you all you need for daily
                                                                     living at the best prices, to get started Shopping
                                                                     hit the link below.

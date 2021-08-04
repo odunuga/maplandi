@@ -10,8 +10,6 @@ class Rating extends Component
     public $key;
     public $class;
 
-
-
     public function render()
     {
         return view('livewire.rating');

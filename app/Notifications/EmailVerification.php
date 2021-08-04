@@ -35,9 +35,9 @@ class EmailVerification extends Notification
      *
      * @return void
      */
-    public function __construct($name)
+    public function __construct($user)
     {
-        $this->name = $name;
+        $this->name = isset($user->name) ? $user->name : $user;
     }
 
     /**
@@ -79,7 +79,7 @@ class EmailVerification extends Notification
     {
         return (new MailMessage)
             ->subject(Lang::get('Verify Email Address'))
-            ->markdown('notify.new_registration', ['url' => $url, 'name' => $this->name]);
+            ->markdown('notify.email_verification', ['url' => $url, 'name' => $this->name]);
     }
 
     /**

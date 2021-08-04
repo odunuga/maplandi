@@ -14,8 +14,9 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Cart\Entities\ShippingAddress;
-use Nagy\LaravelRating\Traits\Rate\CanRate;
 use Overtrue\LaravelLike\Traits\Liker;
+use Rennokki\Rating\Contracts\Rating;
+use Rennokki\Rating\Traits\Rate;
 
 
 /**
@@ -23,15 +24,15 @@ use Overtrue\LaravelLike\Traits\Liker;
  * @package App\Models
  *
  */
-class User extends Authenticatable implements HasLocalePreference, EmailVerification
+class User extends Authenticatable implements HasLocalePreference, EmailVerification,Rating
 {
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
+    use Rate;
     use SoftDeletes;
     use Liker;
-    use CanRate;
     use TwoFactorAuthenticatable;
 
     /**

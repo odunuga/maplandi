@@ -212,6 +212,13 @@
       0 => 'Overtrue\\LaravelLike\\LikeServiceProvider',
     ),
   ),
+  'rennokki/rating' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Rennokki\\Rating\\RatingServiceProvider',
+    ),
+  ),
   'rinvex/countries' => 
   array (
     'providers' => 

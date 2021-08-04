@@ -22,7 +22,7 @@
                     @error('comment') <span class="error">{{ $message }}</span> @enderror
                     <textarea name="comment" wire:model.lazy="comment"
                               class="form-control form-control-custom"
-                              placeholder="Your Comments" autofocus required></textarea>
+                              placeholder="Your Comments"   required></textarea>
                 </div>
             </div>
             <div class="col-12">

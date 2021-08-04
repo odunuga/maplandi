@@ -2,6 +2,7 @@
 
 
 use AmrShawky\LaravelCurrency\Facade\Currency;
+use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Modules\Shop\Entities\Product;
 
@@ -137,7 +138,7 @@ function get_cache_record($name)
 
 function set_amount($code, $amount)
 {
-    return Currency::convert()->from($code)->to(get_user_currency()['code'] ?? 'NGN')->amount($amount)->get();
+    return Currency::convert()->from($code)->to(get_user_currency()['code'] ?: 'NGN')->amount($amount)->get();
 }
 
 function convert_to_user_currency($amount, $code)
@@ -155,4 +156,13 @@ function get_currency_symbol_from_id($id)
     $currency = \Modules\Shop\Entities\Currency::where('id', $id)->first();
     if ($currency) return $currency->symbol;
     return;
+}
+
+function top_rated_products(){
+$class = get_class(new Product());
+    $top_result = \DB::select('
+SELECT products.* FROM products
+LEFT JOIN ratings ON products.id = ratings.rateable_id
+GROUP BY ratings.rateable_id ORDER BY AVG(VALUE) DESC LIMIT 10
+');
 }

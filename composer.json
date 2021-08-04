@@ -24,6 +24,7 @@
         "nagy/laravel-rating": "^2.2",
         "nwidart/laravel-modules": "^8.2",
         "overtrue/laravel-like": "^4.0",
+        "rennokki/rating": "^3.0",
         "socialiteproviders/google": "^4.1",
         "socialiteproviders/zoho": "^4.1",
         "unicodeveloper/laravel-paystack": "^1.0",

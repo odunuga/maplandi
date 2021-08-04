@@ -13,11 +13,17 @@
 {{--<script src="{{ asset('vendor/pace-master/pace.js') }}"></script>--}}
 <script>
     $(document).ready(function () {
-        $('.rateit').rateit();
+        let global_set;
         $('.rateit').on('rated', function (event, value) {
-            window.livewire.emit('rated', {id: event.target.id, value: value})
-        })
+            let key = event.target.id;
+            global_set = $('.' + key);
+            window.livewire.emit('rated', {id: key, value: value})
+        });
+        window.livewire.on('update_rating', function (data) {
+            $('#ratingCounter' + data.id).text(data.value);
+        });
     });
+
 </script>
 <script type="text/javascript">
     $.ajaxSetup({

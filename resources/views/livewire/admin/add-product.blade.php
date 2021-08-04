@@ -11,7 +11,6 @@
         <div class="form-group">
             <label>Other Images</label>
             <input type="file" wire:model="images" multiple>
-
             @error('images.*') <span class="error">{{ $message }}</span> @enderror
 
         </div>
@@ -125,7 +124,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-danger"> Add <i class="fa fa-spinner fa-spin" wire:loading></i>
+        <button type="submit" class="btn btn-danger" wire:loading.attr="disabled"> Add <i class="fa fa-spinner fa-spin" wire:loading></i>
         </button>
     </div>
 </form>
