@@ -44,7 +44,7 @@ class NewRegistration extends Notification
     {
         return (new MailMessage)
             ->subject(' Welcome ' . $this->name)
-            ->markdown('notify.new_registration', ['user' => $this->name]);
+            ->view('notify.new_registration', ['user' => $this->name]);
     }
 
     /**

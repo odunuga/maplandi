@@ -6,13 +6,14 @@ use App\Notifications\CheckoutProcessed;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Modules\Admin\Traits\AdminTraits;
 use Modules\Cart\Entities\Order;
 use Modules\Shop\Traits\CartTraits;
 use Unicodeveloper\Paystack\Facades\Paystack;
 
 class CheckoutDetails extends Component
 {
-    use CartTraits;
+    use CartTraits, AdminTraits;
 
     public $cart_details;
     public $first_name;
@@ -127,7 +128,13 @@ class CheckoutDetails extends Component
         if ($this->cart_details['cart']) {
 
             $transaction_id = $this->generate_on_delivery_id();
-            $order = new Order();
+            $check_order = Order::where('payment_type', 'pay_on_delivery')->where('cart_id', $this->cart_details['id'])->where('amount', $this->cart_details['total'])->where('channel', 'on_delivery')->where('cart', $this->cart_details['cart']);
+            if ($check_order->count() > 0) {
+                $order = $check_order->first();
+            } else {
+                $order = new Order();
+            }
+
             $order->payment_type = 'pay_on_delivery';
             $order->user_id = auth()->id();
             $order->status = 'pending';
@@ -140,7 +147,7 @@ class CheckoutDetails extends Component
             $order->gateway_response = null;
             $order->paid_at = null;
             $order->channel = 'on_delivery';
-            $order->currency =  $this->cart_details['payment_currency'];
+            $order->currency = $this->cart_details['payment_currency'];
             $order->cart = $this->cart_details['cart'];
             $order->sub_total = $this->cart_details['sub_total'];
             $order->tax_added = $this->cart_details['tax_added'];
@@ -158,6 +165,7 @@ class CheckoutDetails extends Component
             $this->clear_session_cart($this->session_id());
             $order->save();
             auth()->user()->notify(new CheckoutProcessed($order->load('payment_currency')));
+            $this->notifyAdmin($order->load('payment_currency'));
             return $order;
         }
         return redirect(route('cart'));

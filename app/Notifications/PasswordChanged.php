@@ -43,7 +43,7 @@ class PasswordChanged extends Notification
     {
         return (new MailMessage)
             ->subject('Password Changed!')
-            ->markdown('notify.password_changed', ['user' => $this->user]);
+            ->view('notify.password_changed', ['user' => $this->user]);
     }
 
     /**

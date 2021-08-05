@@ -58,8 +58,11 @@ Route::prefix('control-room')->group(function () {
 
     Route::get('promotions', 'AdminController@promotions')->name('control.promotions');
 
-    Route::get('testimonies','AdminController@testimonies')->name('control.testimonies');
+    Route::get('testimonies', 'AdminController@testimonies')->name('control.testimonies');
 
+    Route::get('user/{id}', 'AdminController@user_show')->name('control.user.show');
+
+    Route::get('testimony/{id}', 'AdminController@testimony_request')->name('control.testimony.request');
 
     ////////////////////////////////////////////////////////////////////////////////
 
@@ -84,10 +87,10 @@ Route::prefix('control-room')->group(function () {
     Route::post('promotion/delete', 'AdminController@promotion_delete')->name('control.promotion.delete');
 
 
-Route::get('category/{id}/edit','AdminController@category_edit')->name('control.category.edit');
+    Route::get('category/{id}/edit', 'AdminController@category_edit')->name('control.category.edit');
 
 
-Route::post('category/update','AdminController@category_update')->name('control.category.update');
+    Route::post('category/update', 'AdminController@category_update')->name('control.category.update');
 
 
 //    Admin Login

@@ -4,12 +4,16 @@
 namespace Modules\Admin\Traits;
 
 
+use App\Notifications\AdminOrderNotification;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
+use Modules\Admin\Entities\TestimonyRequest;
 use Modules\Cart\Entities\Order;
 use Modules\Shop\Entities\Product;
 
 trait AdminTraits
 {
-
 
 
     private function get_dashboard_menu()
@@ -43,6 +47,24 @@ trait AdminTraits
             $sum += count($order['cart']);
         }
         return $sum;
+    }
+
+    private function generate_token()
+    {
+        return Str::uuid()->toString();
+    }
+
+    private function clear_user_token($user)
+    {
+        return TestimonyRequest::where('user_id', $user->id)->delete();
+    }
+
+    private function notifyAdmin($order)
+    {
+        $admin = env('MAIL_FROM_ADDRESS');
+        Notification::route('mail', [
+            $admin => 'New Order',
+        ])->notify(new AdminOrderNotification($order));
     }
 }
 

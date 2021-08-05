@@ -4,6 +4,8 @@ namespace Modules\Shop\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
+use Modules\Admin\Entities\TestimonyRequest;
 use Modules\Shop\Entities\Product;
 use Modules\Shop\Repository\ShopInterface as Repo;
 
@@ -57,7 +59,6 @@ class ShopController extends Controller
         return $product->where('stock', '>', 0)->where('published', 1)->where('available', 1)->orderByViews()->get()->take($this->take)->load(['image', 'tags', 'category', 'currency']);
     }
 
-
     /**
      * Show the specified resource.
      * @param mixed $sku
@@ -73,6 +74,22 @@ class ShopController extends Controller
         }
         session()->flash('error', __('texts.product_not_found'));
         return back();
+    }
+
+    public function testimony_request($token)
+    {
+        if (auth()->check()) {
+            $user_check = TestimonyRequest::where('token', $token);
+            if ($user_check->count() > 0) {
+                $user = $user_check->first();
+                return view('testimony.testify')->with(['id' => $user->id, 'token' => $token]);
+            }
+            session()->flash('error', 'Token Not Found');
+
+            return redirect();
+        }
+        Cache::put('redirect_to', url('testimony/request/' . $token));
+        return redirect()->route('login');
     }
 
 }

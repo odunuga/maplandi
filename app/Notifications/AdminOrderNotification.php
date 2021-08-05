@@ -7,19 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ResetUserPassword extends Notification
+class AdminOrderNotification extends Notification
 {
     use Queueable;
-    public $url;
+
+    public $order;
 
     /**
      * Create a new notification instance.
      *
-     * @param $user
+     * @return void
      */
-    public function __construct($url)
+    public function __construct($order)
     {
-        $this->url = $url;
+        $this->order = $order;
     }
 
     /**
@@ -42,9 +43,8 @@ class ResetUserPassword extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Request Reset', $this->url)
-            ->line('Thank you for patronizing us!');
+            ->subject('New Order')
+            ->view('notify.admin.new_order', ['order' => $this->order]);
     }
 
     /**

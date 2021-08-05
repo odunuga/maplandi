@@ -44,7 +44,6 @@ class CheckoutProcessed extends Notification
     {
         if (isset($this->order->buyer) && $this->order->buyer) {
             $line1 = 'Dear ' . $this->order->buyer->name;
-
         } else {
             $line1 = '';
         }
@@ -52,7 +51,7 @@ class CheckoutProcessed extends Notification
         return (new MailMessage)
             ->subject('Order Received')
             ->greeting($line1)
-            ->markdown('notify.order_status', ['order' => $this->order]);
+            ->view('notify.order_status', ['order' => $this->order]);
 
     }
 

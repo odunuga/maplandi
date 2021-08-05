@@ -503,7 +503,7 @@
                                                             <td align="center"
                                                                 style="padding:0;Margin:0;padding-bottom:10px"><h1
                                                                     style="Margin:0;line-height:46px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:46px;font-style:normal;font-weight:bold;color:#333333">
-                                                                    Order confirmation</h1></td>
+                                                                    Order Information</h1></td>
                                                         </tr>
                                                     </table>
                                                 </td>
@@ -548,8 +548,8 @@
                                                             <td align="center" class="es-m-p0r es-m-p0l"
                                                                 style="Margin:0;padding-top:5px;padding-bottom:15px;padding-left:40px;padding-right:40px">
                                                                 <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;font-size:14px">
-                                                                    This email is to confirm&nbsp;your order. We will
-                                                                    send you another email as soon as it ships.</p></td>
+                                                                    You have a new Sale!. Kindly find the details of the
+                                                                    order below</p></td>
                                                         </tr>
                                                     </table>
                                                 </td>

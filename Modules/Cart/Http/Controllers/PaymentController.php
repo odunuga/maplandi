@@ -7,6 +7,7 @@ use App\Notifications\CheckoutProcessed;
 use App\Notifications\InvoicePaid;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
+use Modules\Admin\Traits\AdminTraits;
 use Modules\Cart\Entities\Order;
 use Modules\Shop\Traits\CartTraits;
 use Modules\Shop\Traits\PaymentTraits;
@@ -16,7 +17,7 @@ class PaymentController extends Controller
 {
 
     use PaymentTraits;
-    use CartTraits;
+    use CartTraits, AdminTraits;
 
     public function __construct()
     {
@@ -93,6 +94,7 @@ class PaymentController extends Controller
             //TODO Emit Payment Event Information
             auth()->user()->notify(new CheckoutProcessed($order->load('payment_currency')));
             auth()->user()->notify(new InvoicePaid($order));
+            $this->notifyAdmin($order->load('payment_currency'));
             $this->clear_session_cart($this->session_id());
 
         } else {

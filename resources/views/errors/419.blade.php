@@ -1,4 +1,4 @@
-<x-app-layout>
+ <x-app-layout>
     <section class="how-works section bg-light">
         <div class="container">
             <div class="row">
@@ -11,7 +11,7 @@
             </div>
             <div class="row">
                 <div class="col-8 offset-2">
-                    <img src="{{ asset('vendor/images/errors/empty_file.png) }}"/>
+                    <img src="{{ asset('vendor/images/errors/empty_file.png') }}"/>
                 </div>
             </div>
         </div>

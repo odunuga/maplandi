@@ -1,7 +1,7 @@
 <div class="col-lg-3 col-md-12 col-12">
     <div class="dashboard-sidebar">
         <div class="user-image">
-            <img src="{{ asset(auth()->user()->image)}}" alt="#">
+            <img src="{{  auth()->user()->image_url}}" alt="#">
             <h3>Hi, {{ auth()->user()->name }}</h3>
         </div>
         <div class="dashboard-menu">

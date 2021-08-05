@@ -79,7 +79,7 @@ class EmailVerification extends Notification
     {
         return (new MailMessage)
             ->subject(Lang::get('Verify Email Address'))
-            ->markdown('notify.email_verification', ['url' => $url, 'name' => $this->name]);
+            ->view('notify.email_verification', ['url' => $url, 'name' => $this->name]);
     }
 
     /**

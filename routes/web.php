@@ -29,5 +29,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [ShopController::class, 'welcome'])->name('dashboard');
 
+    Route::get('testimony/request/{token}', [ShopController::class, 'testimony_request'])->name('testimony.request.set');
+
 
 });
+

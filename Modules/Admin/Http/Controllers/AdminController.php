@@ -2,11 +2,14 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Models\User;
 use App\Notifications\ProductDelivered;
+use App\Notifications\RequestTestimony;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\Testimony;
+use Modules\Admin\Entities\TestimonyRequest;
 use Modules\Admin\Traits\AdminTraits;
 use Modules\Admin\Traits\SiteSettingsTraits;
 use Modules\Cart\Entities\Order;
@@ -160,6 +163,40 @@ class AdminController extends Controller
             return view('admin::category_edit', compact('category', 'categories'));
         }
         session()->flash('error', 'Unable to find Category');
+        return back();
+
+    }
+
+    public function user_show($id)
+    {
+        $check = User::with(['shipping_address'])->where('id', $id);
+        if ($check->count() > 0) {
+            $user = $check->first();
+            return view('admin::users.show', compact('user'));
+        }
+        session()->flash('error', 'Unable to find User');
+        return back();
+    }
+
+    public function testimony_request($id)
+    {
+
+        $check = User::where('id', $id);
+        if ($check->count() > 0) {
+            $user = $check->first();
+            // generate token
+            $token = $this->generate_token();
+            $this->clear_user_token($user);
+            $set_token = new  TestimonyRequest();
+            $set_token->user_id = $user->id;
+            $set_token->token = $token;
+            $set_token->save();
+
+            $user->notify(new RequestTestimony($user, $token));
+            session()->flash('success', 'Testimony Request Sent!');
+            return back();
+        }
+        session()->flash('error', 'Unable to find User');
         return back();
     }
 

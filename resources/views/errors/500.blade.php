@@ -10,7 +10,7 @@
             </div>
             <div class="row">
                 <div class="col-8 offset-2">
-                    <img src="{{ asset('vendor/images/errors/confuse.png) }}"/>
+                    <img src="{{ asset('vendor/images/errors/confuse.png') }}"/>
                 </div>
             </div>
         </div>

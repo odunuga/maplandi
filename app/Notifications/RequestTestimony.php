@@ -11,20 +11,25 @@ class RequestTestimony extends Notification
 {
     use Queueable;
 
+    public $user;
+    public $token;
+
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param $user
+     * @param $token
      */
-    public function __construct()
+    public function __construct($user, $token)
     {
-        //
+        $this->user = $user;
+        $this->token = $token;
     }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -35,21 +40,23 @@ class RequestTestimony extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
+        $url = url('testimony/request/') . '/' . $this->token;
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->subject('Testimony Request')
+            ->line('We would like you to take the time out to comment about your experience so far using our account details.')
+            ->action('Testify', $url)
+            ->line('Thank you for patronizing us.');
     }
 
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function toArray($notifiable)

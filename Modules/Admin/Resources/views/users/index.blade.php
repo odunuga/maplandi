@@ -103,8 +103,9 @@
                         {
                             data: null,
                             render: function (data) {
-                                return '<i class="fa fa-eye"></i>'
-                                    + '<i class="fa fa-comment"></i>';
+                                let url = '{{ url('control-room/user/') }}';
+                                let test = "{{ url('control-room/testimony/') }}";
+                                return '<a href="' + url + '/' + data.id + '" <i class="fa fa-eye"></i></a>&nbsp;&nbsp;' + '<a href="' + test + '/' + data.id + '" title="Request Testimony"> <i class="fa fa-comment"></i></a>';
                             }
                         }
 

@@ -44,7 +44,7 @@ class ForgotPassword extends Notification
     {
         return (new MailMessage)
             ->subject('Forgot Your Password?')
-            ->markdown('notify.forgot_password', ['token' => route('control.reset.password.get', $this->token)]);
+            ->view('notify.forgot_password', ['token' => route('control.reset.password.get', $this->token)]);
     }
 
     /**
