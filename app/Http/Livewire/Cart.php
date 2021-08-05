@@ -9,7 +9,6 @@ use Modules\Shop\Traits\CartTraits;
 class Cart extends Component
 {
     use CartTraits;
-
     public $total = 0.0;
     public $tax = 0.0;
     public $tax_added = 0.0;
