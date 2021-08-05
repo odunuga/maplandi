@@ -124,7 +124,7 @@ class AddProduct extends Component
             ]);
         }
 
-        if ($image) {
+        if (isset($image) && $image) {
             $img = new Image();
             $img->url = 'vendor/images/' . $image;
             $prev_image = isset($product->image) ? $product->image->id : '';
@@ -134,7 +134,7 @@ class AddProduct extends Component
             $product->image()->save($img);
         }
 
-        if ($images && count($images) > 0) {
+        if (isset($image) && $images && count($images) > 0) {
 
             $prev_images = isset($product->images) ? $product->images->pluck('id')->toArray() : '';
             if ($prev_images && $product->image()) {

@@ -3,6 +3,8 @@
     <div>
         <a class="btn btn-secondary btn-sm" href="{{ url('control-room/builder/'.$category->id) }}">Builder</a>
     </div>
+    <a class="btn btn-success" href="{{ url('control-room/category/'.$category->id.'/edit') }}">Edit</a>
+
     @if($to_delete)
         <button class="btn btn-danger btn-sm" wire:click="delete_category()">Are you sure?
         </button>

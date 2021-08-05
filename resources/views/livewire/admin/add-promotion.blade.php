@@ -4,6 +4,8 @@
         <div class="form-group">
             @if (isset($image))
                 <img src="{{ (is_string($image))?$image:$image->temporaryUrl() }}" class="img-thumbnail h-12">
+            @elseif (isset($prev_img))
+                <img src="{{ (is_string($prev_img))?$prev_img:'' }}" class="img-thumbnail h-12">
             @endif
             <label for="image" class="label"><i class="fa fa-file-upload"></i> {{ __('texts.add_promo_image') }}</label>
             <input id="image" hidden type="file" wire:model="image">

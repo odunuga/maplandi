@@ -10,9 +10,11 @@ use Modules\Admin\Entities\Testimony;
 use Modules\Admin\Traits\AdminTraits;
 use Modules\Admin\Traits\SiteSettingsTraits;
 use Modules\Cart\Entities\Order;
+use Modules\Shop\Entities\Category;
 use Modules\Shop\Entities\Comment;
 use Modules\Shop\Entities\CommentReport;
 use Modules\Shop\Entities\Currency;
+use Modules\Shop\Entities\Image;
 use Modules\Shop\Entities\Parameter;
 use Modules\Shop\Entities\Product;
 use Modules\Shop\Entities\ProductParameter;
@@ -147,6 +149,49 @@ class AdminController extends Controller
     public function promotions()
     {
         return view('admin::advertisement');
+    }
+
+    public function category_edit($id)
+    {
+        $check = Category::with('category')->where('id', $id);
+        if ($check->count() > 0) {
+            $category = $check->first();
+            $categories = Category::all();
+            return view('admin::category_edit', compact('category', 'categories'));
+        }
+        session()->flash('error', 'Unable to find Category');
+        return back();
+    }
+
+    ///////////////////////////// UPDATE /////////////////////////////
+
+    public function category_update()
+    {
+        $message = 'Error Cant locate item';
+        $response = 'error';
+        if (request()->has('id')) {
+            $id = custom_filter_var(request()->get('id'));
+            $title = custom_filter_var(request()->get('title'));
+            $cat_check = Category::where('id', $id);
+            if ($cat_check->count() > 0) {
+                $cat = $cat_check->first();
+                $cat->title = $title;
+                if (request()->hasFile('icon')) {
+                    $icon = 'vendor/images/' . request()->icon->store('category');
+                    if (isset($icon)) {
+                        $cat->image()->delete();
+                        $img = new Image();
+                        $img->url = $icon;
+                        $cat->image()->save($img);
+                    }
+                }
+                $cat->update();
+                session()->flash('success', 'Category Updated Successfully');
+                return redirect(route('control.items'));
+            }
+        }
+        session()->flash('error', 'Unable to find Category');
+        return back();
     }
 
     //////////////////////////// DELETE ///////////////////////////

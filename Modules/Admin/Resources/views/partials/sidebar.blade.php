@@ -54,13 +54,18 @@
                         <span> Product Report </span></a>
                 </li>
                 <li>
+                    <a href="{{ route('control.users') }}" class="waves-effect">
+                        <i class="fas fa-users"></i>
+                        <span> Users</span></a>
+                </li>
+                <li>
                     <a href="{{ route('control.promotions') }}" class="waves-effect">
-                       <i class="fas fa-bullhorn"></i>
+                        <i class="fas fa-bullhorn"></i>
                         <span> Promotions </span></a>
                 </li>
                 <li>
                     <a href="{{ route('control.testimonies') }}" class="waves-effect">
-                       <i class="fas fa-bullseye"></i>
+                        <i class="fas fa-bullseye"></i>
                         <span> Testimonies </span></a>
                 </li>
 

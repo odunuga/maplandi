@@ -18,12 +18,12 @@ class Category extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-    public function image(): MorphOne
+    public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    public function images(): MorphMany
+    public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
     }

@@ -104,6 +104,7 @@
                             data: null,
                             render: function (data) {
                                 return '<i class="fa fa-eye"></i>'
+                                    + '<i class="fa fa-comment"></i>';
                             }
                         }
 

@@ -16,6 +16,7 @@ class AddPromotion extends Component
     public $description;
     public $rate = '';
     public $image;
+    public $prev_img;
     public $products = [];
     public $start_date;
     public $end_date;
@@ -69,7 +70,7 @@ class AddPromotion extends Component
         $this->title = $promotion->title;
         $this->description = $promotion->description;
         $this->rate = $promotion->rate;
-        $this->image = $promotion->image_url;
+        $this->prev_img = $promotion->image_url;
         $this->products = $promotion->products;
         $this->start_date = $promotion->start_date;
         $this->end_date = $promotion->end_date;

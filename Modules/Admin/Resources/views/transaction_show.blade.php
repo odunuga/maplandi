@@ -5,12 +5,12 @@
             <div class="page-title-box">
                 <div class="row align-items-center">
                     <div class="col-sm-6 mb-3">
-                        <h4 class="page-title">Users</h4>
+                        <h4 class="page-title">History</h4>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-right">
                             <li class="breadcrumb-item"><a href="javascript:void(0);">Maplandi</a></li>
-                            <li class="breadcrumb-item active">Users</li>
+                            <li class="breadcrumb-item active">History</li>
                         </ol>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-10 ">
-                                    <b class="h5 mt-0  mb-5 text-small">Orders</b>
+                                    <b class="h5 mt-0  mb-5 text-small">Transaction History</b>
                                 </div>
 
 
@@ -42,7 +42,7 @@
                                         <th scope="col">Amount</th>
                                         <th scope="col">Location</th>
                                         <th scope="col">Date</th>
-                                        <th scope="col" colspan="2">Status</th>
+                                        <th scope="col">Invoice</th>
 
 
                                     </tr>
@@ -67,15 +67,9 @@
 
                                         <td>Lagos,Nigeria</td>
                                         <td>15/1/2018</td>
+                                        <td><a href="invoice.html" class="btn btn-primary">Invoice</button></td>
 
-                                        <td><span class="badge badge-warning">Pending</span></td>
 
-
-                                        <td>
-                                            <div>
-                                                <button class="btn btn-primary btn-sm">Mark As Completed</button>
-                                            </div>
-                                        </td>
                                     </tr>
 
 
@@ -98,8 +92,7 @@
 
                                         <td>Lagos,Nigeria</td>
                                         <td>15/1/2018</td>
-
-                                        <td><span class="badge badge-success">Delivered</span></td>
+                                        <td><a href="invoice.html" class="btn btn-primary">Invoice</button></td>
 
 
                                     </tr>
@@ -134,11 +127,8 @@
             </nav>
 
         </div>
-
-
         <!-- container-fluid -->
 
     </div>
     <!-- content -->
 </x-master-layout>
-

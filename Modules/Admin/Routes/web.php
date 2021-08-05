@@ -84,6 +84,12 @@ Route::prefix('control-room')->group(function () {
     Route::post('promotion/delete', 'AdminController@promotion_delete')->name('control.promotion.delete');
 
 
+Route::get('category/{id}/edit','AdminController@category_edit')->name('control.category.edit');
+
+
+Route::post('category/update','AdminController@category_update')->name('control.category.update');
+
+
 //    Admin Login
     Route::get('/login', 'Auth\LoginController@showLogin')->name('control.login');
 

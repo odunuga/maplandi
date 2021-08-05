@@ -6,7 +6,8 @@
                 <option value="">None</option>
                 @if(isset($categories))
                     @foreach($categories as $cat)
-                        <option value="{{ $cat->id }}">{{ $cat->title }}</option>
+                        <option value="{{ $cat->id }}">{{ $cat->title  }}
+                        </option>
                     @endforeach
                 @endif
             </select>
@@ -22,7 +23,8 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-danger" wire:loading.attr="disabled">Add <i  class="fa fa-spinner fa-spin" wire:loading></i>
+        <button type="submit" class="btn btn-danger" wire:loading.attr="disabled">Add <i class="fa fa-spinner fa-spin"
+                                                                                         wire:loading></i>
         </button>
     </div>
 </form>
