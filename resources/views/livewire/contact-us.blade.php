@@ -2,29 +2,28 @@
     <div class="row">
         <div class="col-lg-6 col-12">
             <div class="form-group">
-                <input wire:model="name" type="text" value="{{ auth()->check()?auth()->user()->name:''}}" {{ auth()->check()?"readonly":"" }}
+                <input wire:model="name" type="text"
                        placeholder="Your Name" required="required">
                 @error('name') <span class="error">{{ $message }}</span> @enderror
             </div>
         </div>
         <div class="col-lg-6 col-12">
             <div class="form-group">
-                <input wire:model="subject" type="text" placeholder="Your Subject"
-                       required="required">
-
+                <input wire:model="phone" type="tel" placeholder="Your Phone"
+                       required="required" >
+                @error('phone') <span class="error">{{ $message }}</span> @enderror
             </div>
         </div>
         <div class="col-lg-6 col-12">
             <div class="form-group">
-                <input wire:model="phone" type="tel" placeholder="Your Phone"
-                       value="{{ auth()->check()?auth()->user()->phone:'' }}"
-                       required="required" {{ auth()->check()?"readonly":"" }}>
-                @error('phone') <span class="error">{{ $message }}</span> @enderror
+                <input wire:model.lazy="subject" type="text" placeholder="Your Subject"
+                       required="required">
+
             </div>
         </div>
         <div class="col-12">
             <div class="form-group message">
-                <textarea wire:model="message" placeholder="Your Message"></textarea>
+                <textarea wire:model.lazy="message" placeholder="Your Message"></textarea>
                 @error('message') <span class="error">{{ $message }}</span> @enderror
             </div>
         </div>

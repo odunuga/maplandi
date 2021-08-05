@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 
 class ContactUs extends Component
@@ -21,6 +21,11 @@ class ContactUs extends Component
 
     public function render()
     {
+        if(auth()->check()){
+            $this->name = auth()->user()->name;
+            $this->phone = auth()->user()->phone;
+
+        }
         return view('livewire.contact-us');
     }
 
@@ -42,9 +47,8 @@ class ContactUs extends Component
             'phone' => $this->phone,
             'message' => $this->message
         ]);
-        Notification::route('mail', [
-            env('MAIL_FROM_ADDRESS') => 'Admin'
-        ])->notify(new \App\Notifications\ContactUs($mail));
+        $admin = env('MAIL_FROM_ADDRESS');
+        Notification::route('mail', $admin)->notify(new \App\Notifications\ContactUs($mail));
     }
 
 

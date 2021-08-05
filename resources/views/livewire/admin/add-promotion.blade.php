@@ -55,7 +55,7 @@
         </div>
         <div class="form-group">
             <label class="label">Start Date</label>
-            <input type="datetime-local" class="form-control" wire:model.lazy="start_date" placeholder="dd/mm/yy"
+            <input type="datetime-local" class="form-control" wire:model="start_date" placeholder="dd/mm/yy"
                    required>
             @error('start_date') <span class="error">{{ $message }}</span> @enderror
         </div>
@@ -72,7 +72,7 @@
             @if($continuous===0||$continuous==='0')
                 <div class="form-group">
                     <label class="label">End Date</label>
-                    <input type="datetime-local" class="form-control" wire:model.lazy="end_date" placeholder="dd/mm/yy"
+                    <input type="datetime-local" class="form-control" wire:model="end_date" placeholder="dd/mm/yy"
                            required>
                     @error('end_date') <span class="error">{{ $message }}</span> @enderror
                 </div>

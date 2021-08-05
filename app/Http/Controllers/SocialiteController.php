@@ -32,7 +32,7 @@ class SocialiteController extends Controller
 
         $userSocial = Socialite::driver('google')->user(); // fetch user details from google
 
-        $check_user = User::where(['email' => $userSocial->getEmail()])->first();  // check if we have user details in our db
+        $check_user = User::where('email', $userSocial->getEmail())->first();  // check if we have user details in our db
         if ($check_user) {
             if ($check_user->email_verified_at === null) {
                 $check_user->email_verified_at = now()->toDateTime();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Shop\Entities\Image;
@@ -35,18 +36,27 @@ class AddPromotion extends Component
 
     public function add_promotion()
     {
-        $check_promotion = Promotion::where('title', "like", "%" . $this->title . "%")->where('condition', $this->condition)->where('rate', $this->rate);
+        $start_date = !empty($this->start_date) ? Carbon::create($this->start_date) : null;
+        $end_date = !empty($this->end_date) ? Carbon::create($this->end_date) : null;
+
+        $check_promotion = Promotion::where('title', "like", "%" . $this->title . "%")->where('condition', $this->condition)->where('advert', $this->advert)->where('start_date', $start_date);
         if ($check_promotion->count() > 0) {
             $promo = $check_promotion->first();
         } else {
             $promo = new Promotion();
         }
+        $check_rate = $this->rate;
+        if (substr($check_rate, 1, 1) !== '-' || substr($check_rate, 1, 1) !== '+') {
+            $rate = '-' . $check_rate;
+        } else {
+            $rate = $check_rate;
+        }
         $promo->condition = $this->condition;
         $promo->title = $this->title;
         $promo->description = $this->description;
         $promo->rate = $this->rate;
-        $promo->start_date = $this->start_date;
-        $promo->end_date = $this->end_date;
+        $promo->start_date = $start_date;
+        $promo->end_date = $end_date;
         $promo->products = $this->products;
         $promo->continuous = $this->continuous;
         $promo->advert = $this->advert;
@@ -72,11 +82,11 @@ class AddPromotion extends Component
         $this->rate = $promotion->rate;
         $this->prev_img = $promotion->image_url;
         $this->products = $promotion->products;
-        $this->start_date = $promotion->start_date;
-        $this->end_date = $promotion->end_date;
-        $this->condition = $promotion->condition;
-        $this->continuous = $promotion->continuous;
-        $this->advert = $promotion->advert;
+        $this->start_date = !empty($promotion->start_date) ? $promotion->start_date->format('Y-m-d\TH:i:s') : null;
+        $this->end_date = !empty($promotion->end_date) ? $promotion->end_date->format('Y-m-d\TH:i:s') : null;
+        $this->condition = ($promotion->condition === true || $promotion->condition === 1) ? 1 : 0;
+        $this->continuous = ($promotion->continuous === true || $promotion->continuous === 1) ? 1 : 0;
+        $this->advert = ($promotion->advert === true || $promotion->advert === 1) ? 1 : 0;
 
     }
 

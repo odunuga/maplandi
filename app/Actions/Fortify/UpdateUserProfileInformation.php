@@ -60,10 +60,19 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         if (isset($input['shipping_phone'])) {
             $address['phone'] = custom_filter_var($input['shipping_phone'], FILTER_SANITIZE_NUMBER_INT);
         }
-        if (isset($input['address'])) {
+        if (isset($input['shipping_address'])) {
             $address['address'] = $input['shipping_address'];
         }
-        if (count($address) > 0) $user->shipping_address()->update($address);
+
+        if (count($address) > 0) {
+            // $check = ShippingAddress::where('user_id', auth()->id());
+            // if ($check->count() > 0) {
+            auth()->user()->shipping_address()->update($address);
+            // } else {
+            // $user->shipping_address()->save($address);
+            // }
+        }
+
         if ($input['email'] !== $user->email &&
             $user instanceof MustVerifyEmail) {
             $this->updateVerifiedUser($user, $input);

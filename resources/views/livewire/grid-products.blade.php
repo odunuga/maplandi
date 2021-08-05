@@ -31,10 +31,10 @@
                         {{ currency_with_price($item->price) }}
                     @endisset
                 </li>
-                <li class="like">
+                <li class="like mx-1">
                     <livewire:like :product="$item->id"/>
                 </li>
-                <li class="like">
+                <li class="like mx-1">
                     <livewire:add-to-cart :product="$item->id" :key="$item->sku"/>
                 </li>
             </ul>
