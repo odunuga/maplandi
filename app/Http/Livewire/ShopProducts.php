@@ -78,7 +78,7 @@ class ShopProducts extends Component
     private function get_advert()
     {
         $now = now();
-        return $advert = Promotion::where('advert', 1)->whereDate('start_date', '<', $now)->whereDate('end_date', '>', $now)->first();
+        return $advert = Promotion::where('advert', 1)->whereDate('start_date', '<', $now)->whereDate('end_date', '>', $now)->orWhere('continuous', 1)->first();
     }
 
 

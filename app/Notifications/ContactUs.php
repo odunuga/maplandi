@@ -44,7 +44,7 @@ class ContactUs extends Notification
     {
         $subject = 'Maplandi Contact Us Mail From ' . $this->info['name'];
         $head = 'Subject of Mail is ' . $this->info['subject'];
-        $body = 'You have a new mail from ' . $this->info['name'] . '<br/> <br/>' . $this->info['message'];
+        $body = 'You have a new mail from ' . $this->info['name'] .' '. $this->info['message'];
         $footer = 'Contact ' . $this->info['name'] . ' on ' . $this->info['phone'];
         return (new MailMessage)
             ->subject($subject)
