@@ -82,7 +82,7 @@ class ShopController extends Controller
             $user_check = TestimonyRequest::where('token', $token);
             if ($user_check->count() > 0) {
                 $user = $user_check->first();
-                return view('testimony.testify')->with(['id' => $user->id, 'token' => $token]);
+                return view('testimony.testify')->with(['id' => $user->user_id, 'token' => $token]);
             }
             session()->flash('error', 'Token Not Found');
 
