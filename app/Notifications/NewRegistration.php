@@ -42,9 +42,10 @@ class NewRegistration extends Notification
      */
     public function toMail($notifiable)
     {
+        $url = route('shop');
         return (new MailMessage)
             ->subject(' Welcome ' . $this->name)
-            ->view('notify.new_registration', ['user' => $this->name]);
+            ->view('notify.new_registration', ['user' => $this->name, 'url' => $url]);
     }
 
     /**

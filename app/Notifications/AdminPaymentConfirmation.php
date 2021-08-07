@@ -7,16 +7,15 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ProductDelivered extends Notification
+class AdminPaymentConfirmation extends Notification
 {
     use Queueable;
-
     public $order;
 
     /**
      * Create a new notification instance.
      *
-     * @param $order
+     * @return void
      */
     public function __construct($order)
     {
@@ -48,19 +47,12 @@ class ProductDelivered extends Notification
         } else {
             $line1 = '';
         }
-        if (isset($this->order->cart)) {
-            $product_names = '';
-            foreach ($this->order->cart as $item) {
-                $product_names .=  $item['name'].', ';
-            }
-        }
-        $products = isset($product_names) ? 'for ' . $product_names . ' with reference ID #' . $this->order->reference : ' with reference ID #' . $this->order->reference;
-        $line2 = 'Your Order ' . $products . ' have been delivered successfully. Thank you for purchasing from us. Kindly contact us in case you have any questions, challenges or suggestions.';
+        $line2 = 'Payment for your order #' . $this->order->reference . ' has been confirmed. Thank you for purchasing from us. Kindly contact us in case you have any questions, challenges or suggestions.';
         return (new MailMessage)
             ->greeting($line1)
             ->line($line2)
-            ->action('Order Details', url('order/' . $this->order->reference))
-            ->line('Thank you for shopping with us! We really appreciate your patronage');
+            ->action('View Order', url('order/' . $this->order->reference))
+            ->line('Thank you for shopping with us. We really appreciate you');
     }
 
     /**

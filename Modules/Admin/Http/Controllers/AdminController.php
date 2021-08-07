@@ -3,6 +3,7 @@
 namespace Modules\Admin\Http\Controllers;
 
 use App\Models\User;
+use App\Notifications\AdminPaymentConfirmation;
 use App\Notifications\ProductDelivered;
 use App\Notifications\RequestTestimony;
 use Illuminate\Contracts\Support\Renderable;
@@ -92,13 +93,15 @@ class AdminController extends Controller
             $confirm_transaction = custom_filter_var(request()->get('confirm_transaction'));
             $delivery_status = custom_filter_var(request()->get('delivery_status'));
             $order = Order::where('id', $id)->firstOrFail();
+            $user = User::where('id', $order->user_id)->first();
             if ($confirm_transaction || $delivery_status) {
-                $order->transaction_confirmed = $confirm_transaction == "on" ? true : false;
-                if ($confirm_transaction == "on" && $order->paid_at == null) {
+                $order->transaction_confirmed = ($confirm_transaction === 1 || $confirm_transaction) === '1' ? true : false;
+                if (($confirm_transaction === 1 || $confirm_transaction === '1') && $order->paid_at == null) {
                     $order->paid_at = now();
+                    $user->notify(new AdminPaymentConfirmation($order));
                 }
-                if ($delivery_status == 1) {
-                    auth()->user()->notify(new ProductDelivered($order));
+                if ($delivery_status === 2 || $delivery_status === '2') {
+                    $user->notify(new ProductDelivered($order));
                 }
                 $order->delivery_status = (int)$delivery_status;
                 $response = 'success';

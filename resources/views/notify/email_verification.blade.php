@@ -8,7 +8,7 @@
     <meta name="x-apple-disable-message-reformatting">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="telephone=no" name="format-detection">
-    <title>Maplandi Password Reset Emails</title>
+    <title>Maplandi Password Email Verification</title>
     <!--[if (mso 16)]>
     <style type="text/css">
         a {
@@ -390,9 +390,9 @@
                                                             <td align="center"
                                                                 style="padding:0;Margin:0;padding-top:15px;padding-bottom:15px">
                                                                 <h1 style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:20px;font-style:normal;font-weight:normal;color:#333333">
-                                                                    <strong>FORGOT YOUR </strong></h1>
+                                                                    <strong>EMAIL </strong></h1>
                                                                 <h1 style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:20px;font-style:normal;font-weight:normal;color:#333333">
-                                                                    <strong>&nbsp;PASSWORD?</strong></h1></td>
+                                                                    <strong>&nbsp;VERIFICATION</strong></h1></td>
                                                         </tr>
                                                         <tr style="border-collapse:collapse">
                                                             <td align="center"
