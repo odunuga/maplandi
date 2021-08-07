@@ -488,7 +488,7 @@
                                                     <table cellpadding="0" cellspacing="0" width="100%"
                                                            role="presentation"
                                                            style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                       
+
                                                         <tr>
                                                             <td align="center"
                                                                 style="padding:0;Margin:0;padding-bottom:10px"><h1
@@ -532,6 +532,16 @@
                                                                     hit the link below.</p></td>
                                                         </tr>
                                                     </table>
+                                                </td>
+                                            </tr>
+                                            <tr style="border-collapse:collapse">
+                                                <td align="center"
+                                                    style="Margin:0;padding-left:10px;padding-right:10px;padding-top:40px;padding-bottom:40px">
+                                                                <span class="es-button-border es-button-border-2"
+                                                                      style="border-style:solid;border-color:#b10b06;background:#ffffff;border-width:2px;display:inline-block;border-radius:10px;width:auto"><a
+                                                                        href="{{ $url }}" class="es-button es-button-1"
+                                                                        target="_blank"
+                                                                        style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#b10b06;font-size:14px;border-style:solid;border-color:#FFFFFF;border-width:15px 20px 15px 20px;display:inline-block;background:#FFFFFF;border-radius:10px;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-weight:bold;font-style:normal;line-height:17px;width:auto;text-align:center">Shop</a></span>
                                                 </td>
                                             </tr>
                                         </table>
