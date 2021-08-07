@@ -290,64 +290,28 @@
            style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top">
         <tr style="border-collapse:collapse">
             <td valign="top" style="padding:0;Margin:0">
-                <table cellpadding="0" cellspacing="0" class="es-content" align="center"
-                       style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%">
-                    <tr style="border-collapse:collapse">
-                        <td class="es-adaptive" align="center" style="padding:0;Margin:0">
-                            <table class="es-content-body"
-                                   style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px"
-                                   cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center">
-                                <tr style="border-collapse:collapse">
-                                    <td align="left" style="padding:10px;Margin:0">
-                                        <table width="100%" cellspacing="0" cellpadding="0"
-                                               style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                            <tr style="border-collapse:collapse">
-                                                <td valign="top" align="center" style="padding:0;Margin:0;width:580px">
-                                                    <table width="100%" cellspacing="0" cellpadding="0"
-                                                           role="presentation"
-                                                           style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                        <tr style="border-collapse:collapse">
-                                                            <td align="center" class="es-infoblock"
-                                                                style="padding:0;Margin:0;line-height:14px;font-size:12px;color:#CCCCCC">
-                                                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:14px;color:#CCCCCC;font-size:12px">
-                                                                    Put your preheader text here. <a
-                                                                        href="https://viewstripo.email" class="view"
-                                                                        target="_blank"
-                                                                        style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;color:#CCCCCC;font-size:12px">View
-                                                                        in browser</a></p></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
                 <table cellpadding="0" cellspacing="0" class="es-header" align="center"
                        style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;background-color:transparent;background-repeat:repeat;background-position:center top">
-                    <tr style="border-collapse:collapse">
-                        <td class="es-adaptive" align="center" style="padding:0;Margin:0">
-                            <table class="es-header-body"
-                                   style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#3d5ca3;width:600px"
-                                   cellspacing="0" cellpadding="0" bgcolor="#3d5ca3" align="center">
-                                <tr style="border-collapse:collapse">
-                                    <td style="Margin:0;padding-top:20px;padding-bottom:20px;padding-left:20px;padding-right:20px;background-color:#b10b06"
-                                        bgcolor="#b10b06" align="left">
-                                        <table cellspacing="0" cellpadding="0" width="100%"
+                    <tr>
+                        <td align="center" style="padding:0;Margin:0">
+                            <table bgcolor="#ffffff" class="es-header-body" align="center" cellpadding="0"
+                                   cellspacing="0"
+                                   style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px">
+                                <tr>
+                                    <td align="left" style="padding:20px;Margin:0">
+                                        <table cellpadding="0" cellspacing="0" width="100%"
                                                style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                            <tr style="border-collapse:collapse">
-                                                <td align="left" style="padding:0;Margin:0;width:560px">
-                                                    <table width="100%" cellspacing="0" cellpadding="0"
+                                            <tr>
+                                                <td class="es-m-p0r" valign="top" align="center"
+                                                    style="padding:0;Margin:0;width:560px">
+                                                    <table cellpadding="0" cellspacing="0" width="100%"
                                                            role="presentation"
                                                            style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-                                                        <tr style="border-collapse:collapse">
-                                                            <td align="center" style="padding:35px;Margin:0"><p
-                                                                    style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:53px;color:#ffffff;font-size:35px">
-                                                                    Maplandi<span style="font-size:52px"></span></p>
-                                                            </td>
+                                                        <tr>
+                                                            <td align="center" bgcolor="#b10b06"
+                                                                style="padding:30px;Margin:0"><p
+                                                                    style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:78px;color:#ffffff;font-size:52px">
+                                                                    Maplandi</p></td>
                                                         </tr>
                                                     </table>
                                                 </td>
@@ -490,3 +454,4 @@
 </div>
 </body>
 </html>
+

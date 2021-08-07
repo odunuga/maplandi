@@ -31,6 +31,5 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     Route::get('testimony/request/{token}', [ShopController::class, 'testimony_request'])->name('testimony.request.set');
 
-
 });
 

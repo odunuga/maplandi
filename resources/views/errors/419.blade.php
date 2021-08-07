@@ -10,8 +10,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-8 offset-2">
-                    <img src="{{ asset('vendor/images/errors/empty_file.png') }}"/>
+                <div class="col-12">
+                    <img src="{{ asset('vendor/images/errors/empty_file.png') }}" class="mx-auto"/>
                 </div>
             </div>
         </div>
